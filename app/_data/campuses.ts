@@ -127,7 +127,7 @@ export const campusDiscoveryCategories: DiscoveryCategory[] = [
     description: "Hire students offering skills, from design to tutoring.",
     icon: Sparkles,
     href: "/freelancers",
-    available: false,
+    available: true,
   },
   {
     title: "Jobs",
