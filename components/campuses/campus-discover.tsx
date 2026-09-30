@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { campusDiscoveryCategories } from "@/app/_data/campuses"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { Badge } from "@/components/ui/badge"
@@ -20,33 +22,54 @@ function CampusDiscover({ campus }: { campus: Campus }) {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {campusDiscoveryCategories.map((category) => (
-          <Card
-            key={category.title}
-            className={
-              category.available ? undefined : "opacity-60"
-            }
-          >
-            <CardContent className="flex h-full flex-col gap-3">
-              <div className="flex items-start justify-between">
-                <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-foreground">
-                  <category.icon className="size-4" aria-hidden="true" />
-                </span>
-                {!category.available && (
-                  <Badge variant="outline">Coming soon</Badge>
-                )}
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="text-base font-medium text-foreground">
-                  {category.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {category.description}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+        {campusDiscoveryCategories.map((category) => {
+          const card = (
+            <Card
+              className={
+                category.available
+                  ? "h-full transition-colors group-hover:ring-primary/40 group-focus-visible:ring-primary/40"
+                  : "h-full opacity-60"
+              }
+            >
+              <CardContent className="flex h-full flex-col gap-3">
+                <div className="flex items-start justify-between">
+                  <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-foreground">
+                    <category.icon className="size-4" aria-hidden="true" />
+                  </span>
+                  {!category.available && (
+                    <Badge variant="outline">Coming soon</Badge>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <h3 className="text-base font-medium text-foreground">
+                    {category.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {category.description}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )
+
+          if (category.available) {
+            return (
+              <Link
+                key={category.title}
+                href={category.href}
+                className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                {card}
+              </Link>
+            )
+          }
+
+          return (
+            <div key={category.title} className="block">
+              {card}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

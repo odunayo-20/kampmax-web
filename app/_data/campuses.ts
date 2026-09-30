@@ -113,14 +113,14 @@ export const campusDiscoveryCategories: DiscoveryCategory[] = [
     description: "Buy and sell products with people around this campus.",
     icon: Store,
     href: "/marketplace",
-    available: false,
+    available: true,
   },
   {
     title: "Services",
     description: "Tutoring, repairs, design work, and everyday help nearby.",
     icon: Wrench,
     href: "/services",
-    available: false,
+    available: true,
   },
   {
     title: "Freelancers",
