@@ -134,7 +134,7 @@ export const campusDiscoveryCategories: DiscoveryCategory[] = [
     description: "Part-time, campus, and entry-level roles near this campus.",
     icon: Briefcase,
     href: "/jobs",
-    available: false,
+    available: true,
   },
   {
     title: "Events",
