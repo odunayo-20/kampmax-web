@@ -141,7 +141,7 @@ export const campusDiscoveryCategories: DiscoveryCategory[] = [
     description: "Campus events, meetups, and things worth showing up for.",
     icon: Calendar,
     href: "/events",
-    available: false,
+    available: true,
   },
   {
     title: "Local Businesses",
