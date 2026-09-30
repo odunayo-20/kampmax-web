@@ -1,24 +1,95 @@
-import type { NavItem } from "@/types/nav"
+import type { NavGroup, NavItem } from "@/types/nav"
 
 /**
- * Primary site navigation. Kept intentionally short — not every Kampmax
- * feature needs a top-level link; the rest are surfaced through on-page
- * CTAs and search as those sections are built out.
+ * Desktop primary navigation. "Home" is intentionally left out here — the
+ * logo already serves that role — but it appears explicitly in the mobile
+ * drawer per the requested IA. Kept short so it never wraps or crowds out
+ * the CTAs; everything else surfaces through "More" instead.
  */
-export const mainNav: NavItem[] = [
-  { title: "How it Works", href: "/how-it-works" },
+export const primaryNav: NavItem[] = [
   { title: "Marketplace", href: "/marketplace" },
+  { title: "Services", href: "/services" },
   { title: "Jobs", href: "/jobs" },
   { title: "Events", href: "/events" },
-  { title: "For Businesses", href: "/for-businesses" },
-  { title: "About", href: "/about" },
+  { title: "Campuses", href: "/campuses" },
 ]
 
 /**
- * Utility/legal links surfaced in the footer, not the primary nav.
+ * Secondary destinations surfaced through the desktop "More" menu and
+ * folded into the mobile drawer's groups below.
  */
-export const footerNav: NavItem[] = [
+export const moreNav: NavItem[] = [
+  { title: "How Kampmax Works", href: "/how-it-works" },
+  { title: "Freelancers", href: "/freelancers" },
+  { title: "For Businesses", href: "/for-businesses" },
+  { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
-  { title: "Privacy Policy", href: "/privacy" },
-  { title: "Terms of Service", href: "/terms" },
+]
+
+/** Grouped sections for the mobile navigation drawer. */
+export const mobileNavGroups: NavGroup[] = [
+  {
+    title: "Discover",
+    items: [
+      { title: "Marketplace", href: "/marketplace" },
+      { title: "Services", href: "/services" },
+      { title: "Jobs", href: "/jobs" },
+      { title: "Events", href: "/events" },
+      { title: "Campuses", href: "/campuses" },
+    ],
+  },
+  {
+    title: "Explore",
+    items: [
+      { title: "Freelancers", href: "/freelancers" },
+      { title: "How Kampmax Works", href: "/how-it-works" },
+      { title: "For Businesses", href: "/for-businesses" },
+    ],
+  },
+  {
+    title: "Company",
+    items: [
+      { title: "About", href: "/about" },
+      { title: "Contact", href: "/contact" },
+    ],
+  },
+]
+
+/** Grouped sections for the footer. */
+export const footerNavGroups: NavGroup[] = [
+  {
+    title: "Discover",
+    items: [
+      { title: "Marketplace", href: "/marketplace" },
+      { title: "Services", href: "/services" },
+      { title: "Jobs", href: "/jobs" },
+      { title: "Events", href: "/events" },
+      { title: "Campuses", href: "/campuses" },
+    ],
+  },
+  {
+    title: "Kampmax",
+    items: [
+      { title: "How Kampmax Works", href: "/how-it-works" },
+      { title: "About", href: "/about" },
+      { title: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "Business",
+    items: [
+      { title: "For Businesses", href: "/for-businesses" },
+      { title: "Become a Vendor", href: "/for-businesses#vendors" },
+      {
+        title: "Become a Service Provider",
+        href: "/for-businesses#service-providers",
+      },
+    ],
+  },
+]
+
+/** Legal links shown in the footer's bottom utility bar. */
+export const legalNav: NavItem[] = [
+  { title: "Privacy", href: "/privacy" },
+  { title: "Terms", href: "/terms" },
 ]

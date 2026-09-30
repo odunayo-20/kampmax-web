@@ -1,32 +1,82 @@
-import Link from "next/link"
-
 import { Container } from "@/components/layout/container"
-import { buttonVariants } from "@/components/ui/button"
-import { siteConfig } from "@/config/site"
+import { Section } from "@/components/layout/section"
+import { CampusEcosystem } from "@/components/home/campus-ecosystem"
+import { DiscoverGrid } from "@/components/home/discover-grid"
+import { EventsCommunity } from "@/components/home/events-community"
+import { FinalCta } from "@/components/home/final-cta"
+import { ForBusinesses } from "@/components/home/for-businesses"
+import { Hero } from "@/components/home/hero"
+import { HowItWorks } from "@/components/home/how-it-works"
+import { Opportunities } from "@/components/home/opportunities"
+import { TrustValues } from "@/components/home/trust-values"
+import { WhatIsKampmax } from "@/components/home/what-is-kampmax"
 
 export default function Home() {
   return (
-    <Container className="flex flex-col items-center gap-6 py-24 text-center sm:py-32">
-      <h1 className="font-heading max-w-2xl text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">
-        {siteConfig.tagline}
-      </h1>
-      <p className="max-w-xl text-lg text-muted-foreground text-balance">
-        {siteConfig.description}
-      </p>
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <Link
-          href={`${siteConfig.appUrl}/register`}
-          className={buttonVariants({ variant: "default", size: "lg" })}
-        >
-          Get Started
-        </Link>
-        <Link
-          href="/how-it-works"
-          className={buttonVariants({ variant: "outline", size: "lg" })}
-        >
-          How it Works
-        </Link>
+    <>
+      <Container>
+        <Hero />
+      </Container>
+
+      <Section>
+        <Container>
+          <WhatIsKampmax />
+        </Container>
+      </Section>
+
+      <Section id="discover" className="scroll-mt-16">
+        <Container>
+          <DiscoverGrid />
+        </Container>
+      </Section>
+
+      <div className="bg-muted/30">
+        <Section>
+          <Container>
+            <HowItWorks />
+          </Container>
+        </Section>
       </div>
-    </Container>
+
+      <Section>
+        <Container>
+          <CampusEcosystem />
+        </Container>
+      </Section>
+
+      <div className="bg-muted/30">
+        <Section>
+          <Container>
+            <Opportunities />
+          </Container>
+        </Section>
+      </div>
+
+      <Section>
+        <Container>
+          <ForBusinesses />
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <EventsCommunity />
+        </Container>
+      </Section>
+
+      <div className="bg-muted/30">
+        <Section>
+          <Container>
+            <TrustValues />
+          </Container>
+        </Section>
+      </div>
+
+      <Section>
+        <Container>
+          <FinalCta />
+        </Container>
+      </Section>
+    </>
   )
 }

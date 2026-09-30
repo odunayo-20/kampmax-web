@@ -13,9 +13,13 @@ import {
   SheetFooter,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { mainNav } from "@/config/nav"
+import { NavLink } from "@/components/layout/nav-link"
+import { mobileNavGroups } from "@/config/nav"
 import { siteConfig } from "@/config/site"
 import { cn } from "cn"
+
+const navLinkClassName =
+  "flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-primary"
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
@@ -23,39 +27,54 @@ export function MobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
-        render={<Button variant="ghost" size="icon" className="md:hidden" />}
+        render={<Button variant="ghost" size="icon" className="lg:hidden" />}
       >
         <Menu aria-hidden="true" />
         <span className="sr-only">Toggle menu</span>
       </SheetTrigger>
-      <SheetContent side="right">
+      <SheetContent side="right" className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>{siteConfig.name}</SheetTitle>
         </SheetHeader>
-        <nav aria-label="Mobile" className="flex flex-col gap-1 px-4">
-          {mainNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted"
-            >
-              {item.title}
-            </Link>
+        <nav aria-label="Mobile" className="flex flex-col gap-4 px-4">
+          <NavLink
+            href="/"
+            onClick={() => setOpen(false)}
+            className={navLinkClassName}
+          >
+            Home
+          </NavLink>
+
+          {mobileNavGroups.map((group) => (
+            <div key={group.title} className="flex flex-col gap-1">
+              <span className="px-3 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                {group.title}
+              </span>
+              {group.items.map((item) => (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={navLinkClassName}
+                >
+                  {item.title}
+                </NavLink>
+              ))}
+            </div>
           ))}
         </nav>
         <SheetFooter className="flex-row gap-2">
           <Link
-            href={`${siteConfig.appUrl}/login`}
+            href={siteConfig.loginUrl}
             className={cn(buttonVariants({ variant: "outline" }), "flex-1")}
           >
             Log in
           </Link>
           <Link
-            href={`${siteConfig.appUrl}/register`}
+            href={siteConfig.registerUrl}
             className={cn(buttonVariants({ variant: "default" }), "flex-1")}
           >
-            Get Started
+            Join Kampmax
           </Link>
         </SheetFooter>
       </SheetContent>
