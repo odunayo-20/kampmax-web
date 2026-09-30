@@ -148,6 +148,6 @@ export const campusDiscoveryCategories: DiscoveryCategory[] = [
     description: "Businesses and opportunities already around this campus.",
     icon: Building2,
     href: "/for-businesses",
-    available: false,
+    available: true,
   },
 ]
