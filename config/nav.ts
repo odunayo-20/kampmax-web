@@ -72,6 +72,7 @@ export const footerNavGroups: NavGroup[] = [
     items: [
       { title: "How Kampmax Works", href: "/how-it-works" },
       { title: "About", href: "/about" },
+      { title: "Blog & Insights", href: "/blog" },
       { title: "Contact", href: "/contact" },
     ],
   },
