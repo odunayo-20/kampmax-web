@@ -9,6 +9,7 @@ import {
 } from "@/app/_data/events"
 import { Container } from "@/components/layout/container"
 import { EventHeader } from "@/components/events/event-header"
+import { EventJsonLd } from "@/components/events/event-json-ld"
 
 type EventPageProps = {
   params: Promise<{ slug: string }>
@@ -28,9 +29,19 @@ export async function generateMetadata({
     return {}
   }
 
+  const description = `${event.description} Date: ${event.date} at ${event.location ?? "Campus"}.`
+
   return {
     title: `${event.title} | Kampmax Events`,
-    description: `${event.description} Date: ${event.date} at ${event.location ?? "Campus"}.`,
+    description,
+    alternates: {
+      canonical: `/events/${event.slug}`,
+    },
+    openGraph: {
+      title: `${event.title} — Kampmax Events`,
+      description,
+      url: `/events/${event.slug}`,
+    },
   }
 }
 
@@ -46,8 +57,12 @@ export default async function EventPage({ params }: EventPageProps) {
   const campus = event.campusSlug ? getCampusBySlug(event.campusSlug) : undefined
 
   return (
-    <Container>
-      <EventHeader event={event} category={category} campus={campus} />
-    </Container>
+    <>
+      <Container>
+        <EventHeader event={event} category={category} campus={campus} />
+      </Container>
+
+      <EventJsonLd event={event} category={category} campus={campus} />
+    </>
   )
 }

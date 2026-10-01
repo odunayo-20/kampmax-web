@@ -22,7 +22,7 @@ function EventCard({
       className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <Card
-        className={`flex h-full flex-col pt-5 transition-colors group-hover:ring-primary/40 group-focus-visible:ring-primary/40 ${
+        className={`flex h-full flex-col pt-5 shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40 ${
           event.isPast ? "opacity-75" : ""
         }`}
       >
@@ -83,10 +83,10 @@ function EventCard({
             ) : (
               <span />
             )}
-            <span className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-foreground">
+            <span className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-primary-600">
               View Event
               <ArrowRight
-                className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                className="size-3.5 transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </span>

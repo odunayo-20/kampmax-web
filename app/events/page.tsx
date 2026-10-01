@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { getEnabledCampuses } from "@/app/_data/campuses"
 import {
   getEnabledEventCategories,
+  getEvents,
   getFeaturedEvents,
   getPastEvents,
   getUpcomingEvents,
@@ -14,13 +15,24 @@ import { EventsBrowser } from "@/components/events/events-browser"
 import { EventsCampusSection } from "@/components/events/events-campus-section"
 import { EventsFeatured } from "@/components/events/events-featured"
 import { EventsHero } from "@/components/events/events-hero"
+import { EventsJsonLd } from "@/components/events/events-json-ld"
 import { EventsOrganizerCta } from "@/components/events/events-organizer-cta"
 import { EventsValueProps } from "@/components/events/events-value-props"
 
+const description =
+  "Discover academic symposiums, hackathons, cultural festivals, and student activities across campus communities on Kampmax."
+
 export const metadata: Metadata = {
   title: "Events & Campus Activities",
-  description:
-    "Discover academic symposiums, hackathons, cultural festivals, and student activities across campus communities on Kampmax.",
+  description,
+  alternates: {
+    canonical: "/events",
+  },
+  openGraph: {
+    title: "Events & Campus Activities — Kampmax",
+    description,
+    url: "/events",
+  },
 }
 
 export default function EventsPage() {
@@ -32,12 +44,22 @@ export default function EventsPage() {
 
   return (
     <>
-      <Container>
-        <EventsHero />
-      </Container>
+      <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-10%] size-128 rounded-full bg-primary-200/40 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
+        />
+        <Container className="relative">
+          <EventsHero />
+        </Container>
+      </div>
 
       {featured.length > 0 && (
-        <div className="bg-muted/30">
+        <div className="border-y border-border bg-primary-50">
           <Section>
             <Container>
               <EventsFeatured events={featured} categories={categories} />
@@ -64,7 +86,7 @@ export default function EventsPage() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <EventsValueProps />
@@ -78,13 +100,15 @@ export default function EventsPage() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <EventsOrganizerCta />
           </Container>
         </Section>
       </div>
+
+      <EventsJsonLd events={getEvents()} />
     </>
   )
 }

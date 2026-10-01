@@ -7,6 +7,7 @@ import { EventCard } from "@/components/events/event-card"
 import { buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
 
@@ -80,39 +81,39 @@ function EventsBrowser({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
-        {/* Timeline tab selector: Upcoming vs Past */}
-        <div className="flex items-center gap-2 border-b border-border/60 pb-3">
-          <button
-            type="button"
-            aria-pressed={tab === "upcoming"}
-            onClick={() => {
-              setTab("upcoming")
-              handleResetFilters()
-            }}
-            className={buttonVariants({
-              variant: tab === "upcoming" ? "default" : "ghost",
-              size: "sm",
-            })}
-          >
-            Upcoming Events ({upcomingEvents.length})
-          </button>
-          <button
-            type="button"
-            aria-pressed={tab === "past"}
-            onClick={() => {
-              setTab("past")
-              handleResetFilters()
-            }}
-            className={buttonVariants({
-              variant: tab === "past" ? "default" : "ghost",
-              size: "sm",
-            })}
-          >
-            Past Events ({pastEvents.length})
-          </button>
-        </div>
+      {/* Timeline tab selector: Upcoming vs Past */}
+      <div className="flex items-center gap-2 border-b border-border/60 pb-3">
+        <button
+          type="button"
+          aria-pressed={tab === "upcoming"}
+          onClick={() => {
+            setTab("upcoming")
+            handleResetFilters()
+          }}
+          className={buttonVariants({
+            variant: tab === "upcoming" ? "default" : "ghost",
+            size: "sm",
+          })}
+        >
+          Upcoming Events ({upcomingEvents.length})
+        </button>
+        <button
+          type="button"
+          aria-pressed={tab === "past"}
+          onClick={() => {
+            setTab("past")
+            handleResetFilters()
+          }}
+          className={buttonVariants({
+            variant: tab === "past" ? "default" : "ghost",
+            size: "sm",
+          })}
+        >
+          Past Events ({pastEvents.length})
+        </button>
+      </div>
 
+      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="w-full max-w-sm">
             <Label htmlFor={searchId} className="sr-only">
@@ -133,7 +134,7 @@ function EventsBrowser({
                 }
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="h-9 pl-8"
+                className="h-10 pl-8"
               />
             </div>
           </div>
@@ -149,7 +150,7 @@ function EventsBrowser({
               id={campusSelectId}
               value={campusSlug}
               onChange={(e) => setCampusSlug(e.target.value)}
-              className="h-9 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               <option value={ALL_CAMPUSES}>All Campuses</option>
               {campuses.map((campus) => (
@@ -170,10 +171,13 @@ function EventsBrowser({
             type="button"
             aria-pressed={categorySlug === ALL_CATEGORIES}
             onClick={() => setCategorySlug(ALL_CATEGORIES)}
-            className={buttonVariants({
-              variant: categorySlug === ALL_CATEGORIES ? "default" : "outline",
-              size: "sm",
-            })}
+            className={cn(
+              buttonVariants({
+                variant: categorySlug === ALL_CATEGORIES ? "default" : "outline",
+                size: "sm",
+              }),
+              "rounded-full"
+            )}
           >
             All
           </button>
@@ -183,10 +187,13 @@ function EventsBrowser({
               type="button"
               aria-pressed={categorySlug === cat.slug}
               onClick={() => setCategorySlug(cat.slug)}
-              className={buttonVariants({
-                variant: categorySlug === cat.slug ? "default" : "outline",
-                size: "sm",
-              })}
+              className={cn(
+                buttonVariants({
+                  variant: categorySlug === cat.slug ? "default" : "outline",
+                  size: "sm",
+                }),
+                "rounded-full"
+              )}
             >
               {cat.name}
             </button>
@@ -196,7 +203,7 @@ function EventsBrowser({
 
       {filteredEvents.length === 0 ? (
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+          <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
             <CalendarX className="size-5" aria-hidden="true" />
           </span>
           <p className="font-heading text-lg font-semibold text-foreground">
@@ -215,21 +222,28 @@ function EventsBrowser({
             <button
               type="button"
               onClick={handleResetFilters}
-              className={buttonVariants({ variant: "outline", size: "sm" })}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
             >
               Clear filters
             </button>
           )}
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredEvents.map((event) => (
-            <EventCard
-              key={event.slug}
-              event={event}
-              category={categoryBySlug.get(event.categorySlug)}
-            />
-          ))}
+        <div className="flex flex-col gap-4">
+          <p className="text-sm text-muted-foreground">
+            Showing {filteredEvents.length} of {activePool.length}{" "}
+            {tab === "upcoming" ? "upcoming" : "past"}{" "}
+            {activePool.length === 1 ? "event" : "events"}
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredEvents.map((event) => (
+              <EventCard
+                key={event.slug}
+                event={event}
+                category={categoryBySlug.get(event.categorySlug)}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>

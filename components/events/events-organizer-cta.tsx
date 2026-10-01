@@ -1,13 +1,14 @@
 import Link from "next/link"
-import { CalendarCheck } from "lucide-react"
+import { ArrowRight, CalendarCheck } from "lucide-react"
 
 import { buttonVariants } from "@/components/ui/button"
 import { H2, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 
 function EventsOrganizerCta() {
   return (
-    <div className="flex flex-col gap-6 rounded-2xl border border-border bg-gradient-to-b from-card to-muted/20 p-8 shadow-xs sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+    <div className="flex flex-col gap-6 rounded-2xl border border-border bg-linear-to-b from-card to-muted/20 p-8 shadow-xs sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
       <div className="flex max-w-2xl flex-col gap-3">
         <div className="flex items-center gap-2">
           <span className="flex size-7 items-center justify-center rounded-md bg-primary/10 text-primary">
@@ -32,13 +33,13 @@ function EventsOrganizerCta() {
       <div className="flex shrink-0 flex-col gap-2">
         <Link
           href={siteConfig.registerUrl}
-          className={buttonVariants({
-            variant: "default",
-            size: "lg",
-            className: "w-full sm:w-auto",
-          })}
+          className={cn(
+            buttonVariants({ variant: "default", size: "lg" }),
+            "h-11 w-full rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20 sm:w-auto"
+          )}
         >
           Publish on Kampmax
+          <ArrowRight />
         </Link>
         <Muted className="text-2xs text-muted-foreground sm:text-xs">
           Event listing publishing and ticket check-ins are handled inside the

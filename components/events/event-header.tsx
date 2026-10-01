@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { H1, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
 
@@ -72,7 +73,7 @@ function EventHeader({
 
       <div className="grid items-start gap-10 lg:grid-cols-3 lg:gap-12">
         <div className="flex flex-col gap-8 lg:col-span-2">
-          <ImagePlaceholder className="aspect-16/9 w-full rounded-2xl" />
+          <ImagePlaceholder className="aspect-video w-full rounded-2xl" />
 
           <section className="flex flex-col gap-3">
             <h2 className="font-heading text-lg font-semibold text-foreground">
@@ -106,12 +107,12 @@ function EventHeader({
           )}
 
           {event.importantInfo ? (
-            <section className="flex flex-col gap-2 rounded-xl border border-border bg-muted/30 p-5">
-              <h3 className="flex items-center gap-2 font-heading text-sm font-semibold text-foreground">
-                <Info className="size-4 text-primary" aria-hidden="true" />
+            <section className="flex flex-col gap-2 rounded-xl border border-accent-500/30 bg-accent-50 p-5">
+              <h3 className="flex items-center gap-2 font-heading text-sm font-semibold text-accent-700">
+                <Info className="size-4 text-accent-600" aria-hidden="true" />
                 Important Information
               </h3>
-              <p className="text-xs leading-relaxed text-muted-foreground">
+              <p className="text-xs leading-relaxed text-accent-700/90">
                 {event.importantInfo}
               </p>
             </section>
@@ -185,11 +186,10 @@ function EventHeader({
           <div className="flex flex-col gap-2 pt-1">
             <Link
               href={siteConfig.registerUrl}
-              className={buttonVariants({
-                variant: "default",
-                size: "lg",
-                className: "w-full",
-              })}
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "h-11 w-full rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
+              )}
             >
               {event.isPast ? "View on Kampmax" : "Join Event on Kampmax"}
             </Link>
