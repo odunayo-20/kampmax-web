@@ -1,11 +1,12 @@
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { ImagePlaceholder } from "@/components/shared/image-placeholder"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { H1, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { formatPrice } from "@/lib/format-price"
 import type { Campus } from "@/types/campus"
 import type { MarketplaceCategory, MarketplaceProduct } from "@/types/marketplace"
@@ -49,9 +50,13 @@ function ProductHeader({
           <div className="flex flex-col gap-2 pt-2">
             <Link
               href={siteConfig.registerUrl}
-              className={buttonVariants({ variant: "default", size: "lg", className: "self-start" })}
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "h-11 self-start rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
+              )}
             >
               Continue on Kampmax
+              <ArrowRight />
             </Link>
             <Muted>
               Continuing takes you into the Kampmax app to message the

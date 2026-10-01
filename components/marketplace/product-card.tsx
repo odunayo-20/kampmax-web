@@ -22,7 +22,7 @@ function ProductCard({
       href={`/marketplace/${product.slug}`}
       className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <Card className="h-full pt-0 transition-colors group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
+      <Card className="h-full pt-0 shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
         <ImagePlaceholder className="aspect-square rounded-none" />
         <CardContent className="flex h-full flex-col gap-2">
           <div className="flex flex-col gap-1">
@@ -39,10 +39,10 @@ function ProductCard({
             <span className="text-sm font-semibold text-foreground">
               {product.price ? formatPrice(product.price) : "Price on request"}
             </span>
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-foreground">
+            <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-600">
               View Product
               <ArrowRight
-                className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                className="size-3.5 transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </span>
