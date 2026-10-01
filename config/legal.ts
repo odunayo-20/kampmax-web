@@ -10,4 +10,14 @@ export const legalConfig = {
     lastUpdated: "October 1, 2026",
     effectiveDate: "October 1, 2026",
   },
+  termsOfService: {
+    title: "Terms of Service",
+    lastUpdated: "October 1, 2026",
+    effectiveDate: "October 1, 2026",
+  },
+  refundPolicy: {
+    title: "Refund & Cancellation Policy",
+    lastUpdated: "October 1, 2026",
+    effectiveDate: "October 1, 2026",
+  },
 } as const

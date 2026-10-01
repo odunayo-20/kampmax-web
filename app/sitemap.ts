@@ -60,7 +60,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/for-businesses",
     "/how-it-works",
     "/privacy",
+    "/refund-policy",
     "/services",
+    "/terms",
   ].map((path) => ({
     url: `${siteConfig.url}${path}`,
     lastModified,
