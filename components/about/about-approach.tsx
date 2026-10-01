@@ -7,13 +7,13 @@ function AboutApproach() {
     <div className="flex flex-col gap-10">
       <SectionHeading
         eyebrow="Our Approach"
-        title="Four principles guiding our product development"
-        description="Rather than creating isolated single-purpose apps, we design interconnected workflows that make university life simpler and more productive."
+        title="Four principles guiding how we build"
+        description="We focus on practical principles that make campus discovery more accessible, connected, and supportive of local enterprise."
       />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {approachPrinciples.map((principle) => (
-          <Card key={principle.number} className="h-full">
+          <Card key={principle.number} className="h-full border-border/80">
             <CardContent className="flex flex-col gap-4 p-6">
               <div className="flex items-center justify-between">
                 <span className="font-heading text-2xl font-bold text-primary">

@@ -1,6 +1,5 @@
 import type { LucideIcon } from "lucide-react"
 import {
-  Boxes,
   Briefcase,
   Building2,
   Calendar,
@@ -9,8 +8,8 @@ import {
   HeartHandshake,
   Layers,
   Lightbulb,
+  Link2,
   ShieldCheck,
-  Smartphone,
   Sparkles,
   Store,
   TrendingUp,
@@ -46,7 +45,7 @@ export const ecosystemPillars: EcosystemPillar[] = [
   },
   {
     title: "Freelancers",
-    subtitle: "Independent Talent",
+    subtitle: "Digital & Creative Skills",
     description:
       "Showcase individual portfolios, technical competencies, creative design, and project-based crafts.",
     href: "/freelancers",
@@ -54,7 +53,7 @@ export const ecosystemPillars: EcosystemPillar[] = [
   },
   {
     title: "Jobs",
-    subtitle: "Career Opportunities",
+    subtitle: "Opportunities",
     description:
       "Connect with internships, campus assistantships, part-time shifts, and entry-level career openings.",
     href: "/jobs",
@@ -62,7 +61,7 @@ export const ecosystemPillars: EcosystemPillar[] = [
   },
   {
     title: "Events",
-    subtitle: "Campus Life & Gatherings",
+    subtitle: "Campus Activities",
     description:
       "Keep track of academic symposiums, hackathons, sports tournaments, workshops, and student festivals.",
     href: "/events",
@@ -70,7 +69,7 @@ export const ecosystemPillars: EcosystemPillar[] = [
   },
   {
     title: "Campuses",
-    subtitle: "Localized Hubs",
+    subtitle: "Local Discovery",
     description:
       "Anchor activity to individual universities, polytechnics, and colleges across Nigeria.",
     href: "/campuses",
@@ -78,48 +77,42 @@ export const ecosystemPillars: EcosystemPillar[] = [
   },
 ]
 
-export type ProblemChallenge = {
+export type WhyProblem = {
   icon: LucideIcon
   title: string
   description: string
 }
 
-export const problemChallenges: ProblemChallenge[] = [
+export const whyProblems: WhyProblem[] = [
   {
     icon: Store,
-    title: "Fragmented Product Discovery",
+    title: "Fragmented Products & Services",
     description:
-      "Buying or selling items on campus often relies on fast-moving instant messaging groups, where listings get buried in chat feeds within minutes.",
-  },
-  {
-    icon: Wrench,
-    title: "Obscured Local Services",
-    description:
-      "Reliable student artisans, technicians, and tutors exist right on campus, but newcomers and busy students struggle to discover who to call.",
+      "Finding useful items or reliable local help on campus often means sifting through fast-moving chat groups, where listings get buried within minutes.",
   },
   {
     icon: Briefcase,
-    title: "Disconnected Opportunities",
+    title: "Access to Opportunities",
     description:
-      "Internships, project gigs, and entry-level positions are frequently shared informally through word-of-mouth rather than open public noticeboards.",
+      "Students and young people actively look for internships, part-time work, and real-world projects, but open opportunities are often shared informally through word-of-mouth.",
   },
   {
     icon: Building2,
-    title: "Barriers for Local Merchants",
+    title: "Visibility for Local Businesses",
     description:
-      "Neighborhood retail stores, printing hubs, and eateries lack a structured, non-intrusive way to make their offerings discoverable to the campus population.",
+      "Neighborhood retail shops, printing centers, and eateries around campus towns need structured, non-intrusive ways to present their offerings directly to campus residents.",
+  },
+  {
+    icon: Wrench,
+    title: "Recognition for Skilled Individuals",
+    description:
+      "Skilled student artisans, programmers, designers, and tutors often lack an organized public profile to showcase their abilities and build lasting credibility.",
   },
   {
     icon: Calendar,
-    title: "Scattered Event Channels",
+    title: "Scattered Campus Activities",
     description:
-      "Important workshops, club activities, and academic fairs are spread across printed physical posters, disparate group links, and social timelines.",
-  },
-  {
-    icon: Sparkles,
-    title: "Underutilized Student Talent",
-    description:
-      "Talented student programmers, designers, writers, and tailors have great capabilities but limited professional platforms to showcase them.",
+      "Workshops, departmental initiatives, sports meets, and club gatherings are frequently scattered across printed flyers and disconnected channels.",
   },
 ]
 
@@ -134,35 +127,35 @@ export type ApproachPrinciple = {
 export const approachPrinciples: ApproachPrinciple[] = [
   {
     number: "01",
-    title: "Discover",
-    subtitle: "Organized Exploration",
+    title: "Accessibility",
+    subtitle: "Simpler Discovery",
     description:
-      "Organize products, services, talent, opportunities, and activities into clean, searchable, campus-anchored directories.",
+      "Make discovery easier for people and businesses by organizing campus offerings into clear, structured, and searchable directories.",
     icon: Compass,
   },
   {
     number: "02",
-    title: "Connect",
-    subtitle: "Direct Relationships",
+    title: "Connection",
+    subtitle: "Closer Relationships",
     description:
-      "Bridge students, faculty, and campus residents directly with the local merchants, service specialists, and peers serving them.",
-    icon: Users,
+      "Bring relevant people, offerings, and opportunities closer together within trusted local campus networks.",
+    icon: Link2,
   },
   {
     number: "03",
-    title: "Participate",
-    subtitle: "Active Involvement",
+    title: "Opportunity",
+    subtitle: "Growth & Enterprise",
     description:
-      "Lower friction for attending campus events, applying for meaningful work, and engaging with neighborhood culture.",
-    icon: Sparkles,
+      "Support learning, entrepreneurship, work, and participation through open visibility for student talent and local ventures.",
+    icon: TrendingUp,
   },
   {
     number: "04",
-    title: "Grow",
-    subtitle: "Sustainable Progress",
+    title: "Community",
+    subtitle: "Campus Ecosystems",
     description:
-      "Give student entrepreneurs, freelancers, and small businesses room to establish credibility and develop their presence over time.",
-    icon: TrendingUp,
+      "Recognize the importance of campus and local ecosystems, keeping tools grounded in the daily routines of university life.",
+    icon: HeartHandshake,
   },
 ]
 
@@ -171,65 +164,76 @@ export type CommunityParticipant = {
   icon: LucideIcon
   badge: string
   description: string
-  actions: string[]
+  highlights: string[]
 }
 
 export const communityParticipants: CommunityParticipant[] = [
   {
-    role: "Students",
+    role: "Students & Customers",
     icon: GraduationCap,
-    badge: "Community Core",
+    badge: "Core Community",
     description:
-      "Find campus essentials, book verified student services, discover internships, and stay informed on upcoming events.",
-    actions: ["Find essentials", "Book services", "Explore jobs", "Join events"],
+      "Find campus essentials, discover trusted service providers, explore job and internship openings, and stay informed on upcoming events.",
+    highlights: ["Campus marketplace", "Service discovery", "Internships", "Activities"],
   },
   {
-    role: "Local Businesses",
-    icon: Building2,
-    badge: "Commerce",
-    description:
-      "Establish an anchored public presence to reach tens of thousands of active campus residents in nearby towns.",
-    actions: ["Reach students", "Publish inventory", "Offer promotions"],
-  },
-  {
-    role: "Freelancers & Creators",
-    icon: Sparkles,
-    badge: "Talent",
-    description:
-      "Build a verified portfolio, present technical and creative competencies, and connect with clients looking for skills.",
-    actions: ["Showcase work", "Set base rates", "Win projects"],
-  },
-  {
-    role: "Vendors & Retailers",
+    role: "Vendors & Entrepreneurs",
     icon: Store,
     badge: "Marketplace",
     description:
-      "List books, electronics, fashion, study kits, and groceries in a structured marketplace built for campus life.",
-    actions: ["List products", "Campus pickup", "Direct inquiry"],
+      "Present products directly to students, faculty, and campus residents through an organized, searchable marketplace presence.",
+    highlights: ["Product showcase", "Campus reach", "Direct inquiry"],
   },
   {
-    role: "Service Providers",
+    role: "Service Providers & Freelancers",
     icon: Wrench,
-    badge: "Services",
+    badge: "Skills & Talent",
     description:
-      "Offer phone and laptop repairs, haircutting, sewing, photography, and tutoring with transparent starting points.",
-    actions: ["List services", "State turnarounds", "Receive bookings"],
+      "Make skilled services and digital proficiencies easier to discover, from laptop repairs and tutoring to design and technical crafts.",
+    highlights: ["Public profile", "Clear starting rates", "Client inquiries"],
   },
   {
-    role: "Employers & Recruiters",
+    role: "Employers & Businesses",
     icon: Briefcase,
     badge: "Opportunities",
     description:
-      "Publish internships, part-time roles, and graduate opportunities targeting ambitious campus talent.",
-    actions: ["Publish openings", "Review profiles", "Hire locally"],
+      "Share relevant part-time roles, internships, and entry-level positions with ambitious students and recent graduates.",
+    highlights: ["Job postings", "Campus talent", "Local hiring"],
   },
   {
-    role: "Organizers & Committees",
+    role: "Event Organizers & Campus Groups",
     icon: Calendar,
-    badge: "Events",
+    badge: "Activities",
     description:
-      "Publish conferences, workshops, sports competitions, and club gatherings on the unified campus calendar.",
-    actions: ["Announce dates", "Share details", "Engage attendees"],
+      "Promote academic fairs, hackathons, seminars, student club gatherings, and cultural festivals on the unified campus schedule.",
+    highlights: ["Event listings", "Campus reach", "Schedule discovery"],
+  },
+]
+
+export type DirectionPillar = {
+  icon: LucideIcon
+  title: string
+  description: string
+}
+
+export const directionPillars: DirectionPillar[] = [
+  {
+    icon: Layers,
+    title: "Connected Campus Ecosystems",
+    description:
+      "Bringing fragmented parts of campus life — buying items, hiring help, finding jobs, and joining activities — into one unified, cohesive home.",
+  },
+  {
+    icon: Building2,
+    title: "Host Towns & Local Commerce",
+    description:
+      "Extending discovery seamlessly between the campus core and the neighborhood merchants, eateries, and artisans operating in host communities.",
+  },
+  {
+    icon: Sparkles,
+    title: "Durable Digital Infrastructure",
+    description:
+      "Developing practical, fast, and mobile-friendly software designed to stay dependable across academic calendars and multi-campus environments.",
   },
 ]
 
@@ -259,7 +263,7 @@ export const coreValues: CoreValue[] = [
       "Clear listings, honest descriptions, and visible accountability form the foundation of our community.",
   },
   {
-    title: "Equal Opportunity",
+    title: "Opportunity",
     icon: TrendingUp,
     description:
       "Whether you are an undergraduate launching your first side project or an established shop, your work deserves discovery.",
@@ -278,35 +282,3 @@ export const coreValues: CoreValue[] = [
   },
 ]
 
-export type ProductPhilosophyItem = {
-  icon: LucideIcon
-  title: string
-  description: string
-}
-
-export const productPhilosophyItems: ProductPhilosophyItem[] = [
-  {
-    icon: Smartphone,
-    title: "Mobile-First & Bandwidth-Aware",
-    description:
-      "Built to load swiftly and render cleanly across all screen sizes and diverse network conditions common in Nigerian university environments.",
-  },
-  {
-    icon: Layers,
-    title: "Simple & Cohesive Architecture",
-    description:
-      "Clear page structures, intuitive navigation paths, and minimal cognitive load so users find what they need without friction.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Security & Integrity Conscious",
-    description:
-      "Prioritizing data protection, spam resistance, and responsible verification throughout the software lifecycle.",
-  },
-  {
-    icon: Boxes,
-    title: "Practical & Scalable Technology",
-    description:
-      "Pragmatic engineering choices built on robust web foundations that grow reliably with increasing multi-campus traffic.",
-  },
-]

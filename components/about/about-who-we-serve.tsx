@@ -3,19 +3,19 @@ import { SectionHeading } from "@/components/layout/section-heading"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 
-function AboutParticipants() {
+function AboutWhoWeServe() {
   return (
     <div className="flex flex-col gap-10">
       <SectionHeading
-        eyebrow="Community Roles"
-        title="Built for everyone who shapes campus life"
-        description="From students navigating coursework to neighborhood shops and campus organizers, Kampmax gives each participant a dedicated presence."
+        eyebrow="Who We Serve"
+        title="Designed for campus communities and local ecosystems"
+        description="Whether you are learning, selling, offering a skill, hiring, or organizing, Kampmax provides a dedicated space tailored to your needs."
       />
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {communityParticipants.map((participant) => (
-          <Card key={participant.role} className="flex h-full flex-col">
-            <CardContent className="flex flex-1 flex-col gap-3.5 p-5">
+          <Card key={participant.role} className="flex h-full flex-col border-border/80">
+            <CardContent className="flex flex-1 flex-col gap-3.5 p-6">
               <div className="flex items-center justify-between">
                 <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <participant.icon className="size-4" aria-hidden="true" />
@@ -29,19 +29,19 @@ function AboutParticipants() {
                 <h3 className="font-heading text-base font-semibold text-foreground">
                   {participant.role}
                 </h3>
-                <p className="text-xs leading-relaxed text-muted-foreground">
+                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                   {participant.description}
                 </p>
               </div>
 
               <div className="mt-auto border-t border-border/60 pt-3">
                 <div className="flex flex-wrap gap-1.5">
-                  {participant.actions.map((act) => (
+                  {participant.highlights.map((item) => (
                     <span
-                      key={act}
+                      key={item}
                       className="rounded-md bg-muted px-2 py-0.5 text-3xs font-medium text-foreground"
                     >
-                      {act}
+                      {item}
                     </span>
                   ))}
                 </div>
@@ -54,4 +54,4 @@ function AboutParticipants() {
   )
 }
 
-export { AboutParticipants }
+export { AboutWhoWeServe }
