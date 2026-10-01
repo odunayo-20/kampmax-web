@@ -64,7 +64,7 @@ function AboutEcosystem() {
 
       <div
         aria-hidden="true"
-        className="flex flex-col items-center gap-3.5 rounded-2xl border border-border/80 bg-gradient-to-b from-card via-card/80 to-muted/30 p-6 shadow-xs sm:p-8"
+        className="flex flex-col items-center gap-3.5 rounded-2xl border border-border/80 bg-linear-to-b from-card via-card/80 to-muted/30 p-6 shadow-xs sm:p-8"
       >
         {/* Core Platform Header */}
         <div className="flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-5 py-2 font-heading text-sm font-semibold text-primary">

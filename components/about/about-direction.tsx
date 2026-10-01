@@ -11,7 +11,7 @@ function AboutDirection() {
         description="We are focused on developing thoughtful digital tools that bring campus communities and local economies closer together."
       />
 
-      <div className="rounded-2xl border border-border/80 bg-gradient-to-br from-card via-card/70 to-primary/5 p-6 sm:p-10">
+      <div className="rounded-2xl border border-border/80 bg-linear-to-br from-card via-card/70 to-primary/5 p-6 sm:p-10">
         <div className="flex flex-col gap-6">
           <p className="font-heading text-xl font-semibold text-foreground sm:text-2xl">
             A steady, dedicated path toward interconnected campus communities.

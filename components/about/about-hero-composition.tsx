@@ -14,7 +14,7 @@ function AboutHeroComposition() {
   return (
     <div
       aria-hidden="true"
-      className="relative mx-auto flex w-full max-w-lg flex-col gap-3 rounded-2xl border border-border/80 bg-gradient-to-b from-card/90 via-card/70 to-muted/30 p-5 shadow-sm sm:p-6"
+      className="relative mx-auto flex w-full max-w-lg flex-col gap-3 rounded-2xl border border-border/80 bg-linear-to-b from-card/90 via-card/70 to-muted/30 p-5 shadow-sm sm:p-6"
     >
       {/* Central Ecosystem Hub Indicator */}
       <div className="flex items-center justify-between border-b border-border/60 pb-3">

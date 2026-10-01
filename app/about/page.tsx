@@ -7,6 +7,8 @@ import { AboutDirection } from "@/components/about/about-direction"
 import { AboutEcosystem } from "@/components/about/about-ecosystem"
 import { AboutFinalCta } from "@/components/about/about-final-cta"
 import { AboutHero } from "@/components/about/about-hero"
+import { AboutJsonLd } from "@/components/about/about-json-ld"
+import { AboutValues } from "@/components/about/about-values"
 import { AboutWhatIsKampmax } from "@/components/about/about-what-is-kampmax"
 import { AboutWhoWeServe } from "@/components/about/about-who-we-serve"
 import { AboutWhyExists } from "@/components/about/about-why-exists"
@@ -30,12 +32,22 @@ export default function AboutPage() {
   return (
     <>
       {/* Section A — Hero */}
-      <Container>
-        <AboutHero />
-      </Container>
+      <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-10%] size-128 rounded-full bg-primary-200/40 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
+        />
+        <Container className="relative">
+          <AboutHero />
+        </Container>
+      </div>
 
       {/* Section B — What Is Kampmax? */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <AboutWhatIsKampmax />
@@ -51,7 +63,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Section D — Our Approach */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <AboutApproach />
@@ -59,37 +71,46 @@ export default function AboutPage() {
         </Section>
       </div>
 
-      {/* Section E — The Kampmax Ecosystem */}
+      {/* Section D.5 — Our Values */}
       <Section>
         <Container>
-          <AboutEcosystem />
+          <AboutValues />
         </Container>
       </Section>
+
+      {/* Section E — The Kampmax Ecosystem */}
+      <div className="border-y border-border bg-primary-50">
+        <Section>
+          <Container>
+            <AboutEcosystem />
+          </Container>
+        </Section>
+      </div>
 
       {/* Section F — Who Kampmax Serves */}
-      <div className="bg-muted/30">
-        <Section>
-          <Container>
-            <AboutWhoWeServe />
-          </Container>
-        </Section>
-      </div>
-
-      {/* Section G — Our Direction */}
       <Section>
         <Container>
-          <AboutDirection />
+          <AboutWhoWeServe />
         </Container>
       </Section>
 
-      {/* Section H — Final CTA */}
-      <div className="bg-muted/30">
+      {/* Section G — Our Direction */}
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
-            <AboutFinalCta />
+            <AboutDirection />
           </Container>
         </Section>
       </div>
+
+      {/* Section H — Final CTA */}
+      <Section>
+        <Container>
+          <AboutFinalCta />
+        </Container>
+      </Section>
+
+      <AboutJsonLd />
     </>
   )
 }
