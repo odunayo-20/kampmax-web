@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site"
+import { toIsoDate } from "@/lib/to-iso-date"
 import type { Opportunity } from "@/types/job"
 
 type JobJsonLdProps = {
@@ -16,22 +17,6 @@ const employmentTypeBySlug: Record<string, string> = {
   "full-time": "FULL_TIME",
   "part-time": "PART_TIME",
   freelance: "CONTRACTOR",
-}
-
-/**
- * Parses "November 15, 2026" into an ISO date; returns undefined if
- * unparseable. Reads local date parts rather than `toISOString()`, which
- * converts through UTC and can shift the date backward by a day.
- */
-function toIsoDate(value: string | undefined): string | undefined {
-  if (!value) return undefined
-  const parsed = new Date(value)
-  if (Number.isNaN(parsed.getTime())) return undefined
-
-  const year = parsed.getFullYear()
-  const month = String(parsed.getMonth() + 1).padStart(2, "0")
-  const day = String(parsed.getDate()).padStart(2, "0")
-  return `${year}-${month}-${day}`
 }
 
 export function JobJsonLd({ opportunity }: JobJsonLdProps) {

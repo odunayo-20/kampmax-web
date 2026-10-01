@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, HelpCircle, Mail } from "lucide-react"
+import { ArrowRight, ArrowUp, HelpCircle, Mail } from "lucide-react"
 
 import { contactConfig } from "@/config/contact"
 
@@ -20,7 +20,7 @@ export function PrivacySections() {
           <p>
             This Privacy Policy describes our practices regarding the collection, use, and protection of information when you access or interact with the public Kampmax website (<code className="rounded bg-muted px-1.5 py-0.5 text-xs text-foreground font-mono">kampmax-web</code>).
           </p>
-          <div className="rounded-xl border border-primary/20 bg-primary/[0.03] p-4 sm:p-5 text-sm sm:text-base text-foreground">
+          <div className="rounded-xl border border-primary/20 bg-primary/3 p-4 sm:p-5 text-sm sm:text-base text-foreground">
             <strong className="font-semibold text-primary">Public Website Scope:</strong>{" "}
             This policy applies specifically to the public marketing website and visitor interactions. The public website does not currently host authenticated user profiles, payment accounts, or transaction processing. When authenticated application services are launched, those features will be governed by their respective platform terms and service-specific privacy notices.
           </div>
@@ -314,6 +314,16 @@ export function PrivacySections() {
           </div>
         </div>
       </section>
+
+      <div className="border-t border-border/40 pt-8 text-center">
+        <a
+          href="#top"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          <ArrowUp className="size-3.5" aria-hidden="true" />
+          <span>Back to top</span>
+        </a>
+      </div>
     </div>
   )
 }

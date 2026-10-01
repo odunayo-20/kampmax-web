@@ -20,7 +20,7 @@ export function PrivacyToc() {
   return (
     <nav
       aria-label="Table of Contents"
-      className="my-8 rounded-2xl border border-border/80 bg-muted/30 p-5 sm:p-6"
+      className="my-8 rounded-2xl border border-primary/15 bg-primary/3 p-5 shadow-sm sm:p-6"
     >
       <div className="flex items-center gap-2 mb-3 text-foreground font-heading font-semibold text-sm">
         <ListFilter className="size-4 text-primary" aria-hidden="true" />

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { Container } from "@/components/layout/container"
 import { PrivacyHeader } from "@/components/privacy/privacy-header"
+import { PrivacyJsonLd } from "@/components/privacy/privacy-json-ld"
 import { PrivacySections } from "@/components/privacy/privacy-sections"
 import { PrivacyToc } from "@/components/privacy/privacy-toc"
 
@@ -22,12 +23,16 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <Container className="py-10 sm:py-16">
-      <article className="mx-auto max-w-3xl">
-        <PrivacyHeader />
-        <PrivacyToc />
-        <PrivacySections />
-      </article>
-    </Container>
+    <>
+      <Container className="py-10 sm:py-16">
+        <article id="top" className="mx-auto max-w-3xl scroll-mt-16">
+          <PrivacyHeader />
+          <PrivacyToc />
+          <PrivacySections />
+        </article>
+      </Container>
+
+      <PrivacyJsonLd />
+    </>
   )
 }
