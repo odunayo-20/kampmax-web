@@ -7,6 +7,7 @@ import { ContactBusinessCta } from "@/components/contact/contact-business-cta"
 import { ContactFaq } from "@/components/contact/contact-faq"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactHero } from "@/components/contact/contact-hero"
+import { ContactJsonLd } from "@/components/contact/contact-json-ld"
 import { ContactPathways } from "@/components/contact/contact-pathways"
 
 export const metadata: Metadata = {
@@ -28,12 +29,22 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero Section */}
-      <Container>
-        <ContactHero />
-      </Container>
+      <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 right-[-10%] size-96 rounded-full bg-primary-200/40 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 left-[-10%] size-80 rounded-full bg-accent-100/60 blur-3xl"
+        />
+        <Container className="relative">
+          <ContactHero />
+        </Container>
+      </div>
 
       {/* Pathways Section */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <ContactPathways />
@@ -91,13 +102,15 @@ export default function ContactPage() {
       </Section>
 
       {/* FAQ Section */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <ContactFaq />
           </Container>
         </Section>
       </div>
+
+      <ContactJsonLd />
     </>
   )
 }

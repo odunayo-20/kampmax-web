@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import { CheckCircle2, Loader2, Send } from "lucide-react"
 
 import {
@@ -13,7 +14,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { FormMessage } from "@/components/ui/form-message"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Muted } from "@/components/ui/typography"
 import { Textarea } from "@/components/ui/textarea"
+import { cn } from "@/lib/utils"
 
 type FormErrors = Partial<Record<keyof ContactSubmissionPayload, string>>
 
@@ -192,6 +195,7 @@ function ContactForm() {
                   onChange={handleChange}
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? "name-error" : undefined}
+                  className="h-10"
                 />
                 {errors.name && (
                   <FormMessage id="name-error" variant="error">
@@ -216,6 +220,7 @@ function ContactForm() {
                   onChange={handleChange}
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? "email-error" : undefined}
+                  className="h-10"
                 />
                 {errors.email && (
                   <FormMessage id="email-error" variant="error">
@@ -236,7 +241,7 @@ function ContactForm() {
                   name="inquiryType"
                   value={formData.inquiryType}
                   onChange={handleChange}
-                  className="h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30"
+                  className="h-10 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30"
                 >
                   {inquiryTypes.map((type) => (
                     <option
@@ -267,6 +272,7 @@ function ContactForm() {
                   autoComplete="tel"
                   value={formData.phone}
                   onChange={handleChange}
+                  className="h-10"
                 />
               </div>
             </div>
@@ -286,6 +292,7 @@ function ContactForm() {
                 placeholder="e.g. Campus Printing Co. or UNILAG Tech Society"
                 value={formData.organization}
                 onChange={handleChange}
+                className="h-10"
               />
             </div>
 
@@ -318,27 +325,35 @@ function ContactForm() {
             </div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className={buttonVariants({
-                variant: "default",
-                size: "lg",
-                className: "mt-2 w-full gap-2 sm:w-auto",
-              })}
-            >
-              {status === "submitting" ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                  <span>Sending Message...</span>
-                </>
-              ) : (
-                <>
-                  <Send className="size-4" aria-hidden="true" />
-                  <span>Send Inquiry</span>
-                </>
-              )}
-            </button>
+            <div className="mt-2 flex flex-col gap-2">
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className={cn(
+                  buttonVariants({ variant: "default", size: "lg" }),
+                  "h-11 w-full gap-2 rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20 sm:w-auto"
+                )}
+              >
+                {status === "submitting" ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                    <span>Sending Message...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="size-4" aria-hidden="true" />
+                    <span>Send Inquiry</span>
+                  </>
+                )}
+              </button>
+              <Muted className="text-2xs">
+                By submitting, you agree to our{" "}
+                <Link href="/privacy" className="font-medium text-primary hover:underline">
+                  Privacy Policy
+                </Link>
+                . We only use your details to respond to this inquiry.
+              </Muted>
+            </div>
           </form>
         )}
       </CardContent>

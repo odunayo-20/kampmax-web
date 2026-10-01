@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 
 function ContactBusinessCta() {
   return (
-    <Card className="border-border/80 bg-gradient-to-br from-card via-card to-primary/5">
+    <Card className="border-border/80 bg-linear-to-br from-card via-card to-primary/5">
       <CardContent className="flex flex-col gap-4 p-6 sm:p-8">
         <div className="flex items-center gap-2">
           <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
