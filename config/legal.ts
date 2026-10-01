@@ -20,4 +20,14 @@ export const legalConfig = {
     lastUpdated: "October 1, 2026",
     effectiveDate: "October 1, 2026",
   },
+  cookiePolicy: {
+    title: "Cookie Policy",
+    lastUpdated: "October 1, 2026",
+    effectiveDate: "October 1, 2026",
+  },
+  amlPolicy: {
+    title: "Anti-Money Laundering Policy",
+    lastUpdated: "October 1, 2026",
+    effectiveDate: "October 1, 2026",
+  },
 } as const

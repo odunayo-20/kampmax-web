@@ -94,4 +94,6 @@ export const legalNav: NavItem[] = [
   { title: "Terms of Service", href: "/terms" },
   { title: "Privacy Policy", href: "/privacy" },
   { title: "Refund Policy", href: "/refund-policy" },
+  { title: "Cookie Policy", href: "/cookie-policy" },
+  { title: "AML Policy", href: "/aml-policy" },
 ]

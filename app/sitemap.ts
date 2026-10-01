@@ -55,8 +55,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "/about",
+    "/aml-policy",
     "/become-a-vendor",
     "/contact",
+    "/cookie-policy",
     "/for-businesses",
     "/how-it-works",
     "/privacy",
