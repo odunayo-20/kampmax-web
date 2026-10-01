@@ -26,8 +26,8 @@ function MoreNav() {
           <Button
             variant="ghost"
             className={cn(
-              "gap-1 text-muted-foreground hover:text-foreground",
-              active && "bg-muted text-foreground"
+              "gap-1 text-muted-foreground hover:bg-primary-50 hover:text-primary-700",
+              active && "bg-primary-50 font-semibold text-primary-700"
             )}
           />
         }

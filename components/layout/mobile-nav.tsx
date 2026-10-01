@@ -19,7 +19,7 @@ import { siteConfig } from "@/config/site"
 import { cn } from "cn"
 
 const navLinkClassName =
-  "flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-primary"
+  "flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-foreground transition-colors hover:bg-primary-50 hover:text-primary-700 aria-[current=page]:bg-primary-50 aria-[current=page]:font-semibold aria-[current=page]:text-primary-700"
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
@@ -66,13 +66,19 @@ export function MobileNav() {
         <SheetFooter className="flex-row gap-2">
           <Link
             href={siteConfig.loginUrl}
-            className={cn(buttonVariants({ variant: "outline" }), "flex-1")}
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "h-10 flex-1 font-medium"
+            )}
           >
             Log in
           </Link>
           <Link
             href={siteConfig.registerUrl}
-            className={cn(buttonVariants({ variant: "default" }), "flex-1")}
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "h-10 flex-1 font-semibold shadow-sm shadow-primary-600/20"
+            )}
           >
             Join Kampmax
           </Link>

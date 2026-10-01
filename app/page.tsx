@@ -14,9 +14,19 @@ import { WhatIsKampmax } from "@/components/home/what-is-kampmax"
 export default function Home() {
   return (
     <>
-      <Container>
-        <Hero />
-      </Container>
+      <div className="relative isolate overflow-hidden bg-linear-to-b from-primary-50 via-background to-background">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-10%] size-128 rounded-full bg-primary-200/40 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
+        />
+        <Container className="relative">
+          <Hero />
+        </Container>
+      </div>
 
       <Section>
         <Container>
@@ -30,7 +40,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <HowItWorks />
@@ -44,7 +54,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <Opportunities />
@@ -64,7 +74,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <TrustValues />
