@@ -1,0 +1,63 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Left Stem Blue Gradient -->
+    <linearGradient id="kmBlueStem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0256E0" />
+      <stop offset="60%" stop-color="#0066FF" />
+      <stop offset="100%" stop-color="#0047BA" />
+    </linearGradient>
+
+    <!-- Lower Right Leg Blue Gradient -->
+    <linearGradient id="kmBlueLeg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0447C8" />
+      <stop offset="50%" stop-color="#0062F5" />
+      <stop offset="100%" stop-color="#003EAC" />
+    </linearGradient>
+
+    <!-- Dynamic Golden Arrow Gradient -->
+    <linearGradient id="kmGoldArrow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF7200" />
+      <stop offset="30%" stop-color="#FFA600" />
+      <stop offset="70%" stop-color="#FFC500" />
+      <stop offset="100%" stop-color="#FFD600" />
+    </linearGradient>
+
+    <!-- Ribbon Wrap Shadow/Gradient -->
+    <linearGradient id="kmRibbonWrap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D45000" />
+      <stop offset="40%" stop-color="#FF7A00" />
+      <stop offset="100%" stop-color="#FFA800" />
+    </linearGradient>
+
+    <!-- Arrow Shaft Ambient Shadow -->
+    <filter id="kmArrowShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="-3" dy="6" stdDeviation="6" flood-color="#001F60" flood-opacity="0.28" />
+    </filter>
+  </defs>
+
+  <!-- 1. Main Left Vertical Blue Stem with Rounded Top-Left -->
+  <path
+    d="M110 170 C110 128 144 104 186 104 L210 104 L210 408 L152 408 C128 408 110 390 110 366 Z"
+    fill="url(#kmBlueStem)"
+  />
+
+  <!-- 2. Bottom-Right Blue Diagonal Leg -->
+  <path
+    d="M210 306 L302 408 L422 408 L286 266 L210 306 Z"
+    fill="url(#kmBlueLeg)"
+  />
+
+  <!-- 3. Under-Ribbon Loop (Wrapping from back of stem to front) -->
+  <path
+    d="M192 408 C150 408 112 376 112 334 C112 288 142 250 182 222 L234 186 L238 234 L196 264 C172 282 158 304 158 326 C158 350 176 368 200 368 L200 408 Z"
+    fill="url(#kmRibbonWrap)"
+  />
+
+  <!-- 4. Front Golden Arrow Ribbon with Head (Rising 45-deg diagonal) -->
+  <g filter="url(#kmArrowShadow)">
+    <path
+      d="M116 340 C118 296 146 258 190 228 L308 144 L276 116 L406 104 L394 214 L358 182 L218 280 C186 302 166 326 158 348 C144 358 126 354 116 340 Z"
+      fill="url(#kmGoldArrow)"
+    />
+  </g>
+</svg>

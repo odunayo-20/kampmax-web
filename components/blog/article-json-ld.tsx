@@ -32,7 +32,7 @@ export function ArticleJsonLd({ post }: ArticleJsonLdProps) {
       url: siteConfig.url,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/favicon.ico`,
+        url: `${siteConfig.url}/icon.svg`,
       },
     },
     articleSection: post.category,
