@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 
 function VendorChoosePath() {
   return (
@@ -67,11 +68,10 @@ function VendorChoosePath() {
               <div className="mt-auto pt-2">
                 <Link
                   href={siteConfig.registerUrl}
-                  className={buttonVariants({
-                    variant: "default",
-                    size: "lg",
-                    className: "w-full gap-2",
-                  })}
+                  className={cn(
+                    buttonVariants({ variant: "default", size: "lg" }),
+                    "h-12 w-full gap-2 rounded-xl px-8 text-base font-semibold shadow-lg shadow-primary-600/25"
+                  )}
                 >
                   <span>{path.ctaText}</span>
                   <ArrowRight className="size-4" aria-hidden="true" />

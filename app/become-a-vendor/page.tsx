@@ -7,6 +7,7 @@ import { VendorCampusAdvantage } from "@/components/become-a-vendor/vendor-campu
 import { VendorChoosePath } from "@/components/become-a-vendor/vendor-choose-path"
 import { VendorExperiences } from "@/components/become-a-vendor/vendor-experiences"
 import { VendorFaq } from "@/components/become-a-vendor/vendor-faq"
+import { VendorFaqJsonLd } from "@/components/become-a-vendor/vendor-faq-json-ld"
 import { VendorFinalCta } from "@/components/become-a-vendor/vendor-final-cta"
 import { VendorHero } from "@/components/become-a-vendor/vendor-hero"
 import { VendorHowItWorks } from "@/components/become-a-vendor/vendor-how-it-works"
@@ -32,12 +33,22 @@ export default function BecomeAVendorPage() {
   return (
     <>
       {/* 1. Hero */}
-      <Container>
-        <VendorHero />
-      </Container>
+      <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-10%] size-128 rounded-full bg-primary-200/40 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
+        />
+        <Container className="relative">
+          <VendorHero />
+        </Container>
+      </div>
 
       {/* 2. Choose Your Path (Sell Products vs. Offer Services) */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <VendorChoosePath />
@@ -53,7 +64,7 @@ export default function BecomeAVendorPage() {
       </Section>
 
       {/* 4. What You Can Showcase */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <VendorShowcase />
@@ -69,7 +80,7 @@ export default function BecomeAVendorPage() {
       </Section>
 
       {/* 6. Vendor & Service Provider Experience */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <VendorExperiences />
@@ -85,7 +96,7 @@ export default function BecomeAVendorPage() {
       </Section>
 
       {/* 8. Trust & Quality Expectations */}
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <VendorTrustQuality />
@@ -101,13 +112,13 @@ export default function BecomeAVendorPage() {
       </Section>
 
       {/* 10. Final Conversion Section */}
-      <div className="bg-muted/30">
-        <Section>
-          <Container>
-            <VendorFinalCta />
-          </Container>
-        </Section>
-      </div>
+      <Section>
+        <Container>
+          <VendorFinalCta />
+        </Container>
+      </Section>
+
+      <VendorFaqJsonLd />
     </>
   )
 }

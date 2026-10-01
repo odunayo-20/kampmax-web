@@ -15,7 +15,7 @@ function VendorHeroComposition() {
   return (
     <div
       aria-hidden="true"
-      className="mx-auto flex w-full max-w-md flex-col items-center gap-2.5 rounded-2xl border border-border/80 bg-gradient-to-b from-card via-card to-muted/20 p-5 shadow-xs sm:p-6"
+      className="mx-auto flex w-full max-w-md flex-col items-center gap-2.5 rounded-2xl border border-border/80 bg-linear-to-b from-card via-card to-muted/20 p-5 shadow-xs sm:p-6"
     >
       {/* 1. Origin: Person / Business */}
       <div className="flex w-full items-center justify-between rounded-xl border border-border bg-card p-3 shadow-2xs">
@@ -86,8 +86,8 @@ function VendorHeroComposition() {
       {/* 4. Audience: Campus Community */}
       <div className="flex w-full items-center justify-between rounded-xl border border-border bg-card p-3 shadow-2xs">
         <div className="flex items-center gap-2.5">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-muted text-foreground">
-            <GraduationCap className="size-4 text-primary" aria-hidden="true" />
+          <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <GraduationCap className="size-4" aria-hidden="true" />
           </span>
           <div className="flex flex-col">
             <span className="font-heading text-xs font-semibold text-foreground">
