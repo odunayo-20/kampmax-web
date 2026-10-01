@@ -16,13 +16,13 @@ function ForVendors() {
         </Lead>
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/for-businesses#vendors"
+            href="/become-a-vendor"
             className={buttonVariants({ variant: "default" })}
           >
             Become a Vendor
           </Link>
           <Link
-            href="/for-businesses#service-providers"
+            href="/become-a-vendor#service-providers"
             className={buttonVariants({ variant: "outline" })}
           >
             Offer a Service

@@ -79,10 +79,10 @@ export const footerNavGroups: NavGroup[] = [
     title: "Business",
     items: [
       { title: "For Businesses", href: "/for-businesses" },
-      { title: "Become a Vendor", href: "/for-businesses#vendors" },
+      { title: "Become a Vendor", href: "/become-a-vendor" },
       {
         title: "Become a Service Provider",
-        href: "/for-businesses#service-providers",
+        href: "/become-a-vendor#service-providers",
       },
     ],
   },
