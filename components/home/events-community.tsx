@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { Calendar } from "lucide-react"
+import { ArrowRight, Calendar } from "lucide-react"
 
 import { buttonVariants } from "@/components/ui/button"
 import { Eyebrow, H2, Lead } from "@/components/ui/typography"
+import { cn } from "@/lib/utils"
 
 function EventsCommunity() {
   return (
@@ -18,16 +19,20 @@ function EventsCommunity() {
         <div>
           <Link
             href="/events"
-            className={buttonVariants({ variant: "default" })}
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "h-11 rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
+            )}
           >
             Browse Events
+            <ArrowRight />
           </Link>
         </div>
       </div>
 
       <div
         aria-hidden="true"
-        className="flex h-48 items-center justify-center rounded-lg bg-muted text-muted-foreground lg:h-full"
+        className="flex h-48 items-center justify-center rounded-lg bg-primary-50 text-primary-400 lg:h-full"
       >
         <Calendar className="size-10" />
       </div>

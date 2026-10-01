@@ -21,7 +21,9 @@ function ForBusinesses() {
               key={cta.href}
               href={cta.href}
               className={cn(
-                buttonVariants({ variant: index === 0 ? "default" : "outline" })
+                buttonVariants({ variant: index === 0 ? "default" : "outline" }),
+                "h-11 rounded-lg px-6 text-sm font-semibold",
+                index === 0 && "shadow-sm shadow-primary-600/20"
               )}
             >
               {cta.title}

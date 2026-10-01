@@ -18,10 +18,10 @@ function DiscoverGrid() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {discoveryItems.map((item) => (
           <Link key={item.href} href={item.href} className="group block">
-            <Card className="h-full transition-colors group-hover:border-primary/40 group-focus-visible:border-primary/40">
+            <Card className="h-full shadow-sm transition-all group-hover:border-primary/40 group-hover:shadow-md group-focus-visible:border-primary/40">
               <CardContent className="flex h-full flex-col gap-3">
                 <div className="flex items-start justify-between">
-                  <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-foreground">
+                  <span className="flex size-9 items-center justify-center rounded-lg bg-primary-50 text-primary-600 transition-colors group-hover:bg-primary-100">
                     <item.icon className="size-4" aria-hidden="true" />
                   </span>
                   {item.badge ? (
@@ -29,10 +29,10 @@ function DiscoverGrid() {
                   ) : null}
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h3 className="flex items-center gap-1.5 text-base font-medium text-foreground">
+                  <h3 className="flex items-center gap-1.5 text-base font-semibold text-foreground">
                     {item.title}
                     <ArrowRight
-                      className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                      className="size-3.5 text-primary-600 transition-transform group-hover:translate-x-1"
                       aria-hidden="true"
                     />
                   </h3>

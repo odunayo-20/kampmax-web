@@ -13,11 +13,11 @@ function Opportunities() {
       <ul className="flex flex-col divide-y divide-border">
         {opportunityItems.map((item) => (
           <li key={item.title} className="flex items-start gap-4 py-4 first:pt-0 last:pb-0">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-700">
               <item.icon className="size-4" aria-hidden="true" />
             </span>
             <div className="flex flex-col gap-0.5">
-              <p className="font-medium text-foreground">{item.title}</p>
+              <p className="font-semibold text-foreground">{item.title}</p>
               <p className="text-sm text-muted-foreground">
                 {item.description}
               </p>

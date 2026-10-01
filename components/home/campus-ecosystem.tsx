@@ -1,3 +1,5 @@
+import { MapPin } from "lucide-react"
+
 import { Eyebrow, H2, Lead } from "@/components/ui/typography"
 
 const places = ["Campus Center", "Residence Halls", "Engineering Quad", "Downtown"]
@@ -22,8 +24,9 @@ function CampusEcosystem() {
         {places.map((place) => (
           <div
             key={place}
-            className="rounded-lg border border-border bg-card px-4 py-6 text-center text-sm font-medium text-foreground ring-1 ring-accent-500/15"
+            className="flex flex-col items-center gap-2 rounded-lg border border-border bg-card px-4 py-6 text-center text-sm font-medium text-foreground shadow-sm ring-1 ring-accent-500/15"
           >
+            <MapPin className="size-4 text-primary-600" aria-hidden="true" />
             {place}
           </div>
         ))}
