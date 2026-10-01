@@ -10,9 +10,9 @@ function CampusCard({ campus }: { campus: Campus }) {
       href={`/campuses/${campus.slug}`}
       className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <Card className="h-full transition-colors group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
+      <Card className="h-full shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
         <CardContent className="flex h-full flex-col gap-3">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-foreground">
+          <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <GraduationCap className="size-4" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
@@ -31,10 +31,10 @@ function CampusCard({ campus }: { campus: Campus }) {
               </p>
             ) : null}
           </div>
-          <span className="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-medium text-foreground">
+          <span className="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-medium text-primary-600">
             Explore Campus
             <ArrowRight
-              className="size-3.5 transition-transform group-hover:translate-x-0.5"
+              className="size-3.5 transition-transform group-hover:translate-x-1"
               aria-hidden="true"
             />
           </span>

@@ -7,7 +7,7 @@ function CampusGrid({ campuses }: { campuses: Campus[] }) {
   if (campuses.length === 0) {
     return (
       <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-        <span className="flex size-10 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+        <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
           <Compass className="size-5" aria-hidden="true" />
         </span>
         <p className="font-heading text-lg font-semibold text-foreground">

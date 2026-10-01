@@ -33,7 +33,7 @@ function CampusDiscover({ campus }: { campus: Campus }) {
             >
               <CardContent className="flex h-full flex-col gap-3">
                 <div className="flex items-start justify-between">
-                  <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-foreground">
+                  <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <category.icon className="size-4" aria-hidden="true" />
                   </span>
                   {!category.available && (

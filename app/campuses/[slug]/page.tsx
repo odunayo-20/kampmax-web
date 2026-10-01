@@ -5,6 +5,7 @@ import { getCampusBySlug, getEnabledCampuses } from "@/app/_data/campuses"
 import { CampusCta } from "@/components/campuses/campus-cta"
 import { CampusDiscover } from "@/components/campuses/campus-discover"
 import { CampusHeader } from "@/components/campuses/campus-header"
+import { CampusJsonLd } from "@/components/campuses/campus-json-ld"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 
@@ -22,9 +23,19 @@ export async function generateMetadata({
     return {}
   }
 
+  const description = `Discover what's happening around ${campus.name} on Kampmax — marketplace, services, jobs, and events for the ${campus.shortName} community.`
+
   return {
     title: `${campus.shortName} Campus`,
-    description: `Discover what's happening around ${campus.name} on Kampmax — marketplace, services, jobs, and events for the ${campus.shortName} community.`,
+    description,
+    alternates: {
+      canonical: `/campuses/${campus.slug}`,
+    },
+    openGraph: {
+      title: `${campus.shortName} Campus — Kampmax`,
+      description,
+      url: `/campuses/${campus.slug}`,
+    },
   }
 }
 
@@ -44,7 +55,7 @@ export default async function CampusPage({
         <CampusHeader campus={campus} />
       </Container>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section id="discover" className="scroll-mt-16">
           <Container>
             <CampusDiscover campus={campus} />
@@ -57,6 +68,8 @@ export default async function CampusPage({
           <CampusCta campus={campus} />
         </Container>
       </Section>
+
+      <CampusJsonLd campus={campus} />
     </>
   )
 }

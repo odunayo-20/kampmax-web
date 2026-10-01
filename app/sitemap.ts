@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 
+import { getEnabledCampuses } from "@/app/_data/campuses"
 import { getEvents } from "@/app/_data/events"
 import { getOpportunities } from "@/app/_data/jobs"
 import { getProducts } from "@/app/_data/marketplace"
@@ -29,6 +30,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  const campusRoutes: MetadataRoute.Sitemap = getEnabledCampuses().map((campus) => ({
+    url: `${siteConfig.url}/campuses/${campus.slug}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }))
+
   return [
     {
       url: siteConfig.url,
@@ -54,8 +62,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    {
+      url: `${siteConfig.url}/campuses`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     ...productRoutes,
     ...eventRoutes,
     ...jobRoutes,
+    ...campusRoutes,
   ]
 }
