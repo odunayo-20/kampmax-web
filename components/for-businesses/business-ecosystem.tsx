@@ -87,7 +87,7 @@ function BusinessEcosystem() {
 
       <div
         aria-hidden="true"
-        className="flex flex-col items-center gap-4 rounded-2xl border border-border/80 bg-gradient-to-b from-card to-muted/30 p-6 shadow-xs sm:p-8"
+        className="flex flex-col items-center gap-4 rounded-2xl border border-border/80 bg-linear-to-b from-card to-muted/30 p-6 shadow-xs sm:p-8"
       >
         <div className="flex items-center gap-2.5 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 font-heading text-sm font-semibold text-primary">
           <Building2 className="size-4" aria-hidden="true" />
@@ -100,7 +100,7 @@ function BusinessEcosystem() {
           {ecosystemSurfaces.map((surface) => (
             <Card key={surface.title} size="sm" className="bg-card">
               <CardContent className="flex flex-col gap-1.5 p-3.5">
-                <span className="flex size-7 items-center justify-center rounded-md bg-muted text-foreground">
+                <span className="flex size-7 items-center justify-center rounded-md bg-primary/10 text-primary">
                   <surface.icon className="size-3.5" aria-hidden="true" />
                 </span>
                 <span className="font-heading text-xs font-semibold text-foreground">
@@ -116,7 +116,7 @@ function BusinessEcosystem() {
 
         <ArrowDown className="size-4 text-muted-foreground" aria-hidden="true" />
 
-        <div className="flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-muted/60 p-3 text-center">
+        <div className="flex w-full items-center justify-center gap-2 rounded-xl border border-primary/20 bg-primary/5 p-3 text-center">
           <Users className="size-4 text-primary" aria-hidden="true" />
           <span className="text-xs font-medium text-foreground">
             Campus Community (Students, Faculty, Residents)

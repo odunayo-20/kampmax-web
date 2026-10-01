@@ -30,7 +30,7 @@ function BusinessWhyCampuses() {
         ))}
       </div>
 
-      <div className="rounded-2xl border border-border/80 bg-gradient-to-r from-primary/5 via-card to-primary/5 p-6 sm:p-8">
+      <div className="rounded-2xl border border-border/80 bg-linear-to-r from-primary/5 via-card to-primary/5 p-6 sm:p-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-heading text-base font-semibold text-foreground sm:text-lg">
             Active communities are built on proximity, trust, and shared daily routines.

@@ -37,7 +37,7 @@ function BusinessHeroComposition() {
   return (
     <div
       aria-hidden="true"
-      className="flex flex-col gap-3 rounded-2xl border border-border/80 bg-gradient-to-b from-card to-muted/30 p-5 shadow-xs sm:p-6"
+      className="flex flex-col gap-3 rounded-2xl border border-border/80 bg-linear-to-b from-card to-muted/30 p-5 shadow-xs sm:p-6"
     >
       <div className="flex items-center justify-between border-b border-border/60 pb-3">
         <div className="flex items-center gap-2">
