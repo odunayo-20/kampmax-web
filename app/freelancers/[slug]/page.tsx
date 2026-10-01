@@ -8,6 +8,7 @@ import {
   getFreelancers,
 } from "@/app/_data/freelancers"
 import { Container } from "@/components/layout/container"
+import { FreelancerJsonLd } from "@/components/freelancers/freelancer-json-ld"
 import { FreelancerProfile } from "@/components/freelancers/freelancer-profile"
 
 type FreelancerPageProps = {
@@ -28,9 +29,19 @@ export async function generateMetadata({
     return {}
   }
 
+  const description = `${freelancer.headline}. ${freelancer.bio}`
+
   return {
     title: `${freelancer.name} | Kampmax Freelancers`,
-    description: `${freelancer.headline}. ${freelancer.bio}`,
+    description,
+    alternates: {
+      canonical: `/freelancers/${freelancer.slug}`,
+    },
+    openGraph: {
+      title: `${freelancer.name} — Kampmax Freelancers`,
+      description,
+      url: `/freelancers/${freelancer.slug}`,
+    },
   }
 }
 
@@ -48,12 +59,16 @@ export default async function FreelancerPage({ params }: FreelancerPageProps) {
     : undefined
 
   return (
-    <Container>
-      <FreelancerProfile
-        freelancer={freelancer}
-        category={category}
-        campus={campus}
-      />
-    </Container>
+    <>
+      <Container>
+        <FreelancerProfile
+          freelancer={freelancer}
+          category={category}
+          campus={campus}
+        />
+      </Container>
+
+      <FreelancerJsonLd freelancer={freelancer} />
+    </>
   )
 }

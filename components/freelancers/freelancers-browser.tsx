@@ -7,6 +7,7 @@ import { FreelancerCard } from "@/components/freelancers/freelancer-card"
 import { buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Freelancer, FreelancerCategory } from "@/types/freelancer"
 
@@ -73,7 +74,7 @@ function FreelancersBrowser({
   if (freelancers.length === 0) {
     return (
       <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-        <span className="flex size-10 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+        <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
           <SearchX className="size-5" aria-hidden="true" />
         </span>
         <p className="font-heading text-lg font-semibold text-foreground">
@@ -89,7 +90,7 @@ function FreelancersBrowser({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="w-full max-w-sm">
             <Label htmlFor={searchId} className="sr-only">
@@ -106,7 +107,7 @@ function FreelancersBrowser({
                 placeholder="Search by name, skill, or role"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="h-9 pl-8"
+                className="h-10 pl-8"
               />
             </div>
           </div>
@@ -122,7 +123,7 @@ function FreelancersBrowser({
               id={campusSelectId}
               value={campusSlug}
               onChange={(event) => setCampusSlug(event.target.value)}
-              className="h-9 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               <option value={ALL_CAMPUSES}>All Campuses</option>
               {campuses.map((campus) => (
@@ -143,10 +144,13 @@ function FreelancersBrowser({
             type="button"
             aria-pressed={categorySlug === ALL_CATEGORIES}
             onClick={() => setCategorySlug(ALL_CATEGORIES)}
-            className={buttonVariants({
-              variant: categorySlug === ALL_CATEGORIES ? "default" : "outline",
-              size: "sm",
-            })}
+            className={cn(
+              buttonVariants({
+                variant: categorySlug === ALL_CATEGORIES ? "default" : "outline",
+                size: "sm",
+              }),
+              "rounded-full"
+            )}
           >
             All
           </button>
@@ -156,10 +160,13 @@ function FreelancersBrowser({
               type="button"
               aria-pressed={categorySlug === category.slug}
               onClick={() => setCategorySlug(category.slug)}
-              className={buttonVariants({
-                variant: categorySlug === category.slug ? "default" : "outline",
-                size: "sm",
-              })}
+              className={cn(
+                buttonVariants({
+                  variant: categorySlug === category.slug ? "default" : "outline",
+                  size: "sm",
+                }),
+                "rounded-full"
+              )}
             >
               {category.name}
             </button>
@@ -169,7 +176,7 @@ function FreelancersBrowser({
 
       {filteredFreelancers.length === 0 ? (
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+          <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
             <SearchX className="size-5" aria-hidden="true" />
           </span>
           <p className="font-heading text-lg font-semibold text-foreground">
@@ -183,17 +190,23 @@ function FreelancersBrowser({
             <button
               type="button"
               onClick={handleResetFilters}
-              className={buttonVariants({ variant: "outline", size: "sm" })}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
             >
               Clear filters
             </button>
           )}
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredFreelancers.map((freelancer) => (
-            <FreelancerCard key={freelancer.slug} freelancer={freelancer} />
-          ))}
+        <div className="flex flex-col gap-4">
+          <p className="text-sm text-muted-foreground">
+            Showing {filteredFreelancers.length} of {freelancers.length}{" "}
+            {freelancers.length === 1 ? "freelancer" : "freelancers"}
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredFreelancers.map((freelancer) => (
+              <FreelancerCard key={freelancer.slug} freelancer={freelancer} />
+            ))}
+          </div>
         </div>
       )}
     </div>

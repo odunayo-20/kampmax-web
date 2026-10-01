@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next"
 
 import { getEnabledCampuses } from "@/app/_data/campuses"
 import { getEvents } from "@/app/_data/events"
+import { getFreelancers } from "@/app/_data/freelancers"
 import { getOpportunities } from "@/app/_data/jobs"
 import { getProducts } from "@/app/_data/marketplace"
 import { siteConfig } from "@/config/site"
@@ -37,6 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  const freelancerRoutes: MetadataRoute.Sitemap = getFreelancers().map((freelancer) => ({
+    url: `${siteConfig.url}/freelancers/${freelancer.slug}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }))
+
   return [
     {
       url: siteConfig.url,
@@ -68,9 +76,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: `${siteConfig.url}/freelancers`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
     ...productRoutes,
     ...eventRoutes,
     ...jobRoutes,
     ...campusRoutes,
+    ...freelancerRoutes,
   ]
 }

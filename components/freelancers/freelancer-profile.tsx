@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { H1, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { formatPrice } from "@/lib/format-price"
 import type { Campus } from "@/types/campus"
 import type { Freelancer, FreelancerCategory } from "@/types/freelancer"
@@ -141,11 +142,10 @@ function FreelancerProfile({
 
           <Link
             href={siteConfig.registerUrl}
-            className={buttonVariants({
-              variant: "default",
-              size: "lg",
-              className: "w-full",
-            })}
+            className={cn(
+              buttonVariants({ variant: "default", size: "lg" }),
+              "h-11 w-full rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
+            )}
           >
             Connect on Kampmax
           </Link>
