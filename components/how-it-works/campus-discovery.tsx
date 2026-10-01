@@ -17,7 +17,7 @@ function CampusDiscovery() {
 
       <div
         aria-hidden="true"
-        className="flex h-48 items-center justify-center rounded-lg bg-muted text-muted-foreground lg:h-full"
+        className="flex h-48 items-center justify-center rounded-lg bg-primary-50 text-primary-400 lg:h-full"
       >
         <MapPin className="size-10" />
       </div>

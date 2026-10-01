@@ -14,18 +14,38 @@ import { Hero } from "@/components/how-it-works/hero"
 import { WhatYouCanDo } from "@/components/how-it-works/what-you-can-do"
 import { siteConfig } from "@/config/site"
 
+const description =
+  "See exactly what you can do on Kampmax — discover the marketplace, services, jobs, freelancers, and events connected around your campus."
+
 export const metadata: Metadata = {
   title: { absolute: `${siteConfig.name} — How It Works` },
-  description:
-    "See exactly what you can do on Kampmax — discover the marketplace, services, jobs, freelancers, and events connected around your campus.",
+  description,
+  alternates: {
+    canonical: "/how-it-works",
+  },
+  openGraph: {
+    title: `${siteConfig.name} — How It Works`,
+    description,
+    url: "/how-it-works",
+  },
 }
 
 export default function HowItWorksPage() {
   return (
     <>
-      <Container>
-        <Hero />
-      </Container>
+      <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-10%] size-128 rounded-full bg-primary-200/40 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
+        />
+        <Container className="relative">
+          <Hero />
+        </Container>
+      </div>
 
       <Section>
         <Container>
@@ -33,7 +53,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section id="what-you-can-do" className="scroll-mt-16">
           <Container>
             <WhatYouCanDo />
@@ -47,7 +67,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <ForStudents />
@@ -61,7 +81,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
             <ForFreelancers />
@@ -75,7 +95,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <div className="bg-muted/30">
+      <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
             <CampusDiscovery />

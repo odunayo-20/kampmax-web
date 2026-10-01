@@ -18,7 +18,7 @@ function HeroPreview() {
           className={index % 2 === 1 ? "ml-4 sm:ml-10" : ""}
         >
           <CardContent className="flex items-center gap-3">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <step.icon className="size-4" />
             </span>
             <div className="flex min-w-0 flex-col gap-0.5">

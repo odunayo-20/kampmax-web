@@ -17,7 +17,7 @@ function ForStudents() {
       <ul className="flex flex-col gap-4 lg:order-1">
         {studentActivities.map((activity) => (
           <li key={activity.text} className="flex items-center gap-3">
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <activity.icon className="size-4" aria-hidden="true" />
             </span>
             <span className="text-sm font-medium text-foreground">

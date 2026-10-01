@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 
+import { getAllPosts } from "@/app/_data/blog"
 import { getEnabledCampuses } from "@/app/_data/campuses"
 import { getEvents } from "@/app/_data/events"
 import { getFreelancers } from "@/app/_data/freelancers"
@@ -45,6 +46,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  const blogRoutes: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${siteConfig.url}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt || post.publishedAt),
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }))
+
+  const staticRoutes: MetadataRoute.Sitemap = [
+    "/about",
+    "/become-a-vendor",
+    "/contact",
+    "/for-businesses",
+    "/how-it-works",
+    "/privacy",
+    "/services",
+  ].map((path) => ({
+    url: `${siteConfig.url}${path}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }))
+
   return [
     {
       url: siteConfig.url,
@@ -82,10 +105,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    {
+      url: `${siteConfig.url}/blog`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    ...staticRoutes,
     ...productRoutes,
     ...eventRoutes,
     ...jobRoutes,
     ...campusRoutes,
     ...freelancerRoutes,
+    ...blogRoutes,
   ]
 }
