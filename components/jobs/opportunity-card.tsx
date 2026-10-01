@@ -24,7 +24,7 @@ function OpportunityCard({
       href={`/jobs/${opportunity.slug}`}
       className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <Card className="flex h-full flex-col pt-5 transition-colors group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
+      <Card className="flex h-full flex-col pt-5 shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
         <CardContent className="flex flex-1 flex-col gap-3.5">
           <div className="flex items-center justify-between gap-2">
             <span className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
@@ -76,10 +76,10 @@ function OpportunityCard({
             <span className="text-xs text-muted-foreground">
               {opportunity.campusSlug ? "Campus-affiliated" : "Open opportunity"}
             </span>
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-foreground">
+            <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-600">
               View Opportunity
               <ArrowRight
-                className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                className="size-3.5 transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </span>

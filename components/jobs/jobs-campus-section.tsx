@@ -43,7 +43,7 @@ function JobsCampusSection() {
         {campusPathways.map((item) => (
           <Card key={item.title} className="h-full">
             <CardContent className="flex flex-col gap-2.5 p-5">
-              <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-foreground">
+              <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <item.icon className="size-4" aria-hidden="true" />
               </span>
               <h3 className="font-heading text-base font-semibold text-foreground">

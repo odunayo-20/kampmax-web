@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 
 import { getEvents } from "@/app/_data/events"
+import { getOpportunities } from "@/app/_data/jobs"
 import { getProducts } from "@/app/_data/marketplace"
 import { siteConfig } from "@/config/site"
 
@@ -19,6 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: event.isPast ? "monthly" : "weekly",
     priority: event.isPast ? 0.4 : 0.6,
+  }))
+
+  const jobRoutes: MetadataRoute.Sitemap = getOpportunities().map((opportunity) => ({
+    url: `${siteConfig.url}/jobs/${opportunity.slug}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.6,
   }))
 
   return [
@@ -40,7 +48,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    {
+      url: `${siteConfig.url}/jobs`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
     ...productRoutes,
     ...eventRoutes,
+    ...jobRoutes,
   ]
 }

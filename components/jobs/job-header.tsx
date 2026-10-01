@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { H1, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Opportunity, OpportunityType } from "@/types/job"
 
@@ -177,11 +178,10 @@ function JobHeader({
           <div className="flex flex-col gap-2 pt-1">
             <Link
               href={siteConfig.registerUrl}
-              className={buttonVariants({
-                variant: "default",
-                size: "lg",
-                className: "w-full",
-              })}
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "h-11 w-full rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
+              )}
             >
               Apply on Kampmax
             </Link>

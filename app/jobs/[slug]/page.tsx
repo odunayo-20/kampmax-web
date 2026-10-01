@@ -9,6 +9,7 @@ import {
 } from "@/app/_data/jobs"
 import { Container } from "@/components/layout/container"
 import { JobHeader } from "@/components/jobs/job-header"
+import { JobJsonLd } from "@/components/jobs/job-json-ld"
 
 type JobPageProps = {
   params: Promise<{ slug: string }>
@@ -28,9 +29,19 @@ export async function generateMetadata({
     return {}
   }
 
+  const description = `${opportunity.description} Location: ${opportunity.location ?? "Campus"}.`
+
   return {
     title: `${opportunity.title} at ${opportunity.organization} | Kampmax Jobs`,
-    description: `${opportunity.description} Location: ${opportunity.location ?? "Campus"}.`,
+    description,
+    alternates: {
+      canonical: `/jobs/${opportunity.slug}`,
+    },
+    openGraph: {
+      title: `${opportunity.title} at ${opportunity.organization} — Kampmax Jobs`,
+      description,
+      url: `/jobs/${opportunity.slug}`,
+    },
   }
 }
 
@@ -48,8 +59,12 @@ export default async function JobPage({ params }: JobPageProps) {
     : undefined
 
   return (
-    <Container>
-      <JobHeader opportunity={opportunity} type={type} campus={campus} />
-    </Container>
+    <>
+      <Container>
+        <JobHeader opportunity={opportunity} type={type} campus={campus} />
+      </Container>
+
+      <JobJsonLd opportunity={opportunity} />
+    </>
   )
 }
