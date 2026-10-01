@@ -12,6 +12,8 @@ export const contactConfig = {
   businessEmail: process.env.NEXT_PUBLIC_BUSINESS_EMAIL ?? "",
   /** Platform support email. Empty until configured. */
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "",
+  /** Privacy and data inquiries email. Empty until configured. */
+  privacyEmail: process.env.NEXT_PUBLIC_PRIVACY_EMAIL ?? "",
   /** Contact phone number. Empty until configured. */
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "",
   /** Physical or mailing address. Empty until configured. */

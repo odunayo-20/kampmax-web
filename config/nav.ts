@@ -89,8 +89,7 @@ export const footerNavGroups: NavGroup[] = [
   },
 ]
 
-/** Legal links shown in the footer's bottom utility bar. */
+/** Legal links shown in the footer's bottom utility bar. Only links to routes that exist. */
 export const legalNav: NavItem[] = [
   { title: "Privacy", href: "/privacy" },
-  { title: "Terms", href: "/terms" },
 ]
