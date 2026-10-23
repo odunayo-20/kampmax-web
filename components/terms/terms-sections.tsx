@@ -128,7 +128,7 @@ export function TermsSections() {
           </p>
           <div className="rounded-xl border border-primary/20 bg-primary/3 p-4 sm:p-5 text-sm sm:text-base text-foreground">
             <strong className="font-semibold text-primary">Role Eligibility:</strong>{" "}
-            Creating an initial User account does not automatically grant authorization to operate under every role. Specific roles—such as listing products as a Vendor, delivering services as a Freelancer, posting jobs as an Employer, or selling event tickets as an Organizer—require dedicated onboarding steps, profile verification, and express administrative approval.
+            Creating an initial User account does not automatically grant authorization to operate under every role. Specific roles,such as listing products as a Vendor, delivering services as a Freelancer, posting jobs as an Employer, or selling event tickets as an Organizer,require dedicated onboarding steps, profile verification, and express administrative approval.
           </div>
           <p className="text-sm sm:text-base">
             Kampmax reserves the right to review role applications, assess qualifications, impose role-specific criteria, or revoke role privileges if a user fails to comply with role guidelines or community standards.
@@ -334,7 +334,7 @@ export function TermsSections() {
             <li>Your Account experiences prolonged inactivity.</li>
           </ul>
           <p className="text-sm sm:text-base">
-            Users whose accounts are suspended or terminated may submit an appeal through our official support channel. Upon termination, provisions that by their nature should survive—including ownership of intellectual property, warranty disclaimers, indemnity, and limitations of liability—shall remain in full effect.
+            Users whose accounts are suspended or terminated may submit an appeal through our official support channel. Upon termination, provisions that by their nature should survive,including ownership of intellectual property, warranty disclaimers, indemnity, and limitations of liability,shall remain in full effect.
           </p>
         </div>
       </section>

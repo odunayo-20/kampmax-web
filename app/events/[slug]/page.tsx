@@ -38,7 +38,7 @@ export async function generateMetadata({
       canonical: `/events/${event.slug}`,
     },
     openGraph: {
-      title: `${event.title} — Kampmax Events`,
+      title: `${event.title} | Kampmax Events`,
       description,
       url: `/events/${event.slug}`,
     },

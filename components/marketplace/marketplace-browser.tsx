@@ -22,7 +22,7 @@ const sortOptions: { value: SortOption; label: string }[] = [
 
 /**
  * Client-side search/category filter over the local mock dataset. Kept
- * intentionally simple — no server-side or API-backed search — so it can
+ * intentionally simple , no server-side or API-backed search , so it can
  * be swapped for a real `kampmax-api` query later without redesigning
  * this section.
  */

@@ -1,8 +1,8 @@
 import type { NavGroup, NavItem } from "@/types/nav"
 
 /**
- * Desktop primary navigation. "Home" is intentionally left out here — the
- * logo already serves that role — but it appears explicitly in the mobile
+ * Desktop primary navigation. "Home" is intentionally left out here , the
+ * logo already serves that role , but it appears explicitly in the mobile
  * drawer per the requested IA. Kept short so it never wraps or crowds out
  * the CTAs; everything else surfaces through "More" instead.
  */

@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site"
 
 /**
  * ContactPage + Organization markup. Contact points are only included when
- * actually configured via env vars — an empty `contactConfig` value means
+ * actually configured via env vars , an empty `contactConfig` value means
  * unset, so we never emit a fabricated email or phone number.
  */
 export function ContactJsonLd() {

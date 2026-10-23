@@ -15,16 +15,16 @@ import { WhatYouCanDo } from "@/components/how-it-works/what-you-can-do"
 import { siteConfig } from "@/config/site"
 
 const description =
-  "See exactly what you can do on Kampmax — discover the marketplace, services, jobs, freelancers, and events connected around your campus."
+  "See exactly what you can do on Kampmax , discover the marketplace, services, jobs, freelancers, and events connected around your campus."
 
 export const metadata: Metadata = {
-  title: { absolute: `${siteConfig.name} — How It Works` },
+  title: { absolute: `${siteConfig.name} | How It Works` },
   description,
   alternates: {
     canonical: "/how-it-works",
   },
   openGraph: {
-    title: `${siteConfig.name} — How It Works`,
+    title: `${siteConfig.name} | How It Works`,
     description,
     url: "/how-it-works",
   },

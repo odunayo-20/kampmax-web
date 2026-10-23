@@ -25,7 +25,7 @@ const tiles = [
 ]
 
 /**
- * Purely illustrative — a small composition of representative listing
+ * Purely illustrative , a small composition of representative listing
  * cards standing in for the ecosystem, not a literal product screenshot.
  * Hidden from assistive tech since the hero copy already conveys the
  * same information in text.

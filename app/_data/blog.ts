@@ -93,7 +93,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "paragraph",
         content:
-          "Student entrepreneurship in Nigerian universities is rarely a luxury—it is often a practical response to living expenses and a stepping stone toward career independence. However, the most common pitfall is overextending before validating daily campus demand.",
+          "Student entrepreneurship in Nigerian universities is rarely a luxury,it is often a practical response to living expenses and a stepping stone toward career independence. However, the most common pitfall is overextending before validating daily campus demand.",
       },
       {
         type: "heading",
@@ -334,7 +334,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "paragraph",
         content:
-          "In a single university, you have software developers in computer science, accountants in management sciences, and creative storytellers in mass communications—all living within walking distance of each other.",
+          "In a single university, you have software developers in computer science, accountants in management sciences, and creative storytellers in mass communications,all living within walking distance of each other.",
       },
       {
         type: "list",

@@ -8,7 +8,7 @@ const pillars = [
     icon: Compass,
     title: "Discover Activities That Matter",
     description:
-      "Find academic talks, hackathons, creative showcases, and club gatherings aligned with your field and personal interests — organized right around your campus.",
+      "Find academic talks, hackathons, creative showcases, and club gatherings aligned with your field and personal interests, organized right around your campus.",
   },
   {
     icon: Users,

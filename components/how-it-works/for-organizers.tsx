@@ -14,7 +14,7 @@ function ForOrganizers() {
         <H2>Reach campus talent and audiences directly.</H2>
         <Lead>
           Publish jobs, discover talent, and create events that reach the
-          people most likely to care — all in one place.
+          people most likely to care, all in one place.
         </Lead>
         <div className="pt-1">
           <Link

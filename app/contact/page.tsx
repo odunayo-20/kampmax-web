@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact Kampmax — The Campus Ecosystem, Connected",
+    title: "Contact Kampmax, The Campus Ecosystem, Connected",
     description:
       "Get in touch with the Kampmax team for general questions, business opportunities, vendor partnerships, or platform support.",
     url: "/contact",

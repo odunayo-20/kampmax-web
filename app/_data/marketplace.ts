@@ -40,7 +40,7 @@ const products: MarketplaceProduct[] = [
     slug: "refurbished-wireless-earbuds",
     name: "Refurbished Wireless Earbuds",
     description:
-      "Tested, working wireless earbuds at a fraction of the retail price — a practical option for lectures and study sessions.",
+      "Tested, working wireless earbuds at a fraction of the retail price , a practical option for lectures and study sessions.",
     categorySlug: "electronics",
     price: 15000,
   },
@@ -74,7 +74,7 @@ const products: MarketplaceProduct[] = [
     slug: "custom-portrait-sketch",
     name: "Custom Portrait Sketch",
     description:
-      "A made-to-order pencil portrait from a photo of your choice. Pricing depends on size and detail — reach out to discuss.",
+      "A made-to-order pencil portrait from a photo of your choice. Pricing depends on size and detail , reach out to discuss.",
     categorySlug: "other",
   },
 ]

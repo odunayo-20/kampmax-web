@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     canonical: "/for-businesses",
   },
   openGraph: {
-    title: "For Businesses — Connect with Campus Communities | Kampmax",
+    title: "For Businesses | Connect with Campus Communities | Kampmax",
     description:
       "Connect your business with campus communities. Showcase products, offer services, recruit student talent, and promote campus events on Kampmax.",
     url: "/for-businesses",

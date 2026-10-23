@@ -65,7 +65,7 @@ function ServiceHeader({
                     <Building2 className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
                     <span>
                       {campus.name} ({campus.shortName})
-                      {campus.location ? ` — ${campus.location}` : ""}
+                      {campus.location ? ` , ${campus.location}` : ""}
                     </span>
                   </div>
                 )}

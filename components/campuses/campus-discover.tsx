@@ -7,8 +7,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import type { Campus } from "@/types/campus"
 
 /**
- * Categories are shown whether or not their route exists yet — visitors
- * should see the full shape of the ecosystem — but only ones with
+ * Categories are shown whether or not their route exists yet , visitors
+ * should see the full shape of the ecosystem , but only ones with
  * `available: true` render as links. The rest are marked "Coming soon"
  * instead of pointing at a route that isn't built.
  */
@@ -18,7 +18,7 @@ function CampusDiscover({ campus }: { campus: Campus }) {
       <SectionHeading
         eyebrow="Discover"
         title={`What's around ${campus.shortName}`}
-        description={`Kampmax helps the ${campus.shortName} community discover products, services, people with useful skills, jobs, and events — all organized around this campus as it grows.`}
+        description={`Kampmax helps the ${campus.shortName} community discover products, services, people with useful skills, jobs, and events, all organized around this campus as it grows.`}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

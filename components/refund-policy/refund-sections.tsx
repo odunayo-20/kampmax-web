@@ -91,7 +91,7 @@ export function RefundSections() {
         </h2>
         <div className="space-y-3.5 text-base sm:text-lg text-muted-foreground">
           <p>
-            Digital products—such as downloadable study guides, revision materials, graphic design templates, digital illustrations, and software files—are distinct from physical merchandise due to their immediate reproducibility and consumption.
+            Digital products,such as downloadable study guides, revision materials, graphic design templates, digital illustrations, and software files,are distinct from physical merchandise due to their immediate reproducibility and consumption.
           </p>
           <div className="rounded-xl border border-primary/20 bg-primary/3 p-4 sm:p-5 text-sm sm:text-base text-foreground">
             <strong className="font-semibold text-primary">Non-Refundable Once Accessed:</strong>{" "}

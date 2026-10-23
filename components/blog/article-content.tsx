@@ -78,7 +78,7 @@ export function ArticleContent({ blocks }: ArticleContentProps) {
                 <p className="leading-relaxed">“{block.content}”</p>
                 {block.citation && (
                   <cite className="mt-3 block text-xs sm:text-sm font-medium not-italic text-muted-foreground">
-                    — {block.citation}
+                    , {block.citation}
                   </cite>
                 )}
               </blockquote>

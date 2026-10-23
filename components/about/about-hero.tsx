@@ -18,7 +18,7 @@ function AboutHero() {
         </Display>
         <Lead className="max-w-xl sm:text-xl/relaxed">
           Kampmax brings together students, local merchants, service providers,
-          freelancers, and event organizers into one coherent digital home —
+          freelancers, and event organizers into one coherent digital home,
           connecting daily commerce, professional skills, and campus life.
         </Lead>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">

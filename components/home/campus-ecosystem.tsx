@@ -12,7 +12,7 @@ function CampusEcosystem() {
         <H2>Organized by campus, not a generic national feed.</H2>
         <Lead>
           What you see on Kampmax reflects what&apos;s actually happening
-          around you — find people, businesses, and opportunities close to
+          around you, find people, businesses, and opportunities close to
           where you study and live.
         </Lead>
       </div>

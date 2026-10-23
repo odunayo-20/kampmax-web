@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "/campuses",
   },
   openGraph: {
-    title: "Campuses — Kampmax",
+    title: "Campuses , Kampmax",
     description,
     url: "/campuses",
   },

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     canonical: "/freelancers",
   },
   openGraph: {
-    title: "Freelancers — Kampmax",
+    title: "Freelancers | Kampmax",
     description,
     url: "/freelancers",
   },

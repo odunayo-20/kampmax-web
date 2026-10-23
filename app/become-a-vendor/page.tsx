@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     canonical: "/become-a-vendor",
   },
   openGraph: {
-    title: "Become a Vendor or Service Provider — Kampmax",
+    title: "Become a Vendor or Service Provider , Kampmax",
     description:
       "Turn what you sell or what you know into something campus communities can discover. Join Kampmax as a product vendor or skilled service provider.",
     url: "/become-a-vendor",

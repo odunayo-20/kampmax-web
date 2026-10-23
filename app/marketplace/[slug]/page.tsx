@@ -22,13 +22,13 @@ export async function generateMetadata({
   }
 
   return {
-    title: product.name,
+    title: `${product.name} | Kampmax Marketplace`,
     description: product.description,
     alternates: {
       canonical: `/marketplace/${product.slug}`,
     },
     openGraph: {
-      title: `${product.name} — Kampmax Marketplace`,
+      title: `${product.name} | Kampmax Marketplace`,
       description: product.description,
       url: `/marketplace/${product.slug}`,
     },

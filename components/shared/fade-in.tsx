@@ -10,7 +10,7 @@ const variants: Variants = {
 
 /**
  * Subtle entrance animation for a section as it scrolls into view.
- * Use sparingly — not every section needs one. No-ops entirely for
+ * Use sparingly , not every section needs one. No-ops entirely for
  * users who prefer reduced motion.
  */
 function FadeIn({

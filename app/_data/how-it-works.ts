@@ -123,7 +123,7 @@ export const experienceSteps: JourneyStep[] = [
   {
     title: "Participate",
     description:
-      "Buy, apply, book, or show up — however you choose to get involved.",
+      "Buy, apply, book, or show up , however you choose to get involved.",
     icon: CheckCircle2,
   },
 ]

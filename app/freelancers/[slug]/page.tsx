@@ -38,7 +38,7 @@ export async function generateMetadata({
       canonical: `/freelancers/${freelancer.slug}`,
     },
     openGraph: {
-      title: `${freelancer.name} — Kampmax Freelancers`,
+      title: `${freelancer.name} | Kampmax Freelancers`,
       description,
       url: `/freelancers/${freelancer.slug}`,
     },

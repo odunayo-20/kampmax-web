@@ -23,16 +23,16 @@ export async function generateMetadata({
     return {}
   }
 
-  const description = `Discover what's happening around ${campus.name} on Kampmax — marketplace, services, jobs, and events for the ${campus.shortName} community.`
+  const description = `Discover what's happening around ${campus.name} on Kampmax , marketplace, services, jobs, and events for the ${campus.shortName} community.`
 
   return {
-    title: `${campus.shortName} Campus`,
+    title: `${campus.shortName} Campus | Kampmax`,
     description,
     alternates: {
       canonical: `/campuses/${campus.slug}`,
     },
     openGraph: {
-      title: `${campus.shortName} Campus — Kampmax`,
+      title: `${campus.shortName} Campus , Kampmax`,
       description,
       url: `/campuses/${campus.slug}`,
     },

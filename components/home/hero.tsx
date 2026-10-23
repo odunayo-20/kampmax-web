@@ -18,7 +18,7 @@ function Hero() {
         </Display>
         <Lead className="max-w-xl sm:text-xl/relaxed">
           Kampmax brings together the marketplace, jobs, services,
-          freelancers, and events happening around your campus — so you can
+          freelancers, and events happening around your campus, so you can
           discover what&apos;s around you and get involved.
         </Lead>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">

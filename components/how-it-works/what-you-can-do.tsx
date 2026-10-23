@@ -11,7 +11,7 @@ function WhatYouCanDo() {
       <SectionHeading
         eyebrow="What you can do"
         title="Six ways to get involved"
-        description="Each one connects to the same ecosystem — start wherever is useful to you."
+        description="Each one connects to the same ecosystem, start wherever is useful to you."
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

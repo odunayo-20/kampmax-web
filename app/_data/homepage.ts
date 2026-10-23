@@ -22,7 +22,7 @@ export type DiscoveryItem = {
 
 /**
  * The "Discover what you need" category grid. `href` points at each
- * category's future public route — not built yet, but the routing
+ * category's future public route , not built yet, but the routing
  * strategy (and the global not-found page) already supports it.
  */
 export const discoveryItems: DiscoveryItem[] = [
@@ -87,7 +87,7 @@ export const journeySteps: JourneyStep[] = [
   {
     title: "Participate",
     description:
-      "Buy, apply, book, or show up — however you choose to get involved.",
+      "Buy, apply, book, or show up , however you choose to get involved.",
     icon: Sparkles,
   },
 ]
@@ -147,7 +147,7 @@ export const valueProps: ValueProp[] = [
   {
     title: "One ecosystem",
     description:
-      "Marketplace, services, jobs, and events — in one place, not five apps.",
+      "Marketplace, services, jobs, and events , in one place, not five apps.",
     icon: Boxes,
   },
 ]

@@ -18,7 +18,7 @@ function MarketplaceHero() {
       <Eyebrow>Marketplace</Eyebrow>
       <H1>Discover products around your campus community.</H1>
       <Lead className="max-w-2xl">
-        Browse what people are offering across the Kampmax ecosystem — from
+        Browse what people are offering across the Kampmax ecosystem, from
         everyday items to campus-made goods. Join Kampmax to message a
         seller or list something yourself.
       </Lead>

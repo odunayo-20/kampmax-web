@@ -12,7 +12,7 @@ function ForBusinesses() {
         <SectionHeading
           eyebrow="For businesses & providers"
           title="Bring your business to campus"
-          description="Vendors can reach customers, service providers can showcase their work, freelancers can find gigs, and employers can reach campus talent — all in one place."
+          description="Vendors can reach customers, service providers can showcase their work, freelancers can find gigs, and employers can reach campus talent, all in one place."
         />
 
         <div className="flex flex-wrap gap-3">

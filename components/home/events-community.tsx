@@ -12,9 +12,9 @@ function EventsCommunity() {
         <Eyebrow>Events &amp; community</Eyebrow>
         <H2>Discover what&apos;s happening on campus.</H2>
         <Lead>
-          From campus fairs to student meetups, Kampmax surfaces the events
-          and activities worth showing up for — organized by the people
-          running them.
+          From campus fairs to student meetups, Kampmax surfaces the events and
+          activities worth showing up for, organized by the people running
+          them.
         </Lead>
         <div>
           <Link

@@ -11,7 +11,7 @@ function CampusDiscovery() {
         <Lead>
           Kampmax is designed around real campuses and communities, so what
           you see reflects the people, products, services, and events
-          actually near you — not a generic national feed.
+          actually near you, not a generic national feed.
         </Lead>
       </div>
 

@@ -13,7 +13,7 @@ function FreelancerHero() {
       <H1>Discover skilled independent talent across campus communities.</H1>
       <Lead className="max-w-2xl">
         Explore profiles of students, creators, and professionals offering
-        specialized skills — from design and software engineering to writing,
+        specialized skills, from design and software engineering to writing,
         photography, and academic coaching. Join Kampmax to connect with
         talent or establish your own public professional presence.
       </Lead>

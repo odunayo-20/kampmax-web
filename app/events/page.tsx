@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     canonical: "/events",
   },
   openGraph: {
-    title: "Events & Campus Activities — Kampmax",
+    title: "Events & Campus Activities | Kampmax",
     description,
     url: "/events",
   },

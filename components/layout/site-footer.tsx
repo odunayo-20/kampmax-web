@@ -13,7 +13,7 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-kampmax-navy text-white">
-      {/* Business CTA banner — the footer's headline moment for vendors & partners */}
+      {/* Business CTA banner , the footer's headline moment for vendors & partners */}
       <div className="border-b border-white/10 bg-linear-to-r from-primary-800 via-primary-700 to-primary-900">
         <Container className="flex flex-col items-start justify-between gap-5 py-8 sm:flex-row sm:items-center">
           <div>
@@ -24,7 +24,7 @@ export function SiteFooter() {
               Grow your business on Kampmax
             </h2>
             <p className="mt-1 text-sm text-primary-100">
-              Reach students across every campus — list services, sell products, and hire talent.
+              Reach students across every campus , list services, sell products, and hire talent.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">

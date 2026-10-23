@@ -7,7 +7,7 @@ function Opportunities() {
       <SectionHeading
         eyebrow="Beyond shopping"
         title="Real opportunities, not just listings"
-        description="Kampmax goes beyond buying and selling — it's also where campus opportunities get discovered."
+        description="Kampmax goes beyond buying and selling, it's also where campus opportunities get discovered."
       />
 
       <ul className="flex flex-col divide-y divide-border">

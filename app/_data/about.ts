@@ -221,7 +221,7 @@ export const directionPillars: DirectionPillar[] = [
     icon: Layers,
     title: "Connected Campus Ecosystems",
     description:
-      "Bringing fragmented parts of campus life — buying items, hiring help, finding jobs, and joining activities — into one unified, cohesive home.",
+      "Bringing fragmented parts of campus life , buying items, hiring help, finding jobs, and joining activities , into one unified, cohesive home.",
   },
   {
     icon: Building2,

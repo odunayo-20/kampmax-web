@@ -8,7 +8,7 @@ const pillars = [
     icon: Compass,
     title: "Discover Relevant Roles",
     description:
-      "Find internships, campus positions, and entry-level opportunities aligned with your discipline and campus environment — without wading through disconnected corporate feeds.",
+      "Find internships, campus positions, and entry-level opportunities aligned with your discipline and campus environment, without wading through disconnected corporate feeds.",
   },
   {
     icon: Users,

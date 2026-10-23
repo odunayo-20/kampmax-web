@@ -8,9 +8,8 @@ function EcosystemMap() {
         <Eyebrow>The Kampmax Ecosystem</Eyebrow>
         <H2>These aren&apos;t separate apps. They&apos;re one ecosystem.</H2>
         <Lead>
-          People, products, services, jobs, events, and businesses all live
-          in the same place — so discovering one naturally leads you to
-          another.
+          People, products, services, jobs, events, and businesses all live in
+          the same place, so discovering one naturally leads you to another.
         </Lead>
       </div>
 

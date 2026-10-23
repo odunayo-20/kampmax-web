@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Kampmax — The Campus Ecosystem, Connected",
+    title: "About Kampmax , The Campus Ecosystem, Connected",
     description:
       "Learn what Kampmax is, why it exists, who it serves, and our direction building a connected campus ecosystem.",
     url: "/about",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Section A — Hero */}
+      {/* Section A , Hero */}
       <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
         <div
           aria-hidden="true"
@@ -46,7 +46,7 @@ export default function AboutPage() {
         </Container>
       </div>
 
-      {/* Section B — What Is Kampmax? */}
+      {/* Section B , What Is Kampmax? */}
       <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
@@ -55,14 +55,14 @@ export default function AboutPage() {
         </Section>
       </div>
 
-      {/* Section C — Why Kampmax Exists */}
+      {/* Section C , Why Kampmax Exists */}
       <Section>
         <Container>
           <AboutWhyExists />
         </Container>
       </Section>
 
-      {/* Section D — Our Approach */}
+      {/* Section D , Our Approach */}
       <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
@@ -71,14 +71,14 @@ export default function AboutPage() {
         </Section>
       </div>
 
-      {/* Section D.5 — Our Values */}
+      {/* Section D.5 , Our Values */}
       <Section>
         <Container>
           <AboutValues />
         </Container>
       </Section>
 
-      {/* Section E — The Kampmax Ecosystem */}
+      {/* Section E , The Kampmax Ecosystem */}
       <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
@@ -87,14 +87,14 @@ export default function AboutPage() {
         </Section>
       </div>
 
-      {/* Section F — Who Kampmax Serves */}
+      {/* Section F , Who Kampmax Serves */}
       <Section>
         <Container>
           <AboutWhoWeServe />
         </Container>
       </Section>
 
-      {/* Section G — Our Direction */}
+      {/* Section G , Our Direction */}
       <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
@@ -103,7 +103,7 @@ export default function AboutPage() {
         </Section>
       </div>
 
-      {/* Section H — Final CTA */}
+      {/* Section H , Final CTA */}
       <Section>
         <Container>
           <AboutFinalCta />
