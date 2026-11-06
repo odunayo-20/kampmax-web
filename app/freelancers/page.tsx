@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import { orNullDuringBuild } from "@/lib/api"
 import { getCampuses } from "@/lib/campuses"
-import { getFreelancers, topSkillCategories } from "@/lib/freelancers"
+import { directoryCategories, getFreelancers } from "@/lib/freelancers"
 import { Container } from "@/components/layout/container"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { FreelancerHero } from "@/components/freelancers/freelancer-hero"
@@ -63,7 +63,7 @@ export default async function FreelancersPage() {
           ) : (
             <FreelancersBrowser
               freelancers={listing.freelancers}
-              categories={topSkillCategories(listing.freelancers)}
+              categories={directoryCategories(listing.freelancers)}
               campuses={listing.campuses}
             />
           )}

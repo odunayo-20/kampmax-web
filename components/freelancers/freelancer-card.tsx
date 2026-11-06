@@ -50,7 +50,7 @@ function FreelancerCard({
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5">
-            <Badge variant="secondary">{freelancer.primarySkill}</Badge>
+            <Badge variant="secondary">{freelancer.categoryName}</Badge>
             {campus ? <Badge variant="outline">{campus.shortName}</Badge> : null}
           </div>
 

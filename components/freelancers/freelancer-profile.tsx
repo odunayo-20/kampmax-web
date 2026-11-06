@@ -25,6 +25,21 @@ const availabilityLabels = {
   UNAVAILABLE: "Not available",
 } as const
 
+function SkillChips({ skills }: { skills: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {skills.map((skill) => (
+        <span
+          key={skill}
+          className="rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-2xs"
+        >
+          {skill}
+        </span>
+      ))}
+    </div>
+  )
+}
+
 function FreelancerProfile({
   freelancer,
   category,
@@ -95,16 +110,20 @@ function FreelancerProfile({
             <h2 className="font-heading text-lg font-semibold text-foreground">
               Skills & Expertise
             </h2>
-            <div className="flex flex-wrap gap-2">
-              {freelancer.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-2xs"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+            {freelancer.skillGroups.length > 1 ? (
+              <div className="flex flex-col gap-5">
+                {freelancer.skillGroups.map((group) => (
+                  <div key={group.category.slug} className="flex flex-col gap-2">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {group.category.name}
+                    </h3>
+                    <SkillChips skills={group.skills} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <SkillChips skills={freelancer.skills} />
+            )}
           </section>
 
           {services.length > 0 && (

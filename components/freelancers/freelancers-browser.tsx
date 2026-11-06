@@ -46,7 +46,7 @@ function FreelancersBrowser({
     return freelancers.filter((freelancer) => {
       const matchesCategory =
         categorySlug === ALL_CATEGORIES ||
-        freelancer.skillSlugs.includes(categorySlug)
+        freelancer.categorySlugs.includes(categorySlug)
 
       const matchesCampus =
         campusSlug === ALL_CAMPUSES || freelancer.campusSlug === campusSlug
@@ -56,6 +56,7 @@ function FreelancersBrowser({
         freelancer.name.toLowerCase().includes(normalizedQuery) ||
         freelancer.headline.toLowerCase().includes(normalizedQuery) ||
         freelancer.primarySkill.toLowerCase().includes(normalizedQuery) ||
+        freelancer.categoryName.toLowerCase().includes(normalizedQuery) ||
         freelancer.bio.toLowerCase().includes(normalizedQuery) ||
         freelancer.skills.some((skill) =>
           skill.toLowerCase().includes(normalizedQuery)
