@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next"
 
-import { getEvents } from "@/app/_data/events"
 import { getFreelancers } from "@/app/_data/freelancers"
 import { getProducts } from "@/app/_data/marketplace"
 import { siteConfig } from "@/config/site"
 import { orNullDuringBuild } from "@/lib/api"
 import { getArticleSitemapEntries } from "@/lib/blog"
 import { getCampuses } from "@/lib/campuses"
+import { getEvents } from "@/lib/events"
 import { getOpportunities } from "@/lib/jobs"
 
 export const revalidate = 3600
@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const campuses = (await orNullDuringBuild(getCampuses)) ?? []
   const opportunities =
     (await orNullDuringBuild(() => getOpportunities(campuses))) ?? []
+  const events = (await orNullDuringBuild(() => getEvents(campuses))) ?? []
 
   const productRoutes: MetadataRoute.Sitemap = getProducts().map((product) => ({
     url: `${siteConfig.url}/marketplace/${product.slug}`,
@@ -25,11 +26,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  const eventRoutes: MetadataRoute.Sitemap = getEvents().map((event) => ({
+  const eventRoutes: MetadataRoute.Sitemap = events.map((event) => ({
     url: `${siteConfig.url}/events/${event.slug}`,
     lastModified,
-    changeFrequency: event.isPast ? "monthly" : "weekly",
-    priority: event.isPast ? 0.4 : 0.6,
+    changeFrequency: "weekly",
+    priority: 0.6,
   }))
 
   const jobRoutes: MetadataRoute.Sitemap = opportunities.map((opportunity) => ({

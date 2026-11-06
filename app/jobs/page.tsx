@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next"
+import type { Metadata } from "next"
 
 import { getEnabledOpportunityTypes } from "@/app/_data/jobs"
 import { orNullDuringBuild } from "@/lib/api"

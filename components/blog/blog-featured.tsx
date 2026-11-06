@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowRight, BookOpen, Clock } from "lucide-react"
 
 import type { BlogPost } from "@/types/blog"
-import { BlogCover } from "@/components/blog/blog-cover"
+import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -40,7 +40,7 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
         className="group block transition-transform hover:-translate-y-0.5"
       >
         <Card className="overflow-hidden border-border/80 bg-gradient-to-br from-card via-card to-primary/5 pt-0 transition-colors group-hover:border-primary/40">
-          <BlogCover
+          <CoverImage
             src={post.image}
             priority
             sizes="(min-width: 1280px) 1152px, 100vw"

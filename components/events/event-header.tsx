@@ -9,11 +9,12 @@ import {
 } from "lucide-react"
 
 import { EventDateBadge } from "@/components/events/event-date-badge"
-import { ImagePlaceholder } from "@/components/shared/image-placeholder"
+import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { H1, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
+import { formatEventDate } from "@/lib/format-event-date"
 import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
@@ -53,7 +54,7 @@ function EventHeader({
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
           <span className="flex items-center gap-1.5 font-medium text-foreground">
             <Calendar className="size-4 text-primary" aria-hidden="true" />
-            {event.date}
+            {formatEventDate(event.date)}
           </span>
           {event.startTime ? (
             <span className="flex items-center gap-1.5">
@@ -73,13 +74,19 @@ function EventHeader({
 
       <div className="grid items-start gap-10 lg:grid-cols-3 lg:gap-12">
         <div className="flex flex-col gap-8 lg:col-span-2">
-          <ImagePlaceholder className="aspect-video w-full rounded-2xl" />
+          <CoverImage
+            src={event.image}
+            alt={event.title}
+            priority
+            sizes="(min-width: 1024px) 768px, 100vw"
+            className="aspect-video w-full rounded-2xl"
+          />
 
           <section className="flex flex-col gap-3">
             <h2 className="font-heading text-lg font-semibold text-foreground">
               About This Event
             </h2>
-            <Lead className="text-base text-foreground/90">
+            <Lead className="text-base text-foreground/90 whitespace-pre-line">
               {event.description}
             </Lead>
           </section>
@@ -139,7 +146,9 @@ function EventHeader({
           <div className="flex flex-col gap-3 border-y border-border/60 py-4 text-xs">
             <div className="flex justify-between gap-2">
               <span className="text-muted-foreground">Date</span>
-              <span className="font-medium text-foreground">{event.date}</span>
+              <span className="font-medium text-foreground text-right">
+                {formatEventDate(event.date)}
+              </span>
             </div>
             {event.startTime ? (
               <div className="flex justify-between gap-2">

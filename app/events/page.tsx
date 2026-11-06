@@ -1,13 +1,8 @@
 import type { Metadata } from "next"
 
-import { getEnabledCampuses } from "@/app/_data/campuses"
-import {
-  getEnabledEventCategories,
-  getEvents,
-  getFeaturedEvents,
-  getPastEvents,
-  getUpcomingEvents,
-} from "@/app/_data/events"
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampuses } from "@/lib/campuses"
+import { categoriesOf, getEvents } from "@/lib/events"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
@@ -16,8 +11,15 @@ import { EventsCampusSection } from "@/components/events/events-campus-section"
 import { EventsFeatured } from "@/components/events/events-featured"
 import { EventsHero } from "@/components/events/events-hero"
 import { EventsJsonLd } from "@/components/events/events-json-ld"
+import {
+  EventsCampusMap,
+  canShowEventsMap,
+} from "@/components/events/events-map"
 import { EventsOrganizerCta } from "@/components/events/events-organizer-cta"
 import { EventsValueProps } from "@/components/events/events-value-props"
+import { ApiUnavailable } from "@/components/shared/api-unavailable"
+
+export const revalidate = 300
 
 const description =
   "Discover academic symposiums, hackathons, cultural festivals, and student activities across campus communities on Kampmax."
@@ -35,12 +37,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default function EventsPage() {
-  const upcomingEvents = getUpcomingEvents()
-  const pastEvents = getPastEvents()
-  const featured = getFeaturedEvents()
-  const categories = getEnabledEventCategories()
-  const campuses = getEnabledCampuses()
+export default async function EventsPage() {
+  const listing = await orNullDuringBuild(async () => {
+    const campuses = await getCampuses()
+    const events = await getEvents(campuses)
+    return { campuses, events }
+  })
+
+  const featured = listing?.events.filter((event) => event.featured) ?? []
 
   return (
     <>
@@ -58,11 +62,15 @@ export default function EventsPage() {
         </Container>
       </div>
 
-      {featured.length > 0 && (
+      {listing && featured.length > 0 && (
         <div className="border-y border-border bg-primary-50">
           <Section>
             <Container>
-              <EventsFeatured events={featured} categories={categories} />
+              <EventsFeatured
+                events={featured}
+                categories={categoriesOf(featured)}
+                campuses={listing.campuses}
+              />
             </Container>
           </Section>
         </div>
@@ -74,14 +82,26 @@ export default function EventsPage() {
             <SectionHeading
               eyebrow="Directory"
               title="Explore campus events & activities"
-              description="Browse upcoming and past campus activities. Search by keyword or filter by category and campus."
+              description="Browse upcoming campus activities. Search by keyword or filter by category and campus."
             />
-            <EventsBrowser
-              upcomingEvents={upcomingEvents}
-              pastEvents={pastEvents}
-              categories={categories}
-              campuses={campuses}
-            />
+            {listing === null ? (
+              <ApiUnavailable subject="events" />
+            ) : (
+              <>
+                {canShowEventsMap(listing.events, listing.campuses) ? (
+                  <EventsCampusMap
+                    events={listing.events}
+                    campuses={listing.campuses}
+                  />
+                ) : null}
+                <EventsBrowser
+                  upcomingEvents={listing.events}
+                  pastEvents={[]}
+                  categories={categoriesOf(listing.events)}
+                  campuses={listing.campuses}
+                />
+              </>
+            )}
           </div>
         </Container>
       </Section>
@@ -108,7 +128,7 @@ export default function EventsPage() {
         </Section>
       </div>
 
-      <EventsJsonLd events={getEvents()} />
+      {listing ? <EventsJsonLd events={listing.events} /> : null}
     </>
   )
 }

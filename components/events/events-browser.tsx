@@ -45,6 +45,11 @@ function EventsBrowser({
     [categories]
   )
 
+  const campusBySlug = useMemo(
+    () => new Map(campuses.map((c) => [c.slug, c])),
+    [campuses]
+  )
+
   const activePool = tab === "upcoming" ? upcomingEvents : pastEvents
 
   const filteredEvents = useMemo(() => {
@@ -97,20 +102,22 @@ function EventsBrowser({
         >
           Upcoming Events ({upcomingEvents.length})
         </button>
-        <button
-          type="button"
-          aria-pressed={tab === "past"}
-          onClick={() => {
-            setTab("past")
-            handleResetFilters()
-          }}
-          className={buttonVariants({
-            variant: tab === "past" ? "default" : "ghost",
-            size: "sm",
-          })}
-        >
-          Past Events ({pastEvents.length})
-        </button>
+        {pastEvents.length > 0 ? (
+          <button
+            type="button"
+            aria-pressed={tab === "past"}
+            onClick={() => {
+              setTab("past")
+              handleResetFilters()
+            }}
+            className={buttonVariants({
+              variant: tab === "past" ? "default" : "ghost",
+              size: "sm",
+            })}
+          >
+            Past Events ({pastEvents.length})
+          </button>
+        ) : null}
       </div>
 
       <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
@@ -241,6 +248,9 @@ function EventsBrowser({
                 key={event.slug}
                 event={event}
                 category={categoryBySlug.get(event.categorySlug)}
+                campus={
+                  event.campusSlug ? campusBySlug.get(event.campusSlug) : undefined
+                }
               />
             ))}
           </div>

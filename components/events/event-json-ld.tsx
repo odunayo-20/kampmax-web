@@ -9,11 +9,10 @@ type EventJsonLdProps = {
 }
 
 /**
- * Schema.org Event markup. Deliberately conservative: `startTime`/`endTime`
- * are free-text (e.g. "Next Day 10:00 AM") and can't be safely converted to
- * ISO datetimes, so only the ISO `date` is used for `startDate`. `image` and
- * `offers` are omitted entirely when not backed by real data, rather than
- * pointing at a placeholder or guessing a price.
+ * Schema.org Event markup. Start and end come from the API's ISO date-times
+ * (the display times are formatted text). `image` and `offers` are omitted
+ * entirely when not backed by real data, rather than pointing at a placeholder
+ * or guessing a price.
  */
 export function EventJsonLd({ event, category, campus }: EventJsonLdProps) {
   const url = `${siteConfig.url}/events/${event.slug}`
@@ -26,11 +25,12 @@ export function EventJsonLd({ event, category, campus }: EventJsonLdProps) {
     name: event.title,
     description: event.description,
     url,
-    startDate: event.date,
+    startDate: event.startsAt ?? event.date,
+    ...(event.endsAt ? { endDate: event.endsAt } : {}),
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     ...(category ? { category: category.name } : {}),
-    ...(event.image ? { image: `${siteConfig.url}${event.image}` } : {}),
+    ...(event.image ? { image: event.image } : {}),
     location: {
       "@type": "Place",
       name: locationName,

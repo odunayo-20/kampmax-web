@@ -18,7 +18,7 @@ import { ArticleReadingProgress } from "@/components/blog/article-reading-progre
 import { ArticleRelated } from "@/components/blog/article-related"
 import { ArticleShare } from "@/components/blog/article-share"
 import { ArticleViewCounter } from "@/components/blog/article-view-counter"
-import { BlogCover } from "@/components/blog/blog-cover"
+import { CoverImage } from "@/components/shared/cover-image"
 import { Container } from "@/components/layout/container"
 
 export const revalidate = 300
@@ -97,7 +97,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <Container className="py-10 sm:py-16">
         <article className="mx-auto max-w-3xl">
           <ArticleHeader post={post} />
-          <BlogCover
+          <CoverImage
             src={post.image}
             alt={post.title}
             priority

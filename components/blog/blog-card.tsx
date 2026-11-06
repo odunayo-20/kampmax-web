@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowRight, Clock } from "lucide-react"
 
 import type { BlogPost } from "@/types/blog"
-import { BlogCover } from "@/components/blog/blog-cover"
+import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -31,7 +31,7 @@ function BlogCard({ post }: BlogCardProps) {
         className="group flex h-full flex-col transition-transform hover:-translate-y-0.5"
       >
         <Card className="flex h-full flex-col border-border/80 bg-card pt-0 transition-colors group-hover:border-primary/40">
-          <BlogCover
+          <CoverImage
             src={post.image}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="rounded-none"

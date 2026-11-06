@@ -3,7 +3,7 @@ import Image from "next/image"
 import { ImagePlaceholder } from "@/components/shared/image-placeholder"
 import { cn } from "@/lib/utils"
 
-type BlogCoverProps = {
+type CoverImageProps = {
   /** Absolute cover URL; falls back to the placeholder when missing. */
   src?: string
   /** Describes the image. Leave empty when a heading beside it already does. */
@@ -15,14 +15,14 @@ type BlogCoverProps = {
   className?: string
 }
 
-function BlogCover({
+function CoverImage({
   src,
   alt = "",
   sizes,
   priority = false,
   hideWhenMissing = false,
   className,
-}: BlogCoverProps) {
+}: CoverImageProps) {
   if (!src) {
     return hideWhenMissing ? null : (
       <ImagePlaceholder className={cn("rounded-none", className)} />
@@ -43,4 +43,4 @@ function BlogCover({
   )
 }
 
-export { BlogCover }
+export { CoverImage }

@@ -1,21 +1,21 @@
 import Link from "next/link"
 import { ArrowRight, Clock, MapPin } from "lucide-react"
 
-import { getCampusBySlug } from "@/app/_data/campuses"
 import { EventDateBadge } from "@/components/events/event-date-badge"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
 
 function EventCard({
   event,
   category,
+  campus,
 }: {
   event: Event
   category: EventCategory | undefined
+  campus?: Campus
 }) {
-  const campus = event.campusSlug ? getCampusBySlug(event.campusSlug) : undefined
-
   return (
     <Link
       href={`/events/${event.slug}`}
