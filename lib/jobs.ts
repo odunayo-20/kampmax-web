@@ -3,7 +3,7 @@ import type { Campus } from "@/types/campus"
 import type { Opportunity } from "@/types/job"
 
 /** Backend shape (`GET /jobs`). Only the fields this site reads. */
-type ApiJob = {
+export type ApiJob = {
   title: string
   slug: string
   summary: string | null
@@ -69,7 +69,7 @@ function toClosingDate(value: string | null): string | undefined {
   })
 }
 
-function toOpportunity(job: ApiJob, campuses: Campus[]): Opportunity {
+export function toOpportunity(job: ApiJob, campuses: Campus[]): Opportunity {
   const campus = job.campus
     ? campuses.find((candidate) => candidate.id === job.campus?.id)
     : undefined

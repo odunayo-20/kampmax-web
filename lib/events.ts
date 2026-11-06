@@ -1,10 +1,11 @@
 import { ApiError, apiFetch, resolveMediaUrl } from "@/lib/api"
+import { formatPrice } from "@/lib/format-price"
 import { idFromSlug, slugWithId } from "@/lib/slug"
 import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
 
 /** Backend shape (`GET /events`). Only the fields this site reads. */
-type ApiEvent = {
+export type ApiEvent = {
   id: string
   campusId: string
   organizerName: string
@@ -17,6 +18,9 @@ type ApiEvent = {
   coverImageUrl: string | null
   isFeatured: boolean
   category: { name: string; slug: string } | null
+  /** Lowest ticket price in Naira; 0 when any ticket type is free. */
+  minPrice: number | string
+  seatsLeft: number
 }
 
 type ApiPage<T> = {
@@ -50,7 +54,14 @@ const shortDateFormat = new Intl.DateTimeFormat("en-US", {
 
 const UNCATEGORISED = { name: "General", slug: "general" } as const
 
-function toEvent(item: ApiEvent, campuses: Campus[]): Event {
+/** "Free", or "From ₦2,500" for the cheapest ticket. */
+function toPriceLabel(minPrice: number | string): string {
+  const price = Number(minPrice)
+  if (!Number.isFinite(price)) return "Free"
+  return price > 0 ? `From ${formatPrice(price)}` : "Free"
+}
+
+export function toEvent(item: ApiEvent, campuses: Campus[]): Event {
   const starts = new Date(item.startsAt)
   const ends = item.endsAt ? new Date(item.endsAt) : undefined
   const category = item.category ?? UNCATEGORISED
@@ -81,6 +92,9 @@ function toEvent(item: ApiEvent, campuses: Campus[]): Event {
     image: resolveMediaUrl(item.coverImageUrl),
     featured: item.isFeatured,
     isPast: false,
+    minPrice: Number.isFinite(Number(item.minPrice)) ? Number(item.minPrice) : undefined,
+    priceLabel: toPriceLabel(item.minPrice),
+    seatsLeft: item.seatsLeft,
   }
 }
 

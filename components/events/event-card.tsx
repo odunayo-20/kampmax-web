@@ -46,6 +46,12 @@ function EventCard({
                   <Badge variant="outline" className="text-muted-foreground">
                     Past
                   </Badge>
+                ) : event.seatsLeft === 0 ? (
+                  <Badge variant="outline" className="text-muted-foreground">
+                    Sold out
+                  </Badge>
+                ) : event.priceLabel ? (
+                  <Badge variant="outline">{event.priceLabel}</Badge>
                 ) : null}
               </div>
 

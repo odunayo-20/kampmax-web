@@ -1,5 +1,11 @@
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Building2, Handshake } from "lucide-react"
+import {
+  ArrowLeft,
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  Handshake,
+} from "lucide-react"
 
 import { FreelancerAvatar } from "@/components/freelancers/freelancer-avatar"
 import { Badge } from "@/components/ui/badge"
@@ -12,6 +18,12 @@ import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Freelancer, FreelancerCategory } from "@/types/freelancer"
 import type { Service } from "@/types/service"
+
+const availabilityLabels = {
+  AVAILABLE: "Available for work",
+  BUSY: "Currently busy",
+  UNAVAILABLE: "Not available",
+} as const
 
 function FreelancerProfile({
   freelancer,
@@ -47,6 +59,17 @@ function FreelancerProfile({
           <div className="flex flex-wrap items-center gap-1.5">
             {category ? <Badge variant="secondary">{category.name}</Badge> : null}
             {campus ? <Badge variant="outline">{campus.shortName}</Badge> : null}
+            {freelancer.verified ? (
+              <Badge variant="default">
+                <BadgeCheck aria-hidden="true" />
+                Verified
+              </Badge>
+            ) : null}
+            {freelancer.availability ? (
+              <Badge variant="outline">
+                {availabilityLabels[freelancer.availability]}
+              </Badge>
+            ) : null}
           </div>
 
           <H1 className="text-2xl sm:text-3xl lg:text-4xl">{freelancer.name}</H1>

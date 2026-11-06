@@ -20,6 +20,9 @@ export type Freelancer = {
   avatar?: string
   /** References a campus slug. Omit when not campus-specific. */
   campusSlug?: string
+  /** True when Kampmax has verified this professional. */
+  verified?: boolean
+  availability?: "AVAILABLE" | "BUSY" | "UNAVAILABLE"
   /** Optional service slugs offered by this professional. */
   serviceSlugs?: string[]
 }

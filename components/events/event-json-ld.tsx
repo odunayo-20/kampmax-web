@@ -11,8 +11,8 @@ type EventJsonLdProps = {
 /**
  * Schema.org Event markup. Start and end come from the API's ISO date-times
  * (the display times are formatted text). `image` and `offers` are omitted
- * entirely when not backed by real data, rather than pointing at a placeholder
- * or guessing a price.
+ * entirely when the API does not supply them, rather than pointing at a
+ * placeholder or guessing a price.
  */
 export function EventJsonLd({ event, category, campus }: EventJsonLdProps) {
   const url = `${siteConfig.url}/events/${event.slug}`
@@ -30,6 +30,20 @@ export function EventJsonLd({ event, category, campus }: EventJsonLdProps) {
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     ...(category ? { category: category.name } : {}),
+    ...(event.minPrice !== undefined
+      ? {
+          offers: {
+            "@type": "Offer",
+            url,
+            price: event.minPrice,
+            priceCurrency: "NGN",
+            availability:
+              event.seatsLeft === 0
+                ? "https://schema.org/SoldOut"
+                : "https://schema.org/InStock",
+          },
+        }
+      : {}),
     ...(event.image ? { image: event.image } : {}),
     location: {
       "@type": "Place",

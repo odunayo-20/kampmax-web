@@ -36,4 +36,10 @@ export type Event = {
   importantInfo?: string
   featured?: boolean
   isPast?: boolean
+  /** Lowest ticket price in Naira; 0 when any ticket type is free. */
+  minPrice?: number
+  /** "Free" or "From ₦2,500". */
+  priceLabel?: string
+  /** Tickets still available across all ticket types. */
+  seatsLeft?: number
 }

@@ -4,13 +4,15 @@ import type { Campus } from "@/types/campus"
 import type { Freelancer, FreelancerCategory } from "@/types/freelancer"
 
 /** Backend shape (`GET /freelancers`). Only the fields this site reads. */
-type ApiFreelancer = {
+export type ApiFreelancer = {
   id: string
   fullName: string
   avatar: string | null
   professionalTitle: string | null
   bio: string | null
   campusId: string | null
+  verificationStatus: string
+  availabilityStatus: string
   skills: { name: string; slug: string }[]
 }
 
@@ -26,8 +28,11 @@ const MAX_CATEGORIES = 8
 
 const FALLBACK_TITLE = "Freelancer"
 
-function toFreelancer(item: ApiFreelancer, campuses: Campus[]): Freelancer {
+const AVAILABILITY = ["AVAILABLE", "BUSY", "UNAVAILABLE"] as const
+
+export function toFreelancer(item: ApiFreelancer, campuses: Campus[]): Freelancer {
   const primary = item.skills[0]
+  const availability = AVAILABILITY.find((value) => value === item.availabilityStatus)
 
   return {
     slug: slugWithId(item.fullName, item.id),
@@ -39,6 +44,8 @@ function toFreelancer(item: ApiFreelancer, campuses: Campus[]): Freelancer {
     categorySlug: primary?.slug ?? "general",
     bio: item.bio ?? "",
     avatar: resolveMediaUrl(item.avatar),
+    verified: item.verificationStatus === "VERIFIED",
+    availability,
     campusSlug: item.campusId
       ? campuses.find((campus) => campus.id === item.campusId)?.slug
       : undefined,

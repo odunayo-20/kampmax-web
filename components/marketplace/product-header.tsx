@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Building2, MapPin, Store, Truck } from "lucide-react"
 
-import { CoverImage } from "@/components/shared/cover-image"
+import { ProductGallery } from "@/components/marketplace/product-gallery"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { H1, Lead, Muted } from "@/components/ui/typography"
@@ -34,32 +34,10 @@ function ProductHeader({
       </Link>
 
       <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-        <div className="flex flex-col gap-3">
-          <CoverImage
-            src={product.image}
-            alt={product.name}
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="aspect-square w-full rounded-xl"
-          />
-
-          {product.images && product.images.length > 1 && (
-            <div className="flex gap-2 overflow-x-auto pb-1">
-              {product.images.map((img, index) => (
-                <div
-                  key={img}
-                  className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-border"
-                >
-                  <CoverImage
-                    src={img}
-                    alt={`${product.name} ${index + 1}`}
-                    sizes="64px"
-                    className="size-full"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <ProductGallery
+          images={product.images ?? (product.image ? [product.image] : [])}
+          name={product.name}
+        />
 
         <div className="flex flex-col gap-5">
           <div className="flex flex-wrap items-center gap-1.5">

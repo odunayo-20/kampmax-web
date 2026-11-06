@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, BadgeCheck } from "lucide-react"
 
 import { FreelancerAvatar } from "@/components/freelancers/freelancer-avatar"
 import { Badge } from "@/components/ui/badge"
@@ -31,8 +31,17 @@ function FreelancerCard({
               size="md"
             />
             <div className="flex min-w-0 flex-1 flex-col">
-              <h3 className="truncate font-heading text-base font-semibold text-foreground transition-colors group-hover:text-primary">
-                {freelancer.name}
+              <h3 className="flex items-center gap-1.5 font-heading text-base font-semibold text-foreground transition-colors group-hover:text-primary">
+                <span className="truncate">{freelancer.name}</span>
+                {freelancer.verified ? (
+                  <>
+                    <BadgeCheck
+                      className="size-4 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
+                    <span className="sr-only">Verified</span>
+                  </>
+                ) : null}
               </h3>
               <p className="line-clamp-1 text-xs text-muted-foreground">
                 {freelancer.headline}

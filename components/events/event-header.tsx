@@ -175,6 +175,24 @@ function EventHeader({
                 </span>
               </div>
             ) : null}
+            {event.priceLabel ? (
+              <div className="flex justify-between gap-2">
+                <span className="text-muted-foreground">Tickets</span>
+                <span className="font-medium text-foreground text-right">
+                  {event.priceLabel}
+                </span>
+              </div>
+            ) : null}
+            {event.seatsLeft !== undefined ? (
+              <div className="flex justify-between gap-2">
+                <span className="text-muted-foreground">Availability</span>
+                <span className="font-medium text-foreground text-right">
+                  {event.seatsLeft > 0
+                    ? `${event.seatsLeft} ${event.seatsLeft === 1 ? "seat" : "seats"} left`
+                    : "Sold out"}
+                </span>
+              </div>
+            ) : null}
             {event.organizerName ? (
               <div className="flex justify-between gap-2">
                 <span className="text-muted-foreground">Organizer</span>

@@ -5,7 +5,7 @@ import Link from "next/link"
 import { CheckCircle2, Loader2, Send } from "lucide-react"
 
 import { inquiryTypes, submitContactInquiry } from "@/lib/contact"
-import type { ContactInquiryType, ContactSubmissionPayload } from "@/types/contact"
+import type { ContactSubmissionPayload } from "@/types/contact"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { FormMessage } from "@/components/ui/form-message"

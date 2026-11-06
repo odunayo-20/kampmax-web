@@ -2,7 +2,7 @@ import { ApiError, apiFetch, resolveMediaUrl } from "@/lib/api"
 import type { Campus } from "@/types/campus"
 
 /** Backend shapes (`GET /campuses`). Only the fields this site reads. */
-type ApiCampus = {
+export type ApiCampus = {
   id: string
   name: string
   slug: string
@@ -23,11 +23,27 @@ type ApiPage<T> = { items: T[] }
  * lower case ("unilag", "oau"), so a single-word slug is shown upper-cased;
  * anything longer falls back to the full name.
  */
-function toShortName(slug: string, name: string): string {
+export function toShortName(slug: string, name: string): string {
   return /^[a-z0-9]{2,12}$/.test(slug) ? slug.toUpperCase() : name
 }
 
-function toCampus(item: ApiCampus): Campus {
+/**
+ * "City, State" for display. Campuses are often saved with the state already
+ * inside the city ("Owo, Ondo State"), so the state is only added when the
+ * city does not already name it.
+ */
+export function formatCampusLocation(city: string, state: string): string | undefined {
+  const cleanCity = city?.trim() ?? ""
+  const cleanState = state?.trim() ?? ""
+  if (!cleanCity || !cleanState) return cleanCity || cleanState || undefined
+
+  const stateName = cleanState.replace(/\s+state$/i, "").toLowerCase()
+  return cleanCity.toLowerCase().includes(stateName)
+    ? cleanCity
+    : `${cleanCity}, ${cleanState}`
+}
+
+export function toCampus(item: ApiCampus): Campus {
   const hasPosition =
     typeof item.latitude === "number" && typeof item.longitude === "number"
 
@@ -36,7 +52,7 @@ function toCampus(item: ApiCampus): Campus {
     slug: item.slug,
     name: item.name,
     shortName: toShortName(item.slug, item.name),
-    location: [item.city, item.state].filter(Boolean).join(", ") || undefined,
+    location: formatCampusLocation(item.city, item.state),
     description: item.description ?? undefined,
     image: resolveMediaUrl(item.coverImage),
     enabled: true,
