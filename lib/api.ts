@@ -80,6 +80,34 @@ export async function apiFetch<T>(
   return body.data
 }
 
+/**
+ * Client or server POST against the Kampmax API. Returns the unwrapped `data`
+ * payload and throws `ApiError` for non-2xx responses.
+ */
+export async function apiPost<T>(
+  path: string,
+  body: unknown,
+  options?: { headers?: HeadersInit; signal?: AbortSignal }
+): Promise<T> {
+  const response = await fetch(buildUrl(path), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      ...options?.headers,
+    },
+    body: JSON.stringify(body),
+    signal: options?.signal ?? AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+  })
+
+  if (!response.ok) {
+    throw new ApiError(response.status, await readErrorMessage(response))
+  }
+
+  const envelope = (await response.json()) as ApiEnvelope<T>
+  return envelope.data
+}
+
 /** True while `next build` is prerendering pages. */
 export function isBuildPhase(): boolean {
   return process.env.NEXT_PHASE === "phase-production-build"

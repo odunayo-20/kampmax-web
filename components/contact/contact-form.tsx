@@ -4,11 +4,8 @@ import * as React from "react"
 import Link from "next/link"
 import { CheckCircle2, Loader2, Send } from "lucide-react"
 
-import {
-  inquiryTypes,
-  submitContactInquiry,
-  type ContactSubmissionPayload,
-} from "@/app/_data/contact"
+import { inquiryTypes, submitContactInquiry } from "@/lib/contact"
+import type { ContactInquiryType, ContactSubmissionPayload } from "@/types/contact"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { FormMessage } from "@/components/ui/form-message"
@@ -42,6 +39,8 @@ function ContactForm() {
 
     if (!formData.name.trim()) {
       newErrors.name = "Full name is required."
+    } else if (formData.name.trim().length > 120) {
+      newErrors.name = "Full name must not exceed 120 characters."
     }
 
     if (!formData.email.trim()) {
@@ -50,11 +49,24 @@ function ContactForm() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!emailRegex.test(formData.email.trim())) {
         newErrors.email = "Please enter a valid email address (e.g. name@example.com)."
+      } else if (formData.email.trim().length > 254) {
+        newErrors.email = "Email address must not exceed 254 characters."
       }
     }
 
     if (!formData.inquiryType) {
       newErrors.inquiryType = "Please select an inquiry type."
+    }
+
+    if (formData.phone && formData.phone.trim()) {
+      const phoneRegex = /^[0-9+()\-.\s]{6,30}$/
+      if (!phoneRegex.test(formData.phone.trim())) {
+        newErrors.phone = "Please enter a valid phone number (6-30 digits or symbols)."
+      }
+    }
+
+    if (formData.organization && formData.organization.trim().length > 160) {
+      newErrors.organization = "Organization must not exceed 160 characters."
     }
 
     if (!formData.message.trim()) {
@@ -121,6 +133,8 @@ function ContactForm() {
     setStatus("idle")
     setFeedbackMessage("")
   }
+
+  const isSubmitting = status === "submitting"
 
   return (
     <Card className="border-border/80 shadow-xs">
@@ -191,6 +205,8 @@ function ContactForm() {
                   placeholder="e.g. Adeyemi Adeleke"
                   autoComplete="name"
                   required
+                  maxLength={120}
+                  disabled={isSubmitting}
                   value={formData.name}
                   onChange={handleChange}
                   aria-invalid={!!errors.name}
@@ -216,6 +232,8 @@ function ContactForm() {
                   placeholder="e.g. adeyemi@example.com"
                   autoComplete="email"
                   required
+                  maxLength={254}
+                  disabled={isSubmitting}
                   value={formData.email}
                   onChange={handleChange}
                   aria-invalid={!!errors.email}
@@ -241,6 +259,7 @@ function ContactForm() {
                   name="inquiryType"
                   value={formData.inquiryType}
                   onChange={handleChange}
+                  disabled={isSubmitting}
                   className="h-10 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30"
                 >
                   {inquiryTypes.map((type) => (
@@ -270,10 +289,19 @@ function ContactForm() {
                   type="tel"
                   placeholder="e.g. +234 801 234 5678"
                   autoComplete="tel"
+                  maxLength={30}
+                  disabled={isSubmitting}
                   value={formData.phone}
                   onChange={handleChange}
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={errors.phone ? "phone-error" : undefined}
                   className="h-10"
                 />
+                {errors.phone && (
+                  <FormMessage id="phone-error" variant="error">
+                    {errors.phone}
+                  </FormMessage>
+                )}
               </div>
             </div>
 
@@ -290,10 +318,19 @@ function ContactForm() {
                 name="organization"
                 type="text"
                 placeholder="e.g. Campus Printing Co. or UNILAG Tech Society"
+                maxLength={160}
+                disabled={isSubmitting}
                 value={formData.organization}
                 onChange={handleChange}
+                aria-invalid={!!errors.organization}
+                aria-describedby={errors.organization ? "org-error" : undefined}
                 className="h-10"
               />
+              {errors.organization && (
+                <FormMessage id="org-error" variant="error">
+                  {errors.organization}
+                </FormMessage>
+              )}
             </div>
 
             {/* Message */}
@@ -312,6 +349,8 @@ function ContactForm() {
                 placeholder="How can we help? Please provide details regarding your questions, campus location, or partnership ideas..."
                 rows={5}
                 required
+                maxLength={2000}
+                disabled={isSubmitting}
                 value={formData.message}
                 onChange={handleChange}
                 aria-invalid={!!errors.message}
@@ -328,13 +367,13 @@ function ContactForm() {
             <div className="mt-2 flex flex-col gap-2">
               <button
                 type="submit"
-                disabled={status === "submitting"}
+                disabled={isSubmitting}
                 className={cn(
                   buttonVariants({ variant: "default", size: "lg" }),
                   "h-11 w-full gap-2 rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20 sm:w-auto"
                 )}
               >
-                {status === "submitting" ? (
+                {isSubmitting ? (
                   <>
                     <Loader2 className="size-4 animate-spin" aria-hidden="true" />
                     <span>Sending Message...</span>

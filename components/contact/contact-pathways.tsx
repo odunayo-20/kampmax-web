@@ -1,4 +1,4 @@
-import { contactPathways } from "@/app/_data/contact"
+import { contactPathways } from "@/lib/contact"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { Card, CardContent } from "@/components/ui/card"
 
