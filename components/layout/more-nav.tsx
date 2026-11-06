@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation"
 import Link from "next/link"
 import {
   ChevronDown,
-  Sparkles,
+  UserCheck,
   Compass,
   Building2,
   Info,
@@ -33,7 +33,7 @@ const moreNavItems = [
     title: "Freelancers",
     href: "/freelancers",
     description: "Discover skilled students or offer your services",
-    icon: Sparkles,
+    icon: UserCheck,
   },
   {
     title: "For Businesses",

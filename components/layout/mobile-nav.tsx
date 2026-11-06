@@ -9,7 +9,7 @@ import {
   Briefcase,
   Calendar,
   GraduationCap,
-  Sparkles,
+  UserCheck,
   Compass,
   Building2,
   Info,
@@ -42,7 +42,7 @@ const routeIcons: Record<string, React.ComponentType<{ className?: string }>> = 
   "/jobs": Briefcase,
   "/events": Calendar,
   "/campuses": GraduationCap,
-  "/freelancers": Sparkles,
+  "/freelancers": UserCheck,
   "/how-it-works": Compass,
   "/for-businesses": Building2,
   "/about": Info,
@@ -107,7 +107,7 @@ export function MobileNav() {
               </span>
               <div className="flex flex-col gap-0.5">
                 {group.items.map((item) => {
-                  const Icon = routeIcons[item.href] || Sparkles
+                  const Icon = routeIcons[item.href] || Compass
                   return (
                     <NavLink
                       key={item.href}

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Building2, Sparkles } from "lucide-react"
+import { ArrowLeft, ArrowRight, Building2, Handshake } from "lucide-react"
 
 import { FreelancerAvatar } from "@/components/freelancers/freelancer-avatar"
 import { Badge } from "@/components/ui/badge"
@@ -127,7 +127,7 @@ function FreelancerProfile({
         <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-xs">
           <div className="flex items-center gap-2">
             <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <Sparkles className="size-4" aria-hidden="true" />
+              <Handshake className="size-4" aria-hidden="true" />
             </span>
             <h2 className="font-heading text-base font-semibold text-foreground">
               Work with {freelancer.name.split(" ")[0]}

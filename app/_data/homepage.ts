@@ -5,9 +5,10 @@ import {
   Calendar,
   Compass,
   GraduationCap,
+  Handshake,
   MapPin,
-  Sparkles,
   Store,
+  UserCheck,
   Users,
   Wrench,
 } from "lucide-react"
@@ -49,7 +50,7 @@ export const discoveryItems: DiscoveryItem[] = [
     title: "Freelancers",
     description: "Hire students offering skills, from design to tutoring.",
     href: "/freelancers",
-    icon: Sparkles,
+    icon: UserCheck,
   },
   {
     title: "Events",
@@ -88,7 +89,7 @@ export const journeySteps: JourneyStep[] = [
     title: "Participate",
     description:
       "Buy, apply, book, or show up , however you choose to get involved.",
-    icon: Sparkles,
+    icon: Handshake,
   },
 ]
 
@@ -109,7 +110,7 @@ export const opportunityItems: OpportunityItem[] = [
   {
     title: "Freelance work",
     description: "Short-term gigs for students offering a specific skill.",
-    icon: Sparkles,
+    icon: UserCheck,
     href: "/freelancers",
   },
   {

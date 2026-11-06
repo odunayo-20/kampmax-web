@@ -1,4 +1,4 @@
-import { Compass, Sparkles, Users } from "lucide-react"
+import { Compass, Handshake, Users } from "lucide-react"
 
 import { SectionHeading } from "@/components/layout/section-heading"
 import { Card, CardContent } from "@/components/ui/card"
@@ -17,7 +17,7 @@ const pillars = [
       "Experience campus life as an active contributor. Join student initiatives, compete in design jams, attend workshops, and engage with the wider university community.",
   },
   {
-    icon: Sparkles,
+    icon: Handshake,
     title: "Connect Through Shared Focus",
     description:
       "Meet fellow students, departmental faculty, guest innovators, and local organizers who share your passions and build lasting community connections.",

@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Sparkles, Store } from "lucide-react"
+import { Briefcase, GraduationCap, Store, UserCheck } from "lucide-react"
 
 import { SectionHeading } from "@/components/layout/section-heading"
 import { Card, CardContent } from "@/components/ui/card"
@@ -23,7 +23,7 @@ const campusPathways = [
       "Structured internship placements with technology, finance, and engineering firms recruiting directly from campus cohorts.",
   },
   {
-    icon: Sparkles,
+    icon: UserCheck,
     title: "Freelance & Project Gigs",
     description:
       "Short-term creative, technical, design, and event projects initiated by campus societies, organizers, and peer founders.",

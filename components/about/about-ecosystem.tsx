@@ -5,8 +5,8 @@ import {
   CheckCircle2,
   GraduationCap,
   Layers,
-  Sparkles,
   Store,
+  UserCheck,
   Wrench,
 } from "lucide-react"
 
@@ -103,7 +103,7 @@ function AboutEcosystem() {
           <Card size="sm" className="bg-card">
             <CardContent className="flex flex-col items-center gap-1 p-3 text-center">
               <span className="flex size-7 items-center justify-center rounded-md bg-muted text-primary">
-                <Sparkles className="size-3.5" aria-hidden="true" />
+                <UserCheck className="size-3.5" aria-hidden="true" />
               </span>
               <span className="font-heading text-xs font-semibold text-foreground">
                 Freelancers

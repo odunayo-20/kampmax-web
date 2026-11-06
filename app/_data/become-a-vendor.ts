@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react"
 import {
+  BadgeCheck,
   Briefcase,
   Building2,
   Calendar,
@@ -13,7 +14,6 @@ import {
   MessageSquare,
   ShieldCheck,
   ShoppingBag,
-  Sparkles,
   Store,
   Tag,
   TrendingUp,
@@ -93,7 +93,7 @@ export const eligibleAudiences: EligibleAudience[] = [
   },
   {
     role: "Freelancers & Creators",
-    icon: Sparkles,
+    icon: UserCheck,
     description:
       "Independent designers, developers, photographers, and writers showcasing their craft.",
   },
@@ -144,7 +144,7 @@ export const showcasePillars: ShowcasePillar[] = [
     subtitle: "Skills",
     description:
       "Highlight technical tools, creative proficiencies, and coursework experience to stand out to prospective clients.",
-    icon: Sparkles,
+    icon: BadgeCheck,
   },
   {
     title: "Dedicated Campus Presence",

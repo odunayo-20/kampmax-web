@@ -1,4 +1,4 @@
-import { Briefcase, Building2, Sparkles, Store, Wrench } from "lucide-react"
+import { Briefcase, Building2, Globe, Store, Wrench } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -47,7 +47,7 @@ function BusinessHeroComposition() {
           </span>
         </div>
         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-          <Sparkles className="size-3" aria-hidden="true" />
+          <Globe className="size-3" aria-hidden="true" />
           Multi-Campus Reach
         </span>
       </div>

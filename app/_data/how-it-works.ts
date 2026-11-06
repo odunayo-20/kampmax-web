@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react"
 import {
+  BadgeCheck,
   Briefcase,
   Building2,
   Calendar,
@@ -12,8 +13,8 @@ import {
   PenTool,
   Rocket,
   Search,
-  Sparkles,
   Store,
+  UserCheck,
   Users,
   Wrench,
 } from "lucide-react"
@@ -75,7 +76,7 @@ export const experiences: Experience[] = [
     why: "Get things done by people who understand campus timelines.",
     href: "/freelancers",
     cta: "Find Freelancers",
-    icon: Sparkles,
+    icon: UserCheck,
   },
   {
     title: "Events",
@@ -138,7 +139,7 @@ export const studentActivities: ActivityItem[] = [
   { text: "Discover products for sale around your campus", icon: Store },
   { text: "Find useful services and everyday help nearby", icon: Wrench },
   { text: "Browse part-time and entry-level jobs", icon: Briefcase },
-  { text: "Hire freelancers offering a specific skill", icon: Sparkles },
+  { text: "Hire freelancers offering a specific skill", icon: UserCheck },
   { text: "Discover campus events and activities", icon: Calendar },
   { text: "See what businesses and opportunities are around you", icon: MapPin },
 ]
@@ -161,7 +162,7 @@ export const freelancerBenefits: BenefitItem[] = [
   { text: "Showcase your skills and past work", icon: PenTool },
   { text: "Discover opportunities that fit what you offer", icon: Compass },
   { text: "Connect with potential customers directly", icon: Handshake },
-  { text: "Build a professional presence on campus", icon: Sparkles },
+  { text: "Build a professional presence on campus", icon: BadgeCheck },
 ]
 
 /** What employers and organizers can use Kampmax for. */

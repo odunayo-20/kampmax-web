@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react"
-import { Briefcase, Building2, Calendar, Sparkles, Store, Wrench } from "lucide-react"
+import { Briefcase, Building2, Calendar, Store, UserCheck, Wrench } from "lucide-react"
 
 import type { Campus } from "@/types/campus"
 
@@ -125,7 +125,7 @@ export const campusDiscoveryCategories: DiscoveryCategory[] = [
   {
     title: "Freelancers",
     description: "Hire students offering skills, from design to tutoring.",
-    icon: Sparkles,
+    icon: UserCheck,
     href: "/freelancers",
     available: true,
   },

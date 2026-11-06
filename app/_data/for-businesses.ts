@@ -7,9 +7,9 @@ import {
   GraduationCap,
   MapPin,
   ShieldCheck,
-  Sparkles,
   Store,
   TrendingUp,
+  UserCheck,
   Users,
   Wrench,
 } from "lucide-react"
@@ -40,7 +40,7 @@ export const businessAudiences: BusinessAudience[] = [
     badge: "Services",
   },
   {
-    icon: Sparkles,
+    icon: UserCheck,
     title: "Freelancers & Creators",
     description:
       "Independent designers, developers, photographers, and writers offering project-based skills to clients.",

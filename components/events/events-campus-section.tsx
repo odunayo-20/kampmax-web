@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Sparkles, Store } from "lucide-react"
+import { Briefcase, GraduationCap, Store, Users } from "lucide-react"
 
 import { SectionHeading } from "@/components/layout/section-heading"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,7 +11,7 @@ const campusStreams = [
       "Public scientific symposia, research poster sessions, and guest academic lectures hosted across university faculties.",
   },
   {
-    icon: Sparkles,
+    icon: Users,
     title: "Student Societies & Cultural Guilds",
     description:
       "Theatrical showcases, poetry nights, association meetings, and cultural celebrations organized by campus groups.",

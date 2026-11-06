@@ -1,9 +1,9 @@
 import {
   ArrowDown,
+  BadgeCheck,
   Building2,
   GraduationCap,
   Layers,
-  Sparkles,
   Store,
   Users,
   Wrench,
@@ -32,7 +32,7 @@ function VendorHeroComposition() {
             </span>
           </div>
         </div>
-        <Sparkles className="size-3.5 text-muted-foreground" aria-hidden="true" />
+        <BadgeCheck className="size-3.5 text-muted-foreground" aria-hidden="true" />
       </div>
 
       <ArrowDown className="size-3.5 text-muted-foreground" aria-hidden="true" />

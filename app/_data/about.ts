@@ -10,9 +10,9 @@ import {
   Lightbulb,
   Link2,
   ShieldCheck,
-  Sparkles,
   Store,
   TrendingUp,
+  UserCheck,
   Users,
   Wrench,
   Zap,
@@ -49,7 +49,7 @@ export const ecosystemPillars: EcosystemPillar[] = [
     description:
       "Showcase individual portfolios, technical competencies, creative design, and project-based crafts.",
     href: "/freelancers",
-    icon: Sparkles,
+    icon: UserCheck,
   },
   {
     title: "Jobs",
@@ -230,7 +230,7 @@ export const directionPillars: DirectionPillar[] = [
       "Extending discovery seamlessly between the campus core and the neighborhood merchants, eateries, and artisans operating in host communities.",
   },
   {
-    icon: Sparkles,
+    icon: ShieldCheck,
     title: "Durable Digital Infrastructure",
     description:
       "Developing practical, fast, and mobile-friendly software designed to stay dependable across academic calendars and multi-campus environments.",
