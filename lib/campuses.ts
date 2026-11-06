@@ -3,6 +3,7 @@ import type { Campus } from "@/types/campus"
 
 /** Backend shapes (`GET /campuses`). Only the fields this site reads. */
 type ApiCampus = {
+  id: string
   name: string
   slug: string
   state: string
@@ -31,6 +32,7 @@ function toCampus(item: ApiCampus): Campus {
     typeof item.latitude === "number" && typeof item.longitude === "number"
 
   return {
+    id: item.id,
     slug: item.slug,
     name: item.name,
     shortName: toShortName(item.slug, item.name),

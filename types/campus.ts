@@ -1,4 +1,6 @@
 export type Campus = {
+  /** API identifier. Other API records (jobs, events) reference a campus by it. */
+  id?: string
   slug: string
   /** Official full name, e.g. "University of Lagos". */
   name: string

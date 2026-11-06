@@ -1,35 +1,38 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { getCampusBySlug } from "@/app/_data/campuses"
-import {
-  getOpportunities,
-  getOpportunityBySlug,
-  getOpportunityTypeBySlug,
-} from "@/app/_data/jobs"
+import { getOpportunityTypeBySlug } from "@/app/_data/jobs"
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampuses } from "@/lib/campuses"
+import { getOpportunities, getOpportunity } from "@/lib/jobs"
 import { Container } from "@/components/layout/container"
 import { JobHeader } from "@/components/jobs/job-header"
 import { JobJsonLd } from "@/components/jobs/job-json-ld"
+
+export const revalidate = 300
 
 type JobPageProps = {
   params: Promise<{ slug: string }>
 }
 
-export function generateStaticParams() {
-  return getOpportunities().map((op) => ({ slug: op.slug }))
+export async function generateStaticParams() {
+  const opportunities = await orNullDuringBuild(async () =>
+    getOpportunities(await getCampuses())
+  )
+  return (opportunities ?? []).map((op) => ({ slug: op.slug }))
 }
 
 export async function generateMetadata({
   params,
 }: JobPageProps): Promise<Metadata> {
   const { slug } = await params
-  const opportunity = getOpportunityBySlug(slug)
+  const opportunity = await getOpportunity(slug, await getCampuses())
 
   if (!opportunity) {
     return {}
   }
 
-  const description = `${opportunity.description} Location: ${opportunity.location ?? "Campus"}.`
+  const description = `${opportunity.summary ?? opportunity.description} Location: ${opportunity.location ?? "Campus"}.`
 
   return {
     title: `${opportunity.title} at ${opportunity.organization} | Kampmax Jobs`,
@@ -47,7 +50,8 @@ export async function generateMetadata({
 
 export default async function JobPage({ params }: JobPageProps) {
   const { slug } = await params
-  const opportunity = getOpportunityBySlug(slug)
+  const campuses = await getCampuses()
+  const opportunity = await getOpportunity(slug, campuses)
 
   if (!opportunity) {
     notFound()
@@ -55,7 +59,7 @@ export default async function JobPage({ params }: JobPageProps) {
 
   const type = getOpportunityTypeBySlug(opportunity.typeSlug)
   const campus = opportunity.campusSlug
-    ? getCampusBySlug(opportunity.campusSlug)
+    ? campuses.find((candidate) => candidate.slug === opportunity.campusSlug)
     : undefined
 
   return (

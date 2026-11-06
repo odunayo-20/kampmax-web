@@ -1,21 +1,21 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 
-import { getEnabledCampuses } from "@/app/_data/campuses"
-import {
-  getEnabledOpportunityTypes,
-  getFeaturedOpportunities,
-  getOpportunities,
-} from "@/app/_data/jobs"
+import { getEnabledOpportunityTypes } from "@/app/_data/jobs"
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampuses } from "@/lib/campuses"
+import { getOpportunities } from "@/lib/jobs"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { JobsBrowser } from "@/components/jobs/jobs-browser"
 import { JobsCampusSection } from "@/components/jobs/jobs-campus-section"
 import { JobsEmployerCta } from "@/components/jobs/jobs-employer-cta"
-import { JobsFeatured } from "@/components/jobs/jobs-featured"
 import { JobsHero } from "@/components/jobs/jobs-hero"
 import { JobsJsonLd } from "@/components/jobs/jobs-json-ld"
 import { JobsValueProps } from "@/components/jobs/jobs-value-props"
+import { ApiUnavailable } from "@/components/shared/api-unavailable"
+
+export const revalidate = 300
 
 const description =
   "Discover internships, campus roles, freelance projects, and graduate opportunities across Nigerian campus communities on Kampmax."
@@ -33,11 +33,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function JobsPage() {
-  const opportunities = getOpportunities()
-  const featured = getFeaturedOpportunities()
+export default async function JobsPage() {
   const types = getEnabledOpportunityTypes()
-  const campuses = getEnabledCampuses()
+  const listing = await orNullDuringBuild(async () => {
+    const campuses = await getCampuses()
+    const opportunities = await getOpportunities(campuses)
+    return { campuses, opportunities }
+  })
 
   return (
     <>
@@ -55,16 +57,6 @@ export default function JobsPage() {
         </Container>
       </div>
 
-      {featured.length > 0 && (
-        <div className="border-y border-border bg-primary-50">
-          <Section>
-            <Container>
-              <JobsFeatured opportunities={featured} types={types} />
-            </Container>
-          </Section>
-        </div>
-      )}
-
       <Section id="browse" className="scroll-mt-16">
         <Container>
           <div className="flex flex-col gap-8">
@@ -73,11 +65,15 @@ export default function JobsPage() {
               title="Explore all opportunities"
               description="Search and filter across internship placements, campus roles, part-time work, and graduate openings."
             />
-            <JobsBrowser
-              opportunities={opportunities}
-              types={types}
-              campuses={campuses}
-            />
+            {listing === null ? (
+              <ApiUnavailable subject="opportunities" />
+            ) : (
+              <JobsBrowser
+                opportunities={listing.opportunities}
+                types={types}
+                campuses={listing.campuses}
+              />
+            )}
           </div>
         </Container>
       </Section>
@@ -104,7 +100,7 @@ export default function JobsPage() {
         </Section>
       </div>
 
-      <JobsJsonLd opportunities={opportunities} />
+      {listing ? <JobsJsonLd opportunities={listing.opportunities} /> : null}
     </>
   )
 }

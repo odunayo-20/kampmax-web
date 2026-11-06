@@ -16,6 +16,7 @@ const employmentTypeBySlug: Record<string, string> = {
   internship: "INTERN",
   "full-time": "FULL_TIME",
   "part-time": "PART_TIME",
+  contract: "CONTRACTOR",
   freelance: "CONTRACTOR",
 }
 

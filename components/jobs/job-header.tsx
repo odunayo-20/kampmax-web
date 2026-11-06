@@ -64,7 +64,7 @@ function JobHeader({
             <h2 className="font-heading text-lg font-semibold text-foreground">
               Overview
             </h2>
-            <Lead className="text-base text-foreground/90">
+            <Lead className="text-base text-foreground/90 whitespace-pre-line">
               {opportunity.description}
             </Lead>
           </section>

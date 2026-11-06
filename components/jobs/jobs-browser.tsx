@@ -40,6 +40,11 @@ function JobsBrowser({
     [types]
   )
 
+  const campusBySlug = useMemo(
+    () => new Map(campuses.map((campus) => [campus.slug, campus])),
+    [campuses]
+  )
+
   const filteredOpportunities = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
 
@@ -211,6 +216,11 @@ function JobsBrowser({
                 key={opportunity.slug}
                 opportunity={opportunity}
                 type={typeBySlug.get(opportunity.typeSlug)}
+                campus={
+                  opportunity.campusSlug
+                    ? campusBySlug.get(opportunity.campusSlug)
+                    : undefined
+                }
               />
             ))}
           </div>

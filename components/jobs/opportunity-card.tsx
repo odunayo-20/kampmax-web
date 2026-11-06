@@ -1,22 +1,20 @@
 import Link from "next/link"
 import { ArrowRight, Building2, MapPin } from "lucide-react"
 
-import { getCampusBySlug } from "@/app/_data/campuses"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import type { Campus } from "@/types/campus"
 import type { Opportunity, OpportunityType } from "@/types/job"
 
 function OpportunityCard({
   opportunity,
   type,
+  campus,
 }: {
   opportunity: Opportunity
   type: OpportunityType | undefined
+  campus?: Campus
 }) {
-  const campus = opportunity.campusSlug
-    ? getCampusBySlug(opportunity.campusSlug)
-    : undefined
-
   const displayedSkills = opportunity.skills?.slice(0, 3) ?? []
 
   return (
@@ -56,7 +54,7 @@ function OpportunityCard({
           </div>
 
           <p className="line-clamp-2 text-sm text-muted-foreground">
-            {opportunity.description}
+            {opportunity.summary ?? opportunity.description}
           </p>
 
           {displayedSkills.length > 0 ? (
