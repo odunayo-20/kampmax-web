@@ -1,11 +1,37 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  campusesWithItems,
   formatCampusLocation,
   toCampus,
   toShortName,
   type ApiCampus,
 } from "@/lib/campuses"
+import type { Campus } from "@/types/campus"
+
+describe("campusesWithItems", () => {
+  const campus = (slug: string): Campus => ({
+    slug,
+    name: slug,
+    shortName: slug.toUpperCase(),
+    enabled: true,
+  })
+  const all = [campus("rugipo"), campus("unilag"), campus("oau")]
+
+  it("keeps only campuses that have items, in the original order", () => {
+    const items = [{ campusSlug: "oau" }, { campusSlug: "rugipo" }, { campusSlug: "oau" }]
+    expect(campusesWithItems(all, items).map((c) => c.slug)).toEqual(["rugipo", "oau"])
+  })
+
+  it("returns nothing when no item has a campus, so the filter can be hidden", () => {
+    expect(campusesWithItems(all, [{}, { campusSlug: undefined }])).toEqual([])
+    expect(campusesWithItems(all, [])).toEqual([])
+  })
+
+  it("ignores items whose campus is not in the list", () => {
+    expect(campusesWithItems(all, [{ campusSlug: "gone" }])).toEqual([])
+  })
+})
 
 describe("formatCampusLocation", () => {
   it("does not repeat a state the city already names", () => {

@@ -146,6 +146,7 @@ function EventsBrowser({
             </div>
           </div>
 
+          {campuses.length > 0 ? (
           <div className="flex items-center gap-2">
             <Label
               htmlFor={campusSelectId}
@@ -167,6 +168,7 @@ function EventsBrowser({
               ))}
             </select>
           </div>
+          ) : null}
         </div>
 
         <div

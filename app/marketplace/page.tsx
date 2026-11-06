@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { orNullDuringBuild } from "@/lib/api"
-import { getCampuses } from "@/lib/campuses"
+import { campusesWithItems, getCampuses } from "@/lib/campuses"
 import {
   activeProductCategories,
   getProductCategories,
@@ -74,7 +74,7 @@ export default async function MarketplacePage() {
                 listing.products,
                 listing.categories
               )}
-              campuses={listing.campuses}
+              campuses={campusesWithItems(listing.campuses, listing.products)}
             />
           )}
         </div>

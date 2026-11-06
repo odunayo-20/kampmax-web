@@ -64,6 +64,20 @@ export function toCampus(item: ApiCampus): Campus {
   }
 }
 
+/**
+ * The campuses a directory can usefully filter by: those that have at least one
+ * of its items. Offering a campus with nothing in it only leads to an empty
+ * list, so the filter lists none of those (and is hidden when no item has a
+ * campus at all).
+ */
+export function campusesWithItems(
+  campuses: Campus[],
+  items: { campusSlug?: string }[]
+): Campus[] {
+  const used = new Set(items.map((item) => item.campusSlug))
+  return campuses.filter((campus) => used.has(campus.slug))
+}
+
 /** Active campuses, as returned by the API (the directory is well under one page). */
 export async function getCampuses(): Promise<Campus[]> {
   const { items } = await apiFetch<ApiPage<ApiCampus>>("/campuses", {

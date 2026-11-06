@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { orNullDuringBuild } from "@/lib/api"
-import { getCampuses } from "@/lib/campuses"
+import { campusesWithItems, getCampuses } from "@/lib/campuses"
 import { categoriesOf, getEvents } from "@/lib/events"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
@@ -98,7 +98,7 @@ export default async function EventsPage() {
                   upcomingEvents={listing.events}
                   pastEvents={[]}
                   categories={categoriesOf(listing.events)}
-                  campuses={listing.campuses}
+                  campuses={campusesWithItems(listing.campuses, listing.events)}
                 />
               </>
             )}

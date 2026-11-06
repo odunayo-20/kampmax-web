@@ -120,6 +120,7 @@ function JobsBrowser({
             </div>
           </div>
 
+          {campuses.length > 0 ? (
           <div className="flex items-center gap-2">
             <Label
               htmlFor={campusSelectId}
@@ -141,6 +142,7 @@ function JobsBrowser({
               ))}
             </select>
           </div>
+          ) : null}
         </div>
 
         <div

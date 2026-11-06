@@ -3,11 +3,7 @@ import { notFound, permanentRedirect } from "next/navigation"
 
 import { orNullDuringBuild } from "@/lib/api"
 import { getCampuses } from "@/lib/campuses"
-import {
-  getService,
-  getServiceCategories,
-  getServices,
-} from "@/lib/services"
+import { categoryOf, getService, getServices } from "@/lib/services"
 import { Container } from "@/components/layout/container"
 import { ServiceHeader } from "@/components/services/service-header"
 import { ServiceJsonLd } from "@/components/services/service-json-ld"
@@ -65,16 +61,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     permanentRedirect(`/services/${service.slug}`)
   }
 
-  const categories = await getServiceCategories()
-  const category =
-    categories.find((candidate) => candidate.slug === service.categorySlug) ??
-    (service.categoryName
-      ? {
-          slug: service.categorySlug,
-          name: service.categoryName,
-          enabled: true,
-        }
-      : undefined)
+  const category = categoryOf(service)
 
   const campus = service.campusSlug
     ? campuses.find((candidate) => candidate.slug === service.campusSlug)

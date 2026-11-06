@@ -20,8 +20,11 @@ export type Service = {
   slug: string
   name: string
   description: string
+  /** The broad category, e.g. "Technology & IT". Sub-categories roll up to it. */
   categorySlug: string
   categoryName?: string
+  /** The specific sub-category when there is one, e.g. "API Development". */
+  subcategoryName?: string
   /** Absolute URL of the cover image. Falls back to a placeholder when unset. */
   image?: string
   /** Name of the individual provider or business offering the service. */

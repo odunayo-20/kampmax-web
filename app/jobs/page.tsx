@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import { getEnabledOpportunityTypes } from "@/app/_data/jobs"
 import { orNullDuringBuild } from "@/lib/api"
-import { getCampuses } from "@/lib/campuses"
+import { campusesWithItems, getCampuses } from "@/lib/campuses"
 import { getOpportunities } from "@/lib/jobs"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
@@ -71,7 +71,7 @@ export default async function JobsPage() {
               <JobsBrowser
                 opportunities={listing.opportunities}
                 types={types}
-                campuses={listing.campuses}
+                campuses={campusesWithItems(listing.campuses, listing.opportunities)}
               />
             )}
           </div>

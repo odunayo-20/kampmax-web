@@ -3,13 +3,16 @@ import { idFromSlug, slugify, slugWithId } from "@/lib/slug"
 import type { Campus } from "@/types/campus"
 import type { Service, ServiceCategory } from "@/types/service"
 
-/** Backend category shape (`GET /categories?type=SERVICE`). */
-type ApiCategory = {
+/** A node of the service taxonomy (`GET /categories/tree?type=SERVICE`). */
+export type ApiCategoryNode = {
   id: string
   name: string
   slug: string
-  isActive: boolean
+  children?: ApiCategoryNode[] | null
 }
+
+/** Maps a category id to the broad category it belongs to. */
+export type ServiceGroups = Map<string, { slug: string; name: string }>
 
 type ApiServiceCategory = {
   id: string
@@ -76,10 +79,39 @@ type ApiPage<T> = {
 const PAGE_SIZE = 100 // The backend caps `limit` at 100.
 const MAX_PAGES = 3
 
-function toService(
+/** Services with no category at all are listed under this one. */
+const UNCATEGORISED = { slug: "other", name: "Other" } as const
+
+/**
+ * The service taxonomy has broad categories ("Technology & IT") that may hold
+ * sub-categories ("API Development"). A sub-category rolls up to its parent; a
+ * top-level category with no children is a category in its own right.
+ */
+export function buildServiceGroups(tree: ApiCategoryNode[]): ServiceGroups {
+  const groups: ServiceGroups = new Map()
+
+  for (const node of tree) {
+    const group = { slug: node.slug, name: node.name }
+    groups.set(node.id, group)
+    for (const child of node.children ?? []) {
+      groups.set(child.id, group)
+    }
+  }
+
+  return groups
+}
+
+async function loadServiceGroups(): Promise<ServiceGroups> {
+  return buildServiceGroups(
+    await apiFetch<ApiCategoryNode[]>("/categories/tree", { query: { type: "SERVICE" } })
+  )
+}
+
+export function toService(
   item: ApiService,
   campuses: Campus[],
-  freelancerMap?: Map<string, ApiFreelancerProfile>
+  freelancerMap?: Map<string, ApiFreelancerProfile>,
+  groups: ServiceGroups = new Map()
 ): Service {
   const profile = item.freelancerId && freelancerMap ? freelancerMap.get(item.freelancerId) : undefined
   const providerName = item.freelancer?.name ?? profile?.fullName
@@ -94,14 +126,22 @@ function toService(
     campusSlug = campuses.find((c) => c.id === profile.campusId)?.slug
   }
 
-  const categorySlug = item.category?.name ? slugify(item.category.name) : "general"
+  // Roll a sub-category up to its broad category, keeping the sub-category name
+  // as the detail. Without a taxonomy the service's own category is used as is.
+  const own = item.category
+  const group = own ? groups.get(own.id) : undefined
+  const categorySlug =
+    group?.slug ?? (own?.name ? slugify(own.name) : UNCATEGORISED.slug)
+  const categoryName = group?.name ?? own?.name ?? UNCATEGORISED.name
+  const subcategoryName = own && own.name !== categoryName ? own.name : undefined
 
   return {
     slug: slugWithId(item.title, item.id),
     name: item.title,
     description: item.description ?? item.shortDescription ?? "",
     categorySlug,
-    categoryName: item.category?.name,
+    categoryName,
+    subcategoryName,
     image: resolveMediaUrl(item.coverImageUrl),
     providerName,
     providerAvatar,
@@ -128,6 +168,7 @@ function toService(
 
 /** Public services, newest first. `campuses` resolves provider campus slugs. */
 export async function getServices(campuses: Campus[] = []): Promise<Service[]> {
+  const groups = await loadServiceGroups()
   const services: ApiService[] = []
 
   for (let page = 1; page <= MAX_PAGES; page++) {
@@ -149,7 +190,7 @@ export async function getServices(campuses: Campus[] = []): Promise<Service[]> {
     profiles.filter((p): p is ApiFreelancerProfile => p !== null).map((p) => [p.id, p])
   )
 
-  return services.map((service) => toService(service, campuses, freelancerMap))
+  return services.map((service) => toService(service, campuses, freelancerMap, groups))
 }
 
 /** A single published service by URL segment, or `null` when it does not exist. */
@@ -194,7 +235,7 @@ export async function getService(
   }
 
   const map = freelancerProfile ? new Map([[freelancerProfile.id, freelancerProfile]]) : undefined
-  return toService(item, campuses, map)
+  return toService(item, campuses, map, await loadServiceGroups())
 }
 
 /** Public services offered by a specific freelancer profile. */
@@ -213,51 +254,47 @@ export async function getServicesByFreelancer(
   }
 }
 
-/** Service taxonomy categories (`GET /categories?type=SERVICE`). */
-export async function getServiceCategories(): Promise<ServiceCategory[]> {
-  try {
-    const result = await apiFetch<ApiPage<ApiCategory>>("/categories", {
-      query: { type: "SERVICE", limit: 100 },
-    })
-    return result.items.map((cat) => ({
-      slug: cat.slug,
-      name: cat.name,
-      enabled: cat.isActive,
-    }))
-  } catch (error) {
-    if (error instanceof ApiError) return []
-    throw error
+/**
+ * Filter pills for the directory: every broad category that has at least one
+ * service in it, the busiest first and "Other" last. Categories with no
+ * services are left out so a pill never leads to an empty list.
+ */
+export function directoryServiceCategories(services: Service[]): ServiceCategory[] {
+  const counts = new Map<string, { category: ServiceCategory; count: number }>()
+
+  for (const service of services) {
+    const entry = counts.get(service.categorySlug)
+    if (entry) {
+      entry.count += 1
+    } else {
+      counts.set(service.categorySlug, {
+        category: {
+          slug: service.categorySlug,
+          name: service.categoryName ?? UNCATEGORISED.name,
+          enabled: true,
+        },
+        count: 1,
+      })
+    }
   }
+
+  return [...counts.values()]
+    .sort(
+      (a, b) =>
+        Number(a.category.slug === UNCATEGORISED.slug) -
+          Number(b.category.slug === UNCATEGORISED.slug) ||
+        b.count - a.count ||
+        a.category.name.localeCompare(b.category.name)
+    )
+    .map(({ category }) => category)
 }
 
-/**
- * Filter pills for the directory: active categories represented in published services
- * supplemented with top categories, up to 8.
- */
-export function activeServiceCategories(
-  services: Service[],
-  allCategories: ServiceCategory[] = []
-): ServiceCategory[] {
-  const categoryMap = new Map(allCategories.map((c) => [c.slug, c]))
-  const usedSlugs = new Set(services.map((s) => s.categorySlug))
-
-  const active: ServiceCategory[] = []
-  for (const slug of usedSlugs) {
-    const found = categoryMap.get(slug)
-    if (found) {
-      active.push(found)
-    } else {
-      active.push({ slug, name: slug.replace(/-/g, " "), enabled: true })
-    }
+/** The broad category shown as a badge on a service. */
+export function categoryOf(service: Service): ServiceCategory {
+  return {
+    slug: service.categorySlug,
+    name: service.categoryName ?? UNCATEGORISED.name,
+    enabled: true,
   }
-
-  for (const cat of allCategories) {
-    if (active.length >= 8) break
-    if (!usedSlugs.has(cat.slug) && cat.enabled) {
-      active.push(cat)
-    }
-  }
-
-  return active
 }
 

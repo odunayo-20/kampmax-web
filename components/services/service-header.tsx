@@ -40,6 +40,9 @@ function ServiceHeader({
         <div className="flex flex-col gap-5">
           <div className="flex flex-wrap items-center gap-1.5">
             {category ? <Badge variant="secondary">{category.name}</Badge> : null}
+            {service.subcategoryName ? (
+              <Badge variant="outline">{service.subcategoryName}</Badge>
+            ) : null}
             {campus ? <Badge variant="outline">{campus.shortName}</Badge> : null}
             {service.pricingModel === "HOURLY" ? (
               <Badge variant="outline">Hourly</Badge>

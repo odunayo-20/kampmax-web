@@ -1,12 +1,8 @@
 import type { Metadata } from "next"
 
 import { orNullDuringBuild } from "@/lib/api"
-import { getCampuses } from "@/lib/campuses"
-import {
-  activeServiceCategories,
-  getServiceCategories,
-  getServices,
-} from "@/lib/services"
+import { campusesWithItems, getCampuses } from "@/lib/campuses"
+import { directoryServiceCategories, getServices } from "@/lib/services"
 import { Container } from "@/components/layout/container"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { ServiceHero } from "@/components/services/service-hero"
@@ -35,11 +31,8 @@ export const metadata: Metadata = {
 export default async function ServicesPage() {
   const listing = await orNullDuringBuild(async () => {
     const campuses = await getCampuses()
-    const [services, categories] = await Promise.all([
-      getServices(campuses),
-      getServiceCategories(),
-    ])
-    return { campuses, services, categories }
+    const services = await getServices(campuses)
+    return { campuses, services }
   })
 
   return (
@@ -70,11 +63,8 @@ export default async function ServicesPage() {
           ) : (
             <ServicesBrowser
               services={listing.services}
-              categories={activeServiceCategories(
-                listing.services,
-                listing.categories
-              )}
-              campuses={listing.campuses}
+              categories={directoryServiceCategories(listing.services)}
+              campuses={campusesWithItems(listing.campuses, listing.services)}
             />
           )}
         </div>

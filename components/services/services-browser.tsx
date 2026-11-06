@@ -59,6 +59,8 @@ function ServicesBrowser({
         normalizedQuery === "" ||
         service.name.toLowerCase().includes(normalizedQuery) ||
         service.description.toLowerCase().includes(normalizedQuery) ||
+        Boolean(service.categoryName?.toLowerCase().includes(normalizedQuery)) ||
+        Boolean(service.subcategoryName?.toLowerCase().includes(normalizedQuery)) ||
         Boolean(service.providerName?.toLowerCase().includes(normalizedQuery))
 
       return matchesCategory && matchesCampus && matchesQuery
@@ -117,6 +119,7 @@ function ServicesBrowser({
             </div>
           </div>
 
+          {campuses.length > 0 ? (
           <div className="flex items-center gap-2">
             <Label
               htmlFor={campusSelectId}
@@ -138,6 +141,7 @@ function ServicesBrowser({
               ))}
             </select>
           </div>
+          ) : null}
         </div>
 
         <div

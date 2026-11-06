@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { orNullDuringBuild } from "@/lib/api"
-import { getCampuses } from "@/lib/campuses"
+import { campusesWithItems, getCampuses } from "@/lib/campuses"
 import { directoryCategories, getFreelancers } from "@/lib/freelancers"
 import { Container } from "@/components/layout/container"
 import { SectionHeading } from "@/components/layout/section-heading"
@@ -64,7 +64,7 @@ export default async function FreelancersPage() {
             <FreelancersBrowser
               freelancers={listing.freelancers}
               categories={directoryCategories(listing.freelancers)}
-              campuses={listing.campuses}
+              campuses={campusesWithItems(listing.campuses, listing.freelancers)}
             />
           )}
         </div>
