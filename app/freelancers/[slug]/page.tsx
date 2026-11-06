@@ -8,6 +8,8 @@ import {
   getFreelancers,
   primaryCategoryOf,
 } from "@/lib/freelancers"
+import { getServicesByFreelancer } from "@/lib/services"
+import { idFromSlug } from "@/lib/slug"
 import { Container } from "@/components/layout/container"
 import { FreelancerJsonLd } from "@/components/freelancers/freelancer-json-ld"
 import { FreelancerProfile } from "@/components/freelancers/freelancer-profile"
@@ -73,6 +75,13 @@ export default async function FreelancerPage({ params }: FreelancerPageProps) {
     ? campuses.find((candidate) => candidate.slug === freelancer.campusSlug)
     : undefined
 
+  const freelancerId = idFromSlug(freelancer.slug)
+  const services = freelancerId
+    ? (await orNullDuringBuild(() =>
+        getServicesByFreelancer(freelancerId, campuses)
+      )) ?? []
+    : []
+
   return (
     <>
       <Container>
@@ -80,6 +89,7 @@ export default async function FreelancerPage({ params }: FreelancerPageProps) {
           freelancer={freelancer}
           category={primaryCategoryOf(freelancer)}
           campus={campus}
+          services={services}
         />
       </Container>
 

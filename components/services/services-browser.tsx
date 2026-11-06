@@ -40,6 +40,11 @@ function ServicesBrowser({
     [categories]
   )
 
+  const campusBySlug = useMemo(
+    () => new Map(campuses.map((campus) => [campus.slug, campus])),
+    [campuses]
+  )
+
   const filteredServices = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
 
@@ -203,6 +208,11 @@ function ServicesBrowser({
               key={service.slug}
               service={service}
               category={categoryBySlug.get(service.categorySlug)}
+              campus={
+                service.campusSlug
+                  ? campusBySlug.get(service.campusSlug)
+                  : undefined
+              }
             />
           ))}
         </div>

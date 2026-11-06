@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowLeft, Building2, User } from "lucide-react"
 
-import { ImagePlaceholder } from "@/components/shared/image-placeholder"
+import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { H1, Lead, Muted } from "@/components/ui/typography"
@@ -30,23 +30,64 @@ function ServiceHeader({
       </Link>
 
       <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-        <ImagePlaceholder className="aspect-4/3 w-full rounded-xl" />
+        <CoverImage
+          src={service.image}
+          alt={service.name}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="aspect-4/3 w-full rounded-xl"
+        />
 
         <div className="flex flex-col gap-5">
           <div className="flex flex-wrap items-center gap-1.5">
             {category ? <Badge variant="secondary">{category.name}</Badge> : null}
             {campus ? <Badge variant="outline">{campus.shortName}</Badge> : null}
+            {service.pricingModel === "HOURLY" ? (
+              <Badge variant="outline">Hourly</Badge>
+            ) : null}
           </div>
 
           <H1>{service.name}</H1>
 
           <p className="text-2xl font-semibold text-foreground">
             {service.priceFrom
-              ? `From ${formatPrice(service.priceFrom)}`
+              ? `From ${formatPrice(service.priceFrom)}${
+                  service.pricingModel === "HOURLY" ? "/hr" : ""
+                }`
               : "Price on request"}
           </p>
 
-          <Lead>{service.description}</Lead>
+          <Lead className="whitespace-pre-line">{service.description}</Lead>
+
+          {service.skills && service.skills.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Skills & Technologies
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {service.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground shadow-2xs"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {service.deliverables && service.deliverables.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Key Deliverables
+              </span>
+              <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
+                {service.deliverables.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {(service.providerName || campus) && (
             <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-4">
@@ -57,7 +98,16 @@ function ServiceHeader({
                 {service.providerName && (
                   <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                     <User className="size-4 text-muted-foreground" aria-hidden="true" />
-                    <span>{service.providerName}</span>
+                    {service.providerSlug ? (
+                      <Link
+                        href={`/freelancers/${service.providerSlug}`}
+                        className="transition-colors hover:text-primary hover:underline"
+                      >
+                        {service.providerName}
+                      </Link>
+                    ) : (
+                      <span>{service.providerName}</span>
+                    )}
                   </div>
                 )}
                 {campus && (

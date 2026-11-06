@@ -8,6 +8,7 @@ import { getCampuses } from "@/lib/campuses"
 import { getEvents } from "@/lib/events"
 import { getFreelancers } from "@/lib/freelancers"
 import { getOpportunities } from "@/lib/jobs"
+import { getServices } from "@/lib/services"
 
 export const revalidate = 3600
 
@@ -20,6 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const events = (await orNullDuringBuild(() => getEvents(campuses))) ?? []
   const freelancers =
     (await orNullDuringBuild(() => getFreelancers(campuses))) ?? []
+  const services =
+    (await orNullDuringBuild(() => getServices(campuses))) ?? []
 
   const productRoutes: MetadataRoute.Sitemap = getProducts().map((product) => ({
     url: `${siteConfig.url}/marketplace/${product.slug}`,
@@ -63,6 +66,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }))
 
+  const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${siteConfig.url}/services/${service.slug}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }))
+
   const staticRoutes: MetadataRoute.Sitemap = [
     "/about",
     "/aml-policy",
@@ -73,7 +83,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/how-it-works",
     "/privacy",
     "/refund-policy",
-    "/services",
     "/terms",
   ].map((path) => ({
     url: `${siteConfig.url}${path}`,
@@ -120,6 +129,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${siteConfig.url}/services`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
+    {
       url: `${siteConfig.url}/blog`,
       lastModified,
       changeFrequency: "weekly",
@@ -131,6 +146,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...jobRoutes,
     ...campusRoutes,
     ...freelancerRoutes,
+    ...serviceRoutes,
     ...blogRoutes,
   ]
 }

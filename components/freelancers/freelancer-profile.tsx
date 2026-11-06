@@ -1,30 +1,29 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Building2, Sparkles } from "lucide-react"
 
-import { getServiceBySlug } from "@/app/_data/services"
 import { FreelancerAvatar } from "@/components/freelancers/freelancer-avatar"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { H1, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
 import { formatPrice } from "@/lib/format-price"
+import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Freelancer, FreelancerCategory } from "@/types/freelancer"
+import type { Service } from "@/types/service"
 
 function FreelancerProfile({
   freelancer,
   category,
   campus,
+  services = [],
 }: {
   freelancer: Freelancer
   category: FreelancerCategory | undefined
   campus: Campus | undefined
+  services?: Service[]
 }) {
-  const services = (freelancer.serviceSlugs ?? [])
-    .map((slug) => getServiceBySlug(slug))
-    .filter((s): s is NonNullable<typeof s> => s !== undefined)
 
   return (
     <div className="flex flex-col gap-8 py-16 sm:py-20 lg:py-24">

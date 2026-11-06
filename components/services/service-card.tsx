@@ -1,29 +1,34 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
-import { getCampusBySlug } from "@/app/_data/campuses"
-import { ImagePlaceholder } from "@/components/shared/image-placeholder"
+import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { formatPrice } from "@/lib/format-price"
+import type { Campus } from "@/types/campus"
 import type { Service, ServiceCategory } from "@/types/service"
 
 function ServiceCard({
   service,
   category,
+  campus,
 }: {
   service: Service
   category: ServiceCategory | undefined
+  campus?: Campus
 }) {
-  const campus = service.campusSlug ? getCampusBySlug(service.campusSlug) : undefined
-
   return (
     <Link
       href={`/services/${service.slug}`}
       className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <Card className="flex h-full flex-col pt-0 shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
-        <ImagePlaceholder className="aspect-16/10 rounded-none" />
+        <CoverImage
+          src={service.image}
+          alt={service.name}
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="aspect-16/10 rounded-none"
+        />
         <CardContent className="flex flex-1 flex-col gap-3">
           <div className="flex flex-col gap-1.5">
             <div className="flex flex-wrap items-center gap-1.5">
@@ -49,7 +54,9 @@ function ServiceCard({
           <div className="mt-auto flex items-center justify-between gap-2 border-t border-border/60 pt-3">
             <span className="text-sm font-semibold text-foreground">
               {service.priceFrom
-                ? `From ${formatPrice(service.priceFrom)}`
+                ? `From ${formatPrice(service.priceFrom)}${
+                    service.pricingModel === "HOURLY" ? "/hr" : ""
+                  }`
                 : "Price on request"}
             </span>
             <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-600">
