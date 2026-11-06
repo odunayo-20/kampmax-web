@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, BookOpen, Clock } from "lucide-react"
 
 import type { BlogPost } from "@/types/blog"
+import { BlogCover } from "@/components/blog/blog-cover"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -38,7 +39,13 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
         href={`/blog/${post.slug}`}
         className="group block transition-transform hover:-translate-y-0.5"
       >
-        <Card className="overflow-hidden border-border/80 bg-gradient-to-br from-card via-card to-primary/5 transition-colors group-hover:border-primary/40">
+        <Card className="overflow-hidden border-border/80 bg-gradient-to-br from-card via-card to-primary/5 pt-0 transition-colors group-hover:border-primary/40">
+          <BlogCover
+            src={post.image}
+            priority
+            sizes="(min-width: 1280px) 1152px, 100vw"
+            className="aspect-video rounded-none sm:aspect-21/9"
+          />
           <CardContent className="flex flex-col gap-5 p-6 sm:p-10">
             <div className="flex flex-wrap items-center gap-3">
               <Badge variant="default" className="text-2xs">

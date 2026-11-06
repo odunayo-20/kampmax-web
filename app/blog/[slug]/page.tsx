@@ -18,6 +18,7 @@ import { ArticleReadingProgress } from "@/components/blog/article-reading-progre
 import { ArticleRelated } from "@/components/blog/article-related"
 import { ArticleShare } from "@/components/blog/article-share"
 import { ArticleViewCounter } from "@/components/blog/article-view-counter"
+import { BlogCover } from "@/components/blog/blog-cover"
 import { Container } from "@/components/layout/container"
 
 export const revalidate = 300
@@ -96,6 +97,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <Container className="py-10 sm:py-16">
         <article className="mx-auto max-w-3xl">
           <ArticleHeader post={post} />
+          <BlogCover
+            src={post.image}
+            alt={post.title}
+            priority
+            hideWhenMissing
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="mb-10 aspect-video rounded-2xl sm:mb-12"
+          />
           <ArticleContent html={post.contentHtml} />
           <ArticleShare title={post.title} slug={post.slug} />
           <ArticleAuthor author={post.author} />
