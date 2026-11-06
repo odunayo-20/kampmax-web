@@ -15,6 +15,6 @@ export const env = {
    * (e.g. `https://api.kampmax.com/api/v1`).
    */
   apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api/v1",
-  /** MapTiler API key. Not used until the map / campus-discovery module. */
+  /** MapTiler API key for the campus and event maps. Maps are hidden when empty. */
   mapTilerApiKey: process.env.NEXT_PUBLIC_MAPTILER_API_KEY ?? "",
 } as const

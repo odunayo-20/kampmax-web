@@ -1,23 +1,31 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { getCampusBySlug, getEnabledCampuses } from "@/app/_data/campuses"
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampus, getCampuses } from "@/lib/campuses"
 import { CampusCta } from "@/components/campuses/campus-cta"
 import { CampusDiscover } from "@/components/campuses/campus-discover"
 import { CampusHeader } from "@/components/campuses/campus-header"
 import { CampusJsonLd } from "@/components/campuses/campus-json-ld"
+import {
+  CampusLocationMap,
+  canShowCampusMap,
+} from "@/components/campuses/campus-map"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 
-export function generateStaticParams() {
-  return getEnabledCampuses().map((campus) => ({ slug: campus.slug }))
+export const revalidate = 300
+
+export async function generateStaticParams() {
+  const campuses = await orNullDuringBuild(getCampuses)
+  return (campuses ?? []).map((campus) => ({ slug: campus.slug }))
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/campuses/[slug]">): Promise<Metadata> {
   const { slug } = await params
-  const campus = getCampusBySlug(slug)
+  const campus = await getCampus(slug)
 
   if (!campus) {
     return {}
@@ -35,6 +43,7 @@ export async function generateMetadata({
       title: `${campus.shortName} Campus , Kampmax`,
       description,
       url: `/campuses/${campus.slug}`,
+      ...(campus.image ? { images: [campus.image] } : {}),
     },
   }
 }
@@ -43,7 +52,7 @@ export default async function CampusPage({
   params,
 }: PageProps<"/campuses/[slug]">) {
   const { slug } = await params
-  const campus = getCampusBySlug(slug)
+  const campus = await getCampus(slug)
 
   if (!campus) {
     notFound()
@@ -54,6 +63,12 @@ export default async function CampusPage({
       <Container>
         <CampusHeader campus={campus} />
       </Container>
+
+      {canShowCampusMap([campus]) ? (
+        <Container className="pb-16 sm:pb-20">
+          <CampusLocationMap campus={campus} />
+        </Container>
+      ) : null}
 
       <div className="border-y border-border bg-primary-50">
         <Section id="discover" className="scroll-mt-16">

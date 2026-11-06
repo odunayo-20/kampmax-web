@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next"
 
-import { getEnabledCampuses } from "@/app/_data/campuses"
 import { getEvents } from "@/app/_data/events"
 import { getFreelancers } from "@/app/_data/freelancers"
 import { getOpportunities } from "@/app/_data/jobs"
@@ -8,12 +7,14 @@ import { getProducts } from "@/app/_data/marketplace"
 import { siteConfig } from "@/config/site"
 import { orNullDuringBuild } from "@/lib/api"
 import { getArticleSitemapEntries } from "@/lib/blog"
+import { getCampuses } from "@/lib/campuses"
 
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
   const articleEntries = (await orNullDuringBuild(getArticleSitemapEntries)) ?? []
+  const campuses = (await orNullDuringBuild(getCampuses)) ?? []
 
   const productRoutes: MetadataRoute.Sitemap = getProducts().map((product) => ({
     url: `${siteConfig.url}/marketplace/${product.slug}`,
@@ -36,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  const campusRoutes: MetadataRoute.Sitemap = getEnabledCampuses().map((campus) => ({
+  const campusRoutes: MetadataRoute.Sitemap = campuses.map((campus) => ({
     url: `${siteConfig.url}/campuses/${campus.slug}`,
     lastModified,
     changeFrequency: "weekly",

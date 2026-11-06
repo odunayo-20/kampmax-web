@@ -15,6 +15,15 @@ export function CampusJsonLd({ campus }: CampusJsonLdProps) {
     url: `${siteConfig.url}/campuses/${campus.slug}`,
     ...(campus.description ? { description: campus.description } : {}),
     ...(campus.location ? { address: campus.location } : {}),
+    ...(campus.latitude !== undefined && campus.longitude !== undefined
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: campus.latitude,
+            longitude: campus.longitude,
+          },
+        }
+      : {}),
   }
 
   return (

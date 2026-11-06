@@ -7,7 +7,13 @@ export type Campus = {
   /** City/state level location , no unverified street addresses. */
   location?: string
   description?: string
-  /** Path to a real campus image. Falls back to a placeholder when unset. */
+  /** Path or absolute URL of a real campus image. Falls back to a placeholder when unset. */
   image?: string
   enabled: boolean
+  /** Street address, when the campus has published one. */
+  address?: string
+  /** Map position. Both are set, or neither. */
+  latitude?: number
+  longitude?: number
+  memberCount?: number
 }
