@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation"
 
+import { orNullDuringBuild } from "@/lib/api"
 import {
   getAdjacentPosts,
   getAllPosts,
-  getPostBySlug,
-} from "@/app/_data/blog"
+  getArticleSitemapEntries,
+  lookupArticle,
+} from "@/lib/blog"
 import { ArticleAdjacent } from "@/components/blog/article-adjacent"
 import { ArticleAuthor } from "@/components/blog/article-author"
 import { ArticleContent } from "@/components/blog/article-content"
@@ -15,73 +17,86 @@ import { ArticleJsonLd } from "@/components/blog/article-json-ld"
 import { ArticleReadingProgress } from "@/components/blog/article-reading-progress"
 import { ArticleRelated } from "@/components/blog/article-related"
 import { ArticleShare } from "@/components/blog/article-share"
+import { ArticleViewCounter } from "@/components/blog/article-view-counter"
 import { Container } from "@/components/layout/container"
+
+export const revalidate = 300
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>
 }
 
-export function generateStaticParams() {
-  return getAllPosts().map((post) => ({
-    slug: post.slug,
-  }))
+export async function generateStaticParams() {
+  const entries = await orNullDuringBuild(getArticleSitemapEntries)
+  return (entries ?? []).map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const lookup = await lookupArticle(slug)
 
-  if (!post) {
+  if (lookup.status !== "found") {
     return {
       title: "Article Not Found | Kampmax Insights",
       description: "The requested article could not be found.",
     }
   }
 
+  const post = lookup.article
+  const title = post.seoTitle ?? post.title
+  const description = post.seoDescription ?? post.excerpt
+
   return {
-    title: `${post.title} | Kampmax Insights`,
-    description: post.excerpt,
+    title: `${title} | Kampmax Insights`,
+    description,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: post.canonicalUrl ?? `/blog/${post.slug}`,
     },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       url: `/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author.name],
       section: post.category,
+      ...(post.image ? { images: [post.image] } : {}),
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
+      ...(post.image ? { images: [post.image] } : {}),
     },
   }
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const lookup = await lookupArticle(slug)
 
-  if (!post) {
+  if (lookup.status === "moved") {
+    permanentRedirect(`/blog/${lookup.slug}`)
+  }
+  if (lookup.status === "missing") {
     notFound()
   }
 
-  const adjacent = getAdjacentPosts(slug)
+  const post = lookup.article
+  const adjacent = getAdjacentPosts(post.slug, await getAllPosts())
 
   return (
     <>
       <ArticleReadingProgress />
+      <ArticleViewCounter slug={post.slug} />
 
       <Container className="py-10 sm:py-16">
         <article className="mx-auto max-w-3xl">
           <ArticleHeader post={post} />
-          <ArticleContent blocks={post.content} />
+          <ArticleContent html={post.contentHtml} />
           <ArticleShare title={post.title} slug={post.slug} />
           <ArticleAuthor author={post.author} />
           <ArticleAdjacent prev={adjacent.prev} next={adjacent.next} />
@@ -89,10 +104,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </article>
 
         <div className="mx-auto max-w-5xl">
-          <ArticleRelated
-            currentSlug={post.slug}
-            categorySlug={post.categorySlug}
-          />
+          <ArticleRelated posts={post.related} />
         </div>
       </Container>
 

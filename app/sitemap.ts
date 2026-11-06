@@ -1,15 +1,19 @@
 import type { MetadataRoute } from "next"
 
-import { getAllPosts } from "@/app/_data/blog"
 import { getEnabledCampuses } from "@/app/_data/campuses"
 import { getEvents } from "@/app/_data/events"
 import { getFreelancers } from "@/app/_data/freelancers"
 import { getOpportunities } from "@/app/_data/jobs"
 import { getProducts } from "@/app/_data/marketplace"
 import { siteConfig } from "@/config/site"
+import { orNullDuringBuild } from "@/lib/api"
+import { getArticleSitemapEntries } from "@/lib/blog"
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 3600
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
+  const articleEntries = (await orNullDuringBuild(getArticleSitemapEntries)) ?? []
 
   const productRoutes: MetadataRoute.Sitemap = getProducts().map((product) => ({
     url: `${siteConfig.url}/marketplace/${product.slug}`,
@@ -46,9 +50,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  const blogRoutes: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
-    url: `${siteConfig.url}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt || post.publishedAt),
+  const blogRoutes: MetadataRoute.Sitemap = articleEntries.map((entry) => ({
+    url: `${siteConfig.url}/blog/${entry.slug}`,
+    lastModified: new Date(entry.lastModified),
     changeFrequency: "monthly",
     priority: 0.5,
   }))

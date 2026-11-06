@@ -24,7 +24,6 @@ export function ArticleJsonLd({ post }: ArticleJsonLdProps) {
     author: {
       "@type": isTeam ? "Organization" : "Person",
       name: post.author.name,
-      ...(post.author.role ? { jobTitle: post.author.role } : {}),
     },
     publisher: {
       "@type": "Organization",
@@ -35,6 +34,7 @@ export function ArticleJsonLd({ post }: ArticleJsonLdProps) {
         url: `${siteConfig.url}/icon.svg`,
       },
     },
+    ...(post.image ? { image: post.image } : {}),
     articleSection: post.category,
     inLanguage: "en-US",
   }

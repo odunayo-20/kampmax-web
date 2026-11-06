@@ -71,16 +71,9 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
                 <span className="flex size-7 items-center justify-center rounded-full bg-muted font-heading text-2xs font-semibold text-foreground">
                   {post.author.name.charAt(0)}
                 </span>
-                <div className="flex flex-col">
-                  <span className="text-xs font-medium text-foreground">
-                    {post.author.name}
-                  </span>
-                  {post.author.role && (
-                    <span className="text-3xs text-muted-foreground">
-                      {post.author.role}
-                    </span>
-                  )}
-                </div>
+                <span className="text-xs font-medium text-foreground">
+                  {post.author.name}
+                </span>
               </div>
 
               <div className="flex items-center gap-1 text-xs font-medium text-primary">

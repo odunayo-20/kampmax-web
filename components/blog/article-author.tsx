@@ -27,16 +27,9 @@ export function ArticleAuthor({ author }: ArticleAuthorProps) {
           {initials || "KP"}
         </div>
         <div className="space-y-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="font-heading text-base font-semibold text-foreground">
-              {author.name}
-            </span>
-            {author.role && (
-              <span className="rounded-md bg-secondary px-2 py-0.5 text-2xs font-medium text-muted-foreground">
-                {author.role}
-              </span>
-            )}
-          </div>
+          <span className="font-heading text-base font-semibold text-foreground">
+            {author.name}
+          </span>
           <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
             Sharing grounded insights on campus commerce, student enterprise, and practical digital opportunities across higher education communities.
           </p>

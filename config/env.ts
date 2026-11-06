@@ -10,8 +10,11 @@ export const env = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   /** URL of the authenticated Kampmax application (kampmax-app). */
   appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "https://app.kampmax.com",
-  /** URL of the Kampmax API (kampmax-api). Not called from this module yet. */
-  apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "https://api.kampmax.com",
-  /** MapTiler API key. Not used until the map/campus-discovery module. */
+  /**
+   * Base URL of the Kampmax API, including the version prefix
+   * (e.g. `https://api.kampmax.com/api/v1`).
+   */
+  apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api/v1",
+  /** MapTiler API key. Not used until the map / campus-discovery module. */
   mapTilerApiKey: process.env.NEXT_PUBLIC_MAPTILER_API_KEY ?? "",
 } as const

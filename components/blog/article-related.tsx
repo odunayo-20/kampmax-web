@@ -1,18 +1,12 @@
-import { getRelatedPosts } from "@/app/_data/blog"
 import { BlogCard } from "@/components/blog/blog-card"
+import type { BlogPost } from "@/types/blog"
 
 type ArticleRelatedProps = {
-  currentSlug: string
-  categorySlug: string
+  posts: BlogPost[]
 }
 
-export function ArticleRelated({
-  currentSlug,
-  categorySlug,
-}: ArticleRelatedProps) {
-  const relatedPosts = getRelatedPosts(currentSlug, categorySlug, 3)
-
-  if (relatedPosts.length === 0) {
+export function ArticleRelated({ posts }: ArticleRelatedProps) {
+  if (posts.length === 0) {
     return null
   }
 
@@ -31,7 +25,7 @@ export function ArticleRelated({
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {relatedPosts.map((post) => (
+        {posts.map((post) => (
           <BlogCard key={post.slug} post={post} />
         ))}
       </div>

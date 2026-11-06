@@ -3,32 +3,7 @@ export type BlogCategory = {
   name: string
 }
 
-export type BlogContentBlock =
-  | {
-      type: "paragraph"
-      content: string
-    }
-  | {
-      type: "heading"
-      level: 2 | 3
-      content: string
-    }
-  | {
-      type: "list"
-      ordered?: boolean
-      items: string[]
-    }
-  | {
-      type: "quote"
-      content: string
-      citation?: string
-    }
-  | {
-      type: "callout"
-      title?: string
-      content: string
-    }
-
+/** A published article as shown on cards and lists (no body). */
 export type BlogPost = {
   slug: string
   title: string
@@ -37,13 +12,23 @@ export type BlogPost = {
   categorySlug: string
   author: {
     name: string
-    role?: string
+    avatar?: string
   }
-  /** ISO date string, e.g. "2026-09-18" */
+  /** ISO date-time string. */
   publishedAt: string
   updatedAt?: string
   readingTime: number
   featured?: boolean
+  /** Absolute URL of the cover image. */
   image?: string
-  content: BlogContentBlock[]
+}
+
+/** A published article with its body and SEO fields (article page). */
+export type BlogArticle = BlogPost & {
+  /** Sanitized HTML produced by the backend. */
+  contentHtml: string
+  seoTitle?: string
+  seoDescription?: string
+  canonicalUrl?: string
+  related: BlogPost[]
 }

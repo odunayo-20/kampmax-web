@@ -82,11 +82,6 @@ export function ArticleHeader({ post }: ArticleHeaderProps) {
           </div>
           <div>
             <div className="font-medium text-foreground">{post.author.name}</div>
-            {post.author.role && (
-              <div className="text-xs text-muted-foreground">
-                {post.author.role}
-              </div>
-            )}
           </div>
         </div>
 
