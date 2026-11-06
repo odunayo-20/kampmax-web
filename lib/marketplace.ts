@@ -236,8 +236,9 @@ export async function getProductCategories(): Promise<MarketplaceCategory[]> {
 }
 
 /**
- * Filter pills for the directory: active categories represented in published products
- * supplemented with top categories, up to 8.
+ * Filter pills for the directory: only the categories that have at least one
+ * product, so a pill never leads to an empty list. Names come from the
+ * taxonomy when it knows the category.
  */
 export function activeProductCategories(
   products: MarketplaceProduct[],
@@ -246,23 +247,9 @@ export function activeProductCategories(
   const categoryMap = new Map(allCategories.map((c) => [c.slug, c]))
   const usedSlugs = new Set(products.map((p) => p.categorySlug))
 
-  const active: MarketplaceCategory[] = []
-  for (const slug of usedSlugs) {
-    const found = categoryMap.get(slug)
-    if (found) {
-      active.push(found)
-    } else {
-      active.push({ slug, name: slug.replace(/-/g, " "), enabled: true })
-    }
-  }
-
-  for (const cat of allCategories) {
-    if (active.length >= 8) break
-    if (!usedSlugs.has(cat.slug) && cat.enabled) {
-      active.push(cat)
-    }
-  }
-
-  return active
+  return [...usedSlugs].map(
+    (slug) =>
+      categoryMap.get(slug) ?? { slug, name: slug.replace(/-/g, " "), enabled: true }
+  )
 }
 

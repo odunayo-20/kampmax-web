@@ -23,14 +23,14 @@ function ProductCard({
   return (
     <Link
       href={`/marketplace/${product.slug}`}
-      className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      className="group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <Card className="flex h-full flex-col pt-0 shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
+      <Card className="flex h-full flex-col rounded-2xl pt-0 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary-950/10 group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
         <CoverImage
           src={product.image}
           alt={product.name}
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="aspect-square rounded-none"
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+          className="aspect-square rounded-none transition-transform duration-500 group-hover:scale-105"
         />
         <CardContent className="flex flex-1 flex-col gap-2 p-4">
           <div className="flex flex-col gap-1.5">
@@ -61,7 +61,7 @@ function ProductCard({
 
           <div className="mt-auto flex items-center justify-between gap-2 border-t border-border/60 pt-3">
             <div className="flex items-baseline gap-2">
-              <span className="text-sm font-semibold text-foreground">
+              <span className="font-heading text-lg font-extrabold tracking-tight text-foreground">
                 {product.price ? formatPrice(product.price) : "Price on request"}
               </span>
               {product.compareAtPrice && product.price && product.compareAtPrice > product.price ? (
@@ -70,10 +70,10 @@ function ProductCard({
                 </span>
               ) : null}
             </div>
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-600">
-              View Product
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-3 py-1.5 text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
+              View
               <ArrowRight
-                className="size-3.5 transition-transform group-hover:translate-x-1"
+                className="size-3.5 transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
             </span>
