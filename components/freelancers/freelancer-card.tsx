@@ -1,17 +1,19 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
-import { getCampusBySlug } from "@/app/_data/campuses"
 import { FreelancerAvatar } from "@/components/freelancers/freelancer-avatar"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import type { Campus } from "@/types/campus"
 import type { Freelancer } from "@/types/freelancer"
 
-function FreelancerCard({ freelancer }: { freelancer: Freelancer }) {
-  const campus = freelancer.campusSlug
-    ? getCampusBySlug(freelancer.campusSlug)
-    : undefined
-
+function FreelancerCard({
+  freelancer,
+  campus,
+}: {
+  freelancer: Freelancer
+  campus?: Campus
+}) {
   const displayedSkills = freelancer.skills.slice(0, 3)
   const remainingCount = freelancer.skills.length - displayedSkills.length
 

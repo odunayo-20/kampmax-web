@@ -1,4 +1,5 @@
 import { ApiError, apiFetch, resolveMediaUrl } from "@/lib/api"
+import { idFromSlug, slugWithId } from "@/lib/slug"
 import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
 
@@ -29,8 +30,6 @@ const MAX_PAGES = 3
 /** Events happen in Nigeria; dates and times are shown in Lagos time. */
 const TIME_ZONE = "Africa/Lagos"
 
-const UUID = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-
 const isoDateFormat = new Intl.DateTimeFormat("en-CA", {
   timeZone: TIME_ZONE,
   year: "numeric",
@@ -51,27 +50,6 @@ const shortDateFormat = new Intl.DateTimeFormat("en-US", {
 
 const UNCATEGORISED = { name: "General", slug: "general" } as const
 
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 60)
-    .replace(/-+$/g, "")
-}
-
-/** The API only knows events by id, so the URL carries it after a readable title. */
-export function eventSlug(title: string, id: string): string {
-  const words = slugify(title)
-  return words ? `${words}-${id}` : id
-}
-
-/** The API id at the end of an event URL segment, or `null` when there is none. */
-export function eventIdFromSlug(slug: string): string | null {
-  return slug.match(UUID)?.[0] ?? null
-}
-
 function toEvent(item: ApiEvent, campuses: Campus[]): Event {
   const starts = new Date(item.startsAt)
   const ends = item.endsAt ? new Date(item.endsAt) : undefined
@@ -87,7 +65,7 @@ function toEvent(item: ApiEvent, campuses: Campus[]): Event {
   }
 
   return {
-    slug: eventSlug(item.title, item.id),
+    slug: slugWithId(item.title, item.id),
     title: item.title,
     description: item.description,
     categorySlug: category.slug,
@@ -129,7 +107,7 @@ export async function getEvent(
   slug: string,
   campuses: Campus[]
 ): Promise<Event | null> {
-  const id = eventIdFromSlug(slug)
+  const id = idFromSlug(slug)
   if (!id) return null
 
   try {

@@ -16,7 +16,7 @@ export function FreelancerJsonLd({ freelancer }: FreelancerJsonLdProps) {
     description: freelancer.bio,
     jobTitle: freelancer.primarySkill,
     url,
-    ...(freelancer.avatar ? { image: `${siteConfig.url}${freelancer.avatar}` } : {}),
+    ...(freelancer.avatar ? { image: freelancer.avatar } : {}),
     ...(freelancer.skills.length ? { knowsAbout: freelancer.skills } : {}),
   }
 

@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next"
 
-import { getFreelancers } from "@/app/_data/freelancers"
 import { getProducts } from "@/app/_data/marketplace"
 import { siteConfig } from "@/config/site"
 import { orNullDuringBuild } from "@/lib/api"
 import { getArticleSitemapEntries } from "@/lib/blog"
 import { getCampuses } from "@/lib/campuses"
 import { getEvents } from "@/lib/events"
+import { getFreelancers } from "@/lib/freelancers"
 import { getOpportunities } from "@/lib/jobs"
 
 export const revalidate = 3600
@@ -18,6 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const opportunities =
     (await orNullDuringBuild(() => getOpportunities(campuses))) ?? []
   const events = (await orNullDuringBuild(() => getEvents(campuses))) ?? []
+  const freelancers =
+    (await orNullDuringBuild(() => getFreelancers(campuses))) ?? []
 
   const productRoutes: MetadataRoute.Sitemap = getProducts().map((product) => ({
     url: `${siteConfig.url}/marketplace/${product.slug}`,
@@ -47,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  const freelancerRoutes: MetadataRoute.Sitemap = getFreelancers().map((freelancer) => ({
+  const freelancerRoutes: MetadataRoute.Sitemap = freelancers.map((freelancer) => ({
     url: `${siteConfig.url}/freelancers/${freelancer.slug}`,
     lastModified,
     changeFrequency: "weekly",

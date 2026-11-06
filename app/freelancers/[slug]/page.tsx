@@ -1,35 +1,43 @@
 import type { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation"
 
-import { getCampusBySlug } from "@/app/_data/campuses"
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampuses } from "@/lib/campuses"
 import {
-  getFreelancerBySlug,
-  getFreelancerCategoryBySlug,
+  getFreelancer,
   getFreelancers,
-} from "@/app/_data/freelancers"
+  primaryCategoryOf,
+} from "@/lib/freelancers"
 import { Container } from "@/components/layout/container"
 import { FreelancerJsonLd } from "@/components/freelancers/freelancer-json-ld"
 import { FreelancerProfile } from "@/components/freelancers/freelancer-profile"
+
+export const revalidate = 300
 
 type FreelancerPageProps = {
   params: Promise<{ slug: string }>
 }
 
-export function generateStaticParams() {
-  return getFreelancers().map((freelancer) => ({ slug: freelancer.slug }))
+export async function generateStaticParams() {
+  const freelancers = await orNullDuringBuild(async () =>
+    getFreelancers(await getCampuses())
+  )
+  return (freelancers ?? []).map((freelancer) => ({ slug: freelancer.slug }))
 }
 
 export async function generateMetadata({
   params,
 }: FreelancerPageProps): Promise<Metadata> {
   const { slug } = await params
-  const freelancer = getFreelancerBySlug(slug)
+  const freelancer = await getFreelancer(slug, await getCampuses())
 
   if (!freelancer) {
     return {}
   }
 
-  const description = `${freelancer.headline}. ${freelancer.bio}`
+  const description = freelancer.bio
+    ? `${freelancer.headline}. ${freelancer.bio}`
+    : freelancer.headline
 
   return {
     title: `${freelancer.name} | Kampmax Freelancers`,
@@ -41,21 +49,28 @@ export async function generateMetadata({
       title: `${freelancer.name} | Kampmax Freelancers`,
       description,
       url: `/freelancers/${freelancer.slug}`,
+      ...(freelancer.avatar ? { images: [freelancer.avatar] } : {}),
     },
   }
 }
 
 export default async function FreelancerPage({ params }: FreelancerPageProps) {
   const { slug } = await params
-  const freelancer = getFreelancerBySlug(slug)
+  const campuses = await getCampuses()
+  const freelancer = await getFreelancer(slug, campuses)
 
   if (!freelancer) {
     notFound()
   }
 
-  const category = getFreelancerCategoryBySlug(freelancer.categorySlug)
+  // The API id identifies the profile; a bare id or an outdated name goes to
+  // the current address.
+  if (slug !== freelancer.slug) {
+    permanentRedirect(`/freelancers/${freelancer.slug}`)
+  }
+
   const campus = freelancer.campusSlug
-    ? getCampusBySlug(freelancer.campusSlug)
+    ? campuses.find((candidate) => candidate.slug === freelancer.campusSlug)
     : undefined
 
   return (
@@ -63,7 +78,7 @@ export default async function FreelancerPage({ params }: FreelancerPageProps) {
       <Container>
         <FreelancerProfile
           freelancer={freelancer}
-          category={category}
+          category={primaryCategoryOf(freelancer)}
           campus={campus}
         />
       </Container>

@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
 
-import { getEnabledCampuses } from "@/app/_data/campuses"
-import {
-  getEnabledFreelancerCategories,
-  getFreelancers,
-} from "@/app/_data/freelancers"
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampuses } from "@/lib/campuses"
+import { getFreelancers, topSkillCategories } from "@/lib/freelancers"
 import { Container } from "@/components/layout/container"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { FreelancerHero } from "@/components/freelancers/freelancer-hero"
 import { FreelancersBrowser } from "@/components/freelancers/freelancers-browser"
 import { FreelancersJsonLd } from "@/components/freelancers/freelancers-json-ld"
+import { ApiUnavailable } from "@/components/shared/api-unavailable"
+
+export const revalidate = 300
 
 const description =
   "Discover skilled students, creators, and independent professionals across campus communities on Kampmax."
@@ -27,10 +28,12 @@ export const metadata: Metadata = {
   },
 }
 
-export default function FreelancersPage() {
-  const freelancers = getFreelancers()
-  const categories = getEnabledFreelancerCategories()
-  const campuses = getEnabledCampuses()
+export default async function FreelancersPage() {
+  const listing = await orNullDuringBuild(async () => {
+    const campuses = await getCampuses()
+    const freelancers = await getFreelancers(campuses)
+    return { campuses, freelancers }
+  })
 
   return (
     <>
@@ -55,15 +58,19 @@ export default function FreelancersPage() {
             title="Independent talent"
             description="Explore skilled individuals offering specialized services and creative skills across campus communities. Search or filter to find the right collaborator."
           />
-          <FreelancersBrowser
-            freelancers={freelancers}
-            categories={categories}
-            campuses={campuses}
-          />
+          {listing === null ? (
+            <ApiUnavailable subject="freelancers" />
+          ) : (
+            <FreelancersBrowser
+              freelancers={listing.freelancers}
+              categories={topSkillCategories(listing.freelancers)}
+              campuses={listing.campuses}
+            />
+          )}
         </div>
       </Container>
 
-      <FreelancersJsonLd freelancers={freelancers} />
+      {listing ? <FreelancersJsonLd freelancers={listing.freelancers} /> : null}
     </>
   )
 }

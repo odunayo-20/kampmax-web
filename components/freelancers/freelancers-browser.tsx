@@ -35,13 +35,18 @@ function FreelancersBrowser({
   const [categorySlug, setCategorySlug] = useState<string>(ALL_CATEGORIES)
   const [campusSlug, setCampusSlug] = useState<string>(ALL_CAMPUSES)
 
+  const campusBySlug = useMemo(
+    () => new Map(campuses.map((campus) => [campus.slug, campus])),
+    [campuses]
+  )
+
   const filteredFreelancers = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
 
     return freelancers.filter((freelancer) => {
       const matchesCategory =
         categorySlug === ALL_CATEGORIES ||
-        freelancer.categorySlug === categorySlug
+        freelancer.skillSlugs.includes(categorySlug)
 
       const matchesCampus =
         campusSlug === ALL_CAMPUSES || freelancer.campusSlug === campusSlug
@@ -204,7 +209,15 @@ function FreelancersBrowser({
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredFreelancers.map((freelancer) => (
-              <FreelancerCard key={freelancer.slug} freelancer={freelancer} />
+              <FreelancerCard
+                key={freelancer.slug}
+                freelancer={freelancer}
+                campus={
+                  freelancer.campusSlug
+                    ? campusBySlug.get(freelancer.campusSlug)
+                    : undefined
+                }
+              />
             ))}
           </div>
         </div>
