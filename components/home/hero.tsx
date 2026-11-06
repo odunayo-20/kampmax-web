@@ -8,7 +8,13 @@ import { Display, Eyebrow, Lead } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
-function Hero() {
+type HeroProps = {
+  product?: { title: string; meta?: string; href?: string }
+  job?: { title: string; meta?: string; href?: string }
+  event?: { title: string; meta?: string; href?: string }
+}
+
+function Hero({ product, job, event }: HeroProps) {
   return (
     <div className="grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:py-28">
       <div className="flex flex-col gap-7">
@@ -45,7 +51,7 @@ function Hero() {
       </div>
 
       <FadeIn>
-        <HeroPreview />
+        <HeroPreview product={product} job={job} event={event} />
       </FadeIn>
     </div>
   )

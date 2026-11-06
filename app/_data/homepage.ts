@@ -96,6 +96,7 @@ export type OpportunityItem = {
   title: string
   description: string
   icon: LucideIcon
+  href: string
 }
 
 export const opportunityItems: OpportunityItem[] = [
@@ -103,21 +104,25 @@ export const opportunityItems: OpportunityItem[] = [
     title: "Jobs",
     description: "Part-time and entry-level roles posted by local employers.",
     icon: Briefcase,
+    href: "/jobs",
   },
   {
     title: "Freelance work",
     description: "Short-term gigs for students offering a specific skill.",
     icon: Sparkles,
+    href: "/freelancers",
   },
   {
     title: "Services",
     description: "Tutoring, repairs, design, and everyday help nearby.",
     icon: Wrench,
+    href: "/services",
   },
   {
     title: "Businesses & skills",
     description: "Local businesses and independent providers to discover.",
     icon: Boxes,
+    href: "/for-businesses",
   },
 ]
 

@@ -1,8 +1,18 @@
+import type { Metadata } from "next"
+
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampuses } from "@/lib/campuses"
+import { getEvents } from "@/lib/events"
+import { getOpportunities } from "@/lib/jobs"
+import { getProductCategories, getProducts } from "@/lib/marketplace"
+import { formatPrice } from "@/lib/format-price"
+import { siteConfig } from "@/config/site"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { CampusEcosystem } from "@/components/home/campus-ecosystem"
 import { DiscoverGrid } from "@/components/home/discover-grid"
 import { EventsCommunity } from "@/components/home/events-community"
+import { FeaturedProducts } from "@/components/home/featured-products"
 import { FinalCta } from "@/components/home/final-cta"
 import { ForBusinesses } from "@/components/home/for-businesses"
 import { Hero } from "@/components/home/hero"
@@ -11,7 +21,32 @@ import { Opportunities } from "@/components/home/opportunities"
 import { TrustValues } from "@/components/home/trust-values"
 import { WhatIsKampmax } from "@/components/home/what-is-kampmax"
 
-export default function Home() {
+export const revalidate = 300
+
+export const metadata: Metadata = {
+  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  description: siteConfig.description,
+  alternates: {
+    canonical: "/",
+  },
+}
+
+export default async function Home() {
+  const data = await orNullDuringBuild(async () => {
+    const campuses = await getCampuses()
+    const [products, categories, events, opportunities] = await Promise.all([
+      getProducts(campuses),
+      getProductCategories(),
+      getEvents(campuses),
+      getOpportunities(campuses),
+    ])
+    return { campuses, products, categories, events, opportunities }
+  })
+
+  const topProduct = data?.products[0]
+  const topJob = data?.opportunities[0]
+  const topEvent = data?.events[0]
+
   return (
     <>
       <div className="relative isolate overflow-hidden bg-linear-to-b from-primary-50 via-background to-background">
@@ -24,7 +59,37 @@ export default function Home() {
           className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
         />
         <Container className="relative">
-          <Hero />
+          <Hero
+            product={
+              topProduct
+                ? {
+                    title: topProduct.name,
+                    meta: topProduct.price
+                      ? formatPrice(topProduct.price)
+                      : "Marketplace",
+                    href: `/marketplace/${topProduct.slug}`,
+                  }
+                : undefined
+            }
+            job={
+              topJob
+                ? {
+                    title: topJob.title,
+                    meta: topJob.location ?? "Opportunity",
+                    href: `/jobs/${topJob.slug}`,
+                  }
+                : undefined
+            }
+            event={
+              topEvent
+                ? {
+                    title: topEvent.title,
+                    meta: topEvent.date,
+                    href: `/events/${topEvent.slug}`,
+                  }
+                : undefined
+            }
+          />
         </Container>
       </div>
 
@@ -40,6 +105,18 @@ export default function Home() {
         </Container>
       </Section>
 
+      {data && data.products.length > 0 && (
+        <Section>
+          <Container>
+            <FeaturedProducts
+              products={data.products}
+              campuses={data.campuses}
+              categories={data.categories}
+            />
+          </Container>
+        </Section>
+      )}
+
       <div className="border-y border-border bg-primary-50">
         <Section>
           <Container>
@@ -50,7 +127,7 @@ export default function Home() {
 
       <Section>
         <Container>
-          <CampusEcosystem />
+          <CampusEcosystem campuses={data?.campuses} />
         </Container>
       </Section>
 
@@ -70,7 +147,7 @@ export default function Home() {
 
       <Section>
         <Container>
-          <EventsCommunity />
+          <EventsCommunity event={topEvent} />
         </Container>
       </Section>
 

@@ -3,7 +3,7 @@ import Link from "next/link"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { buttonVariants } from "@/components/ui/button"
 import { businessCtas } from "@/app/_data/homepage"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 function ForBusinesses() {
   return (
