@@ -88,7 +88,8 @@
   --color-kampmax-warning: #F59E0B;
   --color-kampmax-info: #0284C7;
   --color-kampmax-muted: #F3F4F6;
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   /* ── shadcn/ui component tokens (bridged onto the brand palette above) ── */
   --color-background: var(--color-kampmax-bg);
   --color-foreground: var(--color-kampmax-text);
@@ -108,7 +109,7 @@
   --color-border: var(--color-kampmax-border);
   --color-input: var(--color-kampmax-border);
   --color-ring: var(--color-primary-500);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   /* ── Radius ── */
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -388,4 +389,64 @@ button:focus-visible,
 .article-prose aside.callout-warning {
   border-color: color-mix(in oklab, var(--color-destructive) 35%, transparent);
   background: color-mix(in oklab, var(--color-destructive) 5%, transparent);
+}
+
+/* ═══════════════════════════════════════════════════════
+   HOME PAGE VISUALS
+   Reduced-motion visitors get no animation: the global
+   prefers-reduced-motion rule above shortens every animation.
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-slow 8s ease-in-out -3s infinite;
+}
+
+/* Faint blueprint grid for dark sections, fading out toward the edges. */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 40%, #000 25%, transparent 72%);
+}
+
+/* Light-theme version of the grid, for tinted section backgrounds. */
+.bg-grid-pattern-light {
+  background-image:
+    linear-gradient(to right, rgb(23 105 224 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(23 105 224 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 70%);
+}
+
+/* Plus Jakarta Sans sets its word gaps tight; this keeps headings readable. */
+.font-heading {
+  word-spacing: 0.06em;
+}
+
+/* Blue-to-gold gradient for one highlighted phrase in a headline. */
+.text-gradient-brand {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-primary-400),
+    #8ec5ff 40%,
+    var(--color-accent-400)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

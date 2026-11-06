@@ -1,10 +1,21 @@
 import type { Metadata } from "next"
+import {
+  Briefcase,
+  Calendar,
+  GraduationCap,
+  Store,
+  UserCheck,
+  Wrench,
+} from "lucide-react"
 
 import { orNullDuringBuild } from "@/lib/api"
+import { getAllPosts } from "@/lib/blog"
 import { getCampuses } from "@/lib/campuses"
 import { getEvents } from "@/lib/events"
+import { getFreelancers } from "@/lib/freelancers"
 import { getOpportunities } from "@/lib/jobs"
 import { getProductCategories, getProducts } from "@/lib/marketplace"
+import { getServices } from "@/lib/services"
 import { formatPrice } from "@/lib/format-price"
 import { siteConfig } from "@/config/site"
 import { Container } from "@/components/layout/container"
@@ -17,6 +28,8 @@ import { FinalCta } from "@/components/home/final-cta"
 import { ForBusinesses } from "@/components/home/for-businesses"
 import { Hero } from "@/components/home/hero"
 import { HowItWorks } from "@/components/home/how-it-works"
+import { LatestArticles } from "@/components/home/latest-articles"
+import { LiveStats } from "@/components/home/live-stats"
 import { Opportunities } from "@/components/home/opportunities"
 import { TrustValues } from "@/components/home/trust-values"
 import { WhatIsKampmax } from "@/components/home/what-is-kampmax"
@@ -34,74 +47,113 @@ export const metadata: Metadata = {
 export default async function Home() {
   const data = await orNullDuringBuild(async () => {
     const campuses = await getCampuses()
-    const [products, categories, events, opportunities] = await Promise.all([
+    const [
+      products,
+      categories,
+      events,
+      opportunities,
+      freelancers,
+      services,
+      posts,
+    ] = await Promise.all([
       getProducts(campuses),
       getProductCategories(),
       getEvents(campuses),
       getOpportunities(campuses),
+      getFreelancers(campuses),
+      getServices(campuses),
+      getAllPosts(),
     ])
-    return { campuses, products, categories, events, opportunities }
+    return {
+      campuses,
+      products,
+      categories,
+      events,
+      opportunities,
+      freelancers,
+      services,
+      posts,
+    }
   })
 
   const topProduct = data?.products[0]
   const topJob = data?.opportunities[0]
   const topEvent = data?.events[0]
+  const campusShortName = (slug?: string) =>
+    slug ? data?.campuses.find((campus) => campus.slug === slug)?.shortName : undefined
+
+  const counts = {
+    "/marketplace": data?.products.length ?? 0,
+    "/services": data?.services.length ?? 0,
+    "/jobs": data?.opportunities.length ?? 0,
+    "/freelancers": data?.freelancers.length ?? 0,
+    "/events": data?.events.length ?? 0,
+    "/campuses": data?.campuses.length ?? 0,
+  }
 
   return (
     <>
-      <div className="relative isolate overflow-hidden bg-linear-to-b from-primary-50 via-background to-background">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 right-[-10%] size-128 rounded-full bg-primary-200/40 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
-        />
-        <Container className="relative">
-          <Hero
-            product={
-              topProduct
-                ? {
-                    title: topProduct.name,
-                    meta: topProduct.price
-                      ? formatPrice(topProduct.price)
-                      : "Marketplace",
-                    href: `/marketplace/${topProduct.slug}`,
-                  }
-                : undefined
-            }
-            job={
-              topJob
-                ? {
-                    title: topJob.title,
-                    meta: topJob.location ?? "Opportunity",
-                    href: `/jobs/${topJob.slug}`,
-                  }
-                : undefined
-            }
-            event={
-              topEvent
-                ? {
-                    title: topEvent.title,
-                    meta: topEvent.date,
-                    href: `/events/${topEvent.slug}`,
-                  }
-                : undefined
-            }
+      <Hero
+        product={
+          topProduct
+            ? {
+                title: topProduct.name,
+                href: `/marketplace/${topProduct.slug}`,
+                image: topProduct.image,
+                price: topProduct.price ? formatPrice(topProduct.price) : undefined,
+                campus: campusShortName(topProduct.campusSlug),
+              }
+            : undefined
+        }
+        job={
+          topJob
+            ? {
+                title: topJob.title,
+                href: `/jobs/${topJob.slug}`,
+                meta: topJob.location,
+                organization: topJob.organization,
+              }
+            : undefined
+        }
+        event={
+          topEvent
+            ? {
+                title: topEvent.title,
+                href: `/events/${topEvent.slug}`,
+                date: topEvent.date,
+                image: topEvent.image,
+                location: topEvent.location,
+                time: topEvent.startTime,
+                priceLabel: topEvent.priceLabel,
+              }
+            : undefined
+        }
+      />
+
+      {data ? (
+        <Container>
+          <LiveStats
+            stats={[
+              { label: "Campuses", value: counts["/campuses"], href: "/campuses", icon: GraduationCap },
+              { label: "Marketplace listings", value: counts["/marketplace"], href: "/marketplace", icon: Store },
+              { label: "Open roles", value: counts["/jobs"], href: "/jobs", icon: Briefcase },
+              { label: "Upcoming events", value: counts["/events"], href: "/events", icon: Calendar },
+              { label: "Freelancers", value: counts["/freelancers"], href: "/freelancers", icon: UserCheck },
+              { label: "Services", value: counts["/services"], href: "/services", icon: Wrench },
+            ]}
           />
         </Container>
-      </div>
+      ) : null}
 
-      <Section>
+      <Section className="pb-4 sm:pb-6 lg:pb-8">
         <Container>
           <WhatIsKampmax />
         </Container>
       </Section>
 
-      <Section id="discover" className="scroll-mt-16">
+      <Section id="discover" className="scroll-mt-16 pt-8 sm:pt-10 lg:pt-12">
         <Container>
-          <DiscoverGrid />
+          <DiscoverGrid counts={counts} />
         </Container>
       </Section>
 
@@ -117,7 +169,7 @@ export default async function Home() {
         </Section>
       )}
 
-      <div className="border-y border-border bg-primary-50">
+      <div className="border-y border-border bg-primary-50/70">
         <Section>
           <Container>
             <HowItWorks />
@@ -151,7 +203,17 @@ export default async function Home() {
         </Container>
       </Section>
 
-      <div className="border-y border-border bg-primary-50">
+      {data && data.posts.length > 0 && (
+        <div className="border-t border-border bg-neutral-50">
+          <Section>
+            <Container>
+              <LatestArticles posts={data.posts} />
+            </Container>
+          </Section>
+        </div>
+      )}
+
+      <div className="border-y border-border bg-primary-50/70">
         <Section>
           <Container>
             <TrustValues />

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react"
 
 import { ProductCard } from "@/components/marketplace/product-card"
 import { SectionHeading } from "@/components/layout/section-heading"
+import { FadeIn } from "@/components/shared/fade-in"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
@@ -22,7 +23,7 @@ function FeaturedProducts({
 }) {
   if (products.length === 0) return null
 
-  const displayProducts = products.slice(0, 3)
+  const displayProducts = products.slice(0, 4)
   const campusBySlug = new Map(campuses.map((c) => [c.slug, c]))
   const categoryBySlug = new Map(categories.map((c) => [c.slug, c]))
 
@@ -46,18 +47,19 @@ function FeaturedProducts({
         </Link>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {displayProducts.map((product) => (
-          <ProductCard
-            key={product.slug}
-            product={product}
-            category={categoryBySlug.get(product.categorySlug)}
-            campus={
-              product.campusSlug
-                ? campusBySlug.get(product.campusSlug)
-                : undefined
-            }
-          />
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {displayProducts.map((product, index) => (
+          <FadeIn key={product.slug} delay={index * 0.07}>
+            <ProductCard
+              product={product}
+              category={categoryBySlug.get(product.categorySlug)}
+              campus={
+                product.campusSlug
+                  ? campusBySlug.get(product.campusSlug)
+                  : undefined
+              }
+            />
+          </FadeIn>
         ))}
       </div>
     </div>
