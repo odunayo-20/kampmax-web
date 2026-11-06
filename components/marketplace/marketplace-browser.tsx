@@ -4,13 +4,18 @@ import { useId, useMemo, useState } from "react"
 import { Search, SearchX } from "lucide-react"
 
 import { ProductCard } from "@/components/marketplace/product-card"
+import { buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import type { MarketplaceCategory, MarketplaceProduct } from "@/types/marketplace"
+import type { Campus } from "@/types/campus"
+import type {
+  MarketplaceCategory,
+  MarketplaceProduct,
+} from "@/types/marketplace"
 
 const ALL_CATEGORIES = "all" as const
+const ALL_CAMPUSES = "all" as const
 
 type SortOption = "featured" | "price-asc" | "price-desc"
 
@@ -20,28 +25,32 @@ const sortOptions: { value: SortOption; label: string }[] = [
   { value: "price-desc", label: "Price: High to Low" },
 ]
 
-/**
- * Client-side search/category filter over the local mock dataset. Kept
- * intentionally simple , no server-side or API-backed search , so it can
- * be swapped for a real `kampmax-api` query later without redesigning
- * this section.
- */
 function MarketplaceBrowser({
   products,
   categories,
+  campuses = [],
 }: {
   products: MarketplaceProduct[]
   categories: MarketplaceCategory[]
+  campuses?: Campus[]
 }) {
   const searchId = useId()
+  const campusSelectId = useId()
   const sortId = useId()
+
   const [query, setQuery] = useState("")
   const [categorySlug, setCategorySlug] = useState<string>(ALL_CATEGORIES)
+  const [campusSlug, setCampusSlug] = useState<string>(ALL_CAMPUSES)
   const [sort, setSort] = useState<SortOption>("featured")
 
   const categoryBySlug = useMemo(
     () => new Map(categories.map((category) => [category.slug, category])),
     [categories]
+  )
+
+  const campusBySlug = useMemo(
+    () => new Map(campuses.map((campus) => [campus.slug, campus])),
+    [campuses]
   )
 
   const filteredProducts = useMemo(() => {
@@ -50,14 +59,19 @@ function MarketplaceBrowser({
     return products.filter((product) => {
       const matchesCategory =
         categorySlug === ALL_CATEGORIES || product.categorySlug === categorySlug
+
+      const matchesCampus =
+        campusSlug === ALL_CAMPUSES || product.campusSlug === campusSlug
+
       const matchesQuery =
         normalizedQuery === "" ||
         product.name.toLowerCase().includes(normalizedQuery) ||
-        product.description.toLowerCase().includes(normalizedQuery)
+        product.description.toLowerCase().includes(normalizedQuery) ||
+        Boolean(product.vendorName?.toLowerCase().includes(normalizedQuery))
 
-      return matchesCategory && matchesQuery
+      return matchesCategory && matchesCampus && matchesQuery
     })
-  }, [products, categorySlug, query])
+  }, [products, categorySlug, campusSlug, query])
 
   const sortedProducts = useMemo(() => {
     if (sort === "featured") return filteredProducts
@@ -73,6 +87,18 @@ function MarketplaceBrowser({
     return [...priced, ...unpriced]
   }, [filteredProducts, sort])
 
+  const hasActiveFilters =
+    query.trim() !== "" ||
+    categorySlug !== ALL_CATEGORIES ||
+    campusSlug !== ALL_CAMPUSES
+
+  function handleResetFilters() {
+    setQuery("")
+    setCategorySlug(ALL_CATEGORIES)
+    setCampusSlug(ALL_CAMPUSES)
+    setSort("featured")
+  }
+
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
@@ -83,8 +109,7 @@ function MarketplaceBrowser({
           No products yet
         </p>
         <p className="max-w-sm text-sm text-muted-foreground">
-          Nothing has been listed here yet. Check back soon as the
-          marketplace grows.
+          Nothing has been listed here yet. Check back soon as the marketplace grows.
         </p>
       </div>
     )
@@ -114,25 +139,51 @@ function MarketplaceBrowser({
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Label
-              htmlFor={sortId}
-              className="text-xs font-medium text-muted-foreground whitespace-nowrap"
-            >
-              Sort by:
-            </Label>
-            <select
-              id={sortId}
-              value={sort}
-              onChange={(event) => setSort(event.target.value as SortOption)}
-              className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              {sortOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+          <div className="flex flex-wrap items-center gap-3">
+            {campuses.length > 0 && (
+              <div className="flex items-center gap-2">
+                <Label
+                  htmlFor={campusSelectId}
+                  className="text-xs font-medium text-muted-foreground whitespace-nowrap"
+                >
+                  Campus:
+                </Label>
+                <select
+                  id={campusSelectId}
+                  value={campusSlug}
+                  onChange={(event) => setCampusSlug(event.target.value)}
+                  className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  <option value={ALL_CAMPUSES}>All Campuses</option>
+                  {campuses.map((campus) => (
+                    <option key={campus.slug} value={campus.slug}>
+                      {campus.shortName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            <div className="flex items-center gap-2">
+              <Label
+                htmlFor={sortId}
+                className="text-xs font-medium text-muted-foreground whitespace-nowrap"
+              >
+                Sort by:
+              </Label>
+              <select
+                id={sortId}
+                value={sort}
+                onChange={(event) => setSort(event.target.value as SortOption)}
+                className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                {sortOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
@@ -186,16 +237,15 @@ function MarketplaceBrowser({
           <p className="max-w-sm text-sm text-muted-foreground">
             Try a different search term or category.
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              setQuery("")
-              setCategorySlug(ALL_CATEGORIES)
-            }}
-            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
-          >
-            Clear filters
-          </button>
+          {hasActiveFilters && (
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
+            >
+              Clear filters
+            </button>
+          )}
         </div>
       ) : (
         <div className="flex flex-col gap-4">
@@ -209,6 +259,11 @@ function MarketplaceBrowser({
                 key={product.slug}
                 product={product}
                 category={categoryBySlug.get(product.categorySlug)}
+                campus={
+                  product.campusSlug
+                    ? campusBySlug.get(product.campusSlug)
+                    : undefined
+                }
               />
             ))}
           </div>

@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next"
 
-import { getProducts } from "@/app/_data/marketplace"
 import { siteConfig } from "@/config/site"
 import { orNullDuringBuild } from "@/lib/api"
 import { getArticleSitemapEntries } from "@/lib/blog"
@@ -8,6 +7,7 @@ import { getCampuses } from "@/lib/campuses"
 import { getEvents } from "@/lib/events"
 import { getFreelancers } from "@/lib/freelancers"
 import { getOpportunities } from "@/lib/jobs"
+import { getProducts } from "@/lib/marketplace"
 import { getServices } from "@/lib/services"
 
 export const revalidate = 3600
@@ -23,8 +23,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     (await orNullDuringBuild(() => getFreelancers(campuses))) ?? []
   const services =
     (await orNullDuringBuild(() => getServices(campuses))) ?? []
+  const products =
+    (await orNullDuringBuild(() => getProducts(campuses))) ?? []
 
-  const productRoutes: MetadataRoute.Sitemap = getProducts().map((product) => ({
+  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${siteConfig.url}/marketplace/${product.slug}`,
     lastModified,
     changeFrequency: "weekly",

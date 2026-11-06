@@ -1,5 +1,8 @@
 import { siteConfig } from "@/config/site"
-import type { MarketplaceCategory, MarketplaceProduct } from "@/types/marketplace"
+import type {
+  MarketplaceCategory,
+  MarketplaceProduct,
+} from "@/types/marketplace"
 
 type ProductJsonLdProps = {
   product: MarketplaceProduct
@@ -8,6 +11,11 @@ type ProductJsonLdProps = {
 
 export function ProductJsonLd({ product, category }: ProductJsonLdProps) {
   const url = `${siteConfig.url}/marketplace/${product.slug}`
+  const image = product.image
+    ? product.image.startsWith("http")
+      ? product.image
+      : `${siteConfig.url}${product.image}`
+    : undefined
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -16,10 +24,10 @@ export function ProductJsonLd({ product, category }: ProductJsonLdProps) {
     description: product.description,
     url,
     ...(category ? { category: category.name } : {}),
-    ...(product.image ? { image: `${siteConfig.url}${product.image}` } : {}),
+    ...(image ? { image } : {}),
     brand: {
       "@type": "Organization",
-      name: siteConfig.name,
+      name: product.vendorName ?? siteConfig.name,
     },
     ...(product.price
       ? {
@@ -29,6 +37,14 @@ export function ProductJsonLd({ product, category }: ProductJsonLdProps) {
             price: product.price,
             priceCurrency: "NGN",
             availability: "https://schema.org/InStock",
+            ...(product.vendorName
+              ? {
+                  seller: {
+                    "@type": "Organization",
+                    name: product.vendorName,
+                  },
+                }
+              : {}),
           },
         }
       : {}),

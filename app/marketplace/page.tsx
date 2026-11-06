@@ -1,11 +1,20 @@
 import type { Metadata } from "next"
 
-import { getEnabledCategories, getProducts } from "@/app/_data/marketplace"
+import { orNullDuringBuild } from "@/lib/api"
+import { getCampuses } from "@/lib/campuses"
+import {
+  activeProductCategories,
+  getProductCategories,
+  getProducts,
+} from "@/lib/marketplace"
+import { Container } from "@/components/layout/container"
+import { SectionHeading } from "@/components/layout/section-heading"
 import { MarketplaceBrowser } from "@/components/marketplace/marketplace-browser"
 import { MarketplaceHero } from "@/components/marketplace/marketplace-hero"
 import { MarketplaceJsonLd } from "@/components/marketplace/marketplace-json-ld"
-import { Container } from "@/components/layout/container"
-import { SectionHeading } from "@/components/layout/section-heading"
+import { ApiUnavailable } from "@/components/shared/api-unavailable"
+
+export const revalidate = 300
 
 const description =
   "Discover products people are offering around your campus community on Kampmax Marketplace. Search and filter by category to find what you need, or list your own."
@@ -23,9 +32,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function MarketplacePage() {
-  const products = getProducts()
-  const categories = getEnabledCategories()
+export default async function MarketplacePage() {
+  const listing = await orNullDuringBuild(async () => {
+    const campuses = await getCampuses()
+    const [products, categories] = await Promise.all([
+      getProducts(campuses),
+      getProductCategories(),
+    ])
+    return { campuses, products, categories }
+  })
 
   return (
     <>
@@ -50,11 +65,22 @@ export default function MarketplacePage() {
             title="What's on the marketplace"
             description="A sample of the kinds of listings you'll find on Kampmax. Search, filter by category, or sort by price to narrow things down."
           />
-          <MarketplaceBrowser products={products} categories={categories} />
+          {listing === null ? (
+            <ApiUnavailable subject="products" />
+          ) : (
+            <MarketplaceBrowser
+              products={listing.products}
+              categories={activeProductCategories(
+                listing.products,
+                listing.categories
+              )}
+              campuses={listing.campuses}
+            />
+          )}
         </div>
       </Container>
 
-      <MarketplaceJsonLd products={products} />
+      {listing ? <MarketplaceJsonLd products={listing.products} /> : null}
     </>
   )
 }
