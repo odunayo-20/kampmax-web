@@ -9,8 +9,13 @@ import {
   getProducts,
 } from "@/lib/marketplace"
 import { Container } from "@/components/layout/container"
+import { Section } from "@/components/layout/section"
 import { ProductHeader } from "@/components/marketplace/product-header"
 import { ProductJsonLd } from "@/components/marketplace/product-json-ld"
+import {
+  RelatedProducts,
+  pickRelatedProducts,
+} from "@/components/marketplace/related-products"
 
 export const revalidate = 300
 
@@ -80,11 +85,27 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ? campuses.find((candidate) => candidate.slug === product.campusSlug)
     : undefined
 
+  const related = pickRelatedProducts(product, await getProducts(campuses))
+
   return (
     <>
-      <Container>
-        <ProductHeader product={product} category={category} campus={campus} />
-      </Container>
+      <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
+        <Container>
+          <ProductHeader product={product} category={category} campus={campus} />
+        </Container>
+      </div>
+
+      {related.length > 0 ? (
+        <Section className="border-t border-border/60">
+          <Container>
+            <RelatedProducts
+              products={related}
+              categories={categories}
+              campuses={campuses}
+            />
+          </Container>
+        </Section>
+      ) : null}
 
       <ProductJsonLd product={product} category={category} />
     </>

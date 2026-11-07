@@ -22,7 +22,7 @@ function ProductGallery({ images, name }: { images: string[]; name: string }) {
         alt={images.length > 1 ? `${name}, image ${index + 1} of ${images.length}` : name}
         priority={index === 0}
         sizes="(min-width: 1024px) 50vw, 100vw"
-        className="aspect-square w-full rounded-xl"
+        className="aspect-square w-full rounded-2xl shadow-lg ring-1 shadow-primary-950/10 ring-black/5"
       />
 
       {images.length > 1 ? (
@@ -41,13 +41,13 @@ function ProductGallery({ images, name }: { images: string[]; name: string }) {
                 aria-pressed={isSelected}
                 onClick={() => setSelected(thumbIndex)}
                 className={cn(
-                  "relative size-16 shrink-0 cursor-pointer overflow-hidden rounded-lg border transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+                  "relative size-20 shrink-0 cursor-pointer overflow-hidden rounded-xl border transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
                   isSelected
                     ? "border-primary ring-2 ring-primary/40"
                     : "border-border opacity-70 hover:opacity-100"
                 )}
               >
-                <CoverImage src={src} sizes="64px" className="size-full" />
+                <CoverImage src={src} sizes="80px" className="size-full" />
               </button>
             )
           })}

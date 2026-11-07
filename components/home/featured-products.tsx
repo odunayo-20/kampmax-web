@@ -49,7 +49,7 @@ function FeaturedProducts({
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {displayProducts.map((product, index) => (
-          <FadeIn key={product.slug} delay={index * 0.07}>
+          <FadeIn key={product.slug} delay={index * 0.07} className="h-full">
             <ProductCard
               product={product}
               category={categoryBySlug.get(product.categorySlug)}
