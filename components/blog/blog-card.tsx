@@ -28,13 +28,13 @@ function BlogCard({ post }: BlogCardProps) {
     <article className="h-full">
       <Link
         href={`/blog/${post.slug}`}
-        className="group flex h-full flex-col transition-transform hover:-translate-y-0.5"
+        className="group flex h-full flex-col rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
-        <Card className="flex h-full flex-col border-border/80 bg-card pt-0 transition-colors group-hover:border-primary/40">
+        <Card className="flex h-full flex-col overflow-hidden rounded-2xl border-border/80 bg-card pt-0 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40 group-hover:shadow-xl group-hover:shadow-primary-950/10">
           <CoverImage
             src={post.image}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="rounded-none"
+            className="rounded-none [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105"
           />
           <CardContent className="flex flex-1 flex-col gap-3.5 p-6">
             <div className="flex items-center justify-between">
@@ -64,10 +64,10 @@ function BlogCard({ post }: BlogCardProps) {
                 {formatDate(post.publishedAt)}
               </time>
 
-              <div className="flex items-center gap-1 text-xs font-medium text-primary">
+              <div className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-3 py-1.5 text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
                 <span>Read</span>
                 <ArrowRight
-                  className="size-3 transition-transform group-hover:translate-x-0.5"
+                  className="size-3.5 transition-transform group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
               </div>

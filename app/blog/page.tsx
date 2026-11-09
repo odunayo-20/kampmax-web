@@ -40,9 +40,7 @@ export default async function BlogIndexPage() {
   return (
     <>
       {/* 1. Hero */}
-      <Container>
-        <BlogHero />
-      </Container>
+      <BlogHero posts={content?.allPosts ?? []} />
 
       {content === null ? (
         <Section>

@@ -37,16 +37,16 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
 
       <Link
         href={`/blog/${post.slug}`}
-        className="group block transition-transform hover:-translate-y-0.5"
+        className="group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
-        <Card className="overflow-hidden border-border/80 bg-gradient-to-br from-card via-card to-primary/5 pt-0 transition-colors group-hover:border-primary/40">
+        <Card className="grid gap-0 overflow-hidden rounded-2xl border-border/80 bg-card py-0 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40 group-hover:shadow-xl group-hover:shadow-primary-950/10 lg:grid-cols-[1.1fr_1fr]">
           <CoverImage
             src={post.image}
             priority
-            sizes="(min-width: 1280px) 1152px, 100vw"
-            className="aspect-video rounded-none sm:aspect-21/9"
+            sizes="(min-width: 1024px) 600px, 100vw"
+            className="aspect-video h-full rounded-none lg:aspect-auto lg:min-h-80 [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105"
           />
-          <CardContent className="flex flex-col gap-5 p-6 sm:p-10">
+          <CardContent className="flex flex-col justify-center gap-5 p-6 sm:p-10">
             <div className="flex flex-wrap items-center gap-3">
               <Badge variant="default" className="text-2xs">
                 {post.category}
@@ -65,7 +65,7 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-3xl lg:text-4xl">
+              <h2 className="font-heading text-2xl font-extrabold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-3xl">
                 {post.title}
               </h2>
               <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -83,10 +83,10 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
                 </span>
               </div>
 
-              <div className="flex items-center gap-1 text-xs font-medium text-primary">
+              <div className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-3.5 py-1.5 text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
                 <span>Read Article</span>
                 <ArrowRight
-                  className="size-3.5 transition-transform group-hover:translate-x-1"
+                  className="size-3.5 transition-transform group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
               </div>

@@ -1,17 +1,49 @@
-import { Display, Eyebrow, Lead } from "@/components/ui/typography"
+import Link from "next/link"
+import { ArrowRight, Compass, Lightbulb, Store } from "lucide-react"
 
-function BlogHero() {
+import { BlogHeroVisual } from "@/components/blog/blog-hero-visual"
+import { PageHero, heroActionClass } from "@/components/shared/page-hero"
+import { siteConfig } from "@/config/site"
+import type { BlogPost } from "@/types/blog"
+
+const points = [
+  { icon: Lightbulb, label: "Ideas and guides" },
+  { icon: Store, label: "Student entrepreneurship" },
+  { icon: Compass, label: "Read without an account" },
+]
+
+function BlogHero({ posts = [] }: { posts?: BlogPost[] }) {
+  const count = posts.length
+
   return (
-    <div className="flex flex-col items-center gap-4 py-16 text-center sm:py-20 lg:py-24">
-      <Eyebrow>Kampmax Insights</Eyebrow>
-      <Display className="max-w-3xl">
-        Ideas, opportunities, and insights for campus life.
-      </Display>
-      <Lead className="max-w-2xl">
-        Explore perspectives on student entrepreneurship, emerging digital skills,
-        local commerce, and navigating opportunity across university communities.
-      </Lead>
-    </div>
+    <PageHero
+      eyebrow={
+        count > 0
+          ? `Kampmax Insights · ${count} ${count === 1 ? "article" : "articles"}`
+          : "Kampmax Insights"
+      }
+      title={
+        <>
+          Ideas and insights{" "}
+          <span className="text-gradient-brand">for campus life.</span>
+        </>
+      }
+      description="Explore perspectives on student entrepreneurship, emerging digital skills, local commerce, and navigating opportunity across university communities."
+      actions={
+        <>
+          <Link href="#articles" className={heroActionClass("primary")}>
+            Read the Latest
+            <ArrowRight />
+          </Link>
+          <Link href={siteConfig.registerUrl} className={heroActionClass("ghost")}>
+            Join Kampmax
+          </Link>
+        </>
+      }
+      points={points}
+    >
+      <BlogHeroVisual posts={posts} />
+    </PageHero>
   )
 }
 
