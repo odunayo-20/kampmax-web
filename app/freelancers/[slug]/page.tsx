@@ -11,6 +11,11 @@ import {
 import { getServicesByFreelancer } from "@/lib/services"
 import { idFromSlug } from "@/lib/slug"
 import { Container } from "@/components/layout/container"
+import { Section } from "@/components/layout/section"
+import {
+  RelatedFreelancers,
+  pickRelatedFreelancers,
+} from "@/components/freelancers/related-freelancers"
 import { FreelancerJsonLd } from "@/components/freelancers/freelancer-json-ld"
 import { FreelancerProfile } from "@/components/freelancers/freelancer-profile"
 
@@ -82,16 +87,29 @@ export default async function FreelancerPage({ params }: FreelancerPageProps) {
       )) ?? []
     : []
 
+  const related = pickRelatedFreelancers(freelancer, await getFreelancers(campuses))
+
   return (
     <>
-      <Container>
-        <FreelancerProfile
-          freelancer={freelancer}
-          category={primaryCategoryOf(freelancer)}
-          campus={campus}
-          services={services}
-        />
-      </Container>
+      <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
+        <Container>
+          <FreelancerProfile
+            freelancer={freelancer}
+            category={primaryCategoryOf(freelancer)}
+            campus={campus}
+            services={services}
+            campuses={campuses}
+          />
+        </Container>
+      </div>
+
+      {related.length > 0 ? (
+        <Section className="border-t border-border/60">
+          <Container>
+            <RelatedFreelancers freelancers={related} campuses={campuses} />
+          </Container>
+        </Section>
+      ) : null}
 
       <FreelancerJsonLd freelancer={freelancer} />
     </>
