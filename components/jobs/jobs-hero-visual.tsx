@@ -15,7 +15,7 @@ const placements = [
 /** The stack is only as tall as the number of cards needs. */
 const heights: Record<number, string> = {
   1: "h-36",
-  2: "h-72 sm:h-80",
+  2: "h-[24rem]",
   3: "h-96 sm:h-[28rem]",
 }
 

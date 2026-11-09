@@ -1,33 +1,49 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, BadgeCheck, Compass, MapPin } from "lucide-react"
 
-import { buttonVariants } from "@/components/ui/button"
-import { Eyebrow, H1, Lead } from "@/components/ui/typography"
+import { FreelancersHeroVisual } from "@/components/freelancers/freelancers-hero-visual"
+import { PageHero, heroActionClass } from "@/components/shared/page-hero"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
+import type { Freelancer } from "@/types/freelancer"
 
-function FreelancerHero() {
+const points = [
+  { icon: BadgeCheck, label: "Verified professionals" },
+  { icon: MapPin, label: "Organized by campus" },
+  { icon: Compass, label: "Browse without an account" },
+]
+
+function FreelancerHero({ freelancers = [] }: { freelancers?: Freelancer[] }) {
+  const count = freelancers.length
+
   return (
-    <div className="flex flex-col gap-5 py-16 sm:py-20 lg:py-24">
-      <Eyebrow>Freelancers</Eyebrow>
-      <H1>Discover skilled independent talent across campus communities.</H1>
-      <Lead className="max-w-2xl">
-        Explore profiles of students, creators, and professionals offering
-        specialized skills, from design and software engineering to writing,
-        photography, and academic coaching. Join Kampmax to connect with
-        talent or establish your own public professional presence.
-      </Lead>
-      <Link
-        href={siteConfig.registerUrl}
-        className={cn(
-          buttonVariants({ variant: "default", size: "lg" }),
-          "h-11 self-start rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
-        )}
-      >
-        Join Kampmax
-        <ArrowRight />
-      </Link>
-    </div>
+    <PageHero
+      eyebrow={
+        count > 0
+          ? `Freelancers · ${count} ${count === 1 ? "profile" : "profiles"}`
+          : "Freelancers"
+      }
+      title={
+        <>
+          Discover skilled talent{" "}
+          <span className="text-gradient-brand">across campus.</span>
+        </>
+      }
+      description="Explore profiles of students, creators, and professionals offering specialized skills, from design and software engineering to writing, photography, and academic coaching."
+      actions={
+        <>
+          <Link href="#browse" className={heroActionClass("primary")}>
+            Find Talent
+            <ArrowRight />
+          </Link>
+          <Link href={siteConfig.registerUrl} className={heroActionClass("ghost")}>
+            Join Kampmax
+          </Link>
+        </>
+      }
+      points={points}
+    >
+      <FreelancersHeroVisual freelancers={freelancers} />
+    </PageHero>
   )
 }
 
