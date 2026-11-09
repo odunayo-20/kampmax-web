@@ -8,7 +8,7 @@ export function RefundHeader() {
   return (
     <header className="mb-10 sm:mb-12 border-b border-border/80 pb-8 sm:pb-10">
       <div className="flex items-center gap-2 mb-4">
-        <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <span className="flex size-8 items-center justify-center rounded-xl bg-linear-to-br from-primary-600 to-primary-800 text-white">
           <RotateCcw className="size-4" aria-hidden="true" />
         </span>
         <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -16,7 +16,7 @@ export function RefundHeader() {
         </span>
       </div>
 
-      <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
+      <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-balance text-foreground mb-4">
         Refund &amp; Cancellation Policy
       </h1>
 

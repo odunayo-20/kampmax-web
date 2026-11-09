@@ -25,13 +25,15 @@ export const metadata: Metadata = {
 export default function AmlPolicyPage() {
   return (
     <>
-      <Container className="py-10 sm:py-16">
-        <article id="top" className="mx-auto max-w-3xl scroll-mt-16">
-          <AmlHeader />
-          <AmlToc />
-          <AmlSections />
-        </article>
-      </Container>
+      <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
+        <Container className="py-10 sm:py-16">
+          <article id="top" className="mx-auto max-w-3xl scroll-mt-16">
+            <AmlHeader />
+            <AmlToc />
+            <AmlSections />
+          </article>
+        </Container>
+      </div>
 
       <AmlJsonLd />
     </>
