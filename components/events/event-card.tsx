@@ -121,4 +121,4 @@ function EventCard({
   )
 }
 
-export { EventCard }
+export { EventCard, EventCoverFallback }

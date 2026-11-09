@@ -1,23 +1,54 @@
 import Link from "next/link"
 import {
-  ArrowLeft,
-  Calendar,
-  CheckCircle2,
+  ArrowRight,
+  CalendarDays,
+  Check,
+  ChevronRight,
   Clock,
   Info,
   MapPin,
+  QrCode,
+  Ticket,
+  Armchair,
+  Building2,
+  type LucideIcon,
 } from "lucide-react"
 
+import { EventCoverFallback } from "@/components/events/event-card"
 import { EventDateBadge } from "@/components/events/event-date-badge"
 import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
-import { H1, Lead, Muted } from "@/components/ui/typography"
 import { siteConfig } from "@/config/site"
 import { formatEventDate } from "@/lib/format-event-date"
 import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
+
+/** What the attendee does next, all inside the Kampmax app. */
+const nextSteps = [
+  { icon: Ticket, label: "Get your ticket or pass" },
+  { icon: QrCode, label: "Check in at the venue" },
+  { icon: CalendarDays, label: "Get schedule updates" },
+]
+
+function Fact({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
+  return (
+    <li className="flex items-start gap-3 rounded-2xl border border-border bg-card p-3.5 shadow-xs">
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
+        <Icon className="size-4" aria-hidden="true" />
+      </span>
+      <span className="flex min-w-0 flex-col">
+        <span className="text-xs text-muted-foreground">{label}</span>
+        <span className="text-sm font-semibold text-foreground">{value}</span>
+      </span>
+    </li>
+  )
+}
+
+function SectionTitle({ children }: { children: string }) {
+  return <h2 className="font-heading text-lg font-bold text-foreground">{children}</h2>
+}
 
 function EventHeader({
   event,
@@ -28,204 +59,192 @@ function EventHeader({
   category: EventCategory | undefined
   campus: Campus | undefined
 }) {
+  const time = event.startTime
+    ? `${event.startTime}${event.endTime ? ` – ${event.endTime}` : ""}`
+    : undefined
+
+  const facts = [
+    { icon: CalendarDays, label: "Date", value: formatEventDate(event.date) },
+    time ? { icon: Clock, label: "Time", value: time } : null,
+    event.location ? { icon: MapPin, label: "Venue", value: event.location } : null,
+    campus
+      ? { icon: Building2, label: "Campus", value: `${campus.name} (${campus.shortName})` }
+      : null,
+  ].filter((fact): fact is NonNullable<typeof fact> => fact !== null)
+
+  const soldOut = !event.isPast && event.seatsLeft === 0
+
   return (
-    <div className="flex flex-col gap-8 py-16 sm:py-20 lg:py-24">
-      <Link
-        href="/events"
-        className="inline-flex items-center gap-1.5 self-start rounded-sm text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+    <div className="py-8 sm:py-12 lg:py-14">
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-8 flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground"
       >
-        <ArrowLeft className="size-3.5" aria-hidden="true" />
-        All Events
-      </Link>
+        <Link
+          href="/events"
+          className="rounded-sm font-medium transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          Events
+        </Link>
+        {category ? (
+          <>
+            <ChevronRight className="size-3.5" aria-hidden="true" />
+            <span>{category.name}</span>
+          </>
+        ) : null}
+        <ChevronRight className="size-3.5" aria-hidden="true" />
+        <span className="truncate font-medium text-foreground" aria-current="page">
+          {event.title}
+        </span>
+      </nav>
 
-      <div className="flex flex-col gap-5 border-b border-border/60 pb-8">
-        <div className="flex flex-wrap items-center gap-2">
-          {category ? <Badge variant="secondary">{category.name}</Badge> : null}
-          {campus ? <Badge variant="outline">{campus.shortName}</Badge> : null}
-          {event.isPast ? (
-            <Badge variant="outline" className="text-muted-foreground">
-              Past Event
-            </Badge>
-          ) : null}
-        </div>
+      <div className="grid items-start gap-10 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
+        <div className="flex flex-col gap-8">
+          <div className="relative">
+            <CoverImage
+              src={event.image}
+              alt={event.title}
+              priority
+              sizes="(min-width: 1024px) 700px, 100vw"
+              fallback={<EventCoverFallback className="aspect-video w-full rounded-2xl shadow-lg" />}
+              className="aspect-video w-full rounded-2xl shadow-lg ring-1 shadow-primary-950/10 ring-black/5"
+            />
+            <EventDateBadge
+              date={event.date}
+              isPast={event.isPast}
+              className="absolute top-4 left-4 w-14 bg-card/95 shadow-md backdrop-blur-sm"
+            />
+          </div>
 
-        <H1 className="text-2xl sm:text-3xl lg:text-4xl">{event.title}</H1>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {category ? <Badge variant="secondary">{category.name}</Badge> : null}
+              {campus ? <Badge variant="outline">{campus.shortName}</Badge> : null}
+              {event.isPast ? (
+                <Badge variant="outline" className="text-muted-foreground">
+                  Past event
+                </Badge>
+              ) : soldOut ? (
+                <Badge variant="outline" className="text-muted-foreground">
+                  Sold out
+                </Badge>
+              ) : event.priceLabel ? (
+                <span className="rounded-full bg-accent-500/10 px-2.5 py-0.5 text-xs font-semibold text-accent-700">
+                  {event.priceLabel}
+                </span>
+              ) : null}
+            </div>
 
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1.5 font-medium text-foreground">
-            <Calendar className="size-4 text-primary" aria-hidden="true" />
-            {formatEventDate(event.date)}
-          </span>
-          {event.startTime ? (
-            <span className="flex items-center gap-1.5">
-              <Clock className="size-4 text-muted-foreground" aria-hidden="true" />
-              {event.startTime}
-              {event.endTime ? ` – ${event.endTime}` : ""}
-            </span>
-          ) : null}
-          {event.location ? (
-            <span className="flex items-center gap-1.5">
-              <MapPin className="size-4 text-muted-foreground" aria-hidden="true" />
-              {event.location}
-            </span>
-          ) : null}
-        </div>
-      </div>
+            <h1 className="font-heading text-3xl font-extrabold tracking-tight text-balance text-foreground sm:text-4xl">
+              {event.title}
+            </h1>
 
-      <div className="grid items-start gap-10 lg:grid-cols-3 lg:gap-12">
-        <div className="flex flex-col gap-8 lg:col-span-2">
-          <CoverImage
-            src={event.image}
-            alt={event.title}
-            priority
-            sizes="(min-width: 1024px) 768px, 100vw"
-            className="aspect-video w-full rounded-2xl"
-          />
+            {event.organizerName ? (
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <span
+                  aria-hidden="true"
+                  className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-primary-600 to-primary-800 text-sm font-bold text-white"
+                >
+                  {event.organizerName.charAt(0).toUpperCase()}
+                </span>
+                <span>
+                  Organized by{" "}
+                  <span className="font-semibold text-foreground">{event.organizerName}</span>
+                  {event.organizerType ? ` · ${event.organizerType}` : ""}
+                </span>
+              </div>
+            ) : null}
+          </div>
+
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {facts.map((fact) => (
+              <Fact key={fact.label} {...fact} />
+            ))}
+          </ul>
 
           <section className="flex flex-col gap-3">
-            <h2 className="font-heading text-lg font-semibold text-foreground">
-              About This Event
-            </h2>
-            <Lead className="text-base text-foreground/90 whitespace-pre-line">
+            <SectionTitle>About this event</SectionTitle>
+            <p className="text-base leading-relaxed whitespace-pre-line text-muted-foreground">
               {event.description}
-            </Lead>
+            </p>
           </section>
 
-          {event.highlights && event.highlights.length > 0 && (
+          {event.highlights && event.highlights.length > 0 ? (
             <section className="flex flex-col gap-3">
-              <h2 className="font-heading text-lg font-semibold text-foreground">
-                What to Expect
-              </h2>
+              <SectionTitle>What to expect</SectionTitle>
               <ul className="flex flex-col gap-2.5">
                 {event.highlights.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2.5 text-sm text-muted-foreground"
-                  >
-                    <CheckCircle2
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>{item}</span>
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-foreground/90">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-success-100 text-success-700">
+                      <Check className="size-3" aria-hidden="true" />
+                    </span>
+                    {item}
                   </li>
                 ))}
               </ul>
             </section>
-          )}
+          ) : null}
 
           {event.importantInfo ? (
-            <section className="flex flex-col gap-2 rounded-xl border border-accent-500/30 bg-accent-50 p-5">
-              <h3 className="flex items-center gap-2 font-heading text-sm font-semibold text-accent-700">
+            <section className="flex flex-col gap-2 rounded-2xl border border-accent-500/30 bg-accent-50 p-5">
+              <h2 className="flex items-center gap-2 font-heading text-sm font-semibold text-accent-700">
                 <Info className="size-4 text-accent-600" aria-hidden="true" />
-                Important Information
-              </h3>
-              <p className="text-xs leading-relaxed text-accent-700/90">
-                {event.importantInfo}
-              </p>
+                Important information
+              </h2>
+              <p className="text-sm leading-relaxed text-accent-700/90">{event.importantInfo}</p>
             </section>
           ) : null}
         </div>
 
-        <div className="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6 shadow-xs">
-          <div className="flex items-center gap-3">
-            <EventDateBadge
-              date={event.date}
-              isPast={event.isPast}
-              className="w-14"
-            />
-            <div className="flex flex-col">
-              <h2 className="font-heading text-base font-semibold text-foreground">
-                Event Schedule
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                {event.isPast ? "Historical record" : "Upcoming gathering"}
+        {/* Stays in view while the details scroll on large screens. */}
+        <aside className="flex flex-col gap-4 lg:sticky lg:top-24">
+          <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
+            <div className="flex flex-col gap-1">
+              <p className="font-heading text-3xl font-extrabold tracking-tight text-foreground">
+                {event.priceLabel ?? "Join the event"}
               </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3 border-y border-border/60 py-4 text-xs">
-            <div className="flex justify-between gap-2">
-              <span className="text-muted-foreground">Date</span>
-              <span className="font-medium text-foreground text-right">
+              <p className="text-sm text-muted-foreground">
                 {formatEventDate(event.date)}
-              </span>
-            </div>
-            {event.startTime ? (
-              <div className="flex justify-between gap-2">
-                <span className="text-muted-foreground">Time</span>
-                <span className="font-medium text-foreground">
-                  {event.startTime}
-                  {event.endTime ? ` – ${event.endTime}` : ""}
-                </span>
-              </div>
-            ) : null}
-            {event.location ? (
-              <div className="flex justify-between gap-2">
-                <span className="text-muted-foreground">Venue</span>
-                <span className="font-medium text-foreground text-right">
-                  {event.location}
-                </span>
-              </div>
-            ) : null}
-            {campus ? (
-              <div className="flex justify-between gap-2">
-                <span className="text-muted-foreground">Campus</span>
-                <span className="font-medium text-foreground text-right">
-                  {campus.name} ({campus.shortName})
-                </span>
-              </div>
-            ) : null}
-            {event.priceLabel ? (
-              <div className="flex justify-between gap-2">
-                <span className="text-muted-foreground">Tickets</span>
-                <span className="font-medium text-foreground text-right">
-                  {event.priceLabel}
-                </span>
-              </div>
-            ) : null}
-            {event.seatsLeft !== undefined ? (
-              <div className="flex justify-between gap-2">
-                <span className="text-muted-foreground">Availability</span>
-                <span className="font-medium text-foreground text-right">
+                {time ? ` · ${time}` : ""}
+              </p>
+              {event.seatsLeft !== undefined && !event.isPast ? (
+                <p className="mt-1 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+                  <Armchair className="size-4 text-primary-600" aria-hidden="true" />
                   {event.seatsLeft > 0
                     ? `${event.seatsLeft} ${event.seatsLeft === 1 ? "seat" : "seats"} left`
                     : "Sold out"}
-                </span>
-              </div>
-            ) : null}
-            {event.organizerName ? (
-              <div className="flex justify-between gap-2">
-                <span className="text-muted-foreground">Organizer</span>
-                <div className="flex flex-col items-end">
-                  <span className="font-medium text-foreground text-right">
-                    {event.organizerName}
-                  </span>
-                  {event.organizerType ? (
-                    <span className="text-2xs text-muted-foreground">
-                      {event.organizerType}
-                    </span>
-                  ) : null}
-                </div>
-              </div>
-            ) : null}
-          </div>
+                </p>
+              ) : null}
+            </div>
 
-          <div className="flex flex-col gap-2 pt-1">
-            <Link
-              href={siteConfig.registerUrl}
-              className={cn(
-                buttonVariants({ variant: "default", size: "lg" }),
-                "h-11 w-full rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
-              )}
-            >
-              {event.isPast ? "View on Kampmax" : "Join Event on Kampmax"}
-            </Link>
-            <Muted className="text-2xs text-center text-muted-foreground">
-              Event registration passes, check-ins, and schedule updates occur
-              inside the Kampmax app.
-            </Muted>
+            <div className="flex flex-col gap-3 border-t border-border/70 pt-4">
+              <Link
+                href={siteConfig.registerUrl}
+                className={cn(
+                  buttonVariants({ variant: "default", size: "lg" }),
+                  "h-13 w-full rounded-xl bg-linear-to-r from-primary-600 to-primary-800 text-base font-bold shadow-lg shadow-primary-600/25 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                )}
+              >
+                {event.isPast ? "View on Kampmax" : "Join event on Kampmax"}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+              <ul className="flex flex-col gap-2">
+                {nextSteps.map((step) => (
+                  <li
+                    key={step.label}
+                    className="flex items-center gap-2 text-xs text-muted-foreground"
+                  >
+                    <step.icon className="size-4 shrink-0 text-primary-600" aria-hidden="true" />
+                    {step.label}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-muted-foreground">
+                Registration, check-in and schedule updates all happen inside the Kampmax app.
+              </p>
+            </div>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   )

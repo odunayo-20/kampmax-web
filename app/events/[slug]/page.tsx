@@ -6,6 +6,8 @@ import { getCampuses } from "@/lib/campuses"
 import { categoryOf, getEvent, getEvents } from "@/lib/events"
 import { formatEventDate } from "@/lib/format-event-date"
 import { Container } from "@/components/layout/container"
+import { Section } from "@/components/layout/section"
+import { RelatedEvents, pickRelatedEvents } from "@/components/events/related-events"
 import { EventHeader } from "@/components/events/event-header"
 import { EventJsonLd } from "@/components/events/event-json-ld"
 import {
@@ -73,16 +75,28 @@ export default async function EventPage({ params }: EventPageProps) {
     ? campuses.find((candidate) => candidate.slug === event.campusSlug)
     : undefined
 
+  const related = pickRelatedEvents(event, await getEvents(campuses))
+
   return (
     <>
-      <Container>
-        <EventHeader event={event} category={category} campus={campus} />
-      </Container>
+      <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
+        <Container>
+          <EventHeader event={event} category={category} campus={campus} />
+        </Container>
+      </div>
 
       {campus && canShowEventMap(campus) ? (
-        <Container className="pb-16 sm:pb-20">
+        <Container className="pb-12 sm:pb-16">
           <EventLocationMap event={event} campus={campus} />
         </Container>
+      ) : null}
+
+      {related.length > 0 ? (
+        <Section className="border-t border-border/60">
+          <Container>
+            <RelatedEvents events={related} campuses={campuses} />
+          </Container>
+        </Section>
       ) : null}
 
       <EventJsonLd event={event} category={category} campus={campus} />
