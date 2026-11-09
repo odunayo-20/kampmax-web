@@ -13,9 +13,12 @@ function ContactPathways() {
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {contactPathways.map((pathway) => (
-          <Card key={pathway.id} className="flex h-full flex-col border-border/80 shadow-sm">
+          <Card
+            key={pathway.id}
+            className="flex h-full flex-col rounded-2xl border-border/80 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-950/10"
+          >
             <CardContent className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
-              <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <span className="flex size-10 items-center justify-center rounded-xl bg-linear-to-br from-primary-600 to-primary-800 text-white">
                 <pathway.icon className="size-5" aria-hidden="true" />
               </span>
 
