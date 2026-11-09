@@ -1,53 +1,68 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Briefcase, Calendar, GraduationCap, Store, Users, Wrench } from "lucide-react"
 
-import { AboutHeroComposition } from "@/components/about/about-hero-composition"
-import { FadeIn } from "@/components/shared/fade-in"
-import { buttonVariants } from "@/components/ui/button"
-import { Display, Eyebrow, Lead } from "@/components/ui/typography"
+import { HeroCardStack } from "@/components/shared/hero-card-stack"
+import { PageHero, heroActionClass } from "@/components/shared/page-hero"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
+
+const items = [
+  {
+    icon: Store,
+    label: "Commerce",
+    title: "Marketplace",
+    description: "Course books, supplies and tech kits",
+  },
+  {
+    icon: Wrench,
+    label: "Skills",
+    title: "Local services",
+    description: "Repairs, design, tailoring and tutoring",
+  },
+  {
+    icon: Briefcase,
+    label: "Careers",
+    title: "Jobs and talent",
+    description: "Internships, projects and student freelance",
+  },
+  {
+    icon: Calendar,
+    label: "Activities",
+    title: "Campus events",
+    description: "Conferences, hackathons and festivals",
+  },
+]
+
+const points = [
+  { icon: GraduationCap, label: "Built around campuses" },
+  { icon: Users, label: "Students, sellers and organizers" },
+]
 
 function AboutHero() {
   return (
-    <div className="grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:py-28">
-      <div className="flex flex-col gap-7">
-        <Eyebrow>About Kampmax</Eyebrow>
-        <Display className="xl:text-7xl">
-          Building a more connected campus ecosystem.
-        </Display>
-        <Lead className="max-w-xl sm:text-xl/relaxed">
-          Kampmax brings together students, local merchants, service providers,
-          freelancers, and event organizers into one coherent digital home,
-          connecting daily commerce, professional skills, and campus life.
-        </Lead>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <Link
-            href="#what-is-kampmax"
-            className={cn(
-              buttonVariants({ variant: "default", size: "lg" }),
-              "h-12 rounded-xl px-8 text-base font-semibold shadow-lg shadow-primary-600/25"
-            )}
-          >
+    <PageHero
+      eyebrow="About Kampmax"
+      title={
+        <>
+          Building a more{" "}
+          <span className="text-gradient-brand">connected campus ecosystem.</span>
+        </>
+      }
+      description="Kampmax brings together students, local merchants, service providers, freelancers, and event organizers into one coherent digital home, connecting daily commerce, professional skills, and campus life."
+      actions={
+        <>
+          <Link href="#what-is-kampmax" className={heroActionClass("primary")}>
             Explore Kampmax
             <ArrowRight />
           </Link>
-          <Link
-            href={siteConfig.registerUrl}
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "h-12 rounded-xl px-8 text-base font-semibold"
-            )}
-          >
+          <Link href={siteConfig.registerUrl} className={heroActionClass("ghost")}>
             Join Kampmax
           </Link>
-        </div>
-      </div>
-
-      <FadeIn>
-        <AboutHeroComposition />
-      </FadeIn>
-    </div>
+        </>
+      }
+      points={points}
+    >
+      <HeroCardStack items={items} />
+    </PageHero>
   )
 }
 
