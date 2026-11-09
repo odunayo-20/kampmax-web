@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
+import { FreelancerAvatar } from "@/components/freelancers/freelancer-avatar"
+import { ServiceCoverFallback } from "@/components/services/service-cover-fallback"
 import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -20,14 +22,21 @@ function ServiceCard({
   return (
     <Link
       href={`/services/${service.slug}`}
-      className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      className="group block h-full rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <Card className="flex h-full flex-col pt-0 shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
+      <Card className="flex h-full flex-col rounded-2xl pt-0 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary-950/10 group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
         <CoverImage
           src={service.image}
           alt={service.name}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="aspect-16/10 rounded-none"
+          fallback={
+            <ServiceCoverFallback
+              categorySlug={service.categorySlug}
+              categoryName={service.categoryName}
+              className="aspect-16/10"
+            />
+          }
+          className="aspect-16/10 rounded-none transition-transform duration-500 group-hover:scale-105"
         />
         <CardContent className="flex flex-1 flex-col gap-3">
           <div className="flex flex-col gap-1.5">
@@ -44,9 +53,15 @@ function ServiceCard({
             </h3>
 
             {service.providerName ? (
-              <p className="text-xs font-medium text-muted-foreground">
-                Offered by {service.providerName}
-              </p>
+              <div className="flex items-center gap-2 pt-0.5 text-xs font-medium text-muted-foreground">
+                <FreelancerAvatar
+                  name={service.providerName}
+                  avatar={service.providerAvatar}
+                  size="sm"
+                  className="size-6 text-[10px]"
+                />
+                <span className="truncate">Offered by {service.providerName}</span>
+              </div>
             ) : null}
 
             <p className="line-clamp-2 text-sm text-muted-foreground">
@@ -55,17 +70,17 @@ function ServiceCard({
           </div>
 
           <div className="mt-auto flex items-center justify-between gap-2 border-t border-border/60 pt-3">
-            <span className="text-sm font-semibold text-foreground">
+            <span className="font-heading text-base font-extrabold tracking-tight text-foreground">
               {service.priceFrom
                 ? `From ${formatPrice(service.priceFrom)}${
                     service.pricingModel === "HOURLY" ? "/hr" : ""
                   }`
                 : "Price on request"}
             </span>
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-600">
-              View Service
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-3 py-1.5 text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
+              View
               <ArrowRight
-                className="size-3.5 transition-transform group-hover:translate-x-1"
+                className="size-3.5 transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
             </span>

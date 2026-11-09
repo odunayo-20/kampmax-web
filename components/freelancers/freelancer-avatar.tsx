@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
 
 import { cn } from "@/lib/utils"
@@ -28,8 +31,10 @@ function FreelancerAvatar({
   className?: string
 }) {
   const initials = getInitials(name)
+  // A photo that fails to load drops back to the initials below.
+  const [failedAvatar, setFailedAvatar] = useState<string>()
 
-  if (avatar) {
+  if (avatar && failedAvatar !== avatar) {
     return (
       <div
         className={cn(
@@ -43,6 +48,7 @@ function FreelancerAvatar({
           alt={`Photo of ${name}`}
           fill
           sizes="(max-width: 768px) 64px, 96px"
+          onError={() => setFailedAvatar(avatar)}
           className="object-cover"
         />
       </div>

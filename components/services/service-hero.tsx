@@ -1,33 +1,49 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Handshake, MapPin, MessageCircle } from "lucide-react"
 
-import { buttonVariants } from "@/components/ui/button"
-import { Eyebrow, H1, Lead } from "@/components/ui/typography"
+import { ServicesHeroVisual } from "@/components/services/services-hero-visual"
+import { PageHero, heroActionClass } from "@/components/shared/page-hero"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
+import type { Service } from "@/types/service"
 
-function ServiceHero() {
+const points = [
+  { icon: MapPin, label: "Organized by campus" },
+  { icon: MessageCircle, label: "Connect directly with providers" },
+  { icon: Handshake, label: "Browse without an account" },
+]
+
+function ServiceHero({ services = [] }: { services?: Service[] }) {
+  const count = services.length
+
   return (
-    <div className="flex flex-col gap-5 py-16 sm:py-20 lg:py-24">
-      <Eyebrow>Services</Eyebrow>
-      <H1>Discover services across your campus community.</H1>
-      <Lead className="max-w-2xl">
-        Explore everyday assistance, repairs, creative skills, tutoring, and
-        business services offered by individuals, freelancers, and providers
-        within the Kampmax ecosystem. Join Kampmax to connect directly with
-        providers or offer your own services.
-      </Lead>
-      <Link
-        href={siteConfig.registerUrl}
-        className={cn(
-          buttonVariants({ variant: "default", size: "lg" }),
-          "h-11 self-start rounded-lg px-6 text-sm font-semibold shadow-sm shadow-primary-600/20"
-        )}
-      >
-        Join Kampmax
-        <ArrowRight />
-      </Link>
-    </div>
+    <PageHero
+      eyebrow={
+        count > 0
+          ? `Services · ${count} ${count === 1 ? "service" : "services"} available`
+          : "Services"
+      }
+      title={
+        <>
+          Discover services across{" "}
+          <span className="text-gradient-brand">your campus community.</span>
+        </>
+      }
+      description="Explore everyday assistance, repairs, creative skills, tutoring, and business services offered by individuals, freelancers, and providers within the Kampmax ecosystem. Join Kampmax to connect directly with providers or offer your own services."
+      actions={
+        <>
+          <Link href={siteConfig.registerUrl} className={heroActionClass("primary")}>
+            Join Kampmax
+            <ArrowRight />
+          </Link>
+          <Link href="/become-a-vendor#service-providers" className={heroActionClass("ghost")}>
+            Offer a service
+          </Link>
+        </>
+      }
+      points={points}
+    >
+      <ServicesHeroVisual services={services} />
+    </PageHero>
   )
 }
 

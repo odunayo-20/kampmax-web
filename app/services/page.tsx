@@ -37,22 +37,10 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 right-[-10%] size-96 rounded-full bg-primary-200/40 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-10 left-[-10%] size-80 rounded-full bg-accent-100/60 blur-3xl"
-        />
-        <Container className="relative">
-          <ServiceHero />
-        </Container>
-      </div>
+      <ServiceHero services={listing?.services ?? []} />
 
       <Container>
-        <div className="flex flex-col gap-8 py-16 sm:py-20 lg:py-24">
+        <div id="browse" className="flex scroll-mt-16 flex-col gap-8 py-16 sm:py-20 lg:py-24">
           <SectionHeading
             eyebrow="Directory"
             title="Available services"
