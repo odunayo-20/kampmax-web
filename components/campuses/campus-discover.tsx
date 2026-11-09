@@ -27,8 +27,8 @@ function CampusDiscover({ campus }: { campus: Campus }) {
             <Card
               className={
                 category.available
-                  ? "h-full transition-colors group-hover:ring-primary/40 group-focus-visible:ring-primary/40"
-                  : "h-full opacity-60"
+                  ? "h-full rounded-2xl shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary-950/10 group-hover:ring-primary/40 group-focus-visible:ring-primary/40"
+                  : "h-full rounded-2xl opacity-60"
               }
             >
               <CardContent className="flex h-full flex-col gap-3">
@@ -57,7 +57,7 @@ function CampusDiscover({ campus }: { campus: Campus }) {
               <Link
                 key={category.title}
                 href={category.href}
-                className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                className="group block h-full rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
                 {card}
               </Link>

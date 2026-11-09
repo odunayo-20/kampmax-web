@@ -65,12 +65,10 @@ export default async function CampusPage({
 
   return (
     <>
-      <Container>
-        <CampusHeader campus={campus} />
-      </Container>
+      <CampusHeader campus={campus} />
 
       {canShowCampusMap(campus, places) ? (
-        <Container className="pb-16 sm:pb-20">
+        <Container className="pt-12 pb-16 sm:pt-16 sm:pb-20">
           <CampusLocationMap campus={campus} places={places} />
         </Container>
       ) : null}
