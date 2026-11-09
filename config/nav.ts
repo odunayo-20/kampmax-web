@@ -23,6 +23,7 @@ export const moreNav: NavItem[] = [
   { title: "Freelancers", href: "/freelancers" },
   { title: "For Businesses", href: "/for-businesses" },
   { title: "About", href: "/about" },
+  { title: "Blog & Insights", href: "/blog" },
   { title: "Contact", href: "/contact" },
 ]
 
@@ -50,6 +51,7 @@ export const mobileNavGroups: NavGroup[] = [
     title: "Company",
     items: [
       { title: "About", href: "/about" },
+      { title: "Blog & Insights", href: "/blog" },
       { title: "Contact", href: "/contact" },
     ],
   },

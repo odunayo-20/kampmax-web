@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import {
+  BookOpen,
   ChevronDown,
   UserCheck,
   Compass,
@@ -46,6 +47,12 @@ const moreNavItems = [
     href: "/about",
     description: "Our mission to empower student ecosystems",
     icon: Info,
+  },
+  {
+    title: "Blog & Insights",
+    href: "/blog",
+    description: "Ideas, guides and stories from the Kampmax team",
+    icon: BookOpen,
   },
   {
     title: "Contact",
