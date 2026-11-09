@@ -1,12 +1,4 @@
 import type { Metadata } from "next"
-import {
-  Briefcase,
-  Calendar,
-  GraduationCap,
-  Store,
-  UserCheck,
-  Wrench,
-} from "lucide-react"
 
 import { orNullDuringBuild } from "@/lib/api"
 import { getAllPosts } from "@/lib/blog"
@@ -29,7 +21,6 @@ import { ForBusinesses } from "@/components/home/for-businesses"
 import { Hero } from "@/components/home/hero"
 import { HowItWorks } from "@/components/home/how-it-works"
 import { LatestArticles } from "@/components/home/latest-articles"
-import { LiveStats } from "@/components/home/live-stats"
 import { Opportunities } from "@/components/home/opportunities"
 import { TrustValues } from "@/components/home/trust-values"
 import { WhatIsKampmax } from "@/components/home/what-is-kampmax"
@@ -130,28 +121,21 @@ export default async function Home() {
         }
       />
 
-      {data ? (
-        <Container>
-          <LiveStats
-            stats={[
-              { label: "Campuses", value: counts["/campuses"], href: "/campuses", icon: GraduationCap },
-              { label: "Marketplace listings", value: counts["/marketplace"], href: "/marketplace", icon: Store },
-              { label: "Open roles", value: counts["/jobs"], href: "/jobs", icon: Briefcase },
-              { label: "Upcoming events", value: counts["/events"], href: "/events", icon: Calendar },
-              { label: "Freelancers", value: counts["/freelancers"], href: "/freelancers", icon: UserCheck },
-              { label: "Services", value: counts["/services"], href: "/services", icon: Wrench },
-            ]}
-          />
-        </Container>
-      ) : null}
-
-      <Section className="pb-4 sm:pb-6 lg:pb-8">
+      <Section>
         <Container>
           <WhatIsKampmax />
         </Container>
       </Section>
 
-      <Section id="discover" className="scroll-mt-16 pt-8 sm:pt-10 lg:pt-12">
+      <div className="border-y border-border bg-primary-50/70">
+        <Section>
+          <Container>
+            <HowItWorks />
+          </Container>
+        </Section>
+      </div>
+
+      <Section id="discover" className="scroll-mt-16">
         <Container>
           <DiscoverGrid counts={counts} />
         </Container>
@@ -168,14 +152,6 @@ export default async function Home() {
           </Container>
         </Section>
       )}
-
-      <div className="border-y border-border bg-primary-50/70">
-        <Section>
-          <Container>
-            <HowItWorks />
-          </Container>
-        </Section>
-      </div>
 
       <Section>
         <Container>

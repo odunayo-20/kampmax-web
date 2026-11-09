@@ -45,9 +45,9 @@ function PageHero({
   children,
 }: PageHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-primary-950 text-white">
+    <section className="relative isolate overflow-hidden bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
       <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_90%_0%,rgba(47,128,237,0.45),transparent_70%),radial-gradient(45%_50%_at_0%_100%,rgba(245,158,11,0.18),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_90%_0%,rgba(120,175,255,0.45),transparent_70%),radial-gradient(45%_50%_at_0%_100%,rgba(245,158,11,0.22),transparent_70%)]" />
         <div className="bg-grid-pattern absolute inset-0" />
       </div>
 
@@ -73,7 +73,7 @@ function PageHero({
             {title}
           </h1>
 
-          <p className="max-w-2xl text-lg/relaxed text-primary-100/80 sm:text-xl/relaxed">
+          <p className="max-w-2xl text-lg/relaxed text-primary-50/90 sm:text-xl/relaxed">
             {description}
           </p>
 
@@ -82,7 +82,7 @@ function PageHero({
           ) : null}
 
           {points && points.length > 0 ? (
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-1 text-sm text-primary-100/75">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-1 text-sm text-primary-50/85">
               {points.map((point) => (
                 <li key={point.label} className="flex items-center gap-2">
                   <point.icon className="size-4 text-accent-400" aria-hidden="true" />
