@@ -1,6 +1,27 @@
 import { describe, expect, it } from "vitest"
 
-import { toOpportunity, type ApiJob } from "@/lib/jobs"
+import { toOpportunity, typesWithItems, type ApiJob } from "@/lib/jobs"
+import type { OpportunityType } from "@/types/job"
+
+describe("typesWithItems", () => {
+  const types: OpportunityType[] = [
+    { slug: "internship", name: "Internships", enabled: true },
+    { slug: "full-time", name: "Full-Time Roles", enabled: true },
+    { slug: "freelance", name: "Freelance Projects", enabled: true },
+  ]
+  const job = (typeSlug: string) =>
+    ({ slug: typeSlug, title: "", organization: "", typeSlug, description: "" }) as const
+
+  it("keeps only types that have jobs, in the configured order", () => {
+    const jobs = [job("freelance"), job("full-time"), job("freelance")]
+    expect(typesWithItems(types, jobs).map((type) => type.slug)).toEqual(["full-time", "freelance"])
+  })
+
+  it("offers nothing when there are no jobs, and ignores types the config does not list", () => {
+    expect(typesWithItems(types, [])).toEqual([])
+    expect(typesWithItems(types, [job("seasonal-work")])).toEqual([])
+  })
+})
 import type { Campus } from "@/types/campus"
 
 const campuses: Campus[] = [

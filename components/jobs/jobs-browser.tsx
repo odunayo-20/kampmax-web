@@ -212,7 +212,7 @@ function JobsBrowser({
             Showing {filteredOpportunities.length} of {opportunities.length}{" "}
             {opportunities.length === 1 ? "opportunity" : "opportunities"}
           </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filteredOpportunities.map((opportunity) => (
               <OpportunityCard
                 key={opportunity.slug}

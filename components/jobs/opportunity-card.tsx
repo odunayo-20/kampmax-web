@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Building2, MapPin } from "lucide-react"
+import { ArrowRight, MapPin } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -20,17 +20,22 @@ function OpportunityCard({
   return (
     <Link
       href={`/jobs/${opportunity.slug}`}
-      className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      className="group block h-full rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <Card className="flex h-full flex-col pt-5 shadow-sm transition-all group-hover:shadow-md group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
+      <Card className="flex h-full flex-col rounded-2xl pt-5 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary-950/10 group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
         <CardContent className="flex flex-1 flex-col gap-3.5">
           <div className="flex items-center justify-between gap-2">
-            <span className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
-              <Building2 className="size-3.5 shrink-0" aria-hidden="true" />
+            <span className="flex min-w-0 items-center gap-2.5 text-xs font-medium text-muted-foreground">
+              <span
+                aria-hidden="true"
+                className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-primary-600 to-primary-800 text-xs font-bold text-white"
+              >
+                {opportunity.organization.charAt(0).toUpperCase()}
+              </span>
               <span className="truncate">{opportunity.organization}</span>
             </span>
             {opportunity.closingDate ? (
-              <span className="shrink-0 text-xs text-muted-foreground/80">
+              <span className="shrink-0 rounded-full bg-accent-500/10 px-2.5 py-0.5 text-xs font-semibold text-accent-700">
                 Closes {opportunity.closingDate}
               </span>
             ) : null}
@@ -74,10 +79,10 @@ function OpportunityCard({
             <span className="text-xs text-muted-foreground">
               {opportunity.campusSlug ? "Campus-affiliated" : "Open opportunity"}
             </span>
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-600">
-              View Opportunity
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-3 py-1.5 text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
+              View
               <ArrowRight
-                className="size-3.5 transition-transform group-hover:translate-x-1"
+                className="size-3.5 transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
             </span>

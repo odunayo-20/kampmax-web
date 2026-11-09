@@ -1,6 +1,6 @@
 import { ApiError, apiFetch } from "@/lib/api"
 import type { Campus } from "@/types/campus"
-import type { Opportunity } from "@/types/job"
+import type { Opportunity, OpportunityType } from "@/types/job"
 
 /** Backend shape (`GET /jobs`). Only the fields this site reads. */
 export type ApiJob = {
@@ -89,6 +89,18 @@ export function toOpportunity(job: ApiJob, campuses: Campus[]): Opportunity {
     skills: job.skills.length > 0 ? job.skills.map((skill) => skill.name) : undefined,
     closingDate: toClosingDate(job.applicationDeadline),
   }
+}
+
+/**
+ * The opportunity types a directory can usefully filter by: those with at
+ * least one opportunity. A type with nothing in it only leads to an empty list.
+ */
+export function typesWithItems(
+  types: OpportunityType[],
+  opportunities: Opportunity[]
+): OpportunityType[] {
+  const used = new Set(opportunities.map((opportunity) => opportunity.typeSlug))
+  return types.filter((type) => used.has(type.slug))
 }
 
 /** Published opportunities, newest first. `campuses` resolves each job's campus slug. */

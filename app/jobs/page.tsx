@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { getEnabledOpportunityTypes } from "@/app/_data/jobs"
 import { orNullDuringBuild } from "@/lib/api"
 import { campusesWithItems, getCampuses } from "@/lib/campuses"
-import { getOpportunities } from "@/lib/jobs"
+import { getOpportunities, typesWithItems } from "@/lib/jobs"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
@@ -43,19 +43,7 @@ export default async function JobsPage() {
 
   return (
     <>
-      <div className="relative isolate overflow-hidden border-b border-border bg-linear-to-b from-primary-50 via-background to-background">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 right-[-10%] size-128 rounded-full bg-primary-200/40 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-10 left-[-15%] size-96 rounded-full bg-accent-100/60 blur-3xl"
-        />
-        <Container className="relative">
-          <JobsHero />
-        </Container>
-      </div>
+      <JobsHero opportunities={listing?.opportunities ?? []} />
 
       <Section id="browse" className="scroll-mt-16">
         <Container>
@@ -70,7 +58,7 @@ export default async function JobsPage() {
             ) : (
               <JobsBrowser
                 opportunities={listing.opportunities}
-                types={types}
+                types={typesWithItems(types, listing.opportunities)}
                 campuses={campusesWithItems(listing.campuses, listing.opportunities)}
               />
             )}
