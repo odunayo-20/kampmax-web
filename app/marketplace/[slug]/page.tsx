@@ -9,6 +9,9 @@ import {
   getProducts,
 } from "@/lib/marketplace"
 import { Container } from "@/components/layout/container"
+import { MobileActionBar } from "@/components/shared/mobile-action-bar"
+import { siteConfig } from "@/config/site"
+import { formatPrice } from "@/lib/format-price"
 import { Section } from "@/components/layout/section"
 import { ProductHeader } from "@/components/marketplace/product-header"
 import { ProductJsonLd } from "@/components/marketplace/product-json-ld"
@@ -89,6 +92,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
+      <MobileActionBar
+        title={product.price ? formatPrice(product.price) : "Price on request"}
+        detail={product.name}
+        action="Continue"
+        href={siteConfig.registerUrl}
+      />
+
       <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
         <Container>
           <ProductHeader product={product} category={category} campus={campus} />

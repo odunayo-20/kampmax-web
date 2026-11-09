@@ -162,7 +162,7 @@ function ServiceHeader({
           </div>
 
           {/* Price, and the one next step. */}
-          <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div id="action-card" className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
             <div className="flex flex-col gap-1">
               <p className="font-heading text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
                 {servicePriceLabel(service)}

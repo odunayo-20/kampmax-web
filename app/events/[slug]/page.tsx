@@ -6,6 +6,8 @@ import { getCampuses } from "@/lib/campuses"
 import { categoryOf, getEvent, getEvents } from "@/lib/events"
 import { formatEventDate } from "@/lib/format-event-date"
 import { Container } from "@/components/layout/container"
+import { MobileActionBar } from "@/components/shared/mobile-action-bar"
+import { siteConfig } from "@/config/site"
 import { Section } from "@/components/layout/section"
 import { RelatedEvents, pickRelatedEvents } from "@/components/events/related-events"
 import { EventHeader } from "@/components/events/event-header"
@@ -79,6 +81,13 @@ export default async function EventPage({ params }: EventPageProps) {
 
   return (
     <>
+      <MobileActionBar
+        title={event.priceLabel ?? event.title}
+        detail={formatEventDate(event.date)}
+        action={event.isPast ? "View" : "Join"}
+        href={siteConfig.registerUrl}
+      />
+
       <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
         <Container>
           <EventHeader event={event} category={category} campus={campus} />

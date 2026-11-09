@@ -6,6 +6,8 @@ import { orNullDuringBuild } from "@/lib/api"
 import { getCampuses } from "@/lib/campuses"
 import { getOpportunities, getOpportunity } from "@/lib/jobs"
 import { Container } from "@/components/layout/container"
+import { MobileActionBar } from "@/components/shared/mobile-action-bar"
+import { siteConfig } from "@/config/site"
 import { Section } from "@/components/layout/section"
 import { JobHeader } from "@/components/jobs/job-header"
 import { JobJsonLd } from "@/components/jobs/job-json-ld"
@@ -71,6 +73,13 @@ export default async function JobPage({ params }: JobPageProps) {
 
   return (
     <>
+      <MobileActionBar
+        title={opportunity.title}
+        detail={opportunity.closingDate ? `Closes ${opportunity.closingDate}` : opportunity.organization}
+        action="Apply"
+        href={siteConfig.registerUrl}
+      />
+
       <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
         <Container>
           <JobHeader opportunity={opportunity} type={type} campus={campus} />

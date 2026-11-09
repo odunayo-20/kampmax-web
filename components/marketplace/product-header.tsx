@@ -126,7 +126,7 @@ function ProductHeader({
           </div>
 
           {/* Price, stock and how it gets to you. */}
-          <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div id="action-card" className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
             <div className="flex flex-wrap items-end gap-x-4 gap-y-2">
               <p className="font-heading text-4xl font-extrabold tracking-tight text-foreground">
                 {product.price ? formatPrice(product.price) : "Price on request"}

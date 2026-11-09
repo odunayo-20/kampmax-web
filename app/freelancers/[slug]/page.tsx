@@ -11,6 +11,8 @@ import {
 import { getServicesByFreelancer } from "@/lib/services"
 import { idFromSlug } from "@/lib/slug"
 import { Container } from "@/components/layout/container"
+import { MobileActionBar } from "@/components/shared/mobile-action-bar"
+import { siteConfig } from "@/config/site"
 import { Section } from "@/components/layout/section"
 import {
   RelatedFreelancers,
@@ -91,6 +93,13 @@ export default async function FreelancerPage({ params }: FreelancerPageProps) {
 
   return (
     <>
+      <MobileActionBar
+        title={freelancer.name}
+        detail={freelancer.headline}
+        action="Connect"
+        href={siteConfig.registerUrl}
+      />
+
       <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
         <Container>
           <FreelancerProfile

@@ -5,6 +5,9 @@ import { orNullDuringBuild } from "@/lib/api"
 import { getCampuses } from "@/lib/campuses"
 import { categoryOf, getService, getServices } from "@/lib/services"
 import { Container } from "@/components/layout/container"
+import { MobileActionBar } from "@/components/shared/mobile-action-bar"
+import { siteConfig } from "@/config/site"
+import { servicePriceLabel } from "@/lib/service-price"
 import { Section } from "@/components/layout/section"
 import {
   RelatedServices,
@@ -76,6 +79,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <>
+      <MobileActionBar
+        title={servicePriceLabel(service)}
+        detail={service.name}
+        action="Continue"
+        href={siteConfig.registerUrl}
+      />
+
       <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
         <Container>
           <ServiceHeader

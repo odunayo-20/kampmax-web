@@ -177,7 +177,7 @@ function FreelancerProfile({
 
         {/* Stays in view while the profile scrolls on large screens. */}
         <aside className="flex flex-col gap-4 lg:sticky lg:top-24">
-          <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div id="action-card" className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
             <div className="flex flex-col gap-1">
               <p className="font-heading text-xl font-extrabold tracking-tight text-foreground">
                 Work with {firstName}
