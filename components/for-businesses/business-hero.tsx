@@ -1,54 +1,68 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Briefcase, Calendar, GraduationCap, Store, Users, Wrench } from "lucide-react"
 
-import { BusinessHeroComposition } from "@/components/for-businesses/business-hero-composition"
-import { FadeIn } from "@/components/shared/fade-in"
-import { buttonVariants } from "@/components/ui/button"
-import { Display, Eyebrow, Lead } from "@/components/ui/typography"
+import { HeroCardStack } from "@/components/shared/hero-card-stack"
+import { PageHero, heroActionClass } from "@/components/shared/page-hero"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
+
+const items = [
+  {
+    icon: Store,
+    label: "Merchants",
+    title: "Showcase products",
+    description: "Make your goods discoverable by students",
+  },
+  {
+    icon: Wrench,
+    label: "Service providers",
+    title: "Offer services",
+    description: "Receive direct enquiries from your campus",
+  },
+  {
+    icon: Briefcase,
+    label: "Employers",
+    title: "Recruit talent",
+    description: "Post internships and roles for campus builders",
+  },
+  {
+    icon: Calendar,
+    label: "Organizers",
+    title: "Promote events",
+    description: "Reach the people who show up",
+  },
+]
+
+const points = [
+  { icon: GraduationCap, label: "Active campus audiences" },
+  { icon: Users, label: "Managed in the Kampmax app" },
+]
 
 function BusinessHero() {
   return (
-    <div className="grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:py-28">
-      <div className="flex flex-col gap-7">
-        <Eyebrow>Kampmax for Business</Eyebrow>
-        <Display className="xl:text-7xl">
-          Connect your business directly with campus communities.
-        </Display>
-        <Lead className="max-w-xl sm:text-xl/relaxed">
-          Kampmax gives local merchants, service providers, employers, and
-          entrepreneurs a dedicated public presence to reach active student and
-          campus audiences. Showcase products, offer services, hire talent, and
-          engage where campus life happens every day.
-        </Lead>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <Link
-            href={siteConfig.registerUrl}
-            className={cn(
-              buttonVariants({ variant: "default", size: "lg" }),
-              "h-12 rounded-xl px-8 text-base font-semibold shadow-lg shadow-primary-600/25"
-            )}
-          >
+    <PageHero
+      eyebrow="Kampmax for Business"
+      title={
+        <>
+          Connect your business with{" "}
+          <span className="text-gradient-brand">campus communities.</span>
+        </>
+      }
+      description="Kampmax gives local merchants, service providers, employers, and entrepreneurs a dedicated public presence to reach active student and campus audiences. Showcase products, offer services, hire talent, and engage where campus life happens every day."
+      actions={
+        <>
+          <Link href={siteConfig.registerUrl} className={heroActionClass("primary")}>
             Join Kampmax
             <ArrowRight />
           </Link>
-          <Link
-            href="#how-it-works"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "h-12 rounded-xl px-8 text-base font-semibold"
-            )}
-          >
+          <Link href="#how-it-works" className={heroActionClass("ghost")}>
             See How It Works
           </Link>
-        </div>
-      </div>
-
-      <FadeIn>
-        <BusinessHeroComposition />
-      </FadeIn>
-    </div>
+        </>
+      }
+      points={points}
+    >
+      <HeroCardStack items={items} />
+    </PageHero>
   )
 }
 
