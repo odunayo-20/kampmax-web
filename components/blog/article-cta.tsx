@@ -6,20 +6,20 @@ import { buttonVariants } from "@/components/ui/button"
 
 export function ArticleCta() {
   return (
-    <div className="my-12 rounded-3xl border border-primary/20 bg-gradient-to-br from-primary-950/40 via-card to-card p-6 sm:p-10 relative overflow-hidden">
-      <div className="absolute top-0 right-0 -mt-10 -mr-10 size-48 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+    <div className="my-12 rounded-3xl bg-primary-950 p-6 sm:p-10 relative isolate overflow-hidden text-white">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_100%_0%,rgba(47,128,237,0.45),transparent_70%),radial-gradient(45%_60%_at_0%_100%,rgba(245,158,11,0.18),transparent_70%)]" aria-hidden="true" />
 
       <div className="relative z-10 max-w-xl">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-2xs font-medium text-primary mb-4">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-2xs font-medium text-primary-100 mb-4">
           <Compass className="size-3" aria-hidden="true" />
           <span>The Campus Ecosystem</span>
         </div>
 
-        <h3 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-3">
+        <h3 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-white mb-3">
           Turn Knowledge into Campus Opportunity
         </h3>
 
-        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+        <p className="text-sm sm:text-base text-primary-100/80 leading-relaxed mb-6">
           Whether you offer freelance services, build a student business, or look for verified campus projects, Kampmax gives you direct visibility.
         </p>
 
@@ -31,7 +31,8 @@ export function ArticleCta() {
             className={buttonVariants({
               variant: "default",
               size: "default",
-              className: "h-10 px-5 text-xs sm:text-sm font-medium gap-1.5 shadow-sm",
+              className:
+                "h-10 gap-1.5 bg-accent-500 px-5 text-xs font-bold text-primary-950 shadow-lg shadow-accent-500/25 hover:bg-accent-400 sm:text-sm",
             })}
           >
             <span>Join Kampmax</span>
@@ -43,7 +44,8 @@ export function ArticleCta() {
             className={buttonVariants({
               variant: "outline",
               size: "default",
-              className: "h-10 px-5 text-xs sm:text-sm font-medium",
+              className:
+                "h-10 border-white/25 bg-white/5 px-5 text-xs font-semibold text-white hover:bg-white/10 hover:text-white sm:text-sm",
             })}
           >
             Explore Services

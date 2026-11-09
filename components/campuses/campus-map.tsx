@@ -1,6 +1,8 @@
 import { PlaceMap, type MapPlace } from "@/components/shared/place-map"
 import { env } from "@/config/env"
+import { PLACE_TYPE_LABELS } from "@/lib/places"
 import type { Campus } from "@/types/campus"
+import type { CampusPlace } from "@/types/place"
 
 /** Campuses that have a published position, shaped for the map. */
 function toMapPlaces(campuses: Campus[]): MapPlace[] {
@@ -20,34 +22,42 @@ function toMapPlaces(campuses: Campus[]): MapPlace[] {
   )
 }
 
-/** True when there is something to draw and a key to draw it with. */
-function canShowCampusMap(campuses: Campus[]): boolean {
-  return Boolean(env.mapTilerApiKey) && toMapPlaces(campuses).length > 0
+/** A campus and the named places on it, as map markers. */
+function campusMapPlaces(campus: Campus, places: CampusPlace[]): MapPlace[] {
+  return [
+    // The popup needs no link back to the page the visitor is already on.
+    ...toMapPlaces([campus]).map((place) => ({ ...place, href: undefined })),
+    ...places.map((place) => ({
+      id: place.id,
+      name: place.name,
+      detail: PLACE_TYPE_LABELS[place.type],
+      latitude: place.latitude,
+      longitude: place.longitude,
+    })),
+  ]
 }
 
-/** Map of every campus that has a position. */
-function CampusesMap({ campuses }: { campuses: Campus[] }) {
-  return (
-    <PlaceMap
-      places={toMapPlaces(campuses)}
-      label="Map of Kampmax campuses"
-      className="h-96"
-    />
-  )
+/** True when a campus page has something to draw and a key to draw it with. */
+function canShowCampusMap(campus: Campus, places: CampusPlace[] = []): boolean {
+  return Boolean(env.mapTilerApiKey) && campusMapPlaces(campus, places).length > 0
 }
 
-/** Map centred on a single campus. */
-function CampusLocationMap({ campus }: { campus: Campus }) {
-  const [place] = toMapPlaces([campus])
-  if (!place) return null
-
-  // The popup needs no link back to the page the visitor is already on.
+/** Map centred on a single campus, with its places marked. */
+function CampusLocationMap({
+  campus,
+  places = [],
+}: {
+  campus: Campus
+  places?: CampusPlace[]
+}) {
   return (
     <PlaceMap
-      places={[{ ...place, href: undefined }]}
+      places={campusMapPlaces(campus, places)}
       label={`Map showing ${campus.name}`}
+      // A campus is a few hundred metres across: let the map zoom in to it.
+      maxFitZoom={17}
     />
   )
 }
 
-export { CampusesMap, CampusLocationMap, canShowCampusMap }
+export { CampusLocationMap, canShowCampusMap, toMapPlaces }

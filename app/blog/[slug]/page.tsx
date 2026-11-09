@@ -20,6 +20,7 @@ import { ArticleShare } from "@/components/blog/article-share"
 import { ArticleViewCounter } from "@/components/blog/article-view-counter"
 import { CoverImage } from "@/components/shared/cover-image"
 import { Container } from "@/components/layout/container"
+import { Section } from "@/components/layout/section"
 
 export const revalidate = 300
 
@@ -94,28 +95,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <ArticleReadingProgress />
       <ArticleViewCounter slug={post.slug} />
 
-      <Container className="py-10 sm:py-16">
-        <article className="mx-auto max-w-3xl">
-          <ArticleHeader post={post} />
-          <CoverImage
-            src={post.image}
-            alt={post.title}
-            priority
-            hideWhenMissing
-            sizes="(min-width: 768px) 768px, 100vw"
-            className="mb-10 aspect-video rounded-2xl sm:mb-12"
-          />
-          <ArticleContent html={post.contentHtml} />
-          <ArticleShare title={post.title} slug={post.slug} />
-          <ArticleAuthor author={post.author} />
-          <ArticleAdjacent prev={adjacent.prev} next={adjacent.next} />
-          <ArticleCta />
-        </article>
+      <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
+        <Container className="py-10 sm:py-14">
+          <article className="mx-auto max-w-3xl">
+            <ArticleHeader post={post} />
+            <CoverImage
+              src={post.image}
+              alt={post.title}
+              priority
+              hideWhenMissing
+              sizes="(min-width: 768px) 768px, 100vw"
+              className="mb-10 aspect-video rounded-2xl shadow-lg ring-1 shadow-primary-950/10 ring-black/5 sm:mb-12"
+            />
+            <ArticleContent html={post.contentHtml} />
+            <ArticleShare title={post.title} slug={post.slug} />
+            <ArticleAuthor author={post.author} />
+            <ArticleAdjacent prev={adjacent.prev} next={adjacent.next} />
+            <ArticleCta />
+          </article>
+        </Container>
+      </div>
 
-        <div className="mx-auto max-w-5xl">
-          <ArticleRelated posts={post.related} />
-        </div>
-      </Container>
+      {post.related.length > 0 ? (
+        <Section className="border-t border-border/60">
+          <Container>
+            <ArticleRelated posts={post.related} />
+          </Container>
+        </Section>
+      ) : null}
 
       <ArticleJsonLd post={post} />
     </>

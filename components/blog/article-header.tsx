@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowLeft, Calendar, Clock, RefreshCw } from "lucide-react"
+import { Calendar, ChevronRight, Clock, RefreshCw } from "lucide-react"
 
 import type { BlogPost } from "@/types/blog"
 import { Badge } from "@/components/ui/badge"
@@ -36,18 +36,18 @@ export function ArticleHeader({ post }: ArticleHeaderProps) {
 
   return (
     <header className="mb-10 sm:mb-12 border-b border-border/70 pb-8 sm:pb-10">
-      {/* Back to Blog Navigation */}
-      <nav aria-label="Breadcrumb" className="mb-6">
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground"
+      >
         <Link
           href="/blog"
-          className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          className="rounded-sm font-medium transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
-          <ArrowLeft
-            className="size-3.5 transition-transform group-hover:-translate-x-1"
-            aria-hidden="true"
-          />
-          <span>Back to all insights</span>
+          Blog
         </Link>
+        <ChevronRight className="size-3.5" aria-hidden="true" />
+        <span>{post.category}</span>
       </nav>
 
       {/* Category & Reading Time Meta */}
@@ -62,7 +62,7 @@ export function ArticleHeader({ post }: ArticleHeaderProps) {
       </div>
 
       {/* Article Title */}
-      <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.18] mb-6">
+      <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-balance text-foreground leading-[1.15] mb-6">
         {post.title}
       </h1>
 
@@ -75,7 +75,7 @@ export function ArticleHeader({ post }: ArticleHeaderProps) {
       <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-border/50 text-xs sm:text-sm">
         <div className="flex items-center gap-3">
           <div
-            className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary font-semibold text-xs tracking-wider ring-1 ring-primary/20"
+            className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-primary-600 to-primary-800 text-white font-bold text-xs tracking-wider"
             aria-hidden="true"
           >
             {initials || "KP"}

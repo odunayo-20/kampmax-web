@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 
 import { orNullDuringBuild } from "@/lib/api"
 import { getCampus, getCampuses } from "@/lib/campuses"
+import { getCampusPlaces } from "@/lib/places"
+import { CampusPlacesList } from "@/components/campuses/campus-places-list"
 import { CampusCta } from "@/components/campuses/campus-cta"
 import { CampusDiscover } from "@/components/campuses/campus-discover"
 import { CampusHeader } from "@/components/campuses/campus-header"
@@ -58,15 +60,24 @@ export default async function CampusPage({
     notFound()
   }
 
+  // Campuses saved before places existed have no id on the type; none, no places.
+  const places = campus.id ? await getCampusPlaces(campus.id) : []
+
   return (
     <>
       <Container>
         <CampusHeader campus={campus} />
       </Container>
 
-      {canShowCampusMap([campus]) ? (
+      {canShowCampusMap(campus, places) ? (
         <Container className="pb-16 sm:pb-20">
-          <CampusLocationMap campus={campus} />
+          <CampusLocationMap campus={campus} places={places} />
+        </Container>
+      ) : null}
+
+      {places.length > 0 ? (
+        <Container className="pb-16 sm:pb-20">
+          <CampusPlacesList campus={campus} places={places} />
         </Container>
       ) : null}
 

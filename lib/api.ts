@@ -81,6 +81,29 @@ export async function apiFetch<T>(
 }
 
 /**
+ * Browser GET against the Kampmax API, for things typed by the visitor (search)
+ * that must not be cached or shared between visitors. Returns the unwrapped
+ * `data` payload and throws `ApiError` for non-2xx responses.
+ */
+export async function apiGet<T>(
+  path: string,
+  options?: { query?: Record<string, QueryValue>; signal?: AbortSignal }
+): Promise<T> {
+  const response = await fetch(buildUrl(path, options?.query), {
+    headers: { Accept: "application/json" },
+    cache: "no-store",
+    signal: options?.signal ?? AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+  })
+
+  if (!response.ok) {
+    throw new ApiError(response.status, await readErrorMessage(response))
+  }
+
+  const envelope = (await response.json()) as ApiEnvelope<T>
+  return envelope.data
+}
+
+/**
  * Client or server POST against the Kampmax API. Returns the unwrapped `data`
  * payload and throws `ApiError` for non-2xx responses.
  */

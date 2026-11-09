@@ -21,7 +21,7 @@ export function ArticleAdjacent({ prev, next }: ArticleAdjacentProps) {
       {prev ? (
         <Link
           href={`/blog/${prev.slug}`}
-          className="group flex flex-col justify-between rounded-xl border border-border/70 bg-card p-4 transition-all hover:border-primary/40 hover:bg-card/80"
+          className="group flex flex-col justify-between rounded-2xl border border-border/70 bg-card p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
         >
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground group-hover:text-primary transition-colors mb-2">
             <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
@@ -38,7 +38,7 @@ export function ArticleAdjacent({ prev, next }: ArticleAdjacentProps) {
       {next ? (
         <Link
           href={`/blog/${next.slug}`}
-          className="group flex flex-col justify-between rounded-xl border border-border/70 bg-card p-4 text-right transition-all hover:border-primary/40 hover:bg-card/80 sm:ml-auto w-full"
+          className="group flex flex-col justify-between rounded-2xl border border-border/70 bg-card p-4 text-right shadow-xs transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md sm:ml-auto w-full"
         >
           <div className="flex items-center justify-end gap-1.5 text-xs text-muted-foreground group-hover:text-primary transition-colors mb-2">
             <span>Next Article</span>

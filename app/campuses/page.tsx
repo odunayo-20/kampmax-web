@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { orNullDuringBuild } from "@/lib/api"
 import { getCampuses } from "@/lib/campuses"
 import { CampusGrid } from "@/components/campuses/campus-grid"
-import { CampusesMap, canShowCampusMap } from "@/components/campuses/campus-map"
+import { CampusesExplorer } from "@/components/campuses/campuses-explorer"
 import { CampusesJsonLd } from "@/components/campuses/campuses-json-ld"
 import { DirectoryHero } from "@/components/campuses/directory-hero"
 import { Container } from "@/components/layout/container"
@@ -52,7 +52,7 @@ export default async function CampusesPage() {
             <ApiUnavailable subject="campuses" />
           ) : (
             <>
-              {canShowCampusMap(campuses) ? <CampusesMap campuses={campuses} /> : null}
+              <CampusesExplorer campuses={campuses} />
               <CampusGrid campuses={campuses} />
             </>
           )}
