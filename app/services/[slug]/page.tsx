@@ -5,6 +5,11 @@ import { orNullDuringBuild } from "@/lib/api"
 import { getCampuses } from "@/lib/campuses"
 import { categoryOf, getService, getServices } from "@/lib/services"
 import { Container } from "@/components/layout/container"
+import { Section } from "@/components/layout/section"
+import {
+  RelatedServices,
+  pickRelatedServices,
+} from "@/components/services/related-services"
 import { ServiceHeader } from "@/components/services/service-header"
 import { ServiceJsonLd } from "@/components/services/service-json-ld"
 
@@ -67,15 +72,27 @@ export default async function ServicePage({ params }: ServicePageProps) {
     ? campuses.find((candidate) => candidate.slug === service.campusSlug)
     : undefined
 
+  const related = pickRelatedServices(service, await getServices(campuses))
+
   return (
     <>
-      <Container>
-        <ServiceHeader
-          service={service}
-          category={category}
-          campus={campus}
-        />
-      </Container>
+      <div className="bg-linear-to-b from-primary-50/80 via-background to-background">
+        <Container>
+          <ServiceHeader
+            service={service}
+            category={category}
+            campus={campus}
+          />
+        </Container>
+      </div>
+
+      {related.length > 0 ? (
+        <Section className="border-t border-border/60">
+          <Container>
+            <RelatedServices services={related} campuses={campuses} />
+          </Container>
+        </Section>
+      ) : null}
 
       <ServiceJsonLd service={service} />
     </>

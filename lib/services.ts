@@ -1,4 +1,5 @@
 import { ApiError, apiFetch, resolveMediaUrl } from "@/lib/api"
+import { deliveryLabel } from "@/lib/service-price"
 import { idFromSlug, slugify, slugWithId } from "@/lib/slug"
 import type { Campus } from "@/types/campus"
 import type { Service, ServiceCategory } from "@/types/service"
@@ -148,9 +149,15 @@ export function toService(
     providerSlug,
     campusSlug,
     priceFrom: item.startingPrice !== null && item.startingPrice !== undefined ? Number(item.startingPrice) : undefined,
+    priceMax:
+      item.priceMax !== null && item.priceMax !== undefined
+        ? Number(item.priceMax)
+        : undefined,
     pricingModel: item.pricingModel,
     currency: item.currency,
     deliveryDays: item.deliveryDays ?? undefined,
+    deliveryLabel: deliveryLabel(item.deliveryValue, item.deliveryUnit, item.deliveryDays),
+    revisions: item.revisions ?? undefined,
     skills: item.skills ?? [],
     deliverables: item.deliverables ?? [],
     packages: item.packages?.map((pkg) => ({

@@ -76,7 +76,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${jakarta.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      {/* Browser extensions (Grammarly and similar) add attributes to <body> before
+          React loads; without this, React logs a hydration mismatch for them. It only
+          covers <body>'s own attributes, not anything rendered inside it. */}
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

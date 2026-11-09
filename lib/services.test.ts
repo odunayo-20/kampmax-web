@@ -92,6 +92,27 @@ describe("toService categories", () => {
   })
 })
 
+describe("toService price and delivery", () => {
+  it("carries the delivery time in the provider's own unit, revisions and the price range", () => {
+    const service = toService(
+      { ...api("6", null), deliveryValue: 4, deliveryUnit: "WEEKS", deliveryDays: 28, revisions: 2, priceMax: 25000 },
+      [],
+      undefined,
+      groups
+    )
+    expect(service.deliveryLabel).toBe("4 weeks")
+    expect(service.revisions).toBe(2)
+    expect(service.priceMax).toBe(25000)
+  })
+
+  it("leaves them out when the API has none", () => {
+    const service = toService({ ...api("7", null), deliveryValue: null, deliveryDays: null }, [], undefined, groups)
+    expect(service.deliveryLabel).toBeUndefined()
+    expect(service.revisions).toBeUndefined()
+    expect(service.priceMax).toBeUndefined()
+  })
+})
+
 describe("directoryServiceCategories", () => {
   const svc = (id: string, category: { id: string; name: string } | null) =>
     toService(api(id, category), [], undefined, groups)

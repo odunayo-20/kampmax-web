@@ -37,9 +37,15 @@ export type Service = {
   campusSlug?: string
   /** Starting price in Naira. Omit to represent a quote-based/inquiry-based listing. */
   priceFrom?: number
+  /** Upper end of the price range, when the provider set one. */
+  priceMax?: number
   pricingModel?: "FIXED" | "STARTING_AT" | "HOURLY" | "PROJECT" | string
   currency?: string
   deliveryDays?: number
+  /** Delivery time in the provider's own unit, e.g. "4 weeks". */
+  deliveryLabel?: string
+  /** Revisions included in the price. */
+  revisions?: number
   skills?: string[]
   deliverables?: string[]
   packages?: ServicePackage[]

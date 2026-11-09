@@ -6,7 +6,7 @@ import { ServiceCoverFallback } from "@/components/services/service-cover-fallba
 import { CoverImage } from "@/components/shared/cover-image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { formatPrice } from "@/lib/format-price"
+import { servicePriceLabel } from "@/lib/service-price"
 import type { Campus } from "@/types/campus"
 import type { Service, ServiceCategory } from "@/types/service"
 
@@ -71,11 +71,7 @@ function ServiceCard({
 
           <div className="mt-auto flex items-center justify-between gap-2 border-t border-border/60 pt-3">
             <span className="font-heading text-base font-extrabold tracking-tight text-foreground">
-              {service.priceFrom
-                ? `From ${formatPrice(service.priceFrom)}${
-                    service.pricingModel === "HOURLY" ? "/hr" : ""
-                  }`
-                : "Price on request"}
+              {servicePriceLabel(service)}
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-3 py-1.5 text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
               View
