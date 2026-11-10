@@ -12,9 +12,7 @@ import { formatPrice } from "@/lib/format-price"
 import { siteConfig } from "@/config/site"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
-import { CampusEcosystem } from "@/components/home/campus-ecosystem"
 import { DiscoverGrid } from "@/components/home/discover-grid"
-import { EventsCommunity } from "@/components/home/events-community"
 import { FeaturedProducts } from "@/components/home/featured-products"
 import { FinalCta } from "@/components/home/final-cta"
 import { ForBusinesses } from "@/components/home/for-businesses"
@@ -153,12 +151,6 @@ export default async function Home() {
         </Section>
       )}
 
-      <Section>
-        <Container>
-          <CampusEcosystem campuses={data?.campuses} />
-        </Container>
-      </Section>
-
       <div className="border-y border-border bg-neutral-50">
         <Section>
           <Container>
@@ -170,12 +162,6 @@ export default async function Home() {
       <Section>
         <Container>
           <ForBusinesses />
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <EventsCommunity event={topEvent} />
         </Container>
       </Section>
 
