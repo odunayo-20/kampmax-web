@@ -83,6 +83,7 @@ export const footerNavGroups: NavGroup[] = [
     items: [
       { title: "For Businesses", href: "/for-businesses" },
       { title: "Become a Vendor", href: "/become-a-vendor" },
+      { title: "Become an Accommodation Agent", href: "/become-an-agent" },
       {
         title: "Become a Service Provider",
         href: "/become-a-vendor#service-providers",
