@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { securityHeaders } from "./security-headers.cjs";
 
 /**
  * Hosts `next/image` may load remote images from. Media uploaded through the
@@ -34,6 +35,10 @@ function imageHostnames(): { protocol: "http" | "https"; hostname: string; port?
 }
 
 const nextConfig: NextConfig = {
+  async headers() {
+    // Staged Content-Security-Policy and the other browser security headers: see security-headers.cjs.
+    return [{ source: "/(.*)", headers: securityHeaders({ isDev: process.env.NODE_ENV !== "production" }) }];
+  },
   images: {
     remotePatterns: imageHostnames(),
     // The optimizer refuses localhost by default; the local backend serves
