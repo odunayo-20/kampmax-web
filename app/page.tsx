@@ -12,25 +12,65 @@ import { formatPrice } from "@/lib/format-price"
 import { siteConfig } from "@/config/site"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
+import { CampusEcosystem } from "@/components/home/campus-ecosystem"
 import { DiscoverGrid } from "@/components/home/discover-grid"
+import { EventsCommunity } from "@/components/home/events-community"
 import { FeaturedProducts } from "@/components/home/featured-products"
 import { FinalCta } from "@/components/home/final-cta"
 import { ForBusinesses } from "@/components/home/for-businesses"
 import { Hero } from "@/components/home/hero"
+import { HomeJsonLd } from "@/components/home/home-json-ld"
 import { HowItWorks } from "@/components/home/how-it-works"
 import { LatestArticles } from "@/components/home/latest-articles"
-import { Opportunities } from "@/components/home/opportunities"
+import { LiveStats } from "@/components/home/live-stats"
 import { TrustValues } from "@/components/home/trust-values"
-import { WhatIsKampmax } from "@/components/home/what-is-kampmax"
 
 export const revalidate = 300
 
+// Search-facing copy: the words people actually type (marketplace, jobs,
+// services, events, campus) up front, kept under ~60 characters for the title
+// and ~160 for the description so neither is cut off in results.
+const homeTitle = "Kampmax | Campus Marketplace, Jobs, Services & Events"
+const homeDescription =
+  "Buy and sell, find jobs, hire freelancers and book services, and discover events around your campus. One platform for students, businesses and organizers."
+
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
-  description: siteConfig.description,
+  title: { absolute: homeTitle },
+  description: homeDescription,
   alternates: {
     canonical: "/",
   },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: siteConfig.name,
+    title: homeTitle,
+    description: homeDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description: homeDescription,
+  },
+}
+
+/**
+ * Loads a part of the page that is nice to have. If it fails the page still
+ * renders without it, and the failure is logged. The parts every visitor needs
+ * (campuses, products, events) are not loaded this way: a page missing those
+ * would be cached for minutes, so those errors are allowed to surface.
+ */
+async function optional<T>(name: string, load: () => Promise<T[]>): Promise<T[]> {
+  try {
+    return await load()
+  } catch (error) {
+    console.warn(
+      `[home] Rendering without ${name}: ${
+        error instanceof Error ? error.message : String(error)
+      }`
+    )
+    return []
+  }
 }
 
 export default async function Home() {
@@ -48,10 +88,10 @@ export default async function Home() {
       getProducts(campuses),
       getProductCategories(),
       getEvents(campuses),
-      getOpportunities(campuses),
-      getFreelancers(campuses),
-      getServices(campuses),
-      getAllPosts(),
+      optional("jobs", () => getOpportunities(campuses)),
+      optional("freelancers", () => getFreelancers(campuses)),
+      optional("services", () => getServices(campuses)),
+      optional("articles", () => getAllPosts()),
     ])
     return {
       campuses,
@@ -82,7 +122,9 @@ export default async function Home() {
 
   return (
     <>
+      <HomeJsonLd />
       <Hero
+        campuses={data?.campuses}
         product={
           topProduct
             ? {
@@ -119,11 +161,7 @@ export default async function Home() {
         }
       />
 
-      <Section>
-        <Container>
-          <WhatIsKampmax />
-        </Container>
-      </Section>
+      <LiveStats counts={counts} />
 
       <div className="border-y border-border bg-primary-50/70">
         <Section>
@@ -151,13 +189,23 @@ export default async function Home() {
         </Section>
       )}
 
-      <div className="border-y border-border bg-neutral-50">
+      {topEvent && (
+        <div className="border-y border-border bg-neutral-50">
+          <Section>
+            <Container>
+              <EventsCommunity event={topEvent} />
+            </Container>
+          </Section>
+        </div>
+      )}
+
+      {data && data.campuses.length > 0 && (
         <Section>
           <Container>
-            <Opportunities />
+            <CampusEcosystem campuses={data.campuses} />
           </Container>
         </Section>
-      </div>
+      )}
 
       <Section>
         <Container>

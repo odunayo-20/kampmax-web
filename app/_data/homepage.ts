@@ -23,8 +23,7 @@ export type DiscoveryItem = {
 
 /**
  * The "Discover what you need" category grid. `href` points at each
- * category's future public route , not built yet, but the routing
- * strategy (and the global not-found page) already supports it.
+ * category's public route.
  */
 export const discoveryItems: DiscoveryItem[] = [
   {

@@ -407,12 +407,15 @@ button:focus-visible,
   }
 }
 
+/* Decorative drift on hero cards. It settles after a few cycles instead of
+   running forever: moving content that starts on its own and never stops
+   fails WCAG 2.2.2 and keeps the compositor busy for nothing. */
 .animate-float {
-  animation: float-slow 7s ease-in-out infinite;
+  animation: float-slow 7s ease-in-out 3;
 }
 
 .animate-float-delayed {
-  animation: float-slow 8s ease-in-out -3s infinite;
+  animation: float-slow 8s ease-in-out -3s 3;
 }
 
 /* Faint blueprint grid for dark sections, fading out toward the edges. */
@@ -438,12 +441,14 @@ button:focus-visible,
   word-spacing: 0.06em;
 }
 
-/* Blue-to-gold gradient for one highlighted phrase in a headline. */
+/* Blue-to-gold gradient for one highlighted phrase in a headline. Every stop
+   keeps at least 3:1 contrast (the large-text minimum) against the hero's
+   blue backdrop; the old #5BA3F5 start was 1.9:1. */
 .text-gradient-brand {
   background-image: linear-gradient(
     100deg,
-    var(--color-primary-400),
-    #8ec5ff 40%,
+    #bbd9ff,
+    #dcebff 40%,
     var(--color-accent-400)
   );
   -webkit-background-clip: text;

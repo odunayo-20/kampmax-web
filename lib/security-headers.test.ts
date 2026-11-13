@@ -33,6 +33,23 @@ describe("marketing site security headers", () => {
     expect(d("worker-src")).toContain("blob:")
   })
 
+  it("allows Google Analytics only when a valid measurement ID is configured", () => {
+    const part = (full: string, name: string) =>
+      full.split("; ").find((x) => x.startsWith(`${name} `)) ?? ""
+
+    const off = buildCsp({ env }).full
+    expect(off).not.toContain("googletagmanager")
+    expect(off).not.toContain("google-analytics")
+
+    const bad = buildCsp({ env: { ...env, NEXT_PUBLIC_GA_MEASUREMENT_ID: "not-an-id; script-src *" } }).full
+    expect(bad).not.toContain("googletagmanager")
+
+    const on = buildCsp({ env: { ...env, NEXT_PUBLIC_GA_MEASUREMENT_ID: "G-ABC123XYZ9" } }).full
+    expect(part(on, "script-src")).toContain("https://www.googletagmanager.com")
+    expect(part(on, "connect-src")).toContain("https://www.google-analytics.com")
+    expect(part(on, "img-src")).toContain("https://www.google-analytics.com")
+  })
+
   it("keeps eval and hot-reload sockets to development only, and never opens the camera", () => {
     expect(buildCsp({ env }).full).not.toContain("unsafe-eval")
     expect(buildCsp({ env, isDev: true }).full).toContain("'unsafe-eval'")

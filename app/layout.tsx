@@ -4,6 +4,7 @@ import { Geist_Mono, Inter, Plus_Jakarta_Sans } from "next/font/google"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { CookieConsent } from "@/components/legal/cookie-consent"
+import { Analytics } from "@/components/shared/analytics"
 import { siteConfig } from "@/config/site"
 
 import "./globals.css"
@@ -53,20 +54,14 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-    images: [
-      {
-        url: "/icon-512.png",
-        width: 512,
-        height: 512,
-        alt: `${siteConfig.name} Logo`,
-      },
-    ],
+    locale: "en_NG",
+    // The preview image comes from app/opengraph-image.tsx and
+    // app/twitter-image.tsx; setting `images` here would override them.
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/icon-512.png"],
   },
 }
 
@@ -84,6 +79,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <SiteFooter />
         <CookieConsent />
+        <Analytics />
       </body>
     </html>
   )

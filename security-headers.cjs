@@ -34,11 +34,26 @@ function buildCsp({ env = process.env, isDev = false } = {}) {
     .filter(Boolean)
     .map((h) => `https://${h}`);
 
+  // Google Analytics, allowed only when a measurement ID is configured.
+  const analytics = /^G-[A-Z0-9]{4,20}$/.test(env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "");
+  const gaScript = analytics ? ["https://www.googletagmanager.com"] : [];
+  const gaImg = analytics
+    ? ["https://www.googletagmanager.com", "https://www.google-analytics.com"]
+    : [];
+  const gaConnect = analytics
+    ? [
+        "https://www.googletagmanager.com",
+        "https://www.google-analytics.com",
+        "https://*.google-analytics.com",
+        "https://*.analytics.google.com",
+      ]
+    : [];
+
   const full = [
     ["default-src", "'self'"],
-    ["script-src", "'self'", "'unsafe-inline'", ...(isDev ? ["'unsafe-eval'"] : [])],
+    ["script-src", "'self'", "'unsafe-inline'", ...gaScript, ...(isDev ? ["'unsafe-eval'"] : [])],
     ["style-src", "'self'", "'unsafe-inline'"],
-    ["img-src", "'self'", "data:", "blob:", api, "https://res.cloudinary.com", ...hosts],
+    ["img-src", "'self'", "data:", "blob:", api, "https://res.cloudinary.com", ...hosts, ...gaImg],
     // next/font self-hosts the Google fonts at build time.
     ["font-src", "'self'", "data:"],
     [
@@ -47,6 +62,7 @@ function buildCsp({ env = process.env, isDev = false } = {}) {
       api,
       // MapLibre loads its style, tiles, sprites and glyphs from MapTiler.
       "https://api.maptiler.com",
+      ...gaConnect,
       ...(isDev ? ["ws://localhost:*", "http://localhost:*"] : []),
     ],
     ["worker-src", "'self'", "blob:"],

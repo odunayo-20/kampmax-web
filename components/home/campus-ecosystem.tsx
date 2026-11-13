@@ -6,26 +6,15 @@ import { Eyebrow, H2, Lead } from "@/components/ui/typography"
 import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 
-const fallbackPlaces = [
-  { name: "UNILAG", location: "Akoka, Lagos" },
-  { name: "OAU", location: "Ile-Ife, Osun" },
-  { name: "RUGIPO", location: "Owo, Ondo" },
-  { name: "UI", location: "Ibadan, Oyo" },
-]
-
+/** Left out when there are no campuses: never show campuses that are not on the platform. */
 function CampusEcosystem({ campuses = [] }: { campuses?: Campus[] }) {
-  const displayCampuses =
-    campuses.length > 0
-      ? campuses.slice(0, 4).map((c) => ({
-          name: c.shortName,
-          location: c.location ?? c.name,
-          slug: c.slug,
-        }))
-      : fallbackPlaces.map((p) => ({
-          name: p.name,
-          location: p.location,
-          slug: p.name.toLowerCase(),
-        }))
+  if (campuses.length === 0) return null
+
+  const displayCampuses = campuses.slice(0, 4).map((c) => ({
+    name: c.shortName,
+    location: c.location ?? c.name,
+    slug: c.slug,
+  }))
 
   return (
     <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">

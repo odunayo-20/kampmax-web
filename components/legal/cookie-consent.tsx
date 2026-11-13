@@ -5,8 +5,12 @@ import Link from "next/link"
 import { Check, Cookie, Shield, Sliders, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import {
+  COOKIE_PREFERENCES_CHANGED_EVENT,
+  COOKIE_PREFERENCES_STORAGE_KEY,
+} from "@/lib/analytics"
 
-export const COOKIE_PREFERENCES_STORAGE_KEY = "kampmax_cookie_preferences"
+export { COOKIE_PREFERENCES_STORAGE_KEY }
 export const COOKIE_CONSENT_EVENT = "kampmax:open-cookie-preferences"
 
 export interface CookiePreferences {
@@ -91,6 +95,8 @@ export function CookieConsent() {
       } catch {
         // storage disabled or quota exceeded
       }
+      // Tell the analytics loader the choice changed (it loads or stops collecting).
+      window.dispatchEvent(new CustomEvent(COOKIE_PREFERENCES_CHANGED_EVENT))
       setAnalyticsConsent(analytics)
       setMarketingConsent(marketing)
       setHasInteracted(true)
