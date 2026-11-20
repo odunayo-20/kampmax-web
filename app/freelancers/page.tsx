@@ -40,7 +40,7 @@ export default async function FreelancersPage() {
       <FreelancerHero freelancers={listing?.freelancers ?? []} />
 
       <Container id="browse" className="scroll-mt-16">
-        <div className="flex flex-col gap-8 py-16 sm:py-20 lg:py-24">
+        <div className="flex flex-col gap-6 sm:gap-8 py-10 sm:py-16 lg:py-20">
           <SectionHeading
             eyebrow="Directory"
             title="Independent talent"

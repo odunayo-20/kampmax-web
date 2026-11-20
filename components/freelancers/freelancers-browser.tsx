@@ -96,8 +96,8 @@ function FreelancersBrowser({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-3 shadow-sm sm:gap-4 sm:p-5">
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
           <div className="w-full max-w-sm">
             <Label htmlFor={searchId} className="sr-only">
               Search freelancers
@@ -113,7 +113,7 @@ function FreelancersBrowser({
                 placeholder="Search by name, skill, or role"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="h-10 pl-8"
+                className="h-9 sm:h-10 pl-8 text-xs sm:text-sm"
               />
             </div>
           </div>
@@ -130,7 +130,7 @@ function FreelancersBrowser({
               id={campusSelectId}
               value={campusSlug}
               onChange={(event) => setCampusSlug(event.target.value)}
-              className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              className="h-9 sm:h-10 rounded-lg border border-input bg-background px-3 py-1 text-xs sm:text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               <option value={ALL_CAMPUSES}>All Campuses</option>
               {campuses.map((campus) => (
@@ -146,7 +146,7 @@ function FreelancersBrowser({
         <div
           role="group"
           aria-label="Filter by skill area"
-          className="flex flex-wrap gap-2"
+          className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:flex-wrap sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           <button
             type="button"
@@ -157,7 +157,7 @@ function FreelancersBrowser({
                 variant: categorySlug === ALL_CATEGORIES ? "default" : "outline",
                 size: "sm",
               }),
-              "rounded-full"
+              "h-8 shrink-0 rounded-full px-3 text-xs whitespace-nowrap"
             )}
           >
             All
@@ -173,7 +173,7 @@ function FreelancersBrowser({
                   variant: categorySlug === category.slug ? "default" : "outline",
                   size: "sm",
                 }),
-                "rounded-full"
+                "h-8 shrink-0 rounded-full px-3 text-xs whitespace-nowrap"
               )}
             >
               {category.name}
@@ -210,7 +210,7 @@ function FreelancersBrowser({
             Showing {filteredFreelancers.length} of {freelancers.length}{" "}
             {freelancers.length === 1 ? "freelancer" : "freelancers"}
           </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
             {filteredFreelancers.map((freelancer) => (
               <FreelancerCard
                 key={freelancer.slug}

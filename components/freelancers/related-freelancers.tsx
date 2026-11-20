@@ -47,7 +47,7 @@ function RelatedFreelancers({
         </Link>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
         {freelancers.map((freelancer, index) => (
           <FadeIn key={freelancer.slug} delay={index * 0.07} className="h-full">
             <FreelancerCard
