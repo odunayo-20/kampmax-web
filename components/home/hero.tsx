@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, MapPin } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 import {
   HeroCollage,
@@ -12,26 +12,13 @@ import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
-type HeroCampus = {
-  slug: string
-  shortName: string
-  name: string
-}
-
 type HeroProps = {
   product?: HeroProduct
   job?: HeroJob
   event?: HeroEvent
-  /** Campuses to offer as a one-tap way in. The row is left out when empty. */
-  campuses?: HeroCampus[]
 }
 
-/** How many campus chips fit before the row turns into a wall of buttons. */
-const MAX_CAMPUS_CHIPS = 4
-
-function Hero({ product, job, event, campuses = [] }: HeroProps) {
-  const chips = campuses.slice(0, MAX_CAMPUS_CHIPS)
-
+function Hero({ product, job, event }: HeroProps) {
   return (
     <section className="relative isolate overflow-hidden bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
       {/* Backdrop: light-blue glow top right, warm gold glow bottom left, faint grid. */}
@@ -78,55 +65,6 @@ function Hero({ product, job, event, campuses = [] }: HeroProps) {
               See what&apos;s live
             </Link>
           </div>
-
-          {chips.length > 0 ? (
-            <nav aria-label="Choose your campus" className="flex flex-col gap-3">
-              <p className="flex items-center gap-1.5 text-sm font-semibold text-primary-50">
-                <MapPin className="size-4 text-accent-400" aria-hidden="true" />
-                Pick your campus
-              </p>
-              <ul className="flex flex-wrap gap-2">
-                {chips.map((campus) => (
-                  <li key={campus.slug}>
-                    <Link
-                      href={`/campuses/${campus.slug}`}
-                      title={campus.name}
-                      data-track="campus_chip_click"
-                      data-track-location={campus.slug}
-                      className="inline-flex h-10 items-center rounded-full border border-white/25 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400"
-                    >
-                      {campus.shortName}
-                    </Link>
-                  </li>
-                ))}
-                {campuses.length > chips.length ? (
-                  <li>
-                    <Link
-                      href="/campuses"
-                      data-track="campus_chip_click"
-                      data-track-location="all_campuses"
-                      className="inline-flex h-10 items-center gap-1 rounded-full px-3 text-sm font-semibold text-accent-400 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400"
-                    >
-                      All campuses
-                      <ArrowRight className="size-3.5" aria-hidden="true" />
-                    </Link>
-                  </li>
-                ) : null}
-              </ul>
-            </nav>
-          ) : null}
-
-          <p className="text-sm text-primary-50">
-            Selling, offering a service, or hiring?{" "}
-            <Link
-              href="/for-businesses"
-              data-track="cta_click"
-              data-track-location="hero_for_businesses"
-              className="font-semibold text-white underline decoration-accent-400/70 underline-offset-4 transition-colors hover:decoration-accent-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-400"
-            >
-              Start here
-            </Link>
-          </p>
         </div>
 
         {/*

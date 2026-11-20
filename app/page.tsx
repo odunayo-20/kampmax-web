@@ -22,7 +22,6 @@ import { Hero } from "@/components/home/hero"
 import { HomeJsonLd } from "@/components/home/home-json-ld"
 import { HowItWorks } from "@/components/home/how-it-works"
 import { LatestArticles } from "@/components/home/latest-articles"
-import { LiveStats } from "@/components/home/live-stats"
 import { TrustValues } from "@/components/home/trust-values"
 
 export const revalidate = 300
@@ -124,7 +123,6 @@ export default async function Home() {
     <>
       <HomeJsonLd />
       <Hero
-        campuses={data?.campuses}
         product={
           topProduct
             ? {
@@ -160,8 +158,6 @@ export default async function Home() {
             : undefined
         }
       />
-
-      <LiveStats counts={counts} />
 
       <div className="border-y border-border bg-primary-50/70">
         <Section>
