@@ -174,8 +174,8 @@ export default async function Home() {
       </Section>
 
       {data && data.products.length > 0 && (
-        <Section>
-          <Container>
+        <Section className="overflow-hidden">
+          <Container className="overflow-hidden">
             <FeaturedProducts
               products={data.products}
               campuses={data.campuses}
