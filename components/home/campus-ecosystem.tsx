@@ -23,7 +23,7 @@ function CampusEcosystem({ campuses = [] }: { campuses?: Campus[] }) {
         <H2>Organized by campus, not a generic national feed.</H2>
         <Lead>
           What you see on Kampmax reflects what&apos;s actually happening around
-          you , find people, products, services, and opportunities close to where
+          you — find people, products, services, and opportunities close to where
           you study and live.
         </Lead>
         <div>
@@ -43,14 +43,14 @@ function CampusEcosystem({ campuses = [] }: { campuses?: Campus[] }) {
       <div className="grid grid-cols-2 gap-3 sm:max-w-sm sm:justify-self-end">
         {displayCampuses.map((place) => (
           <Link
-            key={place.name}
+            key={place.slug}
             href={`/campuses/${place.slug}`}
-            className="group flex flex-col items-center gap-2 rounded-xl border border-border bg-card px-4 py-6 text-center text-sm font-medium text-foreground shadow-xs ring-1 ring-accent-500/15 transition-all hover:border-primary/40 hover:shadow-sm"
+            className="group flex flex-col items-center gap-2 rounded-xl border border-border bg-card px-4 py-6 text-center text-sm font-medium text-foreground shadow-xs ring-1 ring-accent-500/15 transition-all hover:border-primary/40 hover:shadow-sm min-w-0"
           >
             <span className="flex size-8 items-center justify-center rounded-lg bg-primary-50 text-primary-600 transition-colors group-hover:bg-primary-100">
               <MapPin className="size-4" aria-hidden="true" />
             </span>
-            <span className="font-heading font-semibold text-foreground group-hover:text-primary transition-colors">
+            <span className="font-heading font-semibold text-foreground group-hover:text-primary transition-colors truncate max-w-full">
               {place.name}
             </span>
             <span className="line-clamp-1 text-xs text-muted-foreground">

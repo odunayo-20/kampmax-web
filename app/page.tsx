@@ -17,7 +17,6 @@ import { DiscoverGrid } from "@/components/home/discover-grid"
 import { EventsCommunity } from "@/components/home/events-community"
 import { FeaturedProducts } from "@/components/home/featured-products"
 import { FinalCta } from "@/components/home/final-cta"
-import { ForBusinesses } from "@/components/home/for-businesses"
 import { Hero } from "@/components/home/hero"
 import { HomeJsonLd } from "@/components/home/home-json-ld"
 import { HowItWorks } from "@/components/home/how-it-works"
@@ -202,12 +201,6 @@ export default async function Home() {
           </Container>
         </Section>
       )}
-
-      <Section>
-        <Container>
-          <ForBusinesses />
-        </Container>
-      </Section>
 
       {data && data.posts.length > 0 && (
         <div className="border-t border-border bg-neutral-50">
