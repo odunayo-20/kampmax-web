@@ -117,9 +117,9 @@ function MarketplaceBrowser({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
+      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="w-full max-w-sm">
+          <div className="w-full sm:max-w-sm">
             <Label htmlFor={searchId} className="sr-only">
               Search products
             </Label>
@@ -134,17 +134,17 @@ function MarketplaceBrowser({
                 placeholder="Search products"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="h-10 pl-8"
+                className="h-9 sm:h-10 pl-8 text-xs sm:text-sm"
               />
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-3">
             {campuses.length > 0 && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <Label
                   htmlFor={campusSelectId}
-                  className="text-xs font-medium text-muted-foreground whitespace-nowrap"
+                  className="text-xs font-medium text-muted-foreground whitespace-nowrap sr-only sm:not-sr-only"
                 >
                   Campus:
                 </Label>
@@ -152,7 +152,7 @@ function MarketplaceBrowser({
                   id={campusSelectId}
                   value={campusSlug}
                   onChange={(event) => setCampusSlug(event.target.value)}
-                  className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                  className="h-9 sm:h-10 w-full rounded-lg border border-input bg-background px-2.5 sm:px-3 text-xs sm:text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 >
                   <option value={ALL_CAMPUSES}>All Campuses</option>
                   {campuses.map((campus) => (
@@ -164,18 +164,18 @@ function MarketplaceBrowser({
               </div>
             )}
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <Label
                 htmlFor={sortId}
-                className="text-xs font-medium text-muted-foreground whitespace-nowrap"
+                className="text-xs font-medium text-muted-foreground whitespace-nowrap sr-only sm:not-sr-only"
               >
-                Sort by:
+                Sort:
               </Label>
               <select
                 id={sortId}
                 value={sort}
                 onChange={(event) => setSort(event.target.value as SortOption)}
-                className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                className="h-9 sm:h-10 w-full rounded-lg border border-input bg-background px-2.5 sm:px-3 text-xs sm:text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
                 {sortOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -190,7 +190,7 @@ function MarketplaceBrowser({
         <div
           role="group"
           aria-label="Filter by category"
-          className="flex flex-wrap gap-2"
+          className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 py-1 sm:flex-wrap"
         >
           <button
             type="button"
@@ -201,7 +201,7 @@ function MarketplaceBrowser({
                 variant: categorySlug === ALL_CATEGORIES ? "default" : "outline",
                 size: "sm",
               }),
-              "rounded-full"
+              "shrink-0 rounded-full text-xs sm:text-sm h-8"
             )}
           >
             All
@@ -217,7 +217,7 @@ function MarketplaceBrowser({
                   variant: categorySlug === category.slug ? "default" : "outline",
                   size: "sm",
                 }),
-                "rounded-full"
+                "shrink-0 rounded-full text-xs sm:text-sm h-8"
               )}
             >
               {category.name}
@@ -249,11 +249,11 @@ function MarketplaceBrowser({
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Showing {sortedProducts.length} of {products.length}{" "}
             {products.length === 1 ? "listing" : "listings"}
           </p>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
             {sortedProducts.map((product) => (
               <ProductCard
                 key={product.slug}

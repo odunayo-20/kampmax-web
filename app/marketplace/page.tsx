@@ -47,7 +47,7 @@ export default async function MarketplacePage() {
       <MarketplaceHero products={listing?.products ?? []} />
 
       <Container>
-        <div id="browse" className="flex scroll-mt-16 flex-col gap-8 py-16 sm:py-20 lg:py-24">
+        <div id="browse" className="flex scroll-mt-16 flex-col gap-6 sm:gap-8 py-10 sm:py-20 lg:py-24">
           <SectionHeading
             eyebrow="Browse"
             title="Everything on the marketplace"
