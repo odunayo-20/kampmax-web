@@ -97,9 +97,9 @@ function ServicesBrowser({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
+      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="w-full max-w-sm">
+          <div className="w-full sm:max-w-sm">
             <Label htmlFor={searchId} className="sr-only">
               Search services
             </Label>
@@ -114,40 +114,40 @@ function ServicesBrowser({
                 placeholder="Search services or providers"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="h-10 pl-8"
+                className="h-9 sm:h-10 pl-8 text-xs sm:text-sm"
               />
             </div>
           </div>
 
           {campuses.length > 0 ? (
-          <div className="flex items-center gap-2">
-            <Label
-              htmlFor={campusSelectId}
-              className="text-xs font-medium text-muted-foreground whitespace-nowrap"
-            >
-              Campus:
-            </Label>
-            <select
-              id={campusSelectId}
-              value={campusSlug}
-              onChange={(event) => setCampusSlug(event.target.value)}
-              className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              <option value={ALL_CAMPUSES}>All Campuses</option>
-              {campuses.map((campus) => (
-                <option key={campus.slug} value={campus.slug}>
-                  {campus.shortName}
-                </option>
-              ))}
-            </select>
-          </div>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <Label
+                htmlFor={campusSelectId}
+                className="text-xs font-medium text-muted-foreground whitespace-nowrap sr-only sm:not-sr-only"
+              >
+                Campus:
+              </Label>
+              <select
+                id={campusSelectId}
+                value={campusSlug}
+                onChange={(event) => setCampusSlug(event.target.value)}
+                className="h-9 sm:h-10 w-full rounded-lg border border-input bg-background px-2.5 sm:px-3 text-xs sm:text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
+              >
+                <option value={ALL_CAMPUSES}>All Campuses</option>
+                {campuses.map((campus) => (
+                  <option key={campus.slug} value={campus.slug}>
+                    {campus.shortName}
+                  </option>
+                ))}
+              </select>
+            </div>
           ) : null}
         </div>
 
         <div
           role="group"
           aria-label="Filter by category"
-          className="flex flex-wrap gap-2"
+          className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 py-1 sm:flex-wrap"
         >
           <button
             type="button"
@@ -158,7 +158,7 @@ function ServicesBrowser({
                 variant: categorySlug === ALL_CATEGORIES ? "default" : "outline",
                 size: "sm",
               }),
-              "rounded-full"
+              "shrink-0 rounded-full text-xs sm:text-sm h-8"
             )}
           >
             All
@@ -174,7 +174,7 @@ function ServicesBrowser({
                   variant: categorySlug === category.slug ? "default" : "outline",
                   size: "sm",
                 }),
-                "rounded-full"
+                "shrink-0 rounded-full text-xs sm:text-sm h-8"
               )}
             >
               {category.name}
@@ -206,19 +206,25 @@ function ServicesBrowser({
           )}
         </div>
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredServices.map((service) => (
-            <ServiceCard
-              key={service.slug}
-              service={service}
-              category={categoryBySlug.get(service.categorySlug)}
-              campus={
-                service.campusSlug
-                  ? campusBySlug.get(service.campusSlug)
-                  : undefined
-              }
-            />
-          ))}
+        <div className="flex flex-col gap-4">
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            Showing {filteredServices.length} of {services.length}{" "}
+            {services.length === 1 ? "service" : "services"}
+          </p>
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
+            {filteredServices.map((service) => (
+              <ServiceCard
+                key={service.slug}
+                service={service}
+                category={categoryBySlug.get(service.categorySlug)}
+                campus={
+                  service.campusSlug
+                    ? campusBySlug.get(service.campusSlug)
+                    : undefined
+                }
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -40,7 +40,7 @@ export default async function ServicesPage() {
       <ServiceHero services={listing?.services ?? []} />
 
       <Container>
-        <div id="browse" className="flex scroll-mt-16 flex-col gap-8 py-16 sm:py-20 lg:py-24">
+        <div id="browse" className="flex scroll-mt-16 flex-col gap-6 sm:gap-8 py-10 sm:py-20 lg:py-24">
           <SectionHeading
             eyebrow="Directory"
             title="Available services"
