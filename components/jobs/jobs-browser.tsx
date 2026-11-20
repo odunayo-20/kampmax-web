@@ -98,9 +98,9 @@ function JobsBrowser({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
+      <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="w-full max-w-sm">
+          <div className="w-full sm:max-w-sm">
             <Label htmlFor={searchId} className="sr-only">
               Search opportunities
             </Label>
@@ -115,40 +115,40 @@ function JobsBrowser({
                 placeholder="Search by role, company, or skill"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="h-10 pl-8"
+                className="h-9 sm:h-10 pl-8 text-xs sm:text-sm"
               />
             </div>
           </div>
 
           {campuses.length > 0 ? (
-          <div className="flex items-center gap-2">
-            <Label
-              htmlFor={campusSelectId}
-              className="text-xs font-medium text-muted-foreground whitespace-nowrap"
-            >
-              Campus:
-            </Label>
-            <select
-              id={campusSelectId}
-              value={campusSlug}
-              onChange={(event) => setCampusSlug(event.target.value)}
-              className="h-10 rounded-lg border border-input bg-background px-3 py-1 text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              <option value={ALL_CAMPUSES}>All Campuses</option>
-              {campuses.map((campus) => (
-                <option key={campus.slug} value={campus.slug}>
-                  {campus.shortName}
-                </option>
-              ))}
-            </select>
-          </div>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <Label
+                htmlFor={campusSelectId}
+                className="text-xs font-medium text-muted-foreground whitespace-nowrap sr-only sm:not-sr-only"
+              >
+                Campus:
+              </Label>
+              <select
+                id={campusSelectId}
+                value={campusSlug}
+                onChange={(event) => setCampusSlug(event.target.value)}
+                className="h-9 sm:h-10 w-full rounded-lg border border-input bg-background px-2.5 sm:px-3 text-xs sm:text-sm text-foreground shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
+              >
+                <option value={ALL_CAMPUSES}>All Campuses</option>
+                {campuses.map((campus) => (
+                  <option key={campus.slug} value={campus.slug}>
+                    {campus.shortName}
+                  </option>
+                ))}
+              </select>
+            </div>
           ) : null}
         </div>
 
         <div
           role="group"
           aria-label="Filter by opportunity type"
-          className="flex flex-wrap gap-2"
+          className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 py-1 sm:flex-wrap"
         >
           <button
             type="button"
@@ -159,7 +159,7 @@ function JobsBrowser({
                 variant: typeSlug === ALL_TYPES ? "default" : "outline",
                 size: "sm",
               }),
-              "rounded-full"
+              "shrink-0 rounded-full text-xs sm:text-sm h-8"
             )}
           >
             All
@@ -175,7 +175,7 @@ function JobsBrowser({
                   variant: typeSlug === type.slug ? "default" : "outline",
                   size: "sm",
                 }),
-                "rounded-full"
+                "shrink-0 rounded-full text-xs sm:text-sm h-8"
               )}
             >
               {type.name}
@@ -208,11 +208,11 @@ function JobsBrowser({
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Showing {filteredOpportunities.length} of {opportunities.length}{" "}
             {opportunities.length === 1 ? "opportunity" : "opportunities"}
           </p>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
             {filteredOpportunities.map((opportunity) => (
               <OpportunityCard
                 key={opportunity.slug}

@@ -45,7 +45,7 @@ export default async function JobsPage() {
     <>
       <JobsHero opportunities={listing?.opportunities ?? []} />
 
-      <Section id="browse" className="scroll-mt-16">
+      <Section id="browse" className="scroll-mt-16 py-10 sm:py-20 lg:py-24">
         <Container>
           <div className="flex flex-col gap-8">
             <SectionHeading
