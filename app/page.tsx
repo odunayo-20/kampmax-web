@@ -203,9 +203,9 @@ export default async function Home() {
       )}
 
       {data && data.posts.length > 0 && (
-        <div className="border-t border-border bg-neutral-50">
-          <Section>
-            <Container>
+        <div className="border-t border-border bg-neutral-50 overflow-hidden">
+          <Section className="overflow-hidden">
+            <Container className="overflow-hidden">
               <LatestArticles posts={data.posts} />
             </Container>
           </Section>
