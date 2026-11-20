@@ -48,12 +48,9 @@ function BlogCard({ post }: BlogCardProps) {
             </div>
 
             <div className="flex flex-1 flex-col gap-2">
-              <h3 className="font-heading text-lg font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
+              <h3 className="line-clamp-2 font-heading text-base font-semibold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-lg">
                 {post.title}
               </h3>
-              <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                {post.excerpt}
-              </p>
             </div>
 
             <div className="mt-auto flex items-center justify-between border-t border-border/60 pt-3">
