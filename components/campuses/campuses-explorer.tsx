@@ -65,7 +65,7 @@ function CampusesExplorer({ campuses }: { campuses: Campus[] }) {
         places={places}
         focus={focus}
         label="Map of Kampmax campuses"
-        className="h-96"
+        className="h-64 sm:h-96"
       />
     </div>
   )

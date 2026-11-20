@@ -35,7 +35,7 @@ export default async function CampusesPage() {
       <DirectoryHero campuses={campuses ?? []} />
 
       <Container>
-        <div id="directory" className="flex scroll-mt-16 flex-col gap-10 py-16 sm:py-20 lg:py-24">
+        <div id="directory" className="flex scroll-mt-16 flex-col gap-6 sm:gap-10 py-10 sm:py-16 lg:py-20">
           {campuses === null ? (
             <ApiUnavailable subject="campuses" />
           ) : (
