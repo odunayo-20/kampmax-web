@@ -10,7 +10,7 @@ export function ArticleCta() {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_100%_0%,rgba(47,128,237,0.45),transparent_70%),radial-gradient(45%_60%_at_0%_100%,rgba(245,158,11,0.18),transparent_70%)]" aria-hidden="true" />
 
       <div className="relative z-10 max-w-xl">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-2xs font-medium text-primary-100 mb-4">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-primary-100 mb-4">
           <Compass className="size-3" aria-hidden="true" />
           <span>The Campus Ecosystem</span>
         </div>

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next"
 
 import { siteConfig } from "@/config/site"
 import { orNullDuringBuild } from "@/lib/api"
+import { getListings } from "@/lib/accommodation"
 import { getArticleSitemapEntries } from "@/lib/blog"
 import { getCampuses } from "@/lib/campuses"
 import { getEvents } from "@/lib/events"
@@ -25,6 +26,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     (await orNullDuringBuild(() => getServices(campuses))) ?? []
   const products =
     (await orNullDuringBuild(() => getProducts(campuses))) ?? []
+
+  // The newest live places. Older ones are reached through the pages above.
+  const places =
+    (await orNullDuringBuild(() => getListings({ page: 1 })))?.items ?? []
+
+  const placeRoutes: MetadataRoute.Sitemap = places.map((place) => ({
+    url: `${siteConfig.url}/accommodation/${place.slug}`,
+    lastModified,
+    changeFrequency: "daily",
+    priority: 0.6,
+  }))
+
+  const campusPlaceRoutes: MetadataRoute.Sitemap = campuses.map((campus) => ({
+    url: `${siteConfig.url}/accommodation/near/${campus.slug}`,
+    lastModified,
+    changeFrequency: "daily",
+    priority: 0.7,
+  }))
 
   const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${siteConfig.url}/marketplace/${product.slug}`,
@@ -108,6 +127,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${siteConfig.url}/accommodation`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
+    {
       url: `${siteConfig.url}/events`,
       lastModified,
       changeFrequency: "daily",
@@ -144,6 +169,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     ...staticRoutes,
+    ...placeRoutes,
+    ...campusPlaceRoutes,
     ...productRoutes,
     ...eventRoutes,
     ...jobRoutes,

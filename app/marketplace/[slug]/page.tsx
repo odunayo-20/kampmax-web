@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+
+import { pageMetadata } from "@/lib/seo"
 import { notFound, permanentRedirect } from "next/navigation"
 
 import { orNullDuringBuild } from "@/lib/api"
@@ -19,6 +21,14 @@ import {
   RelatedProducts,
   pickRelatedProducts,
 } from "@/components/marketplace/related-products"
+import { SafetyTips } from "@/components/shared/safety-tips"
+
+const BUYER_TIPS = [
+  "Meet in a busy, public spot on campus, in daylight if you can.",
+  "Check the item before you pay, and pay only when you are happy with it.",
+  "Be careful if the price looks too good to be true or you are rushed to pay.",
+  "Keep the chat and payment on Kampmax so we can help if something goes wrong.",
+]
 
 export const revalidate = 300
 
@@ -44,19 +54,12 @@ export async function generateMetadata({
     return {}
   }
 
-  return {
-    title: `${product.name} | Kampmax Marketplace`,
+  return pageMetadata({
+    title: `${product.name} | Marketplace`,
     description: product.description,
-    alternates: {
-      canonical: `/marketplace/${product.slug}`,
-    },
-    openGraph: {
-      title: `${product.name} | Kampmax Marketplace`,
-      description: product.description,
-      url: `/marketplace/${product.slug}`,
-      ...(product.image ? { images: [product.image] } : {}),
-    },
-  }
+    path: `/marketplace/${product.slug}`,
+    image: product.image,
+  })
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
@@ -104,6 +107,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <ProductHeader product={product} category={category} campus={campus} />
         </Container>
       </div>
+
+      <SafetyTips
+        title="Buy safely on campus"
+        tips={BUYER_TIPS}
+        reportName={product.name}
+        path={`/marketplace/${product.slug}`}
+      />
 
       {related.length > 0 ? (
         <Section className="border-t border-border/60">

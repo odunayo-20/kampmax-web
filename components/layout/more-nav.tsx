@@ -7,6 +7,7 @@ import {
   ChevronDown,
   UserCheck,
   Compass,
+  GraduationCap,
   Building2,
   Info,
   Mail,
@@ -24,6 +25,12 @@ import { isActivePath } from "@/lib/is-active-path"
 import { cn } from "@/lib/utils"
 
 const moreNavItems = [
+  {
+    title: "Campuses",
+    href: "/campuses",
+    description: "See what is happening around each campus",
+    icon: GraduationCap,
+  },
   {
     title: "How Kampmax Works",
     href: "/how-it-works",
@@ -124,7 +131,7 @@ function MoreNav() {
                   >
                     {item.title}
                   </span>
-                  <span className="text-[11.5px] text-muted-foreground line-clamp-1 leading-snug">
+                  <span className="text-xs text-muted-foreground line-clamp-1 leading-snug">
                     {item.description}
                   </span>
                 </div>
@@ -151,7 +158,7 @@ function MoreNav() {
                 <span className="text-xs font-semibold text-foreground">
                   Sell on Campus
                 </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   Become a verified vendor
                 </span>
               </div>

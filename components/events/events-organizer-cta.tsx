@@ -41,7 +41,7 @@ function EventsOrganizerCta() {
           Publish on Kampmax
           <ArrowRight />
         </Link>
-        <Muted className="text-2xs text-muted-foreground sm:text-xs">
+        <Muted className="text-xs text-muted-foreground sm:text-xs">
           Event listing publishing and ticket check-ins are handled inside the
           Kampmax app.
         </Muted>

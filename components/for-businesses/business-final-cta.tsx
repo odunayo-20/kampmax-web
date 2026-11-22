@@ -47,7 +47,7 @@ function BusinessFinalCta() {
           Explore Kampmax
         </Link>
       </div>
-      <Muted className="relative text-2xs text-primary-foreground/60 sm:text-xs">
+      <Muted className="relative text-xs text-primary-foreground/60 sm:text-xs">
         Registration, catalog publishing, and applicant interactions are handled inside the Kampmax platform.
       </Muted>
     </div>

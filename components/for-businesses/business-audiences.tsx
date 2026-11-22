@@ -25,7 +25,7 @@ function BusinessAudiences() {
                   <audience.icon className="size-4" aria-hidden="true" />
                 </span>
                 {audience.badge ? (
-                  <Badge variant="secondary" className="text-2xs">
+                  <Badge variant="secondary" className="text-xs">
                     {audience.badge}
                   </Badge>
                 ) : null}

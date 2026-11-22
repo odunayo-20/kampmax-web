@@ -26,6 +26,9 @@ const jakarta = Plus_Jakarta_Sans({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  // Only a few small code snippets on the legal pages use it, so it is not
+  // worth preloading on every page.
+  preload: false,
 })
 
 export const metadata: Metadata = {

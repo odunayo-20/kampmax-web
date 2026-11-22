@@ -59,7 +59,12 @@ function ServiceHeader({
 }) {
   const facts = [
     service.deliveryLabel
-      ? { icon: Clock, label: "Delivery", value: service.deliveryLabel }
+      ? {
+          icon: Clock,
+          // Hourly work has no single delivery date, so say what the time means.
+          label: service.pricingModel === "HOURLY" ? "Typical project length" : "Delivery",
+          value: service.deliveryLabel,
+        }
       : null,
     service.revisions !== undefined
       ? {

@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { BusinessAudiences } from "@/components/for-businesses/business-audiences"
@@ -12,20 +14,11 @@ import { BusinessScales } from "@/components/for-businesses/business-scales"
 import { BusinessUseCases } from "@/components/for-businesses/business-use-cases"
 import { BusinessWhyCampuses } from "@/components/for-businesses/business-why-campuses"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "For Businesses",
-  description:
-    "Connect your business with campus communities. Showcase products, offer services, recruit student talent, and promote campus events on Kampmax.",
-  alternates: {
-    canonical: "/for-businesses",
-  },
-  openGraph: {
-    title: "For Businesses | Connect with Campus Communities | Kampmax",
-    description:
-      "Connect your business with campus communities. Showcase products, offer services, recruit student talent, and promote campus events on Kampmax.",
-    url: "/for-businesses",
-  },
-}
+  description: "Connect your business with campus communities. Showcase products, offer services, recruit student talent, and promote campus events on Kampmax.",
+  path: "/for-businesses",
+})
 
 export default function ForBusinessesPage() {
   return (

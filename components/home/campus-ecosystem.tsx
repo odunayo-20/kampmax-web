@@ -45,6 +45,7 @@ function CampusEcosystem({ campuses = [] }: { campuses?: Campus[] }) {
           <Link
             key={place.slug}
             href={`/campuses/${place.slug}`}
+            prefetch={false}
             className="group flex flex-col items-center gap-2 rounded-xl border border-border bg-card px-4 py-6 text-center text-sm font-medium text-foreground shadow-xs ring-1 ring-accent-500/15 transition-all hover:border-primary/40 hover:shadow-sm min-w-0"
           >
             <span className="flex size-8 items-center justify-center rounded-lg bg-primary-50 text-primary-600 transition-colors group-hover:bg-primary-100">

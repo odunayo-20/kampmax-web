@@ -40,6 +40,7 @@ function JobsHeroVisual({ opportunities }: { opportunities: Opportunity[] }) {
           <Link
             key={job.slug}
             href={`/jobs/${job.slug}`}
+            prefetch={false}
             className={cn(
               "absolute block rounded-2xl bg-white p-4 text-neutral-900 shadow-2xl shadow-primary-950/40 ring-1 ring-white/30 transition-transform duration-300 hover:z-40 hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400",
               placements[index]
@@ -50,7 +51,7 @@ function JobsHeroVisual({ opportunities }: { opportunities: Opportunity[] }) {
                 <Briefcase className="size-5" aria-hidden="true" />
               </span>
               <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary-600">
                   {type?.name ?? "Opportunity"}
                 </span>
                 <p className="truncate text-base font-semibold">{job.title}</p>

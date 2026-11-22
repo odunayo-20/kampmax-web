@@ -47,7 +47,7 @@ function AgentFinalCta() {
           I already have an account
         </Link>
       </div>
-      <Muted className="relative text-2xs text-primary-foreground/60 sm:text-xs">
+      <Muted className="relative text-xs text-primary-foreground/60 sm:text-xs">
         Your application, documents and listings are managed inside the Kampmax app.
       </Muted>
     </div>

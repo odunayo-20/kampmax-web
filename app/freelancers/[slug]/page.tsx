@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+
+import { pageMetadata } from "@/lib/seo"
 import { notFound, permanentRedirect } from "next/navigation"
 
 import { orNullDuringBuild } from "@/lib/api"
@@ -48,19 +50,12 @@ export async function generateMetadata({
     ? `${freelancer.headline}. ${freelancer.bio}`
     : freelancer.headline
 
-  return {
-    title: `${freelancer.name} | Kampmax Freelancers`,
+  return pageMetadata({
+    title: `${freelancer.name} | Freelancers`,
     description,
-    alternates: {
-      canonical: `/freelancers/${freelancer.slug}`,
-    },
-    openGraph: {
-      title: `${freelancer.name} | Kampmax Freelancers`,
-      description,
-      url: `/freelancers/${freelancer.slug}`,
-      ...(freelancer.avatar ? { images: [freelancer.avatar] } : {}),
-    },
-  }
+    path: `/freelancers/${freelancer.slug}`,
+    image: freelancer.avatar,
+  })
 }
 
 export default async function FreelancerPage({ params }: FreelancerPageProps) {

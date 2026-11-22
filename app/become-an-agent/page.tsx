@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { AgentFaq } from "@/components/become-an-agent/agent-faq"
@@ -11,20 +13,11 @@ import { AgentPricing } from "@/components/become-an-agent/agent-pricing"
 import { AgentRequirements } from "@/components/become-an-agent/agent-requirements"
 import { getListingPackage } from "@/lib/accommodation-package"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Become an Accommodation Agent",
-  description:
-    "List rooms and apartments near campus on Kampmax Accommodation. Get verified, publish your listings, and reach students who are looking for somewhere to live.",
-  alternates: {
-    canonical: "/become-an-agent",
-  },
-  openGraph: {
-    title: "Become an Accommodation Agent | Kampmax",
-    description:
-      "List rooms and apartments near campus on Kampmax Accommodation. Get verified, publish your listings, and reach students who are looking for somewhere to live.",
-    url: "/become-an-agent",
-  },
-}
+  description: "List rooms and apartments near campus on Kampmax Accommodation. Get verified, publish your listings, and reach students who are looking for somewhere to live.",
+  path: "/become-an-agent",
+})
 
 export default async function BecomeAnAgentPage() {
   // Pricing is shown from the live package; if it cannot be read, the page says so in words.

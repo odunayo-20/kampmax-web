@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { CampusDiscovery } from "@/components/how-it-works/campus-discovery"
@@ -12,23 +14,15 @@ import { ForStudents } from "@/components/how-it-works/for-students"
 import { ForVendors } from "@/components/how-it-works/for-vendors"
 import { Hero } from "@/components/how-it-works/hero"
 import { WhatYouCanDo } from "@/components/how-it-works/what-you-can-do"
-import { siteConfig } from "@/config/site"
 
 const description =
-  "See exactly what you can do on Kampmax , discover the marketplace, services, jobs, freelancers, and events connected around your campus."
+  "See exactly what you can do on Kampmax: discover the marketplace, services, jobs, freelancers, and events connected around your campus."
 
-export const metadata: Metadata = {
-  title: { absolute: `${siteConfig.name} | How It Works` },
+export const metadata: Metadata = pageMetadata({
+  title: "How It Works",
   description,
-  alternates: {
-    canonical: "/how-it-works",
-  },
-  openGraph: {
-    title: `${siteConfig.name} | How It Works`,
-    description,
-    url: "/how-it-works",
-  },
-}
+  path: "/how-it-works",
+})
 
 export default function HowItWorksPage() {
   return (

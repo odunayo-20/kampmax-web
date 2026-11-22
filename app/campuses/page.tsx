@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { orNullDuringBuild } from "@/lib/api"
 import { getCampuses } from "@/lib/campuses"
 import { CampusGrid } from "@/components/campuses/campus-grid"
@@ -14,18 +16,11 @@ export const revalidate = 300
 const description =
   "Explore the campuses Kampmax supports and discover what's happening around each one."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Campuses",
   description,
-  alternates: {
-    canonical: "/campuses",
-  },
-  openGraph: {
-    title: "Campuses , Kampmax",
-    description,
-    url: "/campuses",
-  },
-}
+  path: "/campuses",
+})
 
 export default async function CampusesPage() {
   const campuses = await orNullDuringBuild(getCampuses)

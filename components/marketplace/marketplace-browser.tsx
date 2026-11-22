@@ -13,6 +13,8 @@ import type {
   MarketplaceCategory,
   MarketplaceProduct,
 } from "@/types/marketplace"
+import { NativeSelect } from "@/components/ui/native-select"
+import { EmptyState, EmptyStateCta } from "@/components/shared/empty-state"
 
 const ALL_CATEGORIES = "all" as const
 const ALL_CAMPUSES = "all" as const
@@ -101,17 +103,7 @@ function MarketplaceBrowser({
 
   if (products.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-        <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-          <SearchX className="size-5" aria-hidden="true" />
-        </span>
-        <p className="font-heading text-lg font-semibold text-foreground">
-          No products yet
-        </p>
-        <p className="max-w-sm text-sm text-muted-foreground">
-          Nothing has been listed here yet. Check back soon as the marketplace grows.
-        </p>
-      </div>
+      <EmptyState icon={SearchX} title="No products yet" description="Nothing has been listed here yet. Check back soon as the marketplace grows." action={<EmptyStateCta label="List an item for free" />} />
     )
   }
 
@@ -148,7 +140,7 @@ function MarketplaceBrowser({
                 >
                   Campus:
                 </Label>
-                <select
+                <NativeSelect
                   id={campusSelectId}
                   value={campusSlug}
                   onChange={(event) => setCampusSlug(event.target.value)}
@@ -160,7 +152,7 @@ function MarketplaceBrowser({
                       {campus.shortName}
                     </option>
                   ))}
-                </select>
+                </NativeSelect>
               </div>
             )}
 
@@ -171,7 +163,7 @@ function MarketplaceBrowser({
               >
                 Sort:
               </Label>
-              <select
+              <NativeSelect
                 id={sortId}
                 value={sort}
                 onChange={(event) => setSort(event.target.value as SortOption)}
@@ -182,7 +174,7 @@ function MarketplaceBrowser({
                     {option.label}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
             </div>
           </div>
         </div>
@@ -227,26 +219,7 @@ function MarketplaceBrowser({
       </div>
 
       {sortedProducts.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-            <SearchX className="size-5" aria-hidden="true" />
-          </span>
-          <p className="font-heading text-lg font-semibold text-foreground">
-            Nothing matches yet
-          </p>
-          <p className="max-w-sm text-sm text-muted-foreground">
-            Try a different search term or category.
-          </p>
-          {hasActiveFilters && (
-            <button
-              type="button"
-              onClick={handleResetFilters}
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
+        <EmptyState icon={SearchX} title="Nothing matches yet" description="Try a different search term or category." onReset={hasActiveFilters ? handleResetFilters : undefined} />
       ) : (
         <div className="flex flex-col gap-4">
           <p className="text-xs sm:text-sm text-muted-foreground">

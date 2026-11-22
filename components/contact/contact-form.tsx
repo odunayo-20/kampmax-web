@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import { Muted } from "@/components/ui/typography"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
+import { NativeSelect } from "@/components/ui/native-select"
 
 type FormErrors = Partial<Record<keyof ContactSubmissionPayload, string>>
 
@@ -211,7 +212,7 @@ function ContactForm() {
                   onChange={handleChange}
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? "name-error" : undefined}
-                  className="h-10"
+                  className="h-11 md:h-10"
                 />
                 {errors.name && (
                   <FormMessage id="name-error" variant="error">
@@ -238,7 +239,7 @@ function ContactForm() {
                   onChange={handleChange}
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? "email-error" : undefined}
-                  className="h-10"
+                  className="h-11 md:h-10"
                 />
                 {errors.email && (
                   <FormMessage id="email-error" variant="error">
@@ -254,13 +255,13 @@ function ContactForm() {
                 <Label htmlFor="contact-inquiryType">
                   Inquiry Type <span className="text-destructive">*</span>
                 </Label>
-                <select
+                <NativeSelect
                   id="contact-inquiryType"
                   name="inquiryType"
                   value={formData.inquiryType}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="h-10 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30"
+                  className="w-full"
                 >
                   {inquiryTypes.map((type) => (
                     <option
@@ -271,7 +272,7 @@ function ContactForm() {
                       {type.label}
                     </option>
                   ))}
-                </select>
+                </NativeSelect>
                 {errors.inquiryType && (
                   <FormMessage variant="error">{errors.inquiryType}</FormMessage>
                 )}
@@ -281,7 +282,7 @@ function ContactForm() {
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="contact-phone">Phone Number</Label>
-                  <span className="text-3xs text-muted-foreground">Optional</span>
+                  <span className="text-xs text-muted-foreground">Optional</span>
                 </div>
                 <Input
                   id="contact-phone"
@@ -295,7 +296,7 @@ function ContactForm() {
                   onChange={handleChange}
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? "phone-error" : undefined}
-                  className="h-10"
+                  className="h-11 md:h-10"
                 />
                 {errors.phone && (
                   <FormMessage id="phone-error" variant="error">
@@ -311,7 +312,7 @@ function ContactForm() {
                 <Label htmlFor="contact-organization">
                   Organization / Business Name
                 </Label>
-                <span className="text-3xs text-muted-foreground">Optional</span>
+                <span className="text-xs text-muted-foreground">Optional</span>
               </div>
               <Input
                 id="contact-organization"
@@ -324,7 +325,7 @@ function ContactForm() {
                 onChange={handleChange}
                 aria-invalid={!!errors.organization}
                 aria-describedby={errors.organization ? "org-error" : undefined}
-                className="h-10"
+                className="h-11 md:h-10"
               />
               {errors.organization && (
                 <FormMessage id="org-error" variant="error">
@@ -339,7 +340,7 @@ function ContactForm() {
                 <Label htmlFor="contact-message">
                   Message <span className="text-destructive">*</span>
                 </Label>
-                <span className="text-3xs text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {formData.message.length} / 2000
                 </span>
               </div>
@@ -385,7 +386,7 @@ function ContactForm() {
                   </>
                 )}
               </button>
-              <Muted className="text-2xs">
+              <Muted className="text-xs">
                 By submitting, you agree to our{" "}
                 <Link href="/privacy" className="font-medium text-primary hover:underline">
                   Privacy Policy

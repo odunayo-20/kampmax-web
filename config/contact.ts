@@ -28,6 +28,11 @@ function toInternational(value: string): string {
   return `+${n.slice(0, 3)} ${n.slice(3, 6)} ${n.slice(6, 9)} ${n.slice(9)}`.trim()
 }
 
+/** A WhatsApp chat with the Kampmax team that opens with `message` already typed. */
+export function whatsappUrl(message: string): string {
+  return `https://wa.me/${toWhatsAppNumber(phone)}?text=${encodeURIComponent(message)}`
+}
+
 export const contactConfig = {
   email,
   businessEmail: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || email,
@@ -39,9 +44,7 @@ export const contactConfig = {
   /** International format, for schema.org. */
   phoneInternational: toInternational(phone),
   /** Opens a WhatsApp chat with a friendly first message. */
-  whatsappUrl: `https://wa.me/${toWhatsAppNumber(phone)}?text=${encodeURIComponent(
-    "Hi Kampmax, I have a question."
-  )}`,
+  whatsappUrl: whatsappUrl("Hi Kampmax, I have a question."),
   /** Physical or mailing address. Empty until configured. */
   address: process.env.NEXT_PUBLIC_CONTACT_ADDRESS ?? "",
 } as const

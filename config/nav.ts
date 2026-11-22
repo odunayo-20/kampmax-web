@@ -11,20 +11,7 @@ export const primaryNav: NavItem[] = [
   { title: "Services", href: "/services" },
   { title: "Jobs", href: "/jobs" },
   { title: "Events", href: "/events" },
-  { title: "Campuses", href: "/campuses" },
-]
-
-/**
- * Secondary destinations surfaced through the desktop "More" menu and
- * folded into the mobile drawer's groups below.
- */
-export const moreNav: NavItem[] = [
-  { title: "How Kampmax Works", href: "/how-it-works" },
-  { title: "Freelancers", href: "/freelancers" },
-  { title: "For Businesses", href: "/for-businesses" },
-  { title: "About", href: "/about" },
-  { title: "Blog & Insights", href: "/blog" },
-  { title: "Contact", href: "/contact" },
+  { title: "Accommodation", href: "/accommodation" },
 ]
 
 /** Grouped sections for the mobile navigation drawer. */
@@ -36,6 +23,7 @@ export const mobileNavGroups: NavGroup[] = [
       { title: "Services", href: "/services" },
       { title: "Jobs", href: "/jobs" },
       { title: "Events", href: "/events" },
+      { title: "Accommodation", href: "/accommodation" },
       { title: "Campuses", href: "/campuses" },
     ],
   },
@@ -66,6 +54,7 @@ export const footerNavGroups: NavGroup[] = [
       { title: "Services", href: "/services" },
       { title: "Jobs", href: "/jobs" },
       { title: "Events", href: "/events" },
+      { title: "Accommodation", href: "/accommodation" },
       { title: "Campuses", href: "/campuses" },
     ],
   },

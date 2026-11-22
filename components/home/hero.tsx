@@ -65,6 +65,9 @@ function Hero({ product, job, event }: HeroProps) {
               See what&apos;s live
             </Link>
           </div>
+          <p className="-mt-2 text-sm text-primary-100/90">
+            Free to join. Takes about a minute.
+          </p>
         </div>
 
         {/*

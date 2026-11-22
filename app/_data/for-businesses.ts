@@ -222,7 +222,7 @@ export const campusReasons: CampusReason[] = [
     icon: Users,
     title: "Concentrated Daily Demand",
     description:
-      "Tens of thousands of students, faculty, and campus workers live and operate in tight geographical proximity, requiring daily food, supplies, repairs, and digital services.",
+      "Campuses bring students, faculty, and campus workers together in tight geographical proximity, all needing daily food, supplies, repairs, and digital services.",
   },
   {
     icon: GraduationCap,

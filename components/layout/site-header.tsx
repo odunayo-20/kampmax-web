@@ -40,7 +40,7 @@ export function SiteHeader() {
         {/* Brand Logo & Campus Badge */}
         <div className="flex items-center gap-3">
           <Logo priority />
-          <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-primary-50/90 px-2.5 py-0.5 text-[11px] font-semibold text-primary-700 ring-1 ring-primary-100/80 dark:bg-primary-950/60 dark:text-primary-300 dark:ring-primary-900/60">
+          <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-primary-50/90 px-2.5 py-0.5 text-xs font-semibold text-primary-700 ring-1 ring-primary-100/80 dark:bg-primary-950/60 dark:text-primary-300 dark:ring-primary-900/60">
             <span className="size-1.5 rounded-full bg-primary-600 animate-pulse dark:bg-primary-400" />
             Campus Hub
           </span>

@@ -84,7 +84,7 @@ function AboutEcosystem() {
               <span className="font-heading text-xs font-semibold text-foreground">
                 Marketplace
               </span>
-              <span className="text-3xs text-muted-foreground">Products</span>
+              <span className="text-xs text-muted-foreground">Products</span>
             </CardContent>
           </Card>
 
@@ -96,7 +96,7 @@ function AboutEcosystem() {
               <span className="font-heading text-xs font-semibold text-foreground">
                 Services
               </span>
-              <span className="text-3xs text-muted-foreground">Providers</span>
+              <span className="text-xs text-muted-foreground">Providers</span>
             </CardContent>
           </Card>
 
@@ -108,7 +108,7 @@ function AboutEcosystem() {
               <span className="font-heading text-xs font-semibold text-foreground">
                 Freelancers
               </span>
-              <span className="text-3xs text-muted-foreground">Skills</span>
+              <span className="text-xs text-muted-foreground">Skills</span>
             </CardContent>
           </Card>
 
@@ -120,7 +120,7 @@ function AboutEcosystem() {
               <span className="font-heading text-xs font-semibold text-foreground">
                 Jobs
               </span>
-              <span className="text-3xs text-muted-foreground">Opportunities</span>
+              <span className="text-xs text-muted-foreground">Opportunities</span>
             </CardContent>
           </Card>
         </div>
@@ -135,7 +135,7 @@ function AboutEcosystem() {
               Events & Campus Activities
             </span>
           </div>
-          <span className="text-3xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Schedules & Pop-ups
           </span>
         </div>
@@ -150,7 +150,7 @@ function AboutEcosystem() {
               Campus Communities & Host Towns
             </span>
           </div>
-          <p className="text-3xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             Connecting students, faculty, neighborhood merchants, and local residents
           </p>
         </div>

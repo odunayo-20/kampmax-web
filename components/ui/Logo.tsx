@@ -45,7 +45,7 @@ export function LogoIcon({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={cn("shrink-0 select-none", className)}
-      aria-label="Kampmax Logo"
+      aria-hidden="true"
     >
       <defs>
         {/* Left Stem Blue Gradient */}
@@ -127,6 +127,7 @@ export function Logo({
   const content = (
     <div className={cn("inline-flex items-center select-none group", config.gap, className)}>
       <LogoIcon size={config.icon} />
+      {!showText && <span className="sr-only">Kampmax</span>}
       {showText && (
         <span
           className={cn(
@@ -150,7 +151,8 @@ export function Logo({
     return (
       <Link
         href={href}
-        className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded-lg"
+        aria-label="Kampmax home"
+        className="inline-flex min-h-11 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded-lg"
       >
         {content}
       </Link>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { VendorAudiences } from "@/components/become-a-vendor/vendor-audiences"
@@ -14,20 +16,11 @@ import { VendorHowItWorks } from "@/components/become-a-vendor/vendor-how-it-wor
 import { VendorShowcase } from "@/components/become-a-vendor/vendor-showcase"
 import { VendorTrustQuality } from "@/components/become-a-vendor/vendor-trust-quality"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Become a Vendor or Service Provider",
-  description:
-    "Turn what you sell or what you know into something campus communities can discover. Join Kampmax as a product vendor or skilled service provider.",
-  alternates: {
-    canonical: "/become-a-vendor",
-  },
-  openGraph: {
-    title: "Become a Vendor or Service Provider , Kampmax",
-    description:
-      "Turn what you sell or what you know into something campus communities can discover. Join Kampmax as a product vendor or skilled service provider.",
-    url: "/become-a-vendor",
-  },
-}
+  description: "Turn what you sell or what you know into something campus communities can discover. Join Kampmax as a product vendor or skilled service provider.",
+  path: "/become-a-vendor",
+})
 
 export default function BecomeAVendorPage() {
   return (

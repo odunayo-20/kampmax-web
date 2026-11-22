@@ -30,6 +30,7 @@ function MarketplaceHeroVisual({ products }: { products: MarketplaceProduct[] })
         <Link
           key={product.slug}
           href={`/marketplace/${product.slug}`}
+          prefetch={false}
           className={cn(
             "absolute block rounded-2xl bg-white p-2.5 text-neutral-900 shadow-2xl shadow-primary-950/40 ring-1 ring-white/30 transition-transform duration-300 hover:z-40 hover:scale-[1.04] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400",
             placements[index]

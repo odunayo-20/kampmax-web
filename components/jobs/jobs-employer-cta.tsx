@@ -41,7 +41,7 @@ function JobsEmployerCta() {
           Post an Opportunity
           <ArrowRight />
         </Link>
-        <Muted className="text-2xs text-muted-foreground sm:text-xs">
+        <Muted className="text-xs text-muted-foreground sm:text-xs">
           Role publishing and candidate management occur within the Kampmax app.
         </Muted>
       </div>

@@ -37,6 +37,7 @@ function EventsHeroVisual({ events }: { events: Event[] }) {
         <Link
           key={event.slug}
           href={`/events/${event.slug}`}
+          prefetch={false}
           className={cn(
             "absolute block rounded-2xl bg-white p-4 text-neutral-900 shadow-2xl shadow-primary-950/40 ring-1 ring-white/30 transition-transform duration-300 hover:z-40 hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400",
             placements[index]
@@ -45,7 +46,7 @@ function EventsHeroVisual({ events }: { events: Event[] }) {
           <div className="flex items-start gap-3">
             <EventDateBadge date={event.date} className="w-12 shrink-0" />
             <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="truncate text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+              <span className="truncate text-xs font-semibold uppercase tracking-wider text-primary-600">
                 {event.categoryName ?? "Event"}
               </span>
               <p className="truncate text-base font-semibold">{event.title}</p>

@@ -35,12 +35,12 @@ function ContactPathways() {
                 {pathway.configuredEmail ? (
                   <a
                     href={`mailto:${pathway.configuredEmail}`}
-                    className="text-xs font-medium text-primary hover:underline"
+                    className="inline-flex min-h-11 items-center text-xs font-medium text-primary hover:underline"
                   >
                     {pathway.configuredEmail}
                   </a>
                 ) : (
-                  <span className="text-2xs text-muted-foreground">
+                  <span className="text-xs text-muted-foreground">
                     {pathway.guidance}
                   </span>
                 )}

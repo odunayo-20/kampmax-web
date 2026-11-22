@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { AboutApproach } from "@/components/about/about-approach"
@@ -13,20 +15,11 @@ import { AboutWhatIsKampmax } from "@/components/about/about-what-is-kampmax"
 import { AboutWhoWeServe } from "@/components/about/about-who-we-serve"
 import { AboutWhyExists } from "@/components/about/about-why-exists"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
-  description:
-    "Learn what Kampmax is, why it exists, who it serves, and our direction building a connected campus ecosystem.",
-  alternates: {
-    canonical: "/about",
-  },
-  openGraph: {
-    title: "About Kampmax , The Campus Ecosystem, Connected",
-    description:
-      "Learn what Kampmax is, why it exists, who it serves, and our direction building a connected campus ecosystem.",
-    url: "/about",
-  },
-}
+  description: "Learn what Kampmax is, why it exists, who it serves, and our direction building a connected campus ecosystem.",
+  path: "/about",
+})
 
 export default function AboutPage() {
   return (

@@ -20,6 +20,7 @@ function OpportunityCard({
   return (
     <Link
       href={`/jobs/${opportunity.slug}`}
+      prefetch={false}
       className="group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <Card className="flex items-center gap-3.5 p-3.5 sm:p-5 rounded-2xl shadow-xs transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-primary/40 group-hover:shadow-md group-hover:shadow-primary-950/5">
@@ -34,7 +35,7 @@ function OpportunityCard({
         {/* Content Column */}
         <div className="flex min-w-0 flex-1 flex-col gap-1 sm:gap-1.5">
           {/* Top Line: Organization & Location */}
-          <div className="flex items-center gap-2 text-[11px] sm:text-xs text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <span className="truncate font-medium">{opportunity.organization}</span>
             {opportunity.location ? (
               <>
@@ -55,24 +56,24 @@ function OpportunityCard({
           {/* Tags & Metadata */}
           <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
             {type ? (
-              <Badge variant="secondary" className="text-[10px] sm:text-xs font-normal px-2 py-0.5">
+              <Badge variant="secondary" className="text-xs font-normal px-2 py-0.5">
                 {type.name}
               </Badge>
             ) : null}
             {campus ? (
-              <Badge variant="outline" className="text-[10px] sm:text-xs font-normal px-1.5 py-0.5">
+              <Badge variant="outline" className="text-xs font-normal px-1.5 py-0.5">
                 {campus.shortName}
               </Badge>
             ) : null}
             {opportunity.closingDate ? (
-              <span className="rounded-full bg-accent-500/10 px-2 py-0.5 text-[10px] sm:text-xs font-medium text-accent-700">
+              <span className="rounded-full bg-accent-500/10 px-2 py-0.5 text-xs font-medium text-accent-700">
                 Closes {opportunity.closingDate}
               </span>
             ) : null}
             {displayedSkills.map((skill) => (
               <span
                 key={skill}
-                className="hidden md:inline-flex rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground"
+                className="hidden md:inline-flex rounded-md bg-muted px-1.5 py-0.5 text-xs text-muted-foreground"
               >
                 {skill}
               </span>

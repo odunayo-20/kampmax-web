@@ -91,7 +91,7 @@ export function ArticleHeader({ post }: ArticleHeaderProps) {
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
           </div>
           {post.updatedAt && post.updatedAt !== post.publishedAt && (
-            <div className="flex items-center gap-1.5 text-2xs text-muted-foreground/80">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground/80">
               <RefreshCw className="size-3" aria-hidden="true" />
               <span>Updated {formatDate(post.updatedAt)}</span>
             </div>

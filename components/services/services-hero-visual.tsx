@@ -38,6 +38,7 @@ function ServicesHeroVisual({ services }: { services: Service[] }) {
         <Link
           key={service.slug}
           href={`/services/${service.slug}`}
+          prefetch={false}
           className={cn(
             "absolute block rounded-2xl bg-white p-2.5 text-neutral-900 shadow-2xl shadow-primary-950/40 ring-1 ring-white/30 transition-transform duration-300 hover:z-40 hover:scale-[1.04] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400",
             placements[index]
@@ -59,7 +60,7 @@ function ServicesHeroVisual({ services }: { services: Service[] }) {
               className="aspect-16/10 w-full rounded-xl"
             />
             {service.categoryName ? (
-              <span className="absolute left-2 top-2 rounded-full bg-primary-950/85 px-2.5 py-1 text-[11px] font-semibold text-white shadow-md backdrop-blur">
+              <span className="absolute left-2 top-2 rounded-full bg-primary-950/85 px-2.5 py-1 text-xs font-semibold text-white shadow-md backdrop-blur">
                 {service.categoryName}
               </span>
             ) : null}

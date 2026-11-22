@@ -48,7 +48,7 @@ function AboutFinalCta() {
           Join Kampmax
         </Link>
       </div>
-      <Muted className="relative text-2xs text-primary-foreground/60 sm:text-xs">
+      <Muted className="relative text-xs text-primary-foreground/60 sm:text-xs">
         Registration, member profiles, and service listings are managed inside the Kampmax application.
       </Muted>
     </div>

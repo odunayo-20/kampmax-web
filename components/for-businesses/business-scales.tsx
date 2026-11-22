@@ -18,7 +18,7 @@ function BusinessScales() {
           <Card key={scale.title} className="flex h-full flex-col">
             <CardContent className="flex flex-1 flex-col gap-4 p-6 sm:p-8">
               <div className="flex flex-col gap-1">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-primary">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
                   {scale.subtitle}
                 </span>
                 <h3 className="font-heading text-lg font-semibold text-foreground">

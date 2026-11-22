@@ -12,13 +12,21 @@ type CtaBandProps = {
   description: string
   primary: CtaAction
   secondary?: CtaAction
+  /** Small reassurance under the buttons. Pass `null` for none. */
+  note?: string | null
 }
 
 /**
  * A rounded dark call-to-action panel, used to close a page. Keep it to one
  * clear next step plus, optionally, a quieter second one.
  */
-function CtaBand({ title, description, primary, secondary }: CtaBandProps) {
+function CtaBand({
+  title,
+  description,
+  primary,
+  secondary,
+  note = "Free to join. No card needed.",
+}: CtaBandProps) {
   return (
     <div className="relative isolate flex flex-col items-center gap-7 overflow-hidden rounded-3xl bg-linear-to-br from-primary-600 via-primary-800 to-primary-950 px-6 py-20 text-center text-primary-foreground shadow-2xl shadow-primary-950/25 sm:px-12 sm:py-24">
       <div aria-hidden="true" className="bg-grid-pattern absolute inset-0 -z-10 opacity-70" />
@@ -59,6 +67,7 @@ function CtaBand({ title, description, primary, secondary }: CtaBandProps) {
           </Link>
         ) : null}
       </div>
+      {note ? <p className="relative -mt-3 text-sm text-primary-foreground/70">{note}</p> : null}
     </div>
   )
 }

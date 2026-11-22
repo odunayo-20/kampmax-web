@@ -37,6 +37,7 @@ function FreelancersHeroVisual({ freelancers }: { freelancers: Freelancer[] }) {
         <Link
           key={freelancer.slug}
           href={`/freelancers/${freelancer.slug}`}
+          prefetch={false}
           className={cn(
             "absolute block rounded-2xl bg-white p-4 text-neutral-900 shadow-2xl shadow-primary-950/40 ring-1 ring-white/30 transition-transform duration-300 hover:z-40 hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400",
             placements[index]
@@ -45,7 +46,7 @@ function FreelancersHeroVisual({ freelancers }: { freelancers: Freelancer[] }) {
           <div className="flex items-start gap-3">
             <FreelancerAvatar name={freelancer.name} avatar={freelancer.avatar} size="md" />
             <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="truncate text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+              <span className="truncate text-xs font-semibold uppercase tracking-wider text-primary-600">
                 {freelancer.categoryName}
               </span>
               <p className="flex items-center gap-1.5 text-base font-semibold">

@@ -54,7 +54,7 @@ function EventDateBadge({
     >
       <span
         className={cn(
-          "text-2xs font-bold uppercase tracking-wider",
+          "text-xs font-bold uppercase tracking-wider",
           isPast ? "text-muted-foreground" : "text-primary"
         )}
       >

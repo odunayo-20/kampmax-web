@@ -39,6 +39,7 @@ function EventsCommunity({ event }: { event?: Event }) {
         <FadeIn>
           <Link
             href={`/events/${event.slug}`}
+            prefetch={false}
             className="group block overflow-hidden rounded-3xl border border-border bg-card shadow-lg shadow-primary-950/5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary-950/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             <div className="relative">

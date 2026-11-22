@@ -36,7 +36,7 @@ function CampusIdentityCard({ campus }: { campus: Campus }) {
             {campus.shortName.slice(0, 6)}
           </span>
           <div className="flex min-w-0 flex-col">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+            <span className="text-xs font-semibold uppercase tracking-wider text-primary-600">
               Campus community
             </span>
             <p className="font-heading text-lg font-bold leading-snug">{campus.name}</p>

@@ -12,7 +12,7 @@ function ContactBusinessCta() {
           <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <Store className="size-4" aria-hidden="true" />
           </span>
-          <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             For Merchants & Providers
           </span>
         </div>
@@ -34,7 +34,7 @@ function ContactBusinessCta() {
             className={buttonVariants({
               variant: "outline",
               size: "sm",
-              className: "gap-1.5",
+              className: "min-h-11 gap-1.5",
             })}
           >
             <span>Explore For Businesses</span>

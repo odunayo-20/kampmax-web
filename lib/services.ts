@@ -3,6 +3,7 @@ import { deliveryLabel } from "@/lib/service-price"
 import { idFromSlug, slugify, slugWithId } from "@/lib/slug"
 import type { Campus } from "@/types/campus"
 import type { Service, ServiceCategory } from "@/types/service"
+import { cleanText } from "@/lib/text"
 
 /** A node of the service taxonomy (`GET /categories/tree?type=SERVICE`). */
 export type ApiCategoryNode = {
@@ -139,7 +140,7 @@ export function toService(
   return {
     slug: slugWithId(item.title, item.id),
     name: item.title,
-    description: item.description ?? item.shortDescription ?? "",
+    description: cleanText(item.description ?? item.shortDescription),
     categorySlug,
     categoryName,
     subcategoryName,

@@ -36,12 +36,13 @@ function BlogHeroVisual({ posts }: { posts: BlogPost[] }) {
         <Link
           key={post.slug}
           href={`/blog/${post.slug}`}
+          prefetch={false}
           className={cn(
             "absolute block rounded-2xl bg-white p-4 text-neutral-900 shadow-2xl shadow-primary-950/40 ring-1 ring-white/30 transition-transform duration-300 hover:z-40 hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400",
             placements[index]
           )}
         >
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+          <span className="text-xs font-semibold uppercase tracking-wider text-primary-600">
             {post.category}
           </span>
           <p className="mt-1 line-clamp-2 text-base font-semibold leading-snug">{post.title}</p>

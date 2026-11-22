@@ -32,13 +32,13 @@ function VendorChoosePath() {
                 <span className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <path.icon className="size-6" aria-hidden="true" />
                 </span>
-                <Badge variant="secondary" className="text-2xs font-normal">
+                <Badge variant="secondary" className="text-xs font-normal">
                   {path.badge}
                 </Badge>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {path.subtitle}
                 </span>
                 <h3 className="font-heading text-xl font-semibold text-foreground sm:text-2xl">
@@ -50,14 +50,14 @@ function VendorChoosePath() {
               </div>
 
               <div className="flex flex-col gap-2 border-t border-border/60 pt-4">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Common Offerings
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {path.examples.map((item) => (
                     <span
                       key={item}
-                      className="rounded-md bg-muted px-2.5 py-1 text-3xs font-medium text-foreground"
+                      className="rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-foreground"
                     >
                       {item}
                     </span>

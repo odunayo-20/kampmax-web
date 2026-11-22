@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Opportunity, OpportunityType } from "@/types/job"
+import { NativeSelect } from "@/components/ui/native-select"
+import { EmptyState, EmptyStateCta } from "@/components/shared/empty-state"
 
 const ALL_TYPES = "all" as const
 const ALL_CAMPUSES = "all" as const
@@ -81,18 +83,7 @@ function JobsBrowser({
 
   if (opportunities.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-        <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-          <SearchX className="size-5" aria-hidden="true" />
-        </span>
-        <p className="font-heading text-lg font-semibold text-foreground">
-          No opportunities yet
-        </p>
-        <p className="max-w-sm text-sm text-muted-foreground">
-          No job or internship opportunities have been posted yet. Check back
-          soon as campus and partner organizations add listings.
-        </p>
-      </div>
+      <EmptyState icon={SearchX} title="No opportunities yet" description="No job or internship opportunities have been posted yet. Check back soon as campus and partner organizations add listings." action={<EmptyStateCta label="Post an opportunity" />} />
     )
   }
 
@@ -128,7 +119,7 @@ function JobsBrowser({
               >
                 Campus:
               </Label>
-              <select
+              <NativeSelect
                 id={campusSelectId}
                 value={campusSlug}
                 onChange={(event) => setCampusSlug(event.target.value)}
@@ -140,7 +131,7 @@ function JobsBrowser({
                     {campus.shortName}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
             </div>
           ) : null}
         </div>
@@ -185,27 +176,7 @@ function JobsBrowser({
       </div>
 
       {filteredOpportunities.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-            <SearchX className="size-5" aria-hidden="true" />
-          </span>
-          <p className="font-heading text-lg font-semibold text-foreground">
-            No matching opportunities
-          </p>
-          <p className="max-w-sm text-sm text-muted-foreground">
-            Nothing matched your current keywords or filter criteria. Try
-            clearing filters or searching with different terms.
-          </p>
-          {hasActiveFilters && (
-            <button
-              type="button"
-              onClick={handleResetFilters}
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
+        <EmptyState icon={SearchX} title="No matching opportunities" description="Nothing matched your current keywords or filter criteria. Try clearing filters or searching with different terms." onReset={hasActiveFilters ? handleResetFilters : undefined} />
       ) : (
         <div className="flex flex-col gap-4">
           <p className="text-xs sm:text-sm text-muted-foreground">

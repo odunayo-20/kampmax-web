@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+
+import { pageMetadata } from "@/lib/seo"
 import { notFound } from "next/navigation"
 
 import { orNullDuringBuild } from "@/lib/api"
@@ -33,21 +35,14 @@ export async function generateMetadata({
     return {}
   }
 
-  const description = `Discover what's happening around ${campus.name} on Kampmax , marketplace, services, jobs, and events for the ${campus.shortName} community.`
+  const description = `Discover what's happening around ${campus.name} on Kampmax: marketplace, services, jobs, and events for the ${campus.shortName} community.`
 
-  return {
-    title: `${campus.shortName} Campus | Kampmax`,
+  return pageMetadata({
+    title: `${campus.shortName} Campus`,
     description,
-    alternates: {
-      canonical: `/campuses/${campus.slug}`,
-    },
-    openGraph: {
-      title: `${campus.shortName} Campus , Kampmax`,
-      description,
-      url: `/campuses/${campus.slug}`,
-      ...(campus.image ? { images: [campus.image] } : {}),
-    },
-  }
+    path: `/campuses/${campus.slug}`,
+    image: campus.image,
+  })
 }
 
 export default async function CampusPage({

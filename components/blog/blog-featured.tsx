@@ -30,13 +30,14 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
         <span className="flex size-6 items-center justify-center rounded-md bg-primary/10 text-primary">
           <BookOpen className="size-3.5" aria-hidden="true" />
         </span>
-        <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Featured Story
         </span>
       </div>
 
       <Link
         href={`/blog/${post.slug}`}
+        prefetch={false}
         className="group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         <Card className="grid gap-0 overflow-hidden rounded-2xl border-border/80 bg-card py-0 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40 group-hover:shadow-xl group-hover:shadow-primary-950/10 lg:grid-cols-[1.1fr_1fr]">
@@ -48,17 +49,17 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
           />
           <CardContent className="flex flex-col justify-center gap-5 p-6 sm:p-10">
             <div className="flex flex-wrap items-center gap-3">
-              <Badge variant="default" className="text-2xs">
+              <Badge variant="default" className="text-xs">
                 {post.category}
               </Badge>
-              <div className="flex items-center gap-1.5 text-2xs text-muted-foreground">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <Clock className="size-3" aria-hidden="true" />
                 <span>{post.readingTime} min read</span>
               </div>
               <span className="text-muted-foreground/40">•</span>
               <time
                 dateTime={post.publishedAt}
-                className="text-2xs text-muted-foreground"
+                className="text-xs text-muted-foreground"
               >
                 {formatDate(post.publishedAt)}
               </time>
@@ -75,7 +76,7 @@ function BlogFeatured({ post }: BlogFeaturedProps) {
 
             <div className="flex items-center justify-between border-t border-border/60 pt-4">
               <div className="flex items-center gap-2">
-                <span className="flex size-7 items-center justify-center rounded-full bg-muted font-heading text-2xs font-semibold text-foreground">
+                <span className="flex size-7 items-center justify-center rounded-full bg-muted font-heading text-xs font-semibold text-foreground">
                   {post.author.name.charAt(0)}
                 </span>
                 <span className="text-xs font-medium text-foreground">

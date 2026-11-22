@@ -5,6 +5,7 @@ import type {
   MarketplaceCategory,
   MarketplaceProduct,
 } from "@/types/marketplace"
+import { cleanText } from "@/lib/text"
 
 /** Backend category shape (`GET /categories?type=PRODUCT`). */
 type ApiCategory = {
@@ -83,8 +84,8 @@ function toProduct(
 
   return {
     slug: slugWithId(item.name, item.id),
-    name: item.name,
-    description: item.description ?? "",
+    name: cleanText(item.name),
+    description: cleanText(item.description),
     categorySlug,
     categoryName: category?.name,
     image: resolvedImages[0],

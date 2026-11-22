@@ -13,7 +13,7 @@ export function ArticleRelated({ posts }: ArticleRelatedProps) {
   return (
     <section aria-labelledby="related-articles-heading">
       <div className="mb-8">
-        <span className="text-2xs font-semibold tracking-wider text-primary uppercase">
+        <span className="text-xs font-semibold tracking-wider text-primary uppercase">
           Keep reading
         </span>
         <h2

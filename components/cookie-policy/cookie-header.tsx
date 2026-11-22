@@ -11,7 +11,7 @@ export function CookieHeader() {
         <span className="flex size-8 items-center justify-center rounded-xl bg-linear-to-br from-primary-600 to-primary-800 text-white">
           <Cookie className="size-4" aria-hidden="true" />
         </span>
-        <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Legal & Transparency
         </span>
       </div>

@@ -27,7 +27,7 @@ function AboutWhatIsKampmax() {
                   <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <pillar.icon className="size-5" aria-hidden="true" />
                   </span>
-                  <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {pillar.subtitle}
                   </span>
                 </div>

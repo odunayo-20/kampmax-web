@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+
+import { pageMetadata } from "@/lib/seo"
 import { notFound, permanentRedirect } from "next/navigation"
 
 import { orNullDuringBuild } from "@/lib/api"
@@ -42,19 +44,12 @@ export async function generateMetadata({
 
   const description = `${event.description} Date: ${formatEventDate(event.date)} at ${event.location ?? "Campus"}.`
 
-  return {
-    title: `${event.title} | Kampmax Events`,
+  return pageMetadata({
+    title: `${event.title} | Events`,
     description,
-    alternates: {
-      canonical: `/events/${event.slug}`,
-    },
-    openGraph: {
-      title: `${event.title} | Kampmax Events`,
-      description,
-      url: `/events/${event.slug}`,
-      ...(event.image ? { images: [event.image] } : {}),
-    },
-  }
+    path: `/events/${event.slug}`,
+    image: event.image,
+  })
 }
 
 export default async function EventPage({ params }: EventPageProps) {

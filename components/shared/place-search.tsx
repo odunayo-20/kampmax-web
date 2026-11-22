@@ -210,7 +210,7 @@ function PlaceSearch({
                       </span>
                     ) : null}
                   </span>
-                  <span className="shrink-0 text-[11px] text-muted-foreground">
+                  <span className="shrink-0 text-xs text-muted-foreground">
                     {KIND_LABEL[option.kind]}
                   </span>
                 </li>

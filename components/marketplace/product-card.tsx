@@ -22,6 +22,7 @@ function ProductCard({
   return (
     <Link
       href={`/marketplace/${product.slug}`}
+      prefetch={false}
       className="group block h-full rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <Card className="flex h-full flex-col rounded-2xl pt-0 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary-950/10 group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
@@ -33,7 +34,7 @@ function ProductCard({
         />
         <CardContent className="flex flex-1 flex-col gap-1.5 p-3 sm:gap-2 sm:p-4">
           <div className="flex min-w-0 flex-col gap-0.5 sm:gap-1">
-            <p className="truncate text-[10px] font-semibold uppercase tracking-wide text-muted-foreground sm:text-[11px]">
+            <p className="truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-xs">
               {[category?.name, campus?.shortName].filter(Boolean).join(" · ") ||
                 "Marketplace"}
             </p>
@@ -43,7 +44,7 @@ function ProductCard({
             </h3>
 
             {product.vendorName ? (
-              <p className="truncate text-[11px] text-muted-foreground sm:text-xs">
+              <p className="truncate text-xs text-muted-foreground sm:text-xs">
                 {product.vendorName}
               </p>
             ) : null}
@@ -55,7 +56,7 @@ function ProductCard({
                 {product.price ? formatPrice(product.price) : "Price on request"}
               </span>
               {product.compareAtPrice && product.price && product.compareAtPrice > product.price ? (
-                <span className="text-[10px] text-muted-foreground line-through sm:text-[11px]">
+                <span className="text-xs text-muted-foreground line-through sm:text-xs">
                   {formatPrice(product.compareAtPrice)}
                 </span>
               ) : null}

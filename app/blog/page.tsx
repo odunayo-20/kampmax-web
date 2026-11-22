@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { orNullDuringBuild } from "@/lib/api"
 import { getAllPosts, getCategories, getFeaturedPost } from "@/lib/blog"
 import { Container } from "@/components/layout/container"
@@ -12,20 +14,11 @@ import { ApiUnavailable } from "@/components/shared/api-unavailable"
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Blog & Insights",
-  description:
-    "Explore ideas, opportunities, student entrepreneurship, and campus insights from the Kampmax team.",
-  alternates: {
-    canonical: "/blog",
-  },
-  openGraph: {
-    title: "Blog & Insights , Kampmax",
-    description:
-      "Explore ideas, opportunities, student entrepreneurship, and campus insights from the Kampmax team.",
-    url: "/blog",
-  },
-}
+  description: "Explore ideas, opportunities, student entrepreneurship, and campus insights from the Kampmax team.",
+  path: "/blog",
+})
 
 export default async function BlogIndexPage() {
   const content = await orNullDuringBuild(async () => {
@@ -65,7 +58,7 @@ export default async function BlogIndexPage() {
           <Section id="articles" className="scroll-mt-16">
             <Container>
               <div className="mb-8 flex flex-col gap-1">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-primary">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
                   All Stories
                 </span>
                 <h2 className="font-heading text-xl font-semibold text-foreground sm:text-2xl">

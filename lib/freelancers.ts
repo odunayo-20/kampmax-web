@@ -6,6 +6,7 @@ import type {
   FreelancerCategory,
   FreelancerSkillGroup,
 } from "@/types/freelancer"
+import { cleanText, isPlaceholderText } from "@/lib/text"
 
 /** Backend shape (`GET /freelancers`). Only the fields this site reads. */
 export type ApiFreelancer = {
@@ -113,16 +114,17 @@ export function toFreelancer(
   return {
     slug: slugWithId(item.fullName, item.id),
     name: item.fullName,
-    headline: item.professionalTitle ?? primary?.name ?? FALLBACK_TITLE,
+    headline: cleanText(item.professionalTitle) || primary?.name || FALLBACK_TITLE,
     primarySkill: primary?.name ?? item.professionalTitle ?? FALLBACK_TITLE,
     skills: item.skills.map((skill) => skill.name),
     skillGroups,
     categorySlugs: skillGroups.map((group) => group.category.slug),
     categorySlug: mainCategory.slug,
     categoryName: mainCategory.name,
-    bio: item.bio ?? "",
+    bio: isPlaceholderText(item.bio) ? "" : cleanText(item.bio),
     avatar: resolveMediaUrl(item.avatar),
-    verified: item.verificationStatus === "VERIFIED",
+    // A badge on a profile with no real bio would be a false promise.
+    verified: item.verificationStatus === "VERIFIED" && !isPlaceholderText(item.bio),
     availability,
     campusSlug: item.campusId
       ? campuses.find((campus) => campus.id === item.campusId)?.slug

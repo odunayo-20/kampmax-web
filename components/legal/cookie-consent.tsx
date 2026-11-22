@@ -294,7 +294,7 @@ export function CookieConsent() {
                     <Shield className="size-4 text-primary" aria-hidden="true" />
                     <span className="font-semibold text-foreground">Strictly Necessary</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-2xs font-semibold text-primary">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
                     <Check className="size-3" aria-hidden="true" />
                     Always Active
                   </span>
@@ -335,7 +335,7 @@ export function CookieConsent() {
                   <span className="font-semibold text-foreground">
                     Marketing &amp; Advertising
                   </span>
-                  <span className="inline-flex items-center rounded-full bg-neutral-200 dark:bg-neutral-800 px-2.5 py-0.5 text-2xs font-medium text-muted-foreground">
+                  <span className="inline-flex items-center rounded-full bg-neutral-200 dark:bg-neutral-800 px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                     Not in Use
                   </span>
                 </div>

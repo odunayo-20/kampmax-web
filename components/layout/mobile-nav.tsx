@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import {
+  BedDouble,
   Menu,
   ShoppingBag,
   Layers,
@@ -42,6 +43,7 @@ const routeIcons: Record<string, React.ComponentType<{ className?: string }>> = 
   "/jobs": Briefcase,
   "/events": Calendar,
   "/campuses": GraduationCap,
+  "/accommodation": BedDouble,
   "/freelancers": UserCheck,
   "/how-it-works": Compass,
   "/for-businesses": Building2,
@@ -59,7 +61,7 @@ export function MobileNav() {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-lg text-muted-foreground hover:bg-neutral-100 hover:text-foreground lg:hidden dark:hover:bg-neutral-800"
+            className="size-11 rounded-lg text-muted-foreground hover:bg-neutral-100 hover:text-foreground lg:hidden dark:hover:bg-neutral-800"
           />
         }
       >
@@ -74,7 +76,7 @@ export function MobileNav() {
         <SheetHeader className="border-b border-border/60 px-5 py-4">
           <div className="flex items-center justify-between pr-8">
             <Logo size="sm" />
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-semibold text-primary-700 ring-1 ring-primary-100/80 dark:bg-primary-950/70 dark:text-primary-300 dark:ring-primary-900/60">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-50 px-2.5 py-0.5 text-xs font-semibold text-primary-700 ring-1 ring-primary-100/80 dark:bg-primary-950/70 dark:text-primary-300 dark:ring-primary-900/60">
               <span className="size-1.5 rounded-full bg-primary-600 animate-pulse dark:bg-primary-400" />
               Campus Hub
             </span>
@@ -102,7 +104,7 @@ export function MobileNav() {
           {/* Grouped Links */}
           {mobileNavGroups.map((group) => (
             <div key={group.title} className="flex flex-col gap-1">
-              <span className="px-3 text-[11px] font-semibold tracking-wider text-muted-foreground/80 uppercase">
+              <span className="px-3 text-xs font-semibold tracking-wider text-muted-foreground/80 uppercase">
                 {group.title}
               </span>
               <div className="flex flex-col gap-0.5">
@@ -143,7 +145,7 @@ export function MobileNav() {
                 <p className="text-xs font-semibold text-foreground">
                   Sell to Students
                 </p>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-xs text-muted-foreground">
                   Become a verified vendor
                 </p>
               </div>

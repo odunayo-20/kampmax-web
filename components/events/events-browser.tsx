@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Event, EventCategory } from "@/types/event"
+import { NativeSelect } from "@/components/ui/native-select"
+import { EmptyState, EmptyStateCta } from "@/components/shared/empty-state"
 
 const ALL_CATEGORIES = "all" as const
 const ALL_CAMPUSES = "all" as const
@@ -154,7 +156,7 @@ function EventsBrowser({
             >
               Campus:
             </Label>
-            <select
+            <NativeSelect
               id={campusSelectId}
               value={campusSlug}
               onChange={(e) => setCampusSlug(e.target.value)}
@@ -166,7 +168,7 @@ function EventsBrowser({
                   {campus.shortName}
                 </option>
               ))}
-            </select>
+            </NativeSelect>
           </div>
           ) : null}
         </div>
@@ -211,32 +213,29 @@ function EventsBrowser({
       </div>
 
       {filteredEvents.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-            <CalendarX className="size-5" aria-hidden="true" />
-          </span>
-          <p className="font-heading text-lg font-semibold text-foreground">
-            {tab === "upcoming"
-              ? "No upcoming events match your filters"
-              : "No past events match your filters"}
-          </p>
-          <p className="max-w-sm text-sm text-muted-foreground">
-            {hasActiveFilters
+        <EmptyState
+          icon={CalendarX}
+          title={
+            hasActiveFilters
+              ? `No ${tab} events match your filters`
+              : tab === "upcoming"
+                ? "No events scheduled yet"
+                : "No past events yet"
+          }
+          description={
+            hasActiveFilters
               ? "Try adjusting your search terms or selecting another category or campus."
               : tab === "upcoming"
-                ? "No upcoming events are currently scheduled in this category. Check back soon."
-                : "No archived events recorded under these criteria."}
-          </p>
-          {hasActiveFilters && (
-            <button
-              type="button"
-              onClick={handleResetFilters}
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
+                ? "Nothing is scheduled right now. Organising something on campus? List it and students will find it here."
+                : "Events that have finished will be listed here."
+          }
+          onReset={hasActiveFilters ? handleResetFilters : undefined}
+          action={
+            !hasActiveFilters && tab === "upcoming" ? (
+              <EmptyStateCta label="Host an event" />
+            ) : undefined
+          }
+        />
       ) : (
         <div className="flex flex-col gap-4">
           <p className="text-sm text-muted-foreground">

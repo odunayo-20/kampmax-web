@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { orNullDuringBuild } from "@/lib/api"
 import { campusesWithItems, getCampuses } from "@/lib/campuses"
 import { categoriesOf, getEvents } from "@/lib/events"
@@ -24,18 +26,11 @@ export const revalidate = 300
 const description =
   "Discover academic symposiums, hackathons, cultural festivals, and student activities across campus communities on Kampmax."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Events & Campus Activities",
   description,
-  alternates: {
-    canonical: "/events",
-  },
-  openGraph: {
-    title: "Events & Campus Activities | Kampmax",
-    description,
-    url: "/events",
-  },
-}
+  path: "/events",
+})
 
 export default async function EventsPage() {
   const listing = await orNullDuringBuild(async () => {

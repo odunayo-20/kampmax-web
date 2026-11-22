@@ -47,7 +47,7 @@ function VendorFinalCta() {
           Explore Kampmax
         </Link>
       </div>
-      <Muted className="relative text-2xs text-primary-foreground/60 sm:text-xs">
+      <Muted className="relative text-xs text-primary-foreground/60 sm:text-xs">
         Account creation, catalog setup, and buyer inquiries are managed inside the Kampmax application.
       </Muted>
     </div>

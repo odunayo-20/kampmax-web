@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { CookieHeader } from "@/components/cookie-policy/cookie-header"
 import { CookieJsonLd } from "@/components/cookie-policy/cookie-json-ld"
 import { CookieSections } from "@/components/cookie-policy/cookie-sections"
@@ -9,18 +11,11 @@ import { Container } from "@/components/layout/container"
 const description =
   "Read the Kampmax Cookie Policy to understand how cookies and client storage technologies are used on our public website and how to manage your preferences."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Cookie Policy",
   description,
-  alternates: {
-    canonical: "/cookie-policy",
-  },
-  openGraph: {
-    title: "Cookie Policy | Kampmax",
-    description,
-    url: "/cookie-policy",
-  },
-}
+  path: "/cookie-policy",
+})
 
 export default function CookiePolicyPage() {
   return (

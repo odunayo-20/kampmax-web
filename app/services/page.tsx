@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { orNullDuringBuild } from "@/lib/api"
 import { campusesWithItems, getCampuses } from "@/lib/campuses"
 import { directoryServiceCategories, getServices } from "@/lib/services"
@@ -15,18 +17,11 @@ export const revalidate = 300
 const description =
   "Discover services offered by individuals, freelancers, and businesses across campus communities on Kampmax."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description,
-  alternates: {
-    canonical: "/services",
-  },
-  openGraph: {
-    title: "Services | Kampmax",
-    description,
-    url: "/services",
-  },
-}
+  path: "/services",
+})
 
 export default async function ServicesPage() {
   const listing = await orNullDuringBuild(async () => {

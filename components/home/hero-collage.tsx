@@ -59,6 +59,7 @@ function HeroCollage({ product, job, event }: HeroCollageProps) {
       {/* Marketplace */}
       <Link
         href={product?.href ?? "/marketplace"}
+        prefetch={false}
         className={cn(cardBase, "left-0 top-2 z-10 w-[62%] -rotate-2 animate-float")}
       >
         <div className="relative">
@@ -76,7 +77,7 @@ function HeroCollage({ product, job, event }: HeroCollageProps) {
           ) : null}
         </div>
         <div className="flex flex-col gap-1 px-1 pb-1 pt-3">
-          <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+          <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-primary-600">
             <Store className="size-3" aria-hidden="true" />
             Marketplace
           </span>
@@ -92,6 +93,7 @@ function HeroCollage({ product, job, event }: HeroCollageProps) {
       {/* Events */}
       <Link
         href={event?.href ?? "/events"}
+        prefetch={false}
         className={cn(
           cardBase,
           "right-0 top-[36%] z-20 w-[60%] rotate-2 animate-float-delayed"
@@ -111,7 +113,7 @@ function HeroCollage({ product, job, event }: HeroCollageProps) {
             <div className="flex items-start gap-3 px-1">
               <EventDateBadge date={event.date} className="w-12 shrink-0 p-1.5" />
               <div className="flex min-w-0 flex-col gap-0.5">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary-600">
                   Event{event.priceLabel ? ` · ${event.priceLabel}` : ""}
                 </span>
                 <p className="line-clamp-2 text-sm font-semibold leading-snug">{event.title}</p>
@@ -137,6 +139,7 @@ function HeroCollage({ product, job, event }: HeroCollageProps) {
       {/* Jobs */}
       <Link
         href={job?.href ?? "/jobs"}
+        prefetch={false}
         className={cn(cardBase, "bottom-0 left-[4%] z-30 w-[64%] -rotate-1 animate-float")}
       >
         <div className="flex items-center gap-3 p-1">
@@ -144,7 +147,7 @@ function HeroCollage({ product, job, event }: HeroCollageProps) {
             <Briefcase className="size-5" aria-hidden="true" />
           </span>
           <div className="flex min-w-0 flex-col gap-0.5">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+            <span className="text-xs font-semibold uppercase tracking-wider text-primary-600">
               Jobs{job?.meta ? ` · ${job.meta}` : ""}
             </span>
             <p className="truncate text-sm font-semibold">{job?.title ?? "Find roles near your campus"}</p>

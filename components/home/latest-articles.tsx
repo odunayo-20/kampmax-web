@@ -58,7 +58,10 @@ function LatestArticles({ posts = [] }: { posts?: BlogPost[] }) {
         />
 
         <div className="flex items-center justify-between gap-3 self-stretch sm:self-auto sm:justify-end">
-          <div className="flex items-center gap-1.5">
+          {/* Arrows only when there is something to scroll to. */}
+          <div
+            className={cn("items-center gap-1.5", canScrollLeft || canScrollRight ? "flex" : "hidden")}
+          >
             <Button
               type="button"
               variant="outline"
@@ -66,7 +69,7 @@ function LatestArticles({ posts = [] }: { posts?: BlogPost[] }) {
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
               aria-label="Previous articles"
-              className="size-9 rounded-full shadow-xs"
+              className="size-11 rounded-full shadow-xs"
             >
               <ChevronLeft className="size-4" />
             </Button>
@@ -77,7 +80,7 @@ function LatestArticles({ posts = [] }: { posts?: BlogPost[] }) {
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
               aria-label="Next articles"
-              className="size-9 rounded-full shadow-xs"
+              className="size-11 rounded-full shadow-xs"
             >
               <ChevronRight className="size-4" />
             </Button>

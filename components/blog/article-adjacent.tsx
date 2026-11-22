@@ -21,6 +21,7 @@ export function ArticleAdjacent({ prev, next }: ArticleAdjacentProps) {
       {prev ? (
         <Link
           href={`/blog/${prev.slug}`}
+          prefetch={false}
           className="group flex flex-col justify-between rounded-2xl border border-border/70 bg-card p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
         >
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground group-hover:text-primary transition-colors mb-2">
@@ -38,6 +39,7 @@ export function ArticleAdjacent({ prev, next }: ArticleAdjacentProps) {
       {next ? (
         <Link
           href={`/blog/${next.slug}`}
+          prefetch={false}
           className="group flex flex-col justify-between rounded-2xl border border-border/70 bg-card p-4 text-right shadow-xs transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md sm:ml-auto w-full"
         >
           <div className="flex items-center justify-end gap-1.5 text-xs text-muted-foreground group-hover:text-primary transition-colors mb-2">

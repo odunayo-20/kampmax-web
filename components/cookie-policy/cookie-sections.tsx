@@ -45,7 +45,7 @@ export function CookieSections() {
                   <Shield className="size-4 text-primary" aria-hidden="true" />
                   <span>A. Strictly Necessary &amp; Security Cookies</span>
                 </h3>
-                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-2xs font-semibold text-primary">
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
                   <CheckCircle2 className="size-3" aria-hidden="true" />
                   Always Active
                 </span>
@@ -61,7 +61,7 @@ export function CookieSections() {
                   <Lock className="size-4 text-primary" aria-hidden="true" />
                   <span>B. Authentication &amp; Session Storage</span>
                 </h3>
-                <span className="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-2.5 py-0.5 text-2xs font-medium text-muted-foreground">
+                <span className="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                   Future Platform Scope
                 </span>
               </div>
@@ -76,7 +76,7 @@ export function CookieSections() {
                   <Sliders className="size-4 text-primary" aria-hidden="true" />
                   <span>C. Preference &amp; Interface Storage</span>
                 </h3>
-                <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-2xs font-semibold text-primary">
+                <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
                   Active as Needed
                 </span>
               </div>
@@ -91,7 +91,7 @@ export function CookieSections() {
                   <Info className="size-4 text-muted-foreground" aria-hidden="true" />
                   <span>D. Performance &amp; Diagnostic Analytics</span>
                 </h3>
-                <span className="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-2.5 py-0.5 text-2xs font-medium text-muted-foreground">
+                <span className="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                   Optional / Future
                 </span>
               </div>
@@ -106,7 +106,7 @@ export function CookieSections() {
                   <Cookie className="size-4 text-muted-foreground" aria-hidden="true" />
                   <span>E. Marketing &amp; Behavioral Advertising</span>
                 </h3>
-                <span className="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-2.5 py-0.5 text-2xs font-medium text-muted-foreground">
+                <span className="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                   Not in Use
                 </span>
               </div>

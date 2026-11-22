@@ -25,7 +25,7 @@ export function SiteFooter() {
               Grow your business on Kampmax
             </h2>
             <p className="mt-1 text-sm text-primary-100">
-              Reach students across every campus , list services, sell products, and hire talent.
+              Reach students across every campus: list services, sell products, and hire talent.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
@@ -33,7 +33,7 @@ export function SiteFooter() {
               href="/become-a-vendor"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "bg-accent-500 text-primary-950 font-semibold hover:bg-accent-400"
+                "min-h-11 bg-accent-500 text-primary-950 font-semibold hover:bg-accent-400"
               )}
             >
               Become a Vendor
@@ -43,7 +43,7 @@ export function SiteFooter() {
               href="/for-businesses"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                "min-h-11 border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
               )}
             >
               For Businesses
@@ -64,7 +64,7 @@ export function SiteFooter() {
               href={siteConfig.registerUrl}
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                "min-h-11 border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
               )}
             >
               Join Kampmax
@@ -88,12 +88,12 @@ export function SiteFooter() {
               >
                 {group.title}
               </p>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-1 flex flex-col">
                 {group.items.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-primary-100 transition-colors hover:text-accent-400"
+                      className="inline-flex min-h-11 items-center text-sm text-primary-100 transition-colors hover:text-accent-400"
                     >
                       {item.title}
                     </Link>
@@ -110,12 +110,12 @@ export function SiteFooter() {
           &copy; {year} {siteConfig.name}. All rights reserved.
         </p>
         <nav aria-label="Legal">
-          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          <ul className="flex flex-wrap gap-x-6">
             {legalNav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm text-primary-200 transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center text-sm text-primary-200 transition-colors hover:text-white"
                 >
                   {item.title}
                 </Link>

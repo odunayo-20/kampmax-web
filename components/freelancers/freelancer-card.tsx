@@ -21,6 +21,7 @@ function FreelancerCard({
   return (
     <Link
       href={`/freelancers/${freelancer.slug}`}
+      prefetch={false}
       className="group block h-full rounded-xl sm:rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <Card className="flex h-full flex-col rounded-xl sm:rounded-2xl py-3.5 sm:py-4 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary-950/10 group-hover:ring-primary/40 group-focus-visible:ring-primary/40">
@@ -60,18 +61,18 @@ function FreelancerCard({
                   </>
                 ) : null}
               </h3>
-              <p className="line-clamp-1 text-[11px] sm:text-xs text-muted-foreground">
+              <p className="line-clamp-1 text-xs text-muted-foreground">
                 {freelancer.headline}
               </p>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-1 sm:gap-1.5">
-            <Badge variant="secondary" className="px-1.5 py-0 text-[10px] sm:px-2.5 sm:py-0.5 sm:text-xs">
+            <Badge variant="secondary" className="px-1.5 py-0 text-xs sm:px-2.5 sm:py-0.5 sm:text-xs">
               {freelancer.categoryName}
             </Badge>
             {campus ? (
-              <Badge variant="outline" className="px-1.5 py-0 text-[10px] sm:px-2.5 sm:py-0.5 sm:text-xs">
+              <Badge variant="outline" className="px-1.5 py-0 text-xs sm:px-2.5 sm:py-0.5 sm:text-xs">
                 {campus.shortName}
               </Badge>
             ) : null}
@@ -88,7 +89,7 @@ function FreelancerCard({
               <span
                 key={skill}
                 className={cn(
-                  "rounded-md bg-muted px-1.5 py-0.5 text-[10px] sm:px-2 sm:text-xs text-muted-foreground",
+                  "rounded-md bg-muted px-1.5 py-0.5 text-xs sm:px-2 sm:text-xs text-muted-foreground",
                   index >= 2 && "hidden sm:inline-flex"
                 )}
               >
@@ -96,14 +97,14 @@ function FreelancerCard({
               </span>
             ))}
             {remainingCount > 0 ? (
-              <span className="text-[10px] sm:text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 +{remainingCount}
               </span>
             ) : null}
           </div>
 
           <div className="mt-auto flex items-center justify-between border-t border-border/60 pt-2.5 sm:pt-3">
-            <span className="flex items-center gap-1.5 text-[10px] sm:text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <span
                 className={cn(
                   "size-1.5 sm:size-2 rounded-full shrink-0",
@@ -123,7 +124,7 @@ function FreelancerCard({
                     : "Unavailable"}
               </span>
             </span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-2 py-1 text-[10px] sm:px-3 sm:py-1.5 sm:text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary-50 px-2 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-xs font-semibold text-primary-700 transition-colors group-hover:bg-primary-600 group-hover:text-white">
               <span className="hidden sm:inline">View </span>Profile
               <ArrowRight
                 className="size-3 sm:size-3.5 transition-transform group-hover:translate-x-0.5"

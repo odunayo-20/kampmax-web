@@ -106,7 +106,7 @@ function BusinessEcosystem() {
                 <span className="font-heading text-xs font-semibold text-foreground">
                   {surface.title}
                 </span>
-                <span className="text-3xs text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {surface.subtitle}
                 </span>
               </CardContent>

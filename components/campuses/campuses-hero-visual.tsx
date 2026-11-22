@@ -36,6 +36,7 @@ function CampusesHeroVisual({ campuses }: { campuses: Campus[] }) {
         <Link
           key={campus.slug}
           href={`/campuses/${campus.slug}`}
+          prefetch={false}
           className={cn(
             "absolute block rounded-2xl bg-white p-4 text-neutral-900 shadow-2xl shadow-primary-950/40 ring-1 ring-white/30 transition-transform duration-300 hover:z-40 hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400",
             placements[index]
@@ -44,7 +45,7 @@ function CampusesHeroVisual({ campuses }: { campuses: Campus[] }) {
           <div className="flex items-center gap-3">
             <span
               aria-hidden="true"
-              className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-primary-600 to-primary-800 px-1 text-[10px] font-extrabold tracking-tight text-white"
+              className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-primary-600 to-primary-800 px-1 text-xs font-extrabold tracking-tight text-white"
             >
               {campus.shortName.slice(0, 6)}
             </span>

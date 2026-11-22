@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+
+import { pageMetadata } from "@/lib/seo"
 import { notFound, permanentRedirect } from "next/navigation"
 
 import { orNullDuringBuild } from "@/lib/api"
@@ -40,38 +42,27 @@ export async function generateMetadata({
   const lookup = await lookupArticle(slug)
 
   if (lookup.status !== "found") {
-    return {
-      title: "Article Not Found | Kampmax Insights",
-      description: "The requested article could not be found.",
-    }
+    return { title: "Article not found" }
   }
 
   const post = lookup.article
-  const title = post.seoTitle ?? post.title
-  const description = post.seoDescription ?? post.excerpt
+  const base = pageMetadata({
+    title: post.seoTitle ?? post.title,
+    description: post.seoDescription ?? post.excerpt,
+    path: post.canonicalUrl ?? `/blog/${post.slug}`,
+    image: post.image,
+    type: "article",
+  })
 
   return {
-    title: `${title} | Kampmax Insights`,
-    description,
-    alternates: {
-      canonical: post.canonicalUrl ?? `/blog/${post.slug}`,
-    },
+    ...base,
     openGraph: {
-      title,
-      description,
-      url: `/blog/${post.slug}`,
+      ...base.openGraph,
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author.name],
       section: post.category,
-      ...(post.image ? { images: [post.image] } : {}),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      ...(post.image ? { images: [post.image] } : {}),
     },
   }
 }

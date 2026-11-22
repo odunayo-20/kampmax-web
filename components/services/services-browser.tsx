@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { Service, ServiceCategory } from "@/types/service"
+import { NativeSelect } from "@/components/ui/native-select"
+import { EmptyState, EmptyStateCta } from "@/components/shared/empty-state"
 
 const ALL_CATEGORIES = "all" as const
 const ALL_CAMPUSES = "all" as const
@@ -80,18 +82,7 @@ function ServicesBrowser({
 
   if (services.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-        <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-          <SearchX className="size-5" aria-hidden="true" />
-        </span>
-        <p className="font-heading text-lg font-semibold text-foreground">
-          No services yet
-        </p>
-        <p className="max-w-sm text-sm text-muted-foreground">
-          No services have been listed in the directory yet. Check back soon as
-          providers add their offerings.
-        </p>
-      </div>
+      <EmptyState icon={SearchX} title="No services yet" description="No services have been listed in the directory yet. Check back soon as providers add their offerings." action={<EmptyStateCta label="Offer a service" />} />
     )
   }
 
@@ -127,7 +118,7 @@ function ServicesBrowser({
               >
                 Campus:
               </Label>
-              <select
+              <NativeSelect
                 id={campusSelectId}
                 value={campusSlug}
                 onChange={(event) => setCampusSlug(event.target.value)}
@@ -139,7 +130,7 @@ function ServicesBrowser({
                     {campus.shortName}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
             </div>
           ) : null}
         </div>
@@ -184,27 +175,7 @@ function ServicesBrowser({
       </div>
 
       {filteredServices.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-16 text-center">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-            <SearchX className="size-5" aria-hidden="true" />
-          </span>
-          <p className="font-heading text-lg font-semibold text-foreground">
-            No matching services
-          </p>
-          <p className="max-w-sm text-sm text-muted-foreground">
-            Nothing matched your search or filter selection. Try adjusting your
-            keywords or choosing another category or campus.
-          </p>
-          {hasActiveFilters && (
-            <button
-              type="button"
-              onClick={handleResetFilters}
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
+        <EmptyState icon={SearchX} title="No matching services" description="Nothing matched your search or filter selection. Try adjusting your keywords or choosing another category or campus." onReset={hasActiveFilters ? handleResetFilters : undefined} />
       ) : (
         <div className="flex flex-col gap-4">
           <p className="text-xs sm:text-sm text-muted-foreground">

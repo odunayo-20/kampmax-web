@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { Container } from "@/components/layout/container"
 import { RefundHeader } from "@/components/refund-policy/refund-header"
 import { RefundJsonLd } from "@/components/refund-policy/refund-json-ld"
@@ -9,18 +11,11 @@ import { RefundToc } from "@/components/refund-policy/refund-toc"
 const description =
   "Read the Kampmax Refund & Cancellation Policy for marketplace purchases, freelance services, digital items, and event tickets."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Refund Policy",
   description,
-  alternates: {
-    canonical: "/refund-policy",
-  },
-  openGraph: {
-    title: "Refund Policy | Kampmax",
-    description,
-    url: "/refund-policy",
-  },
-}
+  path: "/refund-policy",
+})
 
 export default function RefundPolicyPage() {
   return (

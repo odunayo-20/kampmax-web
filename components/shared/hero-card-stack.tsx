@@ -33,7 +33,7 @@ function HeroCardStack({ items }: { items: HeroCardStackItem[] }) {
             </span>
             <div className="flex min-w-0 flex-col gap-0.5">
               {item.label ? (
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-primary-600">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary-600">
                   {item.label}
                 </span>
               ) : null}

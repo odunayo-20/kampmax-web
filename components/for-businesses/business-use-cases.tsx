@@ -25,7 +25,7 @@ function BusinessUseCases() {
               </div>
 
               <div className="flex flex-1 flex-col gap-2">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Scenario
                 </span>
                 <p className="text-xs leading-relaxed text-muted-foreground">
@@ -34,7 +34,7 @@ function BusinessUseCases() {
               </div>
 
               <div className="border-t border-border/60 pt-3">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-primary">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
                   Value Delivered
                 </span>
                 <p className="mt-1 text-xs font-medium text-foreground">

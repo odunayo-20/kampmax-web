@@ -18,7 +18,7 @@ function VendorExperiences() {
         {/* Vendor Journey Column */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1 border-b border-border/80 pb-3">
-            <span className="text-2xs font-semibold uppercase tracking-wider text-primary">
+            <span className="text-xs font-semibold uppercase tracking-wider text-primary">
               Marketplace Vendors
             </span>
             <h3 className="font-heading text-xl font-semibold text-foreground">
@@ -51,7 +51,7 @@ function VendorExperiences() {
         {/* Service Provider Journey Column */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1 border-b border-border/80 pb-3">
-            <span className="text-2xs font-semibold uppercase tracking-wider text-primary">
+            <span className="text-xs font-semibold uppercase tracking-wider text-primary">
               Service Providers & Artisans
             </span>
             <h3 className="font-heading text-xl font-semibold text-foreground">

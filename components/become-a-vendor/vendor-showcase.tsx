@@ -20,7 +20,7 @@ function VendorShowcase() {
               </span>
 
               <div className="flex flex-col gap-1">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {pillar.subtitle}
                 </span>
                 <h3 className="font-heading text-base font-semibold text-foreground">

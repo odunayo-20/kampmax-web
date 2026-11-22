@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { orNullDuringBuild } from "@/lib/api"
 import { campusesWithItems, getCampuses } from "@/lib/campuses"
 import {
@@ -19,18 +21,11 @@ export const revalidate = 300
 const description =
   "Discover products people are offering around your campus community on Kampmax Marketplace. Search and filter by category to find what you need, or list your own."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Marketplace",
   description,
-  alternates: {
-    canonical: "/marketplace",
-  },
-  openGraph: {
-    title: "Marketplace | Kampmax",
-    description,
-    url: "/marketplace",
-  },
-}
+  path: "/marketplace",
+})
 
 export default async function MarketplacePage() {
   const listing = await orNullDuringBuild(async () => {

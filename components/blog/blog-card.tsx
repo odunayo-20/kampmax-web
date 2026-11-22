@@ -28,6 +28,7 @@ function BlogCard({ post }: BlogCardProps) {
     <article className="h-full">
       <Link
         href={`/blog/${post.slug}`}
+        prefetch={false}
         className="group flex h-full flex-col rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         <Card className="flex h-full flex-col overflow-hidden rounded-2xl border-border/80 bg-card pt-0 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/40 group-hover:shadow-xl group-hover:shadow-primary-950/10">
@@ -38,10 +39,10 @@ function BlogCard({ post }: BlogCardProps) {
           />
           <CardContent className="flex flex-1 flex-col gap-3.5 p-6">
             <div className="flex items-center justify-between">
-              <Badge variant="secondary" className="text-2xs font-normal">
+              <Badge variant="secondary" className="text-xs font-normal">
                 {post.category}
               </Badge>
-              <div className="flex items-center gap-1 text-3xs text-muted-foreground">
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="size-3" aria-hidden="true" />
                 <span>{post.readingTime} min</span>
               </div>
@@ -56,7 +57,7 @@ function BlogCard({ post }: BlogCardProps) {
             <div className="mt-auto flex items-center justify-between border-t border-border/60 pt-3">
               <time
                 dateTime={post.publishedAt}
-                className="text-2xs text-muted-foreground"
+                className="text-xs text-muted-foreground"
               >
                 {formatDate(post.publishedAt)}
               </time>

@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+
+import { pageMetadata } from "@/lib/seo"
 import { notFound } from "next/navigation"
 
 import { getOpportunityTypeBySlug } from "@/app/_data/jobs"
@@ -38,18 +40,11 @@ export async function generateMetadata({
 
   const description = `${opportunity.summary ?? opportunity.description} Location: ${opportunity.location ?? "Campus"}.`
 
-  return {
-    title: `${opportunity.title} at ${opportunity.organization} | Kampmax Jobs`,
+  return pageMetadata({
+    title: `${opportunity.title} at ${opportunity.organization} | Jobs`,
     description,
-    alternates: {
-      canonical: `/jobs/${opportunity.slug}`,
-    },
-    openGraph: {
-      title: `${opportunity.title} at ${opportunity.organization} | Kampmax Jobs`,
-      description,
-      url: `/jobs/${opportunity.slug}`,
-    },
-  }
+    path: `/jobs/${opportunity.slug}`,
+  })
 }
 
 export default async function JobPage({ params }: JobPageProps) {

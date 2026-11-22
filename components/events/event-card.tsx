@@ -36,6 +36,7 @@ function EventCard({
   return (
     <Link
       href={`/events/${event.slug}`}
+      prefetch={false}
       className="group block h-full rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <Card

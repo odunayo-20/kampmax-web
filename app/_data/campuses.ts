@@ -33,7 +33,7 @@ const campuses: Campus[] = [
     shortName: "UI",
     location: "Ibadan, Oyo State",
     description:
-      "The UI campus in Ibadan is one of Kampmax's configured communities , everything here is set up to grow with local activity.",
+      "The UI campus in Ibadan is one of Kampmax's configured communities, everything here is set up to grow with local activity.",
     enabled: true,
   },
   {
@@ -51,7 +51,7 @@ const campuses: Campus[] = [
     shortName: "UNN",
     location: "Nsukka, Enugu State",
     description:
-      "For the UNN community in Nsukka, Kampmax is configured and ready , local listings and events will appear here as they go live.",
+      "For the UNN community in Nsukka, Kampmax is configured and ready, local listings and events will appear here as they go live.",
     enabled: true,
   },
   {

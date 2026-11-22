@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { pageMetadata } from "@/lib/seo"
+
 import { getEnabledOpportunityTypes } from "@/app/_data/jobs"
 import { orNullDuringBuild } from "@/lib/api"
 import { campusesWithItems, getCampuses } from "@/lib/campuses"
@@ -20,18 +22,11 @@ export const revalidate = 300
 const description =
   "Discover internships, campus roles, freelance projects, and graduate opportunities across Nigerian campus communities on Kampmax."
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Jobs & Opportunities",
   description,
-  alternates: {
-    canonical: "/jobs",
-  },
-  openGraph: {
-    title: "Jobs & Opportunities | Kampmax",
-    description,
-    url: "/jobs",
-  },
-}
+  path: "/jobs",
+})
 
 export default async function JobsPage() {
   const types = getEnabledOpportunityTypes()

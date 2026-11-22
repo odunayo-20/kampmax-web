@@ -25,7 +25,7 @@ function AboutApproach() {
               </div>
 
               <div className="flex flex-col gap-1">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {principle.subtitle}
                 </span>
                 <h3 className="font-heading text-lg font-semibold text-foreground">

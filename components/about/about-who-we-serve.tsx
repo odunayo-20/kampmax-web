@@ -20,7 +20,7 @@ function AboutWhoWeServe() {
                 <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <participant.icon className="size-4" aria-hidden="true" />
                 </span>
-                <Badge variant="secondary" className="text-2xs font-normal">
+                <Badge variant="secondary" className="text-xs font-normal">
                   {participant.badge}
                 </Badge>
               </div>
@@ -39,7 +39,7 @@ function AboutWhoWeServe() {
                   {participant.highlights.map((item) => (
                     <span
                       key={item}
-                      className="rounded-md bg-muted px-2 py-0.5 text-3xs font-medium text-foreground"
+                      className="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-foreground"
                     >
                       {item}
                     </span>
