@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 import { orNullDuringBuild } from "@/lib/api"
+import { getListings } from "@/lib/accommodation"
 import { getAllPosts } from "@/lib/blog"
 import { getCampuses } from "@/lib/campuses"
 import { getEvents } from "@/lib/events"
@@ -12,6 +13,7 @@ import { formatPrice } from "@/lib/format-price"
 import { siteConfig } from "@/config/site"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
+import { AccommodationTeaser } from "@/components/home/accommodation-teaser"
 import { CampusEcosystem } from "@/components/home/campus-ecosystem"
 import { DiscoverGrid } from "@/components/home/discover-grid"
 import { EventsCommunity } from "@/components/home/events-community"
@@ -28,9 +30,9 @@ export const revalidate = 300
 // Search-facing copy: the words people actually type (marketplace, jobs,
 // services, events, campus) up front, kept under ~60 characters for the title
 // and ~160 for the description so neither is cut off in results.
-const homeTitle = "Kampmax | Campus Marketplace, Jobs, Services & Events"
+const homeTitle = "Kampmax | Campus Marketplace, Jobs, Accommodation & Events"
 const homeDescription =
-  "Buy and sell, find jobs, hire freelancers and book services, and discover events around your campus. One platform for students, businesses and organizers."
+  "Buy and sell, find student accommodation, jobs and freelancers, book services and discover events around your campus. One platform for students, businesses and organizers."
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
@@ -82,6 +84,7 @@ export default async function Home() {
       freelancers,
       services,
       posts,
+      accommodation,
     ] = await Promise.all([
       getProducts(campuses),
       getProductCategories(),
@@ -90,6 +93,7 @@ export default async function Home() {
       optional("freelancers", () => getFreelancers(campuses)),
       optional("services", () => getServices(campuses)),
       optional("articles", () => getAllPosts()),
+      optional("accommodation", async () => (await getListings()).items),
     ])
     return {
       campuses,
@@ -100,6 +104,7 @@ export default async function Home() {
       freelancers,
       services,
       posts,
+      accommodation,
     }
   })
 
@@ -171,6 +176,14 @@ export default async function Home() {
           <DiscoverGrid counts={counts} />
         </Container>
       </Section>
+
+      {data && data.campuses.length > 0 && (
+        <Section className="overflow-hidden">
+          <Container className="overflow-hidden">
+            <AccommodationTeaser listings={data.accommodation} campuses={data.campuses} />
+          </Container>
+        </Section>
+      )}
 
       {data && data.products.length > 0 && (
         <Section className="overflow-hidden">
