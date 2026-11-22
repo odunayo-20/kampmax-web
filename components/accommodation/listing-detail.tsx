@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { BadgeCheck, BedDouble, ChevronRight, Clock, MapPin, MessageCircle } from "lucide-react"
 
+import { ListingLocation } from "@/components/accommodation/listing-location"
 import { ProductGallery } from "@/components/marketplace/product-gallery"
 import { ImagePlaceholder } from "@/components/shared/image-placeholder"
 import { buttonVariants } from "@/components/ui/button"
@@ -16,6 +17,7 @@ import {
 import { formatPrice } from "@/lib/format-price"
 import { cn } from "@/lib/utils"
 import type { AccommodationDetail } from "@/types/accommodation"
+import type { Campus } from "@/types/campus"
 
 /** The chat that starts on WhatsApp already says which place it is about. */
 function whatsappLink(listing: AccommodationDetail): string {
@@ -96,7 +98,7 @@ function AgentCard({ listing }: { listing: AccommodationDetail }) {
 }
 
 /** Everything about one place: photos, price, fees, facilities, the agent and how to ask. */
-function ListingDetail({ listing }: { listing: AccommodationDetail }) {
+function ListingDetail({ listing, campus }: { listing: AccommodationDetail; campus?: Campus }) {
   const size = "h-12 w-full rounded-xl text-base"
   return (
     <div className="flex flex-col gap-8 py-8 sm:py-12">
@@ -204,6 +206,8 @@ function ListingDetail({ listing }: { listing: AccommodationDetail }) {
               </ul>
             </section>
           ) : null}
+
+          <ListingLocation listing={listing} campus={campus} />
         </div>
 
         <div className="flex flex-col gap-8">

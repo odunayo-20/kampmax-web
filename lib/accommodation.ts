@@ -91,6 +91,24 @@ export function placeLabel(
   return [listing.neighbourhood, listing.city || listing.state].filter(Boolean).join(", ")
 }
 
+type Point = { latitude: number; longitude: number }
+
+/** Straight-line distance between two points in kilometres (haversine). */
+export function distanceKm(a: Point, b: Point): number {
+  const rad = (degrees: number) => (degrees * Math.PI) / 180
+  const dLat = rad(b.latitude - a.latitude)
+  const dLon = rad(b.longitude - a.longitude)
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(rad(a.latitude)) * Math.cos(rad(b.latitude)) * Math.sin(dLon / 2) ** 2
+  return 2 * 6371 * Math.asin(Math.sqrt(h))
+}
+
+/** "About 800 m" under a kilometre, otherwise "About 1.2 km". */
+export function distanceLabel(km: number): string {
+  return km < 1 ? `About ${Math.max(100, Math.round((km * 1000) / 100) * 100)} m` : `About ${km.toFixed(1)} km`
+}
+
 /** "2 bed · 1 bath", or "Single room" when there is no separate bedroom. */
 export function sizeLabel({
   bedrooms,

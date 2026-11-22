@@ -1,6 +1,19 @@
 import { describe, expect, it } from "vitest"
 
-import { parseSearch, placeLabel, rentLabel, sizeLabel } from "@/lib/accommodation"
+import { distanceKm, distanceLabel, parseSearch, placeLabel, rentLabel, sizeLabel } from "@/lib/accommodation"
+
+describe("distance", () => {
+  it("measures a straight line in kilometres", () => {
+    const a = { latitude: 6.5158, longitude: 3.3896 }
+    expect(distanceKm(a, a)).toBe(0)
+    expect(distanceKm(a, { latitude: 6.5258, longitude: 3.3896 })).toBeCloseTo(1.11, 1)
+  })
+  it("writes metres under a kilometre and never less than 100 m", () => {
+    expect(distanceLabel(0.84)).toBe("About 800 m")
+    expect(distanceLabel(0.01)).toBe("About 100 m")
+    expect(distanceLabel(1.234)).toBe("About 1.2 km")
+  })
+})
 
 describe("labels", () => {
   it("writes rent with its period", () => {

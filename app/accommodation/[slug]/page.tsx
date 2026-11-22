@@ -11,6 +11,7 @@ import { MobileActionBar } from "@/components/shared/mobile-action-bar"
 import { SafetyTips } from "@/components/shared/safety-tips"
 import { siteConfig } from "@/config/site"
 import { getListing, getListings, placeLabel, rentLabel } from "@/lib/accommodation"
+import { getCampuses } from "@/lib/campuses"
 import { pageMetadata } from "@/lib/seo"
 
 const SAFETY_TIPS = [
@@ -42,12 +43,13 @@ export default async function ListingPage({ params }: Props) {
   if (!listing) notFound()
   if (slug !== listing.slug) permanentRedirect(`/accommodation/${listing.slug}`)
 
-  // More places near the same campus keep the visitor browsing.
-  const more = listing.campusId
-    ? (await getListings({ campusId: listing.campusId })).items
-        .filter((item) => item.id !== listing.id)
-        .slice(0, 3)
-    : []
+  // The campus gives the map and distance their reference point, and the places near it keep the visitor browsing.
+  const [campuses, nearby] = await Promise.all([
+    getCampuses(),
+    listing.campusId ? getListings({ campusId: listing.campusId }) : undefined,
+  ])
+  const campus = campuses.find((item) => item.id === listing.campusId)
+  const more = (nearby?.items ?? []).filter((item) => item.id !== listing.id).slice(0, 3)
 
   return (
     <>
@@ -59,7 +61,7 @@ export default async function ListingPage({ params }: Props) {
       />
 
       <Container>
-        <ListingDetail listing={listing} />
+        <ListingDetail listing={listing} campus={campus} />
       </Container>
 
       <SafetyTips
