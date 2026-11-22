@@ -1,6 +1,22 @@
+import Link from "next/link"
+
 import { contactFaqs } from "@/lib/contact"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { Card, CardContent } from "@/components/ui/card"
+
+/** Turns "[text](/path)" in an answer into an internal link. */
+function renderAnswer(answer: string) {
+  return answer.split(/(\[[^\]]+\]\(\/[^)]*\))/).map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\((\/[^)]*)\)$/)
+    return m ? (
+      <Link key={i} href={m[2]} className="font-medium text-primary hover:underline">
+        {m[1]}
+      </Link>
+    ) : (
+      part
+    )
+  })
+}
 
 function ContactFaq() {
   return (
@@ -19,7 +35,7 @@ function ContactFaq() {
                 {faq.question}
               </h3>
               <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                {faq.answer}
+                {renderAnswer(faq.answer)}
               </p>
             </CardContent>
           </Card>

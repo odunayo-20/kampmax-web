@@ -11,7 +11,10 @@ export function ContactJsonLd() {
     contactConfig.email && {
       "@type": "ContactPoint",
       email: contactConfig.email,
+      telephone: contactConfig.phoneInternational,
       contactType: "customer service",
+      areaServed: "NG",
+      availableLanguage: "English",
     },
     contactConfig.businessEmail && {
       "@type": "ContactPoint",
@@ -34,7 +37,10 @@ export function ContactJsonLd() {
       "@type": "Organization",
       name: siteConfig.name,
       url: siteConfig.url,
-      ...(contactConfig.phone ? { telephone: contactConfig.phone } : {}),
+      ...(contactConfig.phone ? { telephone: contactConfig.phoneInternational } : {}),
+      ...(siteConfig.socialLinks.length
+        ? { sameAs: siteConfig.socialLinks.map((s) => s.href) }
+        : {}),
       ...(contactPoints.length ? { contactPoint: contactPoints } : {}),
     },
   }

@@ -9,6 +9,7 @@ import { ContactForm } from "@/components/contact/contact-form"
 import { ContactHero } from "@/components/contact/contact-hero"
 import { ContactJsonLd } from "@/components/contact/contact-json-ld"
 import { ContactPathways } from "@/components/contact/contact-pathways"
+import { ContactChannels, SocialLinks } from "@/components/shared/contact-channels"
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -62,6 +63,17 @@ export default function ContactPage() {
             </div>
 
             <div className="flex flex-col gap-6 lg:col-span-5 xl:col-span-4">
+              <div className="flex flex-col gap-1 rounded-2xl border border-border/80 bg-card p-6 shadow-2xs">
+                <h4 className="font-heading text-sm font-semibold text-foreground">
+                  Prefer to talk? Reach us directly
+                </h4>
+                <p className="mb-1 text-xs leading-relaxed text-muted-foreground">
+                  WhatsApp is the fastest way to get a reply.
+                </p>
+                <ContactChannels />
+                <SocialLinks />
+              </div>
+
               <ContactBusinessCta />
 
               <div className="flex flex-col gap-3 rounded-2xl border border-border/80 bg-card p-6 shadow-2xs">
@@ -69,8 +81,8 @@ export default function ContactPage() {
                   Response Guidelines
                 </h4>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  Inquiries are directed according to selected inquiry type. Business,
-                  vendor, and partnership inquiries are reviewed on a rolling basis.
+                  We reply to every message within 1 to 2 working days, usually sooner on
+                  WhatsApp. Inquiries go to the right team based on the type you select.
                 </p>
                 <div className="border-t border-border/60 pt-3 text-3xs text-muted-foreground">
                   Need immediate campus services? Explore the{" "}

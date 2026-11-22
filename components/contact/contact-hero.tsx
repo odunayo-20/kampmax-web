@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { ArrowRight, MessageSquare, ShieldCheck } from "lucide-react"
+import { ArrowRight, MessageCircle, MessageSquare, ShieldCheck } from "lucide-react"
 
 import { HeroCardStack } from "@/components/shared/hero-card-stack"
 import { PageHero, heroActionClass } from "@/components/shared/page-hero"
+import { contactConfig } from "@/config/contact"
 import { contactPathways } from "@/lib/contact"
 
 const points = [
@@ -22,10 +23,22 @@ function ContactHero() {
       }
       description="Whether you are a student exploring the platform, a local business or artisan wanting to reach campus audiences, an organization seeking a partnership, or simply need help, we are here to assist."
       actions={
+        <>
         <Link href="#inquiry-form" className={heroActionClass("primary")}>
           Send a Message
           <ArrowRight />
         </Link>
+        <a
+          href={contactConfig.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track="contact-whatsapp"
+          className={heroActionClass("ghost")}
+        >
+          <MessageCircle />
+          Chat on WhatsApp
+        </a>
+        </>
       }
       points={points}
     >

@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react"
 
 import { Container } from "@/components/layout/container"
 import { Logo } from "@/components/layout/logo"
+import { ContactChannels, SocialLinks } from "@/components/shared/contact-channels"
 import { buttonVariants } from "@/components/ui/button"
 import { footerNavGroups, legalNav } from "@/config/nav"
 import { siteConfig } from "@/config/site"
@@ -68,6 +69,11 @@ export function SiteFooter() {
             >
               Join Kampmax
             </Link>
+          </div>
+          <div className="flex flex-col gap-1">
+            <p className="text-sm font-semibold text-white">Talk to us</p>
+            <ContactChannels tone="dark" />
+            <SocialLinks tone="dark" />
           </div>
         </div>
 

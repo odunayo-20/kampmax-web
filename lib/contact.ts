@@ -88,6 +88,7 @@ export const contactPathways: ContactPathway[] = [
   },
 ]
 
+/** Answers may contain [text](/path) links; the FAQ renders them as real links. */
 export const contactFaqs: ContactFaq[] = [
   {
     question: "What is Kampmax?",
@@ -112,7 +113,7 @@ export const contactFaqs: ContactFaq[] = [
   {
     question: "Where can I find Kampmax opportunities?",
     answer:
-      "Explore the public Jobs directory (/jobs) for campus roles, internships, and freelance projects, or visit the Freelancers directory (/freelancers) to showcase your portfolio.",
+      "Explore the public [Jobs directory](/jobs) for campus roles, internships, and freelance projects, or visit the [Freelancers directory](/freelancers) to showcase your portfolio.",
   },
 ]
 
@@ -195,7 +196,7 @@ export async function submitContactInquiry(
       success: true,
       message:
         data?.message ||
-        "Thank you for reaching out. Your message has been received and the Kampmax team will reply by email.",
+        "Thank you for reaching out. Your message has been received and the Kampmax team will reply by email within 1 to 2 working days. For a faster answer, chat with us on WhatsApp.",
     }
   } catch (error) {
     if (error instanceof ApiError) {
