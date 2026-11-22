@@ -65,7 +65,8 @@ function ScrollSlider({
         <SectionHeading eyebrow={eyebrow} title={title} description={description} />
 
         <div className="flex items-center justify-between gap-3 self-stretch sm:self-auto sm:justify-end">
-          <div className="flex items-center gap-1.5">
+          {/* No arrows when every card already fits: there is nothing to scroll to. */}
+          <div className={cn("items-center gap-1.5", canScrollLeft || canScrollRight ? "flex" : "hidden")}>
             {(["left", "right"] as const).map((direction) => (
               <Button
                 key={direction}

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { campusLabel } from "@/lib/campuses"
 import {
   ArrowRight,
   BadgeCheck,
@@ -222,7 +223,7 @@ function FreelancerProfile({
                 </span>
                 <span className="flex flex-col">
                   <span className="font-semibold text-foreground">
-                    {campus.name} ({campus.shortName})
+                    {campusLabel(campus)}
                   </span>
                   {campus.location ? (
                     <span className="text-xs text-muted-foreground">{campus.location}</span>

@@ -55,8 +55,9 @@ function ListingCard({
             <span>{furnishingLabel(listing.furnishing)}</span>
           </p>
 
-          <div className="mt-auto flex items-end justify-between gap-2 border-t border-border/60 pt-3">
-            <span className="font-heading text-lg font-bold tracking-tight text-foreground">
+          <div className="mt-auto flex flex-wrap items-end justify-between gap-x-2 gap-y-1 border-t border-border/60 pt-3">
+            {/* The price and its period stay together; the badge drops below instead. */}
+            <span className="font-heading text-lg font-bold tracking-tight whitespace-nowrap text-foreground">
               {rentLabel(listing)}
             </span>
             <span className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-success-700">

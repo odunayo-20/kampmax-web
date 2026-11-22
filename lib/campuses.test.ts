@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  campusLabel,
   campusesWithItems,
   formatCampusLocation,
   toCampus,
@@ -88,5 +89,16 @@ describe("toCampus", () => {
     const campus = toCampus({ ...base, longitude: null })
     expect(campus.latitude).toBeUndefined()
     expect(campus.longitude).toBeUndefined()
+  })
+})
+
+describe("campusLabel", () => {
+  it("adds the abbreviation to a full name", () => {
+    expect(campusLabel({ name: "Obafemi Awolowo University", shortName: "OAU" })).toBe(
+      "Obafemi Awolowo University (OAU)"
+    )
+  })
+  it("shows a name that already is the abbreviation only once", () => {
+    expect(campusLabel({ name: "Unilag", shortName: "UNILAG" })).toBe("UNILAG")
   })
 })

@@ -53,6 +53,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: `${freelancer.name} | Freelancers`,
     description,
+    fallbackDescription: `${freelancer.name}, ${freelancer.headline}. Hire campus freelancers on Kampmax.`,
     path: `/freelancers/${freelancer.slug}`,
     image: freelancer.avatar,
   })

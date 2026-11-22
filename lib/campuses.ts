@@ -28,6 +28,16 @@ export function toShortName(slug: string, name: string): string {
 }
 
 /**
+ * A campus's name with its abbreviation, "Obafemi Awolowo University (OAU)".
+ * When the name already is the abbreviation ("Unilag" and "UNILAG") it is
+ * shown once, not as "Unilag (UNILAG)".
+ */
+export function campusLabel(campus: Pick<Campus, "name" | "shortName">): string {
+  const sameWord = campus.name.trim().toLowerCase() === campus.shortName.toLowerCase()
+  return sameWord ? campus.shortName : `${campus.name} (${campus.shortName})`
+}
+
+/**
  * "City, State" for display. Campuses are often saved with the state already
  * inside the city ("Owo, Ondo State"), so the state is only added when the
  * city does not already name it.

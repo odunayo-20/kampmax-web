@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { campusLabel } from "@/lib/campuses"
 import {
   ArrowRight,
   Briefcase,
@@ -75,7 +76,7 @@ function JobHeader({
       ? { icon: MapPin, label: "Location", value: opportunity.location }
       : null,
     campus
-      ? { icon: Building2, label: "Campus", value: `${campus.name} (${campus.shortName})` }
+      ? { icon: Building2, label: "Campus", value: campusLabel(campus) }
       : null,
     opportunity.closingDate
       ? { icon: CalendarClock, label: "Apply by", value: opportunity.closingDate }

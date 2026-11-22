@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist_Mono, Inter, Plus_Jakarta_Sans } from "next/font/google"
 
 import { SiteFooter } from "@/components/layout/site-footer"
@@ -30,6 +30,9 @@ const geistMono = Geist_Mono({
   // worth preloading on every page.
   preload: false,
 })
+
+// Colours the browser bar on phones; same as `theme_color` in site.webmanifest.
+export const viewport: Viewport = { themeColor: "#1769E0" }
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -78,8 +81,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           React loads; without this, React logs a hydration mismatch for them. It only
           covers <body>'s own attributes, not anything rendered inside it. */}
       <body className="flex min-h-full flex-col" suppressHydrationWarning>
+        {/* First thing a keyboard or screen-reader user reaches: skips the menu. */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-ring"
+        >
+          Skip to main content
+        </a>
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+          {children}
+        </main>
         <SiteFooter />
         <CookieConsent />
         <Analytics />

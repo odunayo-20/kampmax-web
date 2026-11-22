@@ -57,6 +57,14 @@ export async function generateMetadata({
   return pageMetadata({
     title: `${product.name} | Marketplace`,
     description: product.description,
+    fallbackDescription: [
+      product.name,
+      product.price !== undefined ? `for ${formatPrice(product.price)}` : null,
+      product.vendorName ? `from ${product.vendorName}` : null,
+      "on the Kampmax campus marketplace.",
+    ]
+      .filter(Boolean)
+      .join(" "),
     path: `/marketplace/${product.slug}`,
     image: product.image,
   })

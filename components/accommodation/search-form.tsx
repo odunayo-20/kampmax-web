@@ -18,12 +18,15 @@ const BEDROOMS = [0, 1, 2, 3, 4]
  */
 function SearchForm({
   action,
+  resultsId,
   search,
   campuses,
   categories,
 }: {
   /** Page the form submits to. */
   action: string
+  /** Element to land on after searching, so the results are not hidden above the fold. */
+  resultsId: string
   search: AccommodationSearch
   /** Campuses to choose from. Leave out on a campus page, where the campus is fixed. */
   campuses?: Campus[]
@@ -33,7 +36,7 @@ function SearchForm({
 
   return (
     <form
-      action={action}
+      action={`${action}#${resultsId}`}
       method="get"
       role="search"
       aria-label="Find accommodation"
@@ -106,7 +109,7 @@ function SearchForm({
           </NativeSelect>
         </Field>
 
-        <Field label="Max rent (₦)" htmlFor="acc-max">
+        <Field label="Max rent per month (₦)" htmlFor="acc-max">
           <Input
             id="acc-max"
             name="maxRent"

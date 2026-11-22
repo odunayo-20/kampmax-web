@@ -15,6 +15,13 @@ import { cn } from "@/lib/utils"
 import type { Campus } from "@/types/campus"
 import type { AccommodationSearch } from "@/types/accommodation"
 
+/**
+ * Searching or turning a page reloads the page; this fragment lands the visitor
+ * on the results instead of back at the top, behind the hero and the form.
+ */
+const RESULTS_ID = "results"
+const RESULTS_HASH = `#${RESULTS_ID}`
+
 /** `?a=1&b=2` for the filters in `search`, with the page replaced. */
 function pageHref(basePath: string, search: AccommodationSearch, page: number): string {
   const params = new URLSearchParams()
@@ -22,7 +29,7 @@ function pageHref(basePath: string, search: AccommodationSearch, page: number): 
     if (value !== undefined) params.set(key, String(value))
   }
   const query = params.toString()
-  return query ? `${basePath}?${query}` : basePath
+  return `${query ? `${basePath}?${query}` : basePath}${RESULTS_HASH}`
 }
 
 /**
@@ -58,11 +65,13 @@ async function AccommodationBrowse({
     <div className="flex flex-col gap-6">
       <SearchForm
         action={basePath}
+        resultsId={RESULTS_ID}
         search={search}
         campuses={campus ? undefined : campuses.filter((c) => c.id)}
         categories={categories}
       />
 
+      <div id={RESULTS_ID} className="flex scroll-mt-20 flex-col gap-6">
       {results.items.length === 0 ? (
         <NoResults filtered={filtered} basePath={basePath} />
       ) : (
@@ -84,6 +93,7 @@ async function AccommodationBrowse({
           ) : null}
         </>
       )}
+      </div>
     </div>
   )
 }

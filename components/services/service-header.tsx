@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { campusLabel } from "@/lib/campuses"
 import {
   ArrowRight,
   Banknote,
@@ -331,7 +332,7 @@ function ServiceHeader({
                     <Building2 className="size-4" aria-hidden="true" />
                   </span>
                   <span>
-                    {campus.name} ({campus.shortName})
+                    {campusLabel(campus)}
                     {campus.location ? `, ${campus.location}` : ""}
                   </span>
                 </p>

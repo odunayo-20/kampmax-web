@@ -6,6 +6,11 @@ describe("metaDescription", () => {
   it("falls back when empty", () => {
     expect(metaDescription("", "Fallback")).toBe("Fallback")
   })
+  it("falls back when the text is too thin to help, like 'dsv'", () => {
+    expect(metaDescription("dsv", "A better line about this item.")).toBe(
+      "A better line about this item."
+    )
+  })
   it("cuts long text at a word", () => {
     const out = metaDescription("word ".repeat(100))
     expect(out.length).toBeLessThanOrEqual(155)

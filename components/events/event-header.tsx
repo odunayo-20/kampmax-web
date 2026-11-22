@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { campusLabel } from "@/lib/campuses"
 import {
   ArrowRight,
   CalendarDays,
@@ -68,7 +69,7 @@ function EventHeader({
     time ? { icon: Clock, label: "Time", value: time } : null,
     event.location ? { icon: MapPin, label: "Venue", value: event.location } : null,
     campus
-      ? { icon: Building2, label: "Campus", value: `${campus.name} (${campus.shortName})` }
+      ? { icon: Building2, label: "Campus", value: campusLabel(campus) }
       : null,
   ].filter((fact): fact is NonNullable<typeof fact> => fact !== null)
 
