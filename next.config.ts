@@ -9,7 +9,6 @@ import { securityHeaders } from "./security-headers.cjs";
  */
 function imageHostnames(): { protocol: "http" | "https"; hostname: string; port?: string }[] {
   const hosts: { protocol: "http" | "https"; hostname: string; port?: string }[] = [
-    { protocol: "https", hostname: "res.cloudinary.com" },
   ];
 
   try {

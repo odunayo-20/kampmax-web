@@ -53,7 +53,7 @@ function buildCsp({ env = process.env, isDev = false } = {}) {
     ["default-src", "'self'"],
     ["script-src", "'self'", "'unsafe-inline'", ...gaScript, ...(isDev ? ["'unsafe-eval'"] : [])],
     ["style-src", "'self'", "'unsafe-inline'"],
-    ["img-src", "'self'", "data:", "blob:", api, "https://res.cloudinary.com", ...hosts, ...gaImg],
+    ["img-src", "'self'", "data:", "blob:", api, ...hosts, ...gaImg],
     // next/font self-hosts the Google fonts at build time.
     ["font-src", "'self'", "data:"],
     [
