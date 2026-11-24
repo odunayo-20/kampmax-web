@@ -6,8 +6,11 @@
  * shown, so the site never displays made-up contact details.
  */
 
-/** Kampmax's public inbox. Each specific inbox falls back to it. */
-const DEFAULT_EMAIL = "kampmaxtechnology@gmail.com"
+/** Kampmax's public inbox. The business, privacy and legal inboxes fall back to it. */
+const DEFAULT_EMAIL = "info@kampmax.com"
+
+/** Where customers go for help; the help screens in the app use the same address. */
+const DEFAULT_SUPPORT_EMAIL = "support@kampmax.com"
 
 /** Local-format number the team answers calls and WhatsApp on. */
 const DEFAULT_PHONE = "08105219630"
@@ -36,7 +39,7 @@ export function whatsappUrl(message: string): string {
 export const contactConfig = {
   email,
   businessEmail: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || email,
-  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || email,
+  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || DEFAULT_SUPPORT_EMAIL,
   privacyEmail: process.env.NEXT_PUBLIC_PRIVACY_EMAIL || email,
   legalEmail: process.env.NEXT_PUBLIC_LEGAL_EMAIL || email,
   /** As typed locally, for display and tel: links. */
