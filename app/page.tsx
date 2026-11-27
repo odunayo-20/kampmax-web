@@ -9,7 +9,6 @@ import { getFreelancers } from "@/lib/freelancers"
 import { getOpportunities } from "@/lib/jobs"
 import { getProductCategories, getProducts } from "@/lib/marketplace"
 import { getServices } from "@/lib/services"
-import { formatPrice } from "@/lib/format-price"
 import { siteConfig } from "@/config/site"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
@@ -108,11 +107,7 @@ export default async function Home() {
     }
   })
 
-  const topProduct = data?.products[0]
-  const topJob = data?.opportunities[0]
   const topEvent = data?.events[0]
-  const campusShortName = (slug?: string) =>
-    slug ? data?.campuses.find((campus) => campus.slug === slug)?.shortName : undefined
 
   const counts = {
     "/marketplace": data?.products.length ?? 0,
@@ -126,42 +121,7 @@ export default async function Home() {
   return (
     <>
       <HomeJsonLd />
-      <Hero
-        product={
-          topProduct
-            ? {
-                title: topProduct.name,
-                href: `/marketplace/${topProduct.slug}`,
-                image: topProduct.image,
-                price: topProduct.price ? formatPrice(topProduct.price) : undefined,
-                campus: campusShortName(topProduct.campusSlug),
-              }
-            : undefined
-        }
-        job={
-          topJob
-            ? {
-                title: topJob.title,
-                href: `/jobs/${topJob.slug}`,
-                meta: topJob.location,
-                organization: topJob.organization,
-              }
-            : undefined
-        }
-        event={
-          topEvent
-            ? {
-                title: topEvent.title,
-                href: `/events/${topEvent.slug}`,
-                date: topEvent.date,
-                image: topEvent.image,
-                location: topEvent.location,
-                time: topEvent.startTime,
-                priceLabel: topEvent.priceLabel,
-              }
-            : undefined
-        }
-      />
+      <Hero />
 
       <div className="border-y border-border bg-primary-50/70">
         <Section>

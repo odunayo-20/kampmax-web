@@ -1,24 +1,13 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
-import {
-  HeroCollage,
-  type HeroEvent,
-  type HeroJob,
-  type HeroProduct,
-} from "@/components/home/hero-collage"
+import { HeroPhone } from "@/components/home/hero-phone"
 import { Container } from "@/components/layout/container"
 import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
-type HeroProps = {
-  product?: HeroProduct
-  job?: HeroJob
-  event?: HeroEvent
-}
-
-function Hero({ product, job, event }: HeroProps) {
+function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
       {/* Backdrop: light-blue glow top right, warm gold glow bottom left, faint grid. */}
@@ -75,7 +64,7 @@ function Hero({ product, job, event }: HeroProps) {
           wrapper that starts at opacity 0 would hide it until JavaScript has
           loaded, which delays the Largest Contentful Paint.
         */}
-        <HeroCollage product={product} job={job} event={event} />
+        <HeroPhone />
       </Container>
 
       {/* Soft edge into the light page below. */}

@@ -4,11 +4,13 @@ import { securityHeaders } from "./security-headers.cjs";
 /**
  * Hosts `next/image` may load remote images from. Media uploaded through the
  * Kampmax API is served either from the API itself (`/media/...`) or from the
- * configured storage provider. Add other hosts (S3, R2, a CDN) to
+ * configured storage provider. Cloudinary is allowed by default. Add other
+ * hosts (S3, R2, a CDN) to
  * `NEXT_PUBLIC_IMAGE_HOSTS` as a comma-separated list of hostnames.
  */
 function imageHostnames(): { protocol: "http" | "https"; hostname: string; port?: string }[] {
   const hosts: { protocol: "http" | "https"; hostname: string; port?: string }[] = [
+    { protocol: "https", hostname: "res.cloudinary.com" },
   ];
 
   try {
